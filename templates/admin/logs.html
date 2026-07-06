@@ -1,0 +1,321 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Audit Logs - CyberSafe Admin{% endblock %}
+
+{% block extra_css %}
+<style>
+    .logs-container {
+        padding-top: 100px;
+        padding-bottom: 50px;
+        min-height: 100vh;
+        background: var(--bg-void, #02040a);
+    }
+
+    .cyber-card {
+        background: var(--bg-primary, #0b0d17);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 24px;
+        padding: 0;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .cyber-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--cyber-blue, #68ccd9), transparent);
+    }
+
+    .table-header-box {
+        padding: 1.5rem 2rem;
+        background: rgba(0, 0, 0, 0.3);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .table {
+        color: var(--text-primary, #f8fafc);
+        margin-bottom: 0;
+        background-color: transparent !important;
+    }
+
+    .table thead th {
+        background: rgba(0, 0, 0, 0.5) !important;
+        border: none;
+        color: var(--cyber-blue, #68ccd9);
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        letter-spacing: 1.5px;
+        padding: 1.25rem 1.5rem;
+    }
+
+    .table tbody td {
+        background: transparent !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        padding: 1.25rem 1.5rem;
+        vertical-align: middle;
+        font-size: 0.85rem;
+        color: var(--text-secondary, #94a3b8);
+    }
+
+    .table tbody tr {
+        background: transparent !important;
+    }
+
+    .table tbody tr:hover td {
+        background: rgba(255, 255, 255, 0.02) !important;
+        color: #fff !important;
+    }
+
+    /* Action Badges */
+    .badge-action {
+        padding: 0.4rem 0.8rem;
+        border-radius: 6px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .action-login { background: rgba(74, 222, 128, 0.1); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.2); }
+    .action-logout { background: rgba(248, 113, 113, 0.1); color: #f87171; border: 1px solid rgba(248, 113, 113, 0.2); }
+    .action-create { background: rgba(0, 212, 255, 0.1); color: #00d4ff; border: 1px solid rgba(0, 212, 255, 0.2); }
+    .action-update { background: rgba(250, 204, 21, 0.1); color: #facc15; border: 1px solid rgba(250, 204, 21, 0.2); }
+    .action-delete { background: rgba(244, 63, 94, 0.1); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.2); }
+    .action-default { background: rgba(255, 255, 255, 0.05); color: #94a3b8; border: 1px solid rgba(255, 255, 255, 0.1); }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .user-avatar {
+        width: 32px;
+        height: 32px;
+        background: linear-gradient(135deg, #00d4ff, #0056b3);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: #fff;
+        font-size: 0.8rem;
+    }
+
+    .resource-tag {
+        font-family: 'JetBrains Mono', monospace;
+        color: var(--accent-gold, #c5a059);
+        font-size: 0.8rem;
+        background: rgba(197, 160, 89, 0.05);
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+    }
+
+    .pagination-container {
+        padding: 1.5rem 2rem;
+        background: rgba(0, 0, 0, 0.1);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .page-link {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.6);
+        margin: 0 3px;
+        border-radius: 8px !important;
+        font-size: 0.85rem;
+        transition: all 0.3s ease;
+    }
+
+    .page-link:hover {
+        background: rgba(0, 212, 255, 0.1);
+        color: #00d4ff;
+        border-color: #00d4ff;
+        transform: translateY(-2px);
+    }
+
+    .page-item.active .page-link {
+        background: #00d4ff;
+        border-color: #00d4ff;
+        color: #0f172a;
+        font-weight: 700;
+        box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+    }
+
+    /* Keep Dashboard button text white on hover */
+    .btn-outline-light:hover {
+        background: rgba(255, 255, 255, 0.1) !important;
+        color: #fff !important;
+        border-color: rgba(255, 255, 255, 0.3) !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container logs-container">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-end mb-5 reveal">
+        <div>
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <span style="width: 12px; height: 12px; background: #4ade80; border-radius: 50%; box-shadow: 0 0 10px #4ade80;"></span>
+                <span class="text-uppercase small fw-bold tracking-widest text-secondary">System Monitoring</span>
+            </div>
+            <h1 class="display-6 fw-bold mb-0" style="font-family: 'Rajdhani', sans-serif;">
+                ADMIN <span class="text-gradient-blue" style="color: #00d4ff;">AUDIT LOGS</span>
+            </h1>
+        </div>
+        <div class="d-flex gap-3">
+            <div class="text-end me-3">
+                <div class="small text-secondary text-uppercase tracking-tighter">Total Actions Recorded</div>
+                <div class="h4 mb-0 fw-bold">{{ page_obj.paginator.count }}</div>
+            </div>
+            <a href="{% url 'admin_dashboard' %}" class="btn btn-outline-light px-4 d-flex align-items-center gap-2" style="border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02);">
+                <i class="fas fa-th-large small"></i>
+                <span>Dashboard</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Logs Table Card -->
+    <div class="cyber-card reveal">
+        <div class="table-header-box d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center gap-3">
+                <i class="fas fa-list-ul text-secondary"></i>
+                <span class="fw-semibold">Action History</span>
+            </div>
+            <div class="small text-secondary">
+                Showing {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ page_obj.paginator.count }} entries
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Administrator</th>
+                        <th>Action</th>
+                        <th>Resource Object</th>
+                        <th>Security Context</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in page_obj %}
+                    <tr>
+                        <td>
+                            <div class="d-flex flex-column">
+                                <span class="fw-bold">{{ log.timestamp|date:"d M Y" }}</span>
+                                <span class="text-secondary small">{{ log.timestamp|date:"H:i:s" }} UTC</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="user-info">
+                                <div class="user-avatar">
+                                    {{ log.admin_user.email|slice:":1"|upper }}
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <span class="fw-semibold">{{ log.admin_user.username }}</span>
+                                    <span class="text-secondary small">{{ log.admin_user.email }}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            {% with action=log.action|upper %}
+                            <span class="badge-action 
+                                {% if 'LOGIN' in action %}action-login
+                                {% elif 'LOGOUT' in action %}action-logout
+                                {% elif 'CREATE' in action or 'ADD' in action %}action-create
+                                {% elif 'UPDATE' in action or 'EDIT' in action %}action-update
+                                {% elif 'DELETE' in action or 'REMOVE' in action %}action-delete
+                                {% else %}action-default{% endif %}">
+                                <i class="fas 
+                                    {% if 'LOGIN' in action %}fa-sign-in-alt
+                                    {% elif 'LOGOUT' in action %}fa-sign-out-alt
+                                    {% elif 'CREATE' in action or 'ADD' in action %}fa-plus-circle
+                                    {% elif 'UPDATE' in action or 'EDIT' in action %}fa-sync-alt
+                                    {% elif 'DELETE' in action or 'REMOVE' in action %}fa-trash-alt
+                                    {% else %}fa-info-circle{% endif %}"></i>
+                                {{ log.action }}
+                            </span>
+                            {% endwith %}
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="resource-tag">{{ log.resource_type }}</span>
+                                {% if log.resource_id %}
+                                <small class="text-secondary opacity-50">#{{ log.resource_id|slice:":8" }}</small>
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex flex-column">
+                                <div class="d-flex align-items-center gap-2 small">
+                                    <i class="fas fa-network-wired text-secondary" style="font-size: 0.7rem;"></i>
+                                    <code>{{ log.ip_address }}</code>
+                                </div>
+                                <div class="text-truncate text-secondary mt-1" style="max-width: 150px; font-size: 0.7rem;" title="{{ log.user_agent }}">
+                                    {{ log.user_agent }}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center py-5">
+                            <div class="opacity-20 mb-3">
+                                <i class="fas fa-database fa-4x"></i>
+                            </div>
+                            <h5 class="text-secondary">No Activity Records Found</h5>
+                            <p class="text-secondary small">Administrative actions will appear here as they occur.</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        {% if page_obj.has_other_pages %}
+        <div class="pagination-container d-flex justify-content-center">
+            <nav>
+                <ul class="pagination mb-0">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% for i in page_obj.paginator.page_range %}
+                        {% if page_obj.number == i %}
+                        <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+                        {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

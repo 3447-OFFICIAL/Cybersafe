@@ -1,0 +1,386 @@
+{% extends 'base.html' %}
+
+{% block title %}Chatbot Management - CySafe Admin{% endblock %}
+
+{% block extra_css %}
+<style>
+    #test-chat-input::placeholder {
+        color: rgba(255, 255, 255, 0.5) !important;
+    }
+
+    #test-chat-input {
+        background-color: rgba(255, 255, 255, 0.05) !important;
+        color: #ffffff !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    #test-chat-input:focus {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        color: #ffffff !important;
+        border-color: var(--green-primary) !important;
+        box-shadow: 0 0 0 0.2rem var(--green-glow) !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="admin-content">
+    <div class="container-fluid mt-3">
+        <!-- Enhanced Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div
+                    class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+                    <div class="d-flex align-items-center mb-3 mb-md-0">
+                        <div class="rounded-circle p-2 p-md-3 me-3"
+                            style="background: rgba(0, 212, 255, 0.1); border: 1px solid rgba(0, 212, 255, 0.3); box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);">
+                            <i class="fas fa-robot fa-2x text-primary"></i>
+                        </div>
+                        <div>
+                            <h1 class="h3 fw-bold mb-1 text-white">AI Chatbot Management</h1>
+                            <p class="mb-0 small text-white-50">Configure your intelligent cybersecurity assistant</p>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <a href="{% url 'admin_dashboard' %}" class="btn btn-outline-secondary btn-sm">
+                            <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="row g-3 g-md-4 mb-4">
+            <div class="col-6 col-xl-3">
+                <div class="card border-0 shadow-sm stats-card h-100">
+                    <div class="card-body text-center p-3 p-md-4">
+                        <div
+                            class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                            <i class="fas fa-brain fa-2x text-primary"></i>
+                        </div>
+                        <h3 class="fw-bold text-primary mb-2">{{ config.gemini_model|default:"Not Set" }}</h3>
+                        <p class="text-white mb-2">AI Model</p>
+                        <small class="text-success d-inline-block">
+                            <i class="fas fa-check me-1"></i>Active
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-xl-3">
+                <div class="card border-0 shadow-sm stats-card h-100">
+                    <div class="card-body text-center p-3 p-md-4">
+                        <div
+                            class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                            <i class="fas fa-comments fa-2x text-success"></i>
+                        </div>
+                        <h3 class="fw-bold text-success mb-2">{{ total_conversations|default:"0" }}</h3>
+                        <p class="text-white mb-2">Total Conversations</p>
+                        <small class="text-info d-inline-block">
+                            <i class="fas fa-clock me-1"></i>This Month
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-xl-3">
+                <div class="card border-0 shadow-sm stats-card h-100">
+                    <div class="card-body text-center p-3 p-md-4">
+                        <div
+                            class="bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                            <i class="fas fa-stopwatch fa-2x text-warning"></i>
+                        </div>
+                        <h3 class="fw-bold text-warning mb-2">{{ avg_response_time|default:"2.5" }}s</h3>
+                        <p class="text-white mb-2">Avg Response Time</p>
+                        <small class="text-success d-inline-block">
+                            <i class="fas fa-check me-1"></i>Fast
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-xl-3">
+                <div class="card border-0 shadow-sm stats-card h-100">
+                    <div class="card-body text-center p-3 p-md-4">
+                        <div
+                            class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                            <i class="fas fa-heart fa-2x text-info"></i>
+                        </div>
+                        <h3 class="fw-bold text-info mb-2">{{ satisfaction_rate|default:"95" }}%</h3>
+                        <p class="text-white mb-2">Satisfaction Rate</p>
+                        <small class="text-success d-inline-block">
+                            <i class="fas fa-star me-1"></i>Excellent
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Test Chatbot Section -->
+            <div class="col-12">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-gradient-success border-0 text-white">
+                        <div
+                            class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+                            <div class="d-flex align-items-center mb-2 mb-md-0">
+                                <i class="fas fa-comments fa-lg me-3"></i>
+                                <h5 class="fw-bold mb-0">Test Chatbot</h5>
+                            </div>
+                            <a href="{% url 'customize_bot' %}" class="btn btn-light btn-sm">
+                                <i class="fas fa-cog me-2"></i>Customize Bot
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <!-- Current System Prompt Display -->
+                        {% if config.system_prompt %}
+                        <div class="alert alert-info mb-4 alert-permanent">
+                            <div class="d-flex align-items-start">
+                                <i class="fas fa-info-circle me-2 mt-1"></i>
+                                <div>
+                                    <strong>Current System Prompt:</strong>
+                                    <p class="mb-0 mt-1">{{ config.system_prompt }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <div class="mb-3">
+                            <p class="text-muted mb-3">Test your chatbot configuration with real-time responses from
+                                Gemini AI.</p>
+                        </div>
+
+                        <!-- Test Chat Interface -->
+                        <div class="chat-test-container">
+                            <div class="chat-messages" id="test-chat-messages"
+                                style="height: 350px; overflow-y: auto; border: 1px solid rgba(255,255,255,0.1); border-radius: 0.375rem; padding: 1.25rem; margin-bottom: 1rem; background-color: var(--bg-secondary); color: #ffffff;">
+                                <div class="text-center text-muted">
+                                    <i class="fas fa-robot fa-2x mb-2"></i>
+                                    <p class="mb-0">Start a conversation to test your chatbot</p>
+                                </div>
+                            </div>
+
+                            <div class="chat-input">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="test-chat-input"
+                                        placeholder="Type your message here to test the chatbot...">
+                                    <button class="btn btn-primary" id="test-chat-send" onclick="sendTestMessage()">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                                <div class="mt-2 text-center">
+                                    <small class="text-muted">Press Enter to send or click the send button</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Test Status -->
+                        <div class="mt-3 p-2 p-md-3 bg-light rounded">
+                            <div class="row g-2 g-md-3">
+                                <div class="col-6 col-md-6">
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-2">
+                                            <i class="fas fa-robot text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <div class="fw-semibold small">Model</div>
+                                            <small class="text-white">{{ config.gemini_model|default:"Not Set" }}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-6">
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-success bg-opacity-10 rounded-circle p-2 me-2">
+                                            <i class="fas fa-comments text-success"></i>
+                                        </div>
+                                        <div>
+                                            <div class="fw-semibold small">Status</div>
+                                            <small class="text-white" id="chat-status">Ready</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CSRF Token for API calls -->
+<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" id="csrfToken">
+
+<script>
+    // Test Chatbot Functions
+    function sendTestMessage() {
+        const input = document.getElementById('test-chat-input');
+        const message = input.value.trim();
+
+        if (!message) return;
+
+        // Add user message to chat
+        addTestMessage('user', message);
+        input.value = '';
+
+        // Show typing indicator
+        showTestTypingIndicator();
+        updateChatStatus('AI is thinking...');
+
+        // Send to API
+        fetch('/api/chatbot/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.getElementById('csrfToken').value
+            },
+            body: JSON.stringify({ message: message })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                removeTestTypingIndicator();
+                updateChatStatus('Ready');
+
+                if (data.response) {
+                    addTestMessage('bot', data.response);
+                } else {
+                    addTestMessage('bot', 'Sorry, I received an empty response. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                removeTestTypingIndicator();
+                updateChatStatus('Error');
+
+                // Provide user-friendly error messages
+                if (error.message.includes('429')) {
+                    addTestMessage('bot', "I'm currently experiencing high demand. Please wait a moment and try again.");
+                } else if (error.message.includes('500')) {
+                    addTestMessage('bot', 'Server error occurred. Please try again later.');
+                } else if (error.message.includes('fetch')) {
+                    addTestMessage('bot', 'Network error. Please check your connection and try again.');
+                } else {
+                    addTestMessage('bot', 'Sorry, I encountered an error. Please try again.');
+                }
+            });
+    }
+
+    function addTestMessage(sender, message) {
+        const messagesContainer = document.getElementById('test-chat-messages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `mb-3 ${sender === 'user' ? 'text-end' : 'text-start'}`;
+
+        const bubbleDiv = document.createElement('div');
+        bubbleDiv.className = `d-inline-block p-3 rounded-3 ${sender === 'user' ? 'bg-primary' : 'bg-light bg-opacity-10'}`;
+        if (sender === 'user') {
+            bubbleDiv.style.color = 'var(--text-on-green)';
+        } else {
+            bubbleDiv.style.color = '#ffffff';
+            bubbleDiv.style.border = '1px solid rgba(255,255,255,0.1)';
+        }
+        bubbleDiv.style.maxWidth = '80%';
+
+        if (sender === 'bot') {
+            // Format bot message with proper line breaks and basic markdown
+            const formattedMessage = formatBotMessage(message);
+            bubbleDiv.innerHTML = formattedMessage;
+        } else {
+            bubbleDiv.textContent = message;
+        }
+
+        messageDiv.appendChild(bubbleDiv);
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function formatBotMessage(text) {
+        let formatted = text;
+
+        // Convert URLs to clickable links (stop at whitespace or line break)
+        formatted = formatted.replace(/(https?:\/\/[^\s<]+)/g, function (match) {
+            return '<a href="' + match + '" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline;">' + match + '</a>';
+        });
+
+        // Convert line breaks to <br> AFTER link conversion
+        formatted = formatted.replace(/\n/g, '<br>');
+
+        // Convert **bold** to <strong>
+        formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // Convert bullet points to proper lists
+        formatted = formatted.replace(/^\s*\*\s/gm, '• ');
+
+        // Convert numbered lists
+        formatted = formatted.replace(/^\s*\d+\.\s/gm, (match) => `<br>${match}`);
+
+        // Add spacing around bullet points
+        formatted = formatted.replace(/•\s/g, '<br>• ');
+
+        return formatted;
+    }
+
+
+    function showTestTypingIndicator() {
+        const messagesContainer = document.getElementById('test-chat-messages');
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'mb-3 text-start typing-indicator';
+        typingDiv.innerHTML = '<div class="d-inline-block p-3 rounded-3 bg-light"><i class="fas fa-circle fa-fade"></i><i class="fas fa-circle fa-fade ms-1"></i><i class="fas fa-circle fa-fade ms-1"></i></div>';
+        messagesContainer.appendChild(typingDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function removeTestTypingIndicator() {
+        const typingIndicator = document.querySelector('.typing-indicator');
+        if (typingIndicator) {
+            typingIndicator.remove();
+        }
+    }
+
+    function updateChatStatus(status) {
+        const statusElement = document.getElementById('chat-status');
+        if (statusElement) {
+            statusElement.textContent = status;
+        }
+    }
+
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', function () {
+        // Form submission debugging
+        const configForm = document.querySelector('form[method="post"]');
+        if (configForm) {
+            configForm.addEventListener('submit', function (e) {
+                // Form submission handling
+            });
+        }
+
+        // Test chat event listeners
+        const testInput = document.getElementById('test-chat-input');
+        const testSendBtn = document.getElementById('test-chat-send');
+
+        if (testInput) {
+            testInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    sendTestMessage();
+                }
+            });
+        }
+
+        if (testSendBtn) {
+            testSendBtn.addEventListener('click', sendTestMessage);
+        }
+
+        // Auto-dismiss alerts - but only the transient ones
+        const messages = document.querySelectorAll('.alert:not(.alert-permanent)');
+        messages.forEach(message => {
+            setTimeout(() => {
+                message.classList.remove('show');
+                setTimeout(() => message.remove(), 150);
+            }, 5000);
+        });
+    });
+</script>
+{% endblock %}

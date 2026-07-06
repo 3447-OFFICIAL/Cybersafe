@@ -1,0 +1,360 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Financial Exposure Intelligence - CyberSafe{% endblock %}
+
+{% block content %}
+<!-- ═══════════ HERO: IMPACT (GREEN/SUCCESS THEME) ═══════════ -->
+<section class="cyber-section reveal d-flex align-items-center" style="min-height: 100vh; padding: 80px 0;">
+    <div class="container text-center">
+        <div class="cyber-badge mb-4 d-inline-flex mx-auto"
+            style="border-color: rgba(34, 197, 94, 0.3); color: #22c55e;">
+            <i class="fa-solid fa-vault me-2 pulse-green"></i> Monetary Assets Guardian
+        </div>
+        <h1 class="display-3 fw-bold text-white text-sharp mb-3">Financial <span style="color: #22c55e;">Risk
+                Scan</span></h1>
+        <p class="lead text-secondary mx-auto mb-5" style="max-width: 700px; font-size: 1.2rem;">
+            Your financial credentials are the ultimate prize for cybercriminals. We monitor the dark web for
+            exposed credit card digits, bank logs, and UPI risk signals before they can be exploited.
+        </p>
+        <div class="d-flex flex-sm-row flex-column justify-content-center align-items-center gap-3">
+            <a href="#scan-now" class="btn btn-hero-primary px-5 w-100 w-sm-auto" style="background: #22c55e; border-color: #22c55e;">
+                <i class="fa-solid fa-money-check-dollar me-2"></i> Run Finance Scan
+            </a>
+            <a href="#how-it-works" class="btn btn-hero-primary px-4 w-100 w-sm-auto"
+                style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);">
+                <i class="fa-solid fa-circle-info me-2"></i> How it Works
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ HOW IT WORKS ═══════════ -->
+<section id="how-it-works" class="py-5"
+    style="background: rgba(5, 20, 10, 0.4); border-top: 1px solid rgba(34, 197, 94, 0.1);">
+    <div class="container py-5">
+        <div class="text-center mb-5 reveal">
+            <h2 class="text-white fw-bold mb-3">The Path of <span style="color: #22c55e;">Financial Theft</span></h2>
+            <p class="text-secondary mx-auto" style="max-width: 600px;">Financial data doesn't just disappear; it is
+                harvested, validated, and sold in complex underground markets.</p>
+        </div>
+
+        <div class="row g-4 stagger-container reveal">
+            <div class="col-lg-4 stagger-child">
+                <div class="cyber-card p-4 h-100 border-success-subtle">
+                    <div class="module-num green mb-3">01 / HARVESTING</div>
+                    <div class="display-6 mt-2 mb-3" style="color: #22c55e;"><i class="fa-solid fa-credit-card"></i>
+                    </div>
+                    <h5 class="text-white fw-bold">Skimming & Phishing</h5>
+                    <p class="text-secondary small">Cards are compromised via physical skimmers at ATMs or "Magecart"
+                        scripts injected into e-commerce checkout pages to capture digits in real-time.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 stagger-child">
+                <div class="cyber-card p-4 h-100 border-success-subtle">
+                    <div class="module-num green mb-3">02 / VALIDATION</div>
+                    <div class="display-6 mt-2 mb-3" style="color: #22c55e;"><i class="fa-solid fa-microchip"></i></div>
+                    <h5 class="text-white fw-bold">Card Checking</h5>
+                    <p class="text-secondary small">Scammers use automated "Checkers" to run small, invisible
+                        transactions on charity sites to see which leaked cards are still active and have high limits.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 stagger-child">
+                <div class="cyber-card p-4 h-100 border-success-subtle">
+                    <div class="module-num green mb-3">03 / TRADING</div>
+                    <div class="display-6 mt-2 mb-3" style="color: #22c55e;"><i class="fa-solid fa-shop"></i></div>
+                    <h5 class="text-white fw-bold">Dark Web Dumps</h5>
+                    <p class="text-secondary small">Validated banking logs and "Fullz" (full identity packets) are sold
+                        on markets like Genesis for prices ranging from $5 to $500 per entry.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ SCANNER: HOW TO & START ═══════════ -->
+<section id="scan-now" class="py-5 cyber-section">
+    <div class="container py-5">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6 reveal-left">
+                <div class="cyber-badge mb-4" style="border-color: rgba(34, 197, 94, 0.3); color: #22c55e;">
+                    <i class="fa-solid fa-magnifying-glass me-2"></i> Intelligence Protocol
+                </div>
+                <h2 class="text-white fw-bold mb-4">How to Audit <span style="color: #22c55e;">Financial Risks</span>
+                </h2>
+
+                <div class="scan-steps mb-5">
+                    <div class="step-card d-flex gap-4 p-4 mb-3 success-step">
+                        <div class="step-icon-success">1</div>
+                        <div>
+                            <h6 class="text-white fw-bold mb-1">Check for Test Charges</h6>
+                            <p class="text-secondary small mb-0">Audit your bank statement for tiny denominations (under
+                                ₹10). These are often "pings" from thieves checking card validity.</p>
+                        </div>
+                    </div>
+                    <div class="step-card d-flex gap-4 p-4 mb-3 success-step">
+                        <div class="step-icon-success">2</div>
+                        <div>
+                            <h6 class="text-white fw-bold mb-1">Scan Dark Web Dumps</h6>
+                            <p class="text-secondary small mb-0">Use our integrated scanner to check if your card BIN
+                                (first 6 digits) matches current leaked database patterns.</p>
+                        </div>
+                    </div>
+                    <div class="step-card d-flex gap-4 p-4 success-step">
+                        <div class="step-icon-success">3</div>
+                        <div>
+                            <h6 class="text-white fw-bold mb-1">Verify Credit Identity</h6>
+                            <p class="text-secondary small mb-0">Pull an official CIBIL or Experian report to ensure no
+                                unauthorized credit lines have been opened in your name.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="https://www.cibil.com/" target="_blank" class="btn btn-hero-primary w-100 p-4"
+                    style="border-radius: 20px; background: #22c55e; border-color: #22c55e;">
+                    <i class="fa-solid fa-search-dollar me-3 h4 mb-0"></i>
+                    <span class="h5 mb-0 fw-bold">INITIATE DEEP FINANCE SCAN</span>
+                </a>
+            </div>
+
+            <div class="col-lg-6 reveal-right">
+                <div class="scanner-visual success">
+                    <div class="visual-orb success"></div>
+                    <div class="scanning-beam success"></div>
+                    <div class="inner-icon success">
+                        <i class="fa-solid fa-money-bill-transfer" style="color: #22c55e;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ CONSEQUENCES: WHAT HAPPENS IF EXPOSED ═══════════ -->
+<section class="py-5" style="background: rgba(34, 197, 94, 0.03); border-top: 1px solid rgba(34, 197, 94, 0.1);">
+    <div class="container py-5">
+        <div class="text-center mb-5 reveal">
+            <h2 class="text-white fw-bold mb-3">Consequences of <span style="color: #22c55e;">Financial Exposure</span>
+            </h2>
+            <p class="text-secondary mx-auto" style="max-width: 650px;">When your money is at risk, the damage extends
+                far beyond a single unauthorized transaction.</p>
+        </div>
+
+        <div class="row g-4 reveal">
+            <div class="col-md-4">
+                <div class="threat-alert success p-4 h-100">
+                    <div class="alert-severity red">CRITICAL</div>
+                    <h5 class="text-white fw-bold mt-3">Total Savings Drain</h5>
+                    <p class="text-secondary small">Using intercepted UPI pins or bank logs, attackers can initiate bulk
+                        transfers to "money mule" accounts, emptying your life savings in minutes.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="threat-alert success p-4 h-100">
+                    <div class="alert-severity red">CRITICAL</div>
+                    <h5 class="text-white fw-bold mt-3">Credit Score Collapse</h5>
+                    <p class="text-secondary small">Identity thieves take out "Buy Now Pay Later" (BNPL) loans. When
+                        they default, it is your CIBIL score that takes the hit, preventing future loans.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="threat-alert success p-4 h-100">
+                    <div class="alert-severity amber">HIGH RISK</div>
+                    <h5 class="text-white fw-bold mt-3">Merchant Exploitation</h5>
+                    <p class="text-secondary small">Stored card info on Amazon or Flipkart is used to buy high-value
+                        gift cards or electronics that are untraceable and easily resold.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="threat-alert success p-4 h-100">
+                    <div class="alert-severity red">CRITICAL</div>
+                    <h5 class="text-white fw-bold mt-3">Illegal Wealth Claims</h5>
+                    <p class="text-secondary small">Fraudsters use your bank details to claim refunds or subsidies,
+                        leading to legal investigations against you by government enforcement agencies.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="threat-alert success p-4 h-100">
+                    <div class="alert-severity amber">HIGH RISK</div>
+                    <h5 class="text-white fw-bold mt-3">Family Liability</h5>
+                    <p class="text-secondary small">Secondary cards linked to your primary account can be systematiclly
+                        targeted, putting the financial security of your family at risk.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="threat-alert success p-4 h-100">
+                    <div class="alert-severity amber">HIGH RISK</div>
+                    <h5 class="text-white fw-bold mt-3">Long-term Surveillance</h5>
+                    <p class="text-secondary small">Once a financial log is sold, you end up on a "Sucker List" used by
+                        fraudulent investment schemes and high-pressure insurance scammers.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ PREVENTION & MITIGATION ═══════════ -->
+<section class="py-5" style="background: transparent;">
+    <div class="container py-5">
+        <div class="row g-5">
+            <!-- Prevention -->
+            <div class="col-lg-6 reveal-left">
+                <div class="cyber-badge mb-4" style="border-color: rgba(16,185,129,0.3); color: var(--success-color);">
+                    <i class="fa-solid fa-shield-check me-2"></i> Defensive Strategy
+                </div>
+                <h3 class="text-white fw-bold mb-4">Prevention Tips</h3>
+                <div class="tip-list">
+                    <div class="tip-item d-flex gap-3 mb-4">
+                        <i class="fa-solid fa-check-circle text-success mt-1"></i>
+                        <div>
+                            <h6 class="text-white mb-1">Use Virtual Cards</h6>
+                            <p class="text-secondary small">Use apps like Jupiter or bank-specific virtual card
+                                generators for every online purchase to keep your original card hidden.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item d-flex gap-3 mb-4">
+                        <i class="fa-solid fa-check-circle text-success mt-1"></i>
+                        <div>
+                            <h6 class="text-white mb-1">Disable Int. Usage</h6>
+                            <p class="text-secondary small">Most leaks are used on international sites without OTP. Keep
+                                international transactions OFF in your bank app.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item d-flex gap-3">
+                        <i class="fa-solid fa-check-circle text-success mt-1"></i>
+                        <div>
+                            <h6 class="text-white mb-1">Set Transaction Limits</h6>
+                            <p class="text-secondary small">Restrict daily online limits to small amounts. Increase them
+                                only when you are about to make a large purchase.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mitigation -->
+            <div class="col-lg-6 reveal-right">
+                <div class="cyber-badge mb-4" style="border-color: #22c55e33; color: #22c55e;">
+                    <i class="fa-solid fa-kit-medical me-2"></i> Recovery Protocol
+                </div>
+                <h3 class="text-white fw-bold mb-4">Mitigation Tips</h3>
+                <div class="tip-list">
+                    <div class="tip-item d-flex gap-3 mb-4">
+                        <i class="fa-solid fa-snowflake mt-1" style="color: #22c55e;"></i>
+                        <div>
+                            <h6 class="text-white mb-1">Freeze Accounts via App</h6>
+                            <p class="text-secondary small">Don't wait for a phone call. Use the "Freeze/Block" button
+                                in your banking app at the first sign of a suspicious alert.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item d-flex gap-3 mb-4">
+                        <i class="fa-solid fa-phone-slash mt-1" style="color: #22c55e;"></i>
+                        <div>
+                            <h6 class="text-white mb-1">Call 1930 Helpline</h6>
+                            <p class="text-secondary small">The Ministry of Home Affairs dedicated financial fraud
+                                helpline. Reporting here can lead to freezing the scammers' bank accounts.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item d-flex gap-3">
+                        <i class="fa-solid fa-file-shield mt-1" style="color: #22c55e;"></i>
+                        <div>
+                            <h6 class="text-white mb-1">Request New Card</h6>
+                            <p class="text-secondary small">Once a card is exposed, it is forever vulnerable. Ask your
+                                bank for a complete replacement with new numbers and CVV.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .step-icon-success {
+        width: 48px;
+        height: 48px;
+        background: #22c55e;
+        color: var(--bg-void);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+        box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
+    }
+
+    .success-step {
+        background: rgba(34, 197, 94, 0.03) !important;
+        border-color: rgba(34, 197, 94, 0.1) !important;
+    }
+
+    .scanner-visual.success {
+        height: 500px;
+        background: rgba(5, 15, 10, 0.6);
+        border: 1px solid rgba(34, 197, 94, 0.2);
+        border-radius: 40px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 60px rgba(0, 0, 0, 0.4), inset 0 0 40px rgba(34, 197, 94, 0.05);
+    }
+
+    .visual-orb.success {
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(34, 197, 94, 0.2) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: orbPulse 4s infinite alternate;
+    }
+
+    .scanning-beam.success {
+        position: absolute;
+        width: 100%;
+        height: 200px;
+        background: linear-gradient(to bottom, transparent, rgba(34, 197, 94, 0.2), transparent);
+        top: -200px;
+        animation: scanAnim 4s linear infinite;
+    }
+
+    .inner-icon.success {
+        position: absolute;
+        font-size: 8rem;
+        opacity: 0.2;
+        filter: drop-shadow(0 0 20px #22c55e);
+    }
+
+    .threat-alert.success:hover {
+        border-color: rgba(34, 197, 94, 0.4);
+        transform: translateY(-5px);
+        background: rgba(34, 197, 94, 0.08);
+    }
+
+    .pulse-green {
+        animation: pulseGreen 3s infinite;
+    }
+
+    @keyframes pulseGreen {
+
+        0%,
+        100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.5;
+        }
+    }
+
+    .module-num.green {
+        color: #22c55e;
+    }
+
+    .border-success-subtle {
+        border-color: rgba(34, 197, 94, 0.1) !important;
+    }
+</style>
+{% endblock %}

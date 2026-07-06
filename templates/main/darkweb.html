@@ -1,0 +1,365 @@
+{% extends 'base.html' %}
+
+{% block title %}Dark Web Intelligence - CyberSafe{% endblock %}
+
+{% block extra_css %}
+<style>
+  /* Dark Web Specific Styles */
+  :root {
+    --dw-bg: #030a16;
+    --dw-card: #0a1930;
+    --dw-accent: #00d2ff;
+    --dw-alert: #ff3366;
+  }
+
+  body {
+    background: var(--dw-bg) !important;
+    color: #fff;
+  }
+
+  .dw-hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: radial-gradient(circle at center 20%, #0a1930 0%, #030a16 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    scroll-snap-align: start;
+    padding: 80px 0;
+  }
+
+  .dw-h1 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 56px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    line-height: 1.1;
+  }
+
+  .dw-sub {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 600px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+
+  /* Bento Grid Infographics */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 20px;
+    max-width: 600px;
+    margin-left: auto;
+  }
+
+  .bento-card {
+    background: var(--dw-card);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    margin: 0 !important;
+  }
+
+  .bento-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 210, 255, 0.3);
+  }
+
+  .bento-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--dw-accent), transparent);
+    opacity: 0.5;
+  }
+
+  .bento-card.alert::before {
+    background: linear-gradient(90deg, var(--dw-alert), transparent);
+  }
+
+  .bento-val {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+
+  .bento-label {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+  }
+
+  /* Threat Vector Flow */
+  .flow-container {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 60px;
+    margin-bottom: 80px;
+  }
+
+  .flow-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    font-family: 'Rajdhani', sans-serif;
+  }
+
+  .flow-steps {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+  }
+
+  .flow-steps::before {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: 50px;
+    right: 50px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 1;
+  }
+
+  .f-step {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 20%;
+  }
+
+  .f-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--dw-card);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--dw-accent);
+  }
+
+  .f-step:last-child .f-icon {
+    color: var(--dw-alert);
+    border-color: rgba(255, 51, 102, 0.3);
+  }
+
+  .f-title {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+
+  .f-desc {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.5;
+  }
+
+  /* Protection Grid */
+  .prot-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 80px;
+  }
+
+  .prot-card {
+    background: rgba(0, 210, 255, 0.03);
+    border: 1px solid rgba(0, 210, 255, 0.15);
+    padding: 32px;
+    border-radius: 8px;
+  }
+
+  .prot-icon {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+
+  .prot-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #fff;
+  }
+
+  .prot-desc {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+  }
+
+  /* Call to Action Section */
+  .dw-cta {
+    background: var(--dw-card);
+    border: 1px dashed rgba(255, 51, 102, 0.3);
+    border-radius: 12px;
+    padding: 60px;
+    text-align: center;
+  }
+
+  .btn-dw-primary {
+    display: inline-block;
+    background: var(--dw-alert);
+    color: #fff;
+    padding: 16px 32px;
+    border-radius: 6px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: none;
+  }
+
+  .btn-dw-primary:hover {
+    background: #e62e5c;
+    color: #fff;
+  }
+
+  .btn-dw-secondary {
+    display: inline-block;
+    background: transparent;
+    color: #fff;
+    padding: 16px 32px;
+    border-radius: 6px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-dw-secondary:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO SECTION -->
+<section class="dw-hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 text-lg-start">
+        <h1 class="dw-h1">The Hidden Ecosystem:<br>Inside the Dark Web</h1>
+        <p class="dw-sub mx-lg-0">
+          The Dark Web is an encrypted network unindexed by standard search engines. While it has legitimate uses for
+          privacy, it serves as the primary marketplace for stolen data, credentials, and cybercrime-as-a-service.
+        </p>
+      </div>
+      <div class="col-lg-6">
+        <div class="bento-grid">
+          <div class="bento-card">
+            <div class="bento-val">₹1,500</div>
+            <div class="bento-label">Avg. price of a stolen credit card (Indian)</div>
+          </div>
+          <div class="bento-card">
+            <div class="bento-val">200 Billion+</div>
+            <div class="bento-label">Credentials circulating underground</div>
+          </div>
+          <div class="bento-card alert alert-permanent" style="grid-column: 1 / -1;">
+            <div class="bento-val" style="font-size: 38px;">&lt;24 Hours</div>
+            <div class="bento-label" style="font-size: 15px;">Time for stolen data to appear on dark web</div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<section style="padding: 80px 0;">
+  <div class="container">
+
+
+
+    <!-- MISUSE SECTION -->
+    <div class="flow-container">
+      <h2 class="flow-title">The Data Supply Chain: How Breaches Become Scams</h2>
+      <div class="flow-steps">
+        <div class="f-step">
+          <div class="f-icon">🌐</div>
+          <div class="f-title">Initial Breach</div>
+          <div class="f-desc">A service you use is hacked, exposing your email, password, and phone number.</div>
+        </div>
+        <div class="f-step">
+          <div class="f-icon">🛒</div>
+          <div class="f-title">Data Brokering</div>
+          <div class="f-desc">Your info is bundled into "dumps" and sold in bulk on underground forums.</div>
+        </div>
+        <div class="f-step">
+          <div class="f-icon">🔍</div>
+          <div class="f-title">Credential Stuffing</div>
+          <div class="f-desc">Bots test your exposed password across hundreds of banking and email sites.</div>
+        </div>
+        <div class="f-step">
+          <div class="f-icon">📞</div>
+          <div class="f-title">Social Engineering</div>
+          <div class="f-desc">Scammers use your leaked details to impersonate banks or police via calls.</div>
+        </div>
+        <div class="f-step">
+          <div class="f-icon">💰</div>
+          <div class="f-title">Financial Loss</div>
+          <div class="f-desc">Accounts are drained, or identity is stolen to take out loans in your name.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROTECTION PROTOCOL -->
+    <div
+      style="margin-bottom: 32px; font-weight: 700; color: var(--dw-accent); letter-spacing: 0.1em; text-transform: uppercase; font-size: 12px;">
+      Defense Protocols</div>
+    <div class="prot-grid">
+      <div class="prot-card">
+        <div class="prot-icon">🔗</div>
+        <div class="prot-title">Delink Stale Accounts</div>
+        <div class="prot-desc">Delete accounts on websites you no longer use. Unsubscribe from newsletters and remove
+          saved payment methods from minor apps.</div>
+      </div>
+      <div class="prot-card">
+        <div class="prot-icon">🔑</div>
+        <div class="prot-title">Rotate Passwords</div>
+        <div class="prot-desc">Never reuse passwords. If an old service is breached, hackers will test that password on
+          your primary banking and email accounts.</div>
+      </div>
+      <div class="prot-card">
+        <div class="prot-icon">🛡️</div>
+        <div class="prot-title">Stay Alert & Enable 2FA</div>
+        <div class="prot-desc">Always enable Two-Factor Authentication (Authenticator apps > SMS). Be highly suspicious
+          of urgent calls requesting OTPs or money.</div>
+      </div>
+    </div>
+
+    <!-- CTA LOOP -->
+    <div class="dw-cta">
+      <h2 style="font-family: 'Rajdhani', sans-serif; font-size: 36px; margin-bottom: 16px;">Has Your Data Hit The Dark
+        Web?</h2>
+      <p style="color: rgba(255,255,255,0.7); max-width: 500px; margin: 0 auto 32px;">Don't wait until damage is done.
+        Use our integrated scanning engines to check if your credentials or identity documents are actively being
+        traded.</p>
+
+      <div style="display: flex; gap: 16px; justify-content: center;">
+        <a href="{% url 'email_breach_check' %}" class="btn-dw-primary">🔍 Scan Dark Web for My Email</a>
+        <a href="{% url 'kyc_document_shield' %}" class="btn-dw-secondary">📄 Check for Leaked KYC Docs</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

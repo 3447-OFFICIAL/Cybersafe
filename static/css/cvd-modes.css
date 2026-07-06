@@ -1,0 +1,141 @@
+/* ══════════════════════════════════════════════════════════
+   CYBERSAFE — ADAPTIVE ACCESSIBILITY ENGINE
+   Color Vision Deficiency (CVD) & High Contrast Overrides
+   ══════════════════════════════════════════════════════════ */
+
+/* --- Filter Layer (Full Screen Backdrop) --- */
+#cvd-filter-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Crucial: clicks pass through to content */
+    z-index: 999997;
+    display: none;
+    transition: backdrop-filter 0.3s ease;
+}
+
+body.mode-protanopia #cvd-filter-layer,
+body.mode-deuteranopia #cvd-filter-layer,
+body.mode-tritanopia #cvd-filter-layer {
+    display: block;
+}
+
+/* --- Protanopia Mode (Red-Blind) --- */
+body.mode-protanopia #cvd-filter-layer {
+    backdrop-filter: url('#protanopia-filter');
+}
+
+body.mode-protanopia .btn-danger,
+body.mode-protanopia [style*="background:linear-gradient"][style*="#8b0000"],
+body.mode-protanopia [style*="background:linear-gradient"][style*="#FF7A00"],
+body.mode-protanopia .severity-high {
+    background: #5d3fd3 !important;
+    color: #fff !important;
+}
+
+/* --- Deuteranopia Mode (Green-Blind) --- */
+body.mode-deuteranopia #cvd-filter-layer {
+    backdrop-filter: url('#deuteranopia-filter');
+}
+
+body.mode-deuteranopia .btn-success,
+body.mode-deuteranopia [style*="color:#ffe4b5"],
+body.mode-deuteranopia .severity-low {
+    color: #2b6cb0 !important;
+}
+
+/* --- Tritanopia Mode (Blue-Blind) --- */
+body.mode-tritanopia #cvd-filter-layer {
+    backdrop-filter: url('#tritanopia-filter');
+}
+
+body.mode-tritanopia .btn-hero-primary,
+body.mode-tritanopia .btn-breach-scan,
+body.mode-tritanopia [style*="color:var(--cyber-blue)"] {
+    background: #d53f8c !important;
+    border-color: #d53f8c !important;
+    color: #fff !important;
+}
+
+/* --- Universal Indicators --- */
+body.mode-protanopia .severity-critical::before,
+body.mode-deuteranopia .severity-critical::before,
+body.mode-tritanopia .severity-critical::before {
+    content: '⚠️ ' !important;
+}
+
+body:not(.mode-none) li [style*="color:#ffe4b5"] {
+    position: relative;
+    padding-left: 20px;
+}
+body:not(.mode-none) li [style*="color:#ffe4b5"]::before {
+    content: '✖';
+    position: absolute;
+    left: 0;
+    font-weight: 900;
+}
+
+/* --- Widget Fixes --- */
+#acc-premium-widget {
+    z-index: 999999 !important; /* Above the filter layer */
+}
+
+.acc-main-trigger {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+body.mode-protanopia .acc-main-trigger {
+    background: #5d3fd3 !important;
+    color: #fff !important;
+    box-shadow: 0 0 20px rgba(93, 63, 211, 0.4) !important;
+}
+
+body.mode-deuteranopia .acc-main-trigger {
+    background: #2b6cb0 !important;
+    color: #fff !important;
+    box-shadow: 0 0 20px rgba(43, 108, 176, 0.4) !important;
+}
+
+body.mode-tritanopia .acc-main-trigger {
+    background: #d53f8c !important;
+    color: #fff !important;
+    box-shadow: 0 0 20px rgba(213, 63, 140, 0.4) !important;
+}
+
+/* ═══════════ VISIBLE SCROLLBAR FOR CVD MODES ═══════════ */
+/* Protanopia mode scrollbar */
+html:has(body.mode-protanopia) {
+    scrollbar-color: #5d3fd3 var(--bg-void);
+}
+html:has(body.mode-protanopia) ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #5d3fd3 0%, #402c91 100%);
+}
+html:has(body.mode-protanopia) ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #402c91 0%, #5d3fd3 100%);
+}
+
+/* Deuteranopia mode scrollbar */
+html:has(body.mode-deuteranopia) {
+    scrollbar-color: #2b6cb0 var(--bg-void);
+}
+html:has(body.mode-deuteranopia) ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #2b6cb0 0%, #1a4a7a 100%);
+}
+html:has(body.mode-deuteranopia) ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #1a4a7a 0%, #2b6cb0 100%);
+}
+
+/* Tritanopia mode scrollbar */
+html:has(body.mode-tritanopia) {
+    scrollbar-color: #d53f8c var(--bg-void);
+}
+html:has(body.mode-tritanopia) ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #d53f8c 0%, #9e2a66 100%);
+}
+html:has(body.mode-tritanopia) ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #9e2a66 0%, #d53f8c 100%);
+}

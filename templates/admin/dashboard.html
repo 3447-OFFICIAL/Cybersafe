@@ -1,0 +1,753 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard - CyberSafe{% endblock %}
+
+{% block extra_css %}
+<style>
+    .admin-dashboard {
+        padding-top: 1.5rem;
+    }
+
+    /* ── Dashboard Header ── */
+    .dash-header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .dash-header h1 {
+        font-family: 'Rajdhani', sans-serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #fff;
+    }
+
+    .dash-header p {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.9rem;
+        margin: 0;
+    }
+
+    /* ── Security Banner ── */
+    .security-banner {
+        background: rgba(0, 212, 255, 0.04);
+        border: 1px solid rgba(0, 212, 255, 0.12);
+        border-radius: 20px;
+        padding: 1.5rem 2rem;
+        margin-bottom: 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .security-banner::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 20px;
+        padding: 1px;
+        background: linear-gradient(135deg, rgba(0, 212, 255, 0.3), transparent, rgba(197, 160, 89, 0.2));
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+    }
+
+    .banner-status-dot {
+        width: 12px;
+        height: 12px;
+        background: #22c55e;
+        border-radius: 50%;
+        display: inline-block;
+        animation: statusPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes statusPulse {
+
+        0%,
+        100% {
+            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+        }
+
+        50% {
+            box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+        }
+    }
+
+    .metric-pill {
+        background: rgba(0, 212, 255, 0.08);
+        border: 1px solid rgba(0, 212, 255, 0.15);
+        border-radius: 12px;
+        padding: 0.75rem 1rem;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .metric-pill:hover {
+        background: rgba(0, 212, 255, 0.12);
+        border-color: var(--cyber-blue, #00d4ff);
+        transform: translateY(-2px);
+    }
+
+    .metric-pill .value {
+        font-family: 'Rajdhani', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--accent-gold, #c5a059);
+    }
+
+    .metric-pill .label {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.5);
+        font-weight: 600;
+    }
+
+    /* ── Stats Cards ── */
+    .stat-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 16px;
+        padding: 1.5rem;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .stat-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 16px;
+        padding: 1px;
+        background: linear-gradient(135deg, transparent, var(--cyber-blue-border, rgba(0, 212, 255, 0.15)), transparent);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .stat-card:hover::before {
+        opacity: 1;
+    }
+
+    .stat-card:hover {
+        background: rgba(255, 255, 255, 0.05);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .stat-card .icon-wrap {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+    }
+
+    /* ── Panel Cards for Charts ── */
+    .panel-card {
+        background: rgba(15, 23, 42, 0.4);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(0, 212, 255, 0.1);
+        border-radius: 20px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .panel-header {
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .panel-header h5 {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #fff;
+        letter-spacing: 0.5px;
+    }
+
+    .panel-body {
+        padding: 1.5rem;
+    }
+
+    .panel-card:hover {
+        border-color: rgba(0, 212, 255, 0.3);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .stat-card .stat-value {
+        font-family: 'Rajdhani', sans-serif;
+        font-size: 2rem;
+        font-weight: 700;
+    }
+
+    .stat-card .stat-label {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .stat-card .stat-trend {
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    /* ── Quick Actions ── */
+    .quick-action {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 16px;
+        padding: 1.25rem 1.5rem;
+        color: #fff;
+        text-decoration: none;
+        transition: all 0.4s ease;
+    }
+
+    .quick-action:hover {
+        background: rgba(0, 212, 255, 0.06);
+        border-color: rgba(0, 212, 255, 0.2);
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .quick-action .qa-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+    }
+
+    .quick-action strong {
+        display: block;
+    }
+
+    .quick-action small {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* ── Panel Card ── */
+    .panel-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 20px;
+        overflow: hidden;
+        height: 100%;
+    }
+
+    .panel-card .panel-header {
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .panel-card .panel-header h5 {
+        font-family: 'Rajdhani', sans-serif;
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: #fff;
+        margin: 0;
+    }
+
+    .panel-card .panel-body {
+        padding: 1.5rem;
+    }
+
+    /* Activity items */
+    .activity-item {
+        display: flex;
+        align-items: start;
+        gap: 0.75rem;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .activity-item:last-child {
+        border-bottom: none;
+    }
+
+    .activity-dot {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: rgba(0, 212, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        color: var(--cyber-blue, #00d4ff);
+    }
+
+    .activity-item p {
+        color: rgba(255, 255, 255, 0.8);
+        margin: 0;
+        font-size: 0.9rem;
+    }
+
+    .activity-item small {
+        color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* Health items */
+    .health-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .health-item:last-child {
+        border-bottom: none;
+    }
+
+    .health-item .service-name {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 500;
+    }
+
+    .health-badge {
+        padding: 0.3rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .health-badge.operational {
+        background: rgba(34, 197, 94, 0.12);
+        color: #4ade80;
+        border: 1px solid rgba(34, 197, 94, 0.25);
+    }
+
+    .health-badge.scheduled {
+        background: rgba(234, 179, 8, 0.12);
+        color: #facc15;
+        border: 1px solid rgba(234, 179, 8, 0.25);
+    }
+
+    .health-badge.down {
+        background: rgba(239, 68, 68, 0.12);
+        color: #ef4444;
+        border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+    .btn-cyber-glow {
+        background: var(--cyber-blue, #00d4ff);
+        border: none;
+        color: #000 !important;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .btn-cyber-glow:hover {
+        background: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+        color: #000 !important;
+    }
+
+    .btn-cyber-glow:active {
+        transform: translateY(0);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="admin-content" style="padding-top: 1.5rem;">
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="dash-header reveal">
+            <div>
+                <h1><i class="fas fa-shield-halved me-2" style="color: var(--cyber-blue, #00d4ff);"></i> Security
+                    Dashboard
+                </h1>
+                <p>Real-time monitoring and analytics for CyberSafe platform</p>
+            </div>
+            <div class="d-flex gap-2">
+                <button class="btn btn-outline-primary btn-sm" onclick="location.reload()">
+                    <i class="fas fa-sync-alt me-2"></i>Refresh
+                </button>
+                <a href="{% url 'home' %}" class="btn btn-outline-secondary btn-sm">
+                    <i class="fas fa-external-link-alt me-2"></i>View Site
+                </a>
+                <a href="{% url 'admin_logout' %}" class="btn btn-outline-danger btn-sm">
+                    <i class="fas fa-sign-out-alt me-2"></i>Logout
+                </a>
+            </div>
+        </div>
+
+        <!-- Security Status Banner -->
+        <div class="security-banner reveal">
+            <div class="row g-3 align-items-center">
+                <div class="col-12 col-md-8">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="banner-status-dot"></div>
+                        <div>
+                            <h5 class="mb-1 fw-bold text-white">System Monitoring Active</h5>
+                            <p class="mb-0 small" style="color: rgba(255,255,255,0.5);">Continuous real-time security tracking and system health diagnostics are currently enabled.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 text-md-end">
+                    <a href="{% url 'monitoring_dashboard' %}" class="btn-cyber-glow btn btn-sm px-4">
+                        <i class="fas fa-chart-line"></i> View Detailed Security Stats
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart Analytics Section -->
+        <div class="row g-4 mb-4">
+            <div class="col-lg-8 reveal">
+                <div class="panel-card h-100">
+                    <div class="panel-header">
+                        <h5><i class="fas fa-chart-line me-2" style="color: var(--cyber-blue, #00d4ff);"></i>Crimes Over
+                            Time</h5>
+                    </div>
+                    <div class="panel-body">
+                        <div class="chart-container" style="position: relative; height: 300px; width: 100%;">
+                            <canvas id="lineChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 reveal">
+                <div class="panel-card h-100">
+                    <div class="panel-header">
+                        <h5><i class="fas fa-chart-pie me-2" style="color: var(--accent-gold, #c5a059);"></i>Crimes by
+                            Severity</h5>
+                    </div>
+                    <div class="panel-body d-flex align-items-center justify-content-center">
+                        <div class="chart-container" style="position: relative; height: 300px; width: 100%;">
+                            <canvas id="pieChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row g-3 g-md-4 mb-4">
+            <div class="col-12 col-md-4 reveal">
+                <div class="stat-card h-100">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="stat-label">Total Cyber Crimes</div>
+                            <div class="stat-value text-danger">{{ total_crimes|default:"0" }}</div>
+                            <div class="stat-trend text-success">
+                                <i class="fas fa-arrow-up me-1"></i>+12.5%
+                            </div>
+                        </div>
+                        <div class="icon-wrap" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;">
+                            <i class="fa-solid fa-triangle-exclamation text-danger"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 reveal">
+                <div class="stat-card h-100">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="stat-label">Critical Security Alerts</div>
+                            <div class="stat-value text-warning">{{ critical_alerts|default:"0" }}</div>
+                            <div class="stat-trend text-info">
+                                <i class="fas fa-shield-alt me-1"></i>Live Tracking
+                            </div>
+                        </div>
+                        <div class="icon-wrap" style="background: rgba(234, 179, 8, 0.1); color: #eab308;">
+                            <i class="fa-solid fa-shield-virus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 reveal">
+                <div class="stat-card h-100">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="stat-label">Unique Website Visitors</div>
+                            <div class="stat-value" style="color: var(--cyber-blue, #00d4ff);">{{ unique_visitors_count|default:"0" }}</div>
+                            <div class="stat-trend" style="color: var(--cyber-blue, #00d4ff);">
+                                <i class="fas fa-users me-1"></i>All Time
+                            </div>
+                        </div>
+                        <div class="icon-wrap" style="background: rgba(0, 212, 255, 0.1); color: var(--cyber-blue, #00d4ff);">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="row g-3 mb-4">
+            <div class="col-12">
+                <h5 class="fw-bold text-white mb-3 reveal" style="font-family: 'Rajdhani', sans-serif;">
+                    <i class="fas fa-bolt me-2" style="color: var(--accent-gold, #c5a059);"></i>Quick Security Actions
+                </h5>
+            </div>
+            <div class="col-12 col-md-4 reveal">
+                <a href="{% url 'admin_crimes' %}" class="quick-action">
+                    <div class="qa-icon" style="background: rgba(0, 212, 255, 0.1); color: var(--cyber-blue, #00d4ff);">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div>
+                        <strong>Manage Crimes</strong>
+                        <small>Update crime database</small>
+                    </div>
+                </a>
+            </div>
+            <div class="col-12 col-md-4 reveal">
+                <a href="{% url 'admin_chatbot' %}" class="quick-action">
+                    <div class="qa-icon"
+                        style="background: rgba(197, 160, 89, 0.1); color: var(--accent-gold, #c5a059);">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div>
+                        <strong>Chatbot Management</strong>
+                        <small>Configure AI assistant</small>
+                    </div>
+                </a>
+            </div>
+            <div class="col-12 col-md-4 reveal">
+                <a href="{% url 'admin_visitors' %}" class="quick-action">
+                    <div class="qa-icon"
+                        style="background: rgba(0, 212, 255, 0.1); color: var(--cyber-blue, #00d4ff);">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div>
+                        <strong>Website Visitors</strong>
+                        <small>View unique access logs</small>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Activity + Health Panels -->
+        <div class="row g-4 mb-4">
+            <!-- Recent Activity -->
+            <div class="col-lg-6 reveal">
+                <div class="panel-card">
+                    <div class="panel-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0"><i class="fas fa-wave-square me-2"
+                                style="color: var(--cyber-blue, #00d4ff);"></i>Recent Admin Activity</h5>
+                        <a href="{% url 'logs_view' %}" class="btn btn-sm btn-outline-primary"
+                            style="font-size: 0.75rem; padding: 0.25rem 0.75rem; border-radius: 8px;">
+                            View All
+                        </a>
+                    </div>
+                    <div class="panel-body">
+                        {% for activity in recent_activity|slice:":3" %}
+                        <div class="activity-item">
+                            <div class="activity-dot">
+                                <i class="fas fa-edit" style="font-size: 0.8rem;"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p>
+                                    <strong>{{ activity.action }}</strong> on
+                                    <strong>{{ activity.resource_type }}</strong>
+                                </p>
+                                <small>by {{ activity.admin_user.email }} • {{ activity.timestamp|timesince }}
+                                    ago</small>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="text-center py-4">
+                            <i class="fas fa-wave-square fa-2x mb-2" style="color: rgba(255,255,255,0.2);"></i>
+                            <p style="color: rgba(255,255,255,0.4);">No recent activity</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Health -->
+            <div class="col-lg-6 reveal">
+                <div class="panel-card">
+                    <div class="panel-header">
+                        <h5><i class="fas fa-heartbeat me-2" style="color: #4ade80;"></i>System Health</h5>
+                    </div>
+                    <div class="panel-body">
+                        <div class="health-item">
+                            <div class="service-name">
+                                {% if health_status.database %}
+                                <i class="fas fa-database" style="color: #4ade80;"></i>
+                                {% else %}
+                                <i class="fas fa-database" style="color: #ef4444;"></i>
+                                {% endif %}
+                                <span>Database</span>
+                            </div>
+                            {% if health_status.database %}
+                            <span class="health-badge operational">Operational</span>
+                            {% else %}
+                            <span class="health-badge down">Down</span>
+                            {% endif %}
+                        </div>
+                        <div class="health-item">
+                            <div class="service-name">
+                                {% if health_status.auth %}
+                                <i class="fas fa-lock" style="color: #4ade80;"></i>
+                                {% else %}
+                                <i class="fas fa-lock" style="color: #ef4444;"></i>
+                                {% endif %}
+                                <span>Authentication</span>
+                            </div>
+                            {% if health_status.auth %}
+                            <span class="health-badge operational">Secure</span>
+                            {% else %}
+                            <span class="health-badge down">Issue</span>
+                            {% endif %}
+                        </div>
+                        <div class="health-item">
+                            <div class="service-name">
+                                {% if health_status.api %}
+                                <i class="fas fa-plug" style="color: #4ade80;"></i>
+                                {% else %}
+                                <i class="fas fa-plug" style="color: #ef4444;"></i>
+                                {% endif %}
+                                <span>Chatbot Services</span>
+                            </div>
+                            {% if health_status.api %}
+                            <span class="health-badge operational">Online</span>
+                            {% else %}
+                            <span class="health-badge down">Offline</span>
+                            {% endif %}
+                        </div>
+                        <div class="health-item">
+                            <div class="service-name">
+                                {% if health_status.backup %}
+                                <i class="fas fa-cloud" style="color: #facc15;"></i>
+                                {% else %}
+                                <i class="fas fa-cloud" style="color: #ef4444;"></i>
+                                {% endif %}
+                                <span>Backup System</span>
+                            </div>
+                            {% if health_status.backup %}
+                            <span class="health-badge operational">Available</span>
+                            {% else %}
+                            <span class="health-badge down">Not Available</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Make sure we parse the JSON properly in the template
+    const chartData = JSON.parse('{{ chart_data|escapejs }}');
+
+    // 1. Line Chart: Crimes Over Time
+    const ctx1 = document.getElementById('lineChart').getContext('2d');
+    new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: chartData.dates,
+            datasets: [{
+                label: 'Crimes Added',
+                data: chartData.counts,
+                borderColor: '#00d4ff',
+                backgroundColor: 'rgba(0, 212, 255, 0.2)',
+                borderWidth: 2,
+                pointBackgroundColor: '#c5a059',
+                pointBorderColor: '#fff',
+                pointRadius: 4,
+                tension: 0.4,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: {
+                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                    ticks: { color: 'rgba(255, 255, 255, 0.6)' }
+                },
+                y: {
+                    beginAtZero: true,
+                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                    ticks: {
+                        color: 'rgba(255, 255, 255, 0.6)',
+                        stepSize: 1
+                    }
+                }
+            }
+        }
+    });
+
+    // 2. Pie Chart: Crimes by Severity
+    const ctx2 = document.getElementById('pieChart').getContext('2d');
+    new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+            labels: chartData.severity_labels,
+            datasets: [{
+                data: chartData.severity_counts,
+                backgroundColor: [
+                    '#00d4ff', // cyber-blue
+                    '#ef4444', // danger red
+                    '#facc15', // warning yellow
+                    '#4ade80', // success green
+                    '#c5a059', // accent gold
+                    '#8b5cf6'  // purple
+                ],
+                borderWidth: 0,
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '65%',
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: {
+                        color: 'rgba(255, 255, 255, 0.8)',
+                        usePointStyle: true,
+                        padding: 20
+                    }
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

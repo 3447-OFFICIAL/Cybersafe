@@ -1,0 +1,227 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Unique Visitors - CyberSafe Admin{% endblock %}
+
+{% block extra_css %}
+<style>
+    .logs-container {
+        padding-top: 100px;
+        padding-bottom: 50px;
+        min-height: 100vh;
+        background: var(--bg-void, #02040a);
+    }
+
+    .cyber-card {
+        background: var(--bg-primary, #0b0d17);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 24px;
+        padding: 0;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .cyber-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--cyber-blue, #68ccd9), transparent);
+    }
+
+    .table-header-box {
+        padding: 1.5rem 2rem;
+        background: rgba(0, 0, 0, 0.3);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .table {
+        color: var(--text-primary, #f8fafc);
+        margin-bottom: 0;
+        background-color: transparent !important;
+    }
+
+    .table thead th {
+        background: rgba(0, 0, 0, 0.5) !important;
+        border: none;
+        color: var(--cyber-blue, #68ccd9);
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        letter-spacing: 1.5px;
+        padding: 1.25rem 1.5rem;
+    }
+
+    .table tbody td {
+        background: transparent !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        padding: 1.25rem 1.5rem;
+        vertical-align: middle;
+        font-size: 0.85rem;
+        color: var(--text-secondary, #94a3b8);
+    }
+
+    .table tbody tr {
+        background: transparent !important;
+    }
+
+    .table tbody tr:hover td {
+        background: rgba(255, 255, 255, 0.02) !important;
+        color: #fff !important;
+    }
+
+    .pagination-container {
+        padding: 1.5rem 2rem;
+        background: rgba(0, 0, 0, 0.1);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .page-link {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.6);
+        margin: 0 3px;
+        border-radius: 8px !important;
+        font-size: 0.85rem;
+        transition: all 0.3s ease;
+    }
+
+    .page-link:hover {
+        background: rgba(0, 212, 255, 0.1);
+        color: #00d4ff;
+        border-color: #00d4ff;
+        transform: translateY(-2px);
+    }
+
+    .page-item.active .page-link {
+        background: #00d4ff;
+        border-color: #00d4ff;
+        color: #0f172a;
+        font-weight: 700;
+        box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+    }
+
+    .btn-outline-light:hover {
+        background: rgba(255, 255, 255, 0.1) !important;
+        color: #fff !important;
+        border-color: rgba(255, 255, 255, 0.3) !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container logs-container">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-end mb-5 reveal">
+        <div>
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <span style="width: 12px; height: 12px; background: #00d4ff; border-radius: 50%; box-shadow: 0 0 10px #00d4ff;"></span>
+                <span class="text-uppercase small fw-bold tracking-widest text-secondary">Traffic Monitoring</span>
+            </div>
+            <h1 class="display-6 fw-bold mb-0" style="font-family: 'Rajdhani', sans-serif;">
+                UNIQUE <span class="text-gradient-blue" style="color: #00d4ff;">VISITORS</span>
+            </h1>
+        </div>
+        <div class="d-flex gap-3">
+            <div class="text-end me-3">
+                <div class="small text-secondary text-uppercase tracking-tighter">Total Unique Visitors</div>
+                <div class="h4 mb-0 fw-bold">{{ total_visitors }}</div>
+            </div>
+            <a href="{% url 'admin_dashboard' %}" class="btn btn-outline-light px-4 d-flex align-items-center gap-2" style="border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02);">
+                <i class="fas fa-th-large small"></i>
+                <span>Dashboard</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Visitors Table Card -->
+    <div class="cyber-card reveal">
+        <div class="table-header-box d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center gap-3">
+                <i class="fas fa-network-wired text-secondary"></i>
+                <span class="fw-semibold">Visitor IP Addresses</span>
+            </div>
+            {% if page_obj.paginator.count > 0 %}
+            <div class="small text-secondary">
+                Showing {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ page_obj.paginator.count }} entries
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>IP Address</th>
+                        <th>First Visited On</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for visitor in page_obj %}
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="fas fa-globe text-secondary" style="font-size: 0.8rem;"></i>
+                                <code style="color: #00d4ff; font-size: 0.95rem;">{{ visitor.ip_address }}</code>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex flex-column">
+                                <span class="fw-bold">{{ visitor.first_visit|date:"d M Y" }}</span>
+                                <span class="text-secondary small">{{ visitor.first_visit|date:"H:i:s" }} UTC</span>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="2" class="text-center py-5">
+                            <div class="opacity-20 mb-3">
+                                <i class="fas fa-users-slash fa-4x"></i>
+                            </div>
+                            <h5 class="text-secondary">No Visitors Found</h5>
+                            <p class="text-secondary small">As traffic comes to your site, unique IPs will be logged here.</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        {% if page_obj.has_other_pages %}
+        <div class="pagination-container d-flex justify-content-center">
+            <nav>
+                <ul class="pagination mb-0">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% for i in page_obj.paginator.page_range %}
+                        {% if page_obj.number == i %}
+                            <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

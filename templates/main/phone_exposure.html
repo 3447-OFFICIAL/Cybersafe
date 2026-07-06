@@ -1,0 +1,484 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Phone Exposure Intelligence - CyberSafe{% endblock %}
+
+{% block content %}
+<!-- ═══════════ HERO: IMPACT (GOLD THEME) ═══════════ -->
+<section class="cyber-section reveal d-flex align-items-center" style="min-height: 100vh; padding: 80px 0;">
+    <div class="container text-center">
+        <div class="cyber-badge mb-4 d-inline-flex mx-auto"
+            style="border-color: var(--accent-gold-border); color: var(--accent-gold);">
+            <i class="fa-solid fa-tower-broadcast me-2 pulse-gold"></i> Telecom Audit Engine
+        </div>
+        <h1 class="display-3 fw-bold text-white text-sharp mb-3">Is Your Number <span
+                style="color: var(--accent-gold);">Exploited?</span></h1>
+        <p class="lead text-secondary mx-auto mb-5" style="max-width: 700px; font-size: 1.2rem;">
+            Your mobile number is the heartbeat of your digital identity. We help you verify if your number is
+            exposed or linked to unauthorized SIM registrations.
+        </p>
+        <div class="d-flex flex-sm-row flex-column justify-content-center align-items-center gap-3">
+            <a href="#audit-now" class="btn btn-hero-gold px-5 w-100 w-sm-auto">
+                <i class="fa-solid fa-mobile-button me-2"></i> Start Connection Audit
+            </a>
+            <a href="#how-it-works" class="btn btn-hero-primary px-4 w-100 w-sm-auto"
+                style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);">
+                <i class="fa-solid fa-circle-info me-2"></i> How it Works
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ HOW IT WORKS ═══════════ -->
+<section id="how-it-works" class="py-5"
+    style="background: rgba(20, 15, 5, 0.4); border-top: 1px solid rgba(245, 158, 11, 0.1);">
+    <div class="container py-5">
+        <div class="text-center mb-5 reveal">
+            <h2 class="text-white fw-bold mb-3">The Anatomy of <span style="color: var(--accent-gold);">Number
+                    Exposure</span></h2>
+            <p class="text-secondary mx-auto" style="max-width: 600px;">How your private mobile number ends up in the
+                hands of scammers and telemarketers.</p>
+        </div>
+
+        <div class="row g-4 stagger-container reveal">
+            <div class="col-lg-4 stagger-child">
+                <div class="cyber-card p-4 h-100 border-gold-subtle">
+                    <div class="module-num gold mb-3">01 / DISCOVERY</div>
+                    <div class="display-6 mt-2 mb-3" style="color: var(--accent-gold);"><i
+                            class="fa-solid fa-spider"></i></div>
+                    <h5 class="text-white fw-bold">Scraper Bots</h5>
+                    <p class="text-secondary small">Automated scripts crawl public social media profiles and classified
+                        ads to harvest thousands of active mobile numbers every second.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 stagger-child">
+                <div class="cyber-card p-4 h-100 border-gold-subtle">
+                    <div class="module-num gold mb-3">02 / LEAKAGE</div>
+                    <div class="display-6 mt-2 mb-3" style="color: var(--accent-gold);"><i
+                            class="fa-solid fa-server"></i></div>
+                    <h5 class="text-white fw-bold">Database Breaches</h5>
+                    <p class="text-secondary small">Delivery apps, fintech services, and telecom providers often suffer
+                        breaches where your number and KYC data are leaked together.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 stagger-child">
+                <div class="cyber-card p-4 h-100 border-gold-subtle">
+                    <div class="module-num gold mb-3">03 / EXPLOITATION</div>
+                    <div class="display-6 mt-2 mb-3" style="color: var(--accent-gold);"><i
+                            class="fa-solid fa-sim-card"></i></div>
+                    <h5 class="text-white fw-bold">Unauthorized SIMs</h5>
+                    <p class="text-secondary small">Identity thieves use your leaked document details to register
+                        "shadow" SIM cards in your name for money laundering and scams.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ SCANNER: HOW TO & START ═══════════ -->
+<section id="audit-now" class="py-5 cyber-section">
+    <div class="container py-5">
+        <div class="row align-items-center g-5 flex-lg-row-reverse">
+            <div class="col-lg-6 reveal-right">
+                <div class="cyber-badge mb-4"
+                    style="border-color: var(--accent-gold-border); color: var(--accent-gold);">
+                    <i class="fa-solid fa-clipboard-check me-2"></i> Gov-Compliance Audit
+                </div>
+                <h2 class="text-white fw-bold mb-4">How to Audit <span style="color: var(--accent-gold);">Your
+                        Connections</span></h2>
+
+                <div class="scan-steps mb-5">
+                    <div class="step-card d-flex gap-4 p-4 mb-3 gold-step">
+                        <div class="step-icon-gold">1</div>
+                        <div>
+                            <h6 class="text-white fw-bold mb-1">Access Sanchar Saathi</h6>
+                            <p class="text-secondary small mb-0">Data is verified using the official Department of
+                                Telecommunications (DoT) portal.</p>
+                        </div>
+                    </div>
+                    <div class="step-card d-flex gap-4 p-4 mb-3 gold-step">
+                        <div class="step-icon-gold">2</div>
+                        <div>
+                            <h6 class="text-white fw-bold mb-1">Verify with DoT OTP</h6>
+                            <p class="text-secondary small mb-0">Use your registered mobile number to receive a secure
+                                government-issued OTP for authentication.</p>
+                        </div>
+                    </div>
+                    <div class="step-card d-flex gap-4 p-4 gold-step">
+                        <div class="step-icon-gold">3</div>
+                        <div>
+                            <h6 class="text-white fw-bold mb-1">Report Shadow Numbers</h6>
+                            <p class="text-secondary small mb-0">Identify any SIM cards you don't recognize and flag
+                                them for immediate termination by DoT.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="https://sancharsaathi.gov.in/" target="_blank" class="btn btn-hero-gold w-100 p-4"
+                    style="border-radius: 20px;">
+                    <i class="fa-solid fa-building-columns me-3 h4 mb-0"></i>
+                    <span class="h5 mb-0 fw-bold">OPEN OFFICIAL AUDIT PORTAL</span>
+                </a>
+            </div>
+
+            <div class="col-lg-6 reveal-left">
+                <div class="scanner-visual gold">
+                    <div class="visual-orb gold"></div>
+                    <div class="scanning-beam gold"></div>
+                    <div class="inner-icon gold">
+                        <i class="fa-solid fa-mobile-screen-button" style="color: var(--accent-gold);"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════ HOW TO LESSEN PHONE CALL SCAMS ═══════════ -->
+<section class="py-5" style="background: rgba(20, 15, 5, 0.4); border-top: 1px solid rgba(245, 158, 11, 0.1);">
+    <div class="container py-5">
+        <div class="text-center mb-5 reveal">
+            <h2 class="text-white fw-bold mb-3">How to Lessen <span style="color: var(--accent-gold);">Phone Call
+                    Scams</span></h2>
+            <div class="p-4 rounded-4 bg-void border border-gold-subtle mx-auto text-white shadow-lg stagger-child mb-5"
+                style="max-width: 900px; border-left: 4px solid var(--accent-gold) !important; background: rgba(245, 158, 11, 0.05) !important;">
+                <h6 class="text-gold fw-bold text-uppercase mb-2"><i class="fa-solid fa-star me-2"></i> The Golden Rule
+                </h6>
+                <p class="mb-0 fs-5" style="line-height: 1.6;">"Any call that creates <b>urgency, fear, or asks for an
+                        OTP, Aadhaar, or money</b> — is a scam. Legitimate organisations always give you time. Scammers
+                    never do. <b>When in doubt, hang up.</b>"</p>
+            </div>
+        </div>
+
+        <div class="row g-4 stagger-container reveal">
+            <!-- Phase 1: Before -->
+            <div class="col-lg-4 stagger-child">
+                <div class="cyber-card p-4 h-100 border-gold-subtle d-flex flex-column">
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <div class="step-icon-gold bg-primary bg-opacity-10 text-primary border-primary border-opacity-20"
+                            style="width: 50px; height: 50px; background: rgba(13, 110, 253, 0.1) !important; color: #0d6efd !important;">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h5 class="text-white fw-bold mb-0">Before a Scam Call</h5>
+                    </div>
+                    <p class="text-gold small fw-bold mb-3">Protect yourself in advance</p>
+                    <ul class="list-unstyled flex-grow-1">
+                        <li class="mb-4 d-flex gap-3">
+                            <i class="fa-solid fa-circle-check text-success mt-1"></i>
+                            <span class="text-secondary small"><b>Register on TRAI DND:</b> Legally block commercial
+                                spam by registering on <u>trai.gov.in</u>.</span>
+                        </li>
+                        <li class="mb-4 d-flex gap-3">
+                            <i class="fa-solid fa-circle-check text-success mt-1"></i>
+                            <span class="text-secondary small"><b>Check SIM connections:</b> Visit
+                                <u>sancharsaathi.gov.in</u> to block unknown SIMs linked to your Aadhaar.</span>
+                        </li>
+                        <li class="d-flex gap-3">
+                            <i class="fa-solid fa-circle-check text-success mt-1"></i>
+                            <span class="text-secondary small"><b>Avoid public listings:</b> Never post your primary
+                                banking number on OLX or Facebook Marketplace.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Phase 2: During -->
+            <div class="col-lg-4 stagger-child">
+                <div class="cyber-card p-4 h-100 border-gold-subtle d-flex flex-column">
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <div class="step-icon-gold"
+                            style="width: 50px; height: 50px; background: rgba(245, 158, 11, 0.1) !important; color: #f59e0b !important; border: 1px solid rgba(245, 158, 11, 0.2) !important;">
+                            <i class="fa-solid fa-phone-slash"></i>
+                        </div>
+                        <h5 class="text-white fw-bold mb-0">During the Call</h5>
+                    </div>
+                    <p class="text-gold small fw-bold mb-3">What to do in the moment</p>
+                    <ul class="list-unstyled flex-grow-1">
+                        <li class="mb-4 d-flex gap-3">
+                            <i class="fa-solid fa-hand text-danger mt-1"></i>
+                            <span class="text-secondary small"><b>Hang up immediately:</b> Banks or CBI never use
+                                "digital arrest" or demand OTPs over video calls.</span>
+                        </li>
+                        <li class="mb-4 d-flex gap-3">
+                            <i class="fa-solid fa-hand text-danger mt-1"></i>
+                            <span class="text-secondary small"><b>Never dial USSD codes:</b> Codes starting with **,
+                                *401*, or *67* silently hijack your calls.</span>
+                        </li>
+                        <li class="d-flex gap-3">
+                            <i class="fa-solid fa-hand text-danger mt-1"></i>
+                            <span class="text-secondary small"><b>Call back officially:</b> Pressure is proof of a scam.
+                                Always look up official helpline numbers yourself.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Phase 3: After -->
+            <div class="col-lg-4 stagger-child">
+                <div class="cyber-card p-4 h-100 border-gold-subtle d-flex flex-column">
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <div class="step-icon-gold bg-danger bg-opacity-10 text-danger border-danger border-opacity-20"
+                            style="width: 50px; height: 50px; background: rgba(220, 53, 69, 0.1) !important; color: #dc3545 !important;">
+                            <i class="fa-solid fa-bullhorn"></i>
+                        </div>
+                        <h5 class="text-white fw-bold mb-0">After the Call</h5>
+                    </div>
+                    <p class="text-gold small fw-bold mb-3">Act fast, time matters</p>
+                    <ul class="list-unstyled flex-grow-1">
+                        <li class="mb-4 d-flex gap-3">
+                            <i class="fa-solid fa-bolt text-warning mt-1"></i>
+                            <span class="text-secondary small"><b>Report on Chakshu:</b> Use
+                                <u>sancharsaathi.gov.in/Home/Chakshu</u> to help TRAI block the scammer.</span>
+                        </li>
+                        <li class="mb-4 d-flex gap-3">
+                            <i class="fa-solid fa-bolt text-warning mt-1"></i>
+                            <span class="text-secondary small"><b>Call 1930 immediately:</b> If you shared any detail,
+                                speed is vital to freeze fraudulent transactions.</span>
+                        </li>
+                        <li class="d-flex gap-3">
+                            <i class="fa-solid fa-bolt text-warning mt-1"></i>
+                            <span class="text-secondary small"><b>File National Complaint:</b> Register crime details at
+                                <u>cybercrime.gov.in</u> to create legal records.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ CONSEQUENCES: WHAT HAPPENS IF EXPOSED ═══════════ -->
+<section class="py-5" style="background: rgba(245, 158, 11, 0.03); border-top: 1px solid rgba(245, 158, 11, 0.1);">
+    <div class="container py-5">
+        <div class="text-center mb-5 reveal">
+            <h2 class="text-white fw-bold mb-3">Risks of <span style="color: var(--accent-gold);">Number
+                    Compromise</span></h2>
+            <p class="text-secondary mx-auto" style="max-width: 650px;">A compromised phone number is the primary target
+                for advanced social engineering and financial fraud.</p>
+        </div>
+
+        <div class="row g-4 reveal">
+            <div class="col-md-4">
+                <div class="threat-alert gold p-4 h-100">
+                    <div class="alert-severity red">CRITICAL</div>
+                    <h5 class="text-white fw-bold mt-3">Digital Arrest Scam</h5>
+                    <p class="text-secondary small">Caller poses as CBI, ED, or TRAI officer and claims your number is
+                        linked to money laundering. They place you under a fake "digital arrest" over video call and
+                        extort money. India's #1 fastest growing scam in 2025.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="threat-alert gold p-4 h-100">
+                    <div class="alert-severity red">CRITICAL</div>
+                    <h5 class="text-white fw-bold mt-3">OTP Harvesting</h5>
+                    <p class="text-secondary small">Fraudster calls pretending to be your bank or UIDAI and tricks you
+                        into sharing your OTP verbally. Every UPI fraud, every bank account takeover in India starts
+                        with this single step.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="threat-alert gold p-4 h-100">
+                    <div class="alert-severity red">CRITICAL</div>
+                    <h5 class="text-white fw-bold mt-3">SIM Swap via Aadhaar Leak</h5>
+                    <p class="text-secondary small">Using your leaked Aadhaar details, attackers visit a telecom store
+                        and get a new SIM issued on your number. Your original SIM goes dead. They now receive all your
+                        bank OTPs.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="threat-alert gold p-4 h-100">
+                    <div class="alert-severity amber">HIGH RISK</div>
+                    <h5 class="text-white fw-bold mt-3">Call Forwarding Activation</h5>
+                    <p class="text-secondary small">You're tricked into dialing a USSD code like **21*&lt;number&gt;#
+                        which silently forwards all your calls to the scammer. You receive no notification. Your OTPs go
+                        directly to them.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="threat-alert gold p-4 h-100">
+                    <div class="alert-severity amber">HIGH RISK</div>
+                    <h5 class="text-white fw-bold mt-3">TRAI Disconnection Threat</h5>
+                    <p class="text-secondary small">Scammer calls claiming your number will be disconnected in 2 hours
+                        due to "illegal usage." Panic makes victims share KYC details, Aadhaar numbers, or OTPs
+                        immediately.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="threat-alert gold p-4 h-100">
+                    <div class="alert-severity amber">HIGH RISK</div>
+                    <h5 class="text-white fw-bold mt-3">UPI Collect Request Fraud</h5>
+                    <p class="text-secondary small">Victim receives a UPI collect request disguised as a refund or
+                        prize. Entering your PIN to "receive" money actually sends it. Extremely common on PhonePe,
+                        GPay, and Paytm in India.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ OLD PREVENTION & MITIGATION ═══════════ -->
+<section class="py-5" style="background: transparent;">
+    <div class="container py-5">
+        <div class="row g-5">
+            <!-- Prevention -->
+            <div class="col-lg-6 reveal-left">
+                <div class="cyber-badge mb-4" style="border-color: rgba(16,185,129,0.3); color: var(--success-color);">
+                    <i class="fa-solid fa-shield-check me-2"></i> Defensive Strategy
+                </div>
+                <h3 class="text-white fw-bold mb-4">Prevention Tips</h3>
+                <div class="tip-list">
+                    <div class="tip-item d-flex gap-3 mb-4">
+                        <i class="fa-solid fa-check-circle text-success mt-1"></i>
+                        <div>
+                            <h6 class="text-white mb-1">Set a SIM PIN</h6>
+                            <p class="text-secondary small">Lock your SIM card with a PIN via your phone settings to
+                                prevent it from working in a different device.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item d-flex gap-3 mb-4">
+                        <i class="fa-solid fa-check-circle text-success mt-1"></i>
+                        <div>
+                            <h6 class="text-white mb-1">DND Activation</h6>
+                            <p class="text-secondary small">Register on the 'National Do Not Call' registry to reduce
+                                exposure to marketing databases.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item d-flex gap-3">
+                        <i class="fa-solid fa-check-circle text-success mt-1"></i>
+                        <div>
+                            <h6 class="text-white mb-1">Use Auth Apps</h6>
+                            <p class="text-secondary small">Switch from SMS 2FA to Authenticator Apps (Authy, Google
+                                Auth) wherever possible.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mitigation -->
+            <div class="col-lg-6 reveal-right">
+                <div class="cyber-badge mb-4"
+                    style="border-color: var(--accent-gold-border); color: var(--accent-gold);">
+                    <i class="fa-solid fa-kit-medical me-2"></i> Emergency Protocol
+                </div>
+                <h3 class="text-white fw-bold mb-4">Mitigation Tips</h3>
+                <div class="tip-list">
+                    <div class="tip-item d-flex gap-3 mb-4">
+                        <i class="fa-solid fa-user-slash style=" color: var(--accent-gold);" mt-1"></i>
+                        <div>
+                            <h6 class="text-white mb-1">Report to TAFCOP</h6>
+                            <p class="text-secondary small">Flag unauthorized connections on the Sanchar Saathi portal
+                                for immediate carrier action.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item d-flex gap-3 mb-4">
+                        <i class="fa-solid fa-phone-slash style=" color: var(--accent-gold);" mt-1"></i>
+                        <div>
+                            <h6 class="text-white mb-1">Alert Your Carrier</h6>
+                            <p class="text-secondary small">If you lose signal suddenly, call your carrier from another
+                                phone to report a potential SIM swap.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item d-flex gap-3">
+                        <i class="fa-solid fa-building-shield style=" color: var(--accent-gold);" mt-1"></i>
+                        <div>
+                            <h6 class="text-white mb-1">Police Complaint</h6>
+                            <p class="text-secondary small">Lodge a cyber-cell complaint if your number is used in any
+                                fraudulent financial transactions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .step-icon-gold {
+        width: 48px;
+        height: 48px;
+        background: var(--accent-gold);
+        color: var(--bg-void);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+        box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+    }
+
+    .gold-step {
+        background: rgba(245, 158, 11, 0.03) !important;
+        border-color: rgba(245, 158, 11, 0.1) !important;
+    }
+
+    .scanner-visual.gold {
+        height: 500px;
+        background: rgba(20, 15, 5, 0.6);
+        border: 1px solid var(--accent-gold-border);
+        border-radius: 40px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 60px rgba(0, 0, 0, 0.4), inset 0 0 40px rgba(245, 158, 11, 0.05);
+    }
+
+    .visual-orb.gold {
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(245, 158, 11, 0.2) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: orbPulse 4s infinite alternate;
+    }
+
+    .scanning-beam.gold {
+        position: absolute;
+        width: 100%;
+        height: 200px;
+        background: linear-gradient(to bottom, transparent, rgba(245, 158, 11, 0.2), transparent);
+        top: -200px;
+        animation: scanAnim 4s linear infinite;
+    }
+
+    .inner-icon.gold {
+        position: absolute;
+        font-size: 8rem;
+        opacity: 0.2;
+        filter: drop-shadow(0 0 20px var(--accent-gold));
+    }
+
+    .threat-alert.gold:hover {
+        border-color: rgba(245, 158, 11, 0.4);
+        transform: translateY(-5px);
+        background: rgba(245, 158, 11, 0.08);
+    }
+
+    .pulse-gold {
+        animation: pulseGold 3s infinite;
+    }
+
+    @keyframes pulseGold {
+
+        0%,
+        100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.5;
+        }
+    }
+
+    .module-num.gold {
+        color: var(--accent-gold);
+    }
+
+    .border-gold-subtle {
+        border-color: rgba(245, 158, 11, 0.1) !important;
+    }
+</style>
+{% endblock %}

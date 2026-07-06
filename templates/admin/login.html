@@ -1,0 +1,321 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Admin Login - CyberSafe{% endblock %}
+
+{% block extra_css %}
+<style>
+    .login-section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        padding: 2rem 0;
+    }
+
+    /* Animated background particles */
+    .login-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background:
+            radial-gradient(circle at 20% 30%, rgba(0, 212, 255, 0.06) 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, rgba(197, 160, 89, 0.05) 0%, transparent 50%);
+        animation: ambientPulse 10s ease-in-out infinite;
+        z-index: 0;
+    }
+
+    .login-card {
+        position: relative;
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+        border: 1px solid rgba(0, 212, 255, 0.1);
+        border-radius: 24px;
+        padding: 3rem 2.5rem;
+        max-width: 440px;
+        width: 100%;
+        z-index: 10;
+        overflow: hidden;
+    }
+
+    /* Animated gradient border */
+    .login-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 24px;
+        padding: 1.5px;
+        background: linear-gradient(135deg, var(--cyber-blue, #00d4ff), transparent 40%, transparent 60%, var(--accent-gold, #c5a059));
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        animation: borderRotate 6s linear infinite;
+        z-index: -1;
+    }
+
+    @keyframes borderRotate {
+        0% {
+            background: linear-gradient(0deg, var(--cyber-blue, #00d4ff), transparent 40%, transparent 60%, var(--accent-gold, #c5a059));
+        }
+
+        25% {
+            background: linear-gradient(90deg, var(--cyber-blue, #00d4ff), transparent 40%, transparent 60%, var(--accent-gold, #c5a059));
+        }
+
+        50% {
+            background: linear-gradient(180deg, var(--cyber-blue, #00d4ff), transparent 40%, transparent 60%, var(--accent-gold, #c5a059));
+        }
+
+        75% {
+            background: linear-gradient(270deg, var(--cyber-blue, #00d4ff), transparent 40%, transparent 60%, var(--accent-gold, #c5a059));
+        }
+
+        100% {
+            background: linear-gradient(360deg, var(--cyber-blue, #00d4ff), transparent 40%, transparent 60%, var(--accent-gold, #c5a059));
+        }
+    }
+
+    /* Scanline overlay on the card */
+    .login-card::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: repeating-linear-gradient(0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 212, 255, 0.02) 2px,
+                rgba(0, 212, 255, 0.02) 4px);
+        pointer-events: none;
+        border-radius: 24px;
+        z-index: -1;
+    }
+
+    .login-badge {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(197, 160, 89, 0.10));
+        border: 2px solid rgba(0, 212, 255, 0.25);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        animation: glow-pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes glow-pulse {
+
+        0%,
+        100% {
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+        }
+
+        50% {
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.4), 0 0 60px rgba(0, 212, 255, 0.1);
+        }
+    }
+
+    .login-badge img {
+        height: 45px;
+        width: auto;
+        filter: drop-shadow(0 0 15px rgba(104, 204, 217, 0.4));
+    }
+
+    .login-title {
+        font-family: 'Rajdhani', sans-serif;
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: #fff;
+        text-align: center;
+        letter-spacing: 1px;
+    }
+
+    .login-subtitle {
+        color: rgba(255, 255, 255, 0.5);
+        text-align: center;
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+    }
+
+    .login-label {
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 0.5rem;
+    }
+
+    .login-input-group .input-group-text {
+        background: rgba(0, 212, 255, 0.06);
+        border: 1px solid rgba(0, 212, 255, 0.15);
+        border-right: none;
+        color: var(--cyber-blue, #00d4ff);
+    }
+
+    .login-input-group .form-control {
+        background: rgba(0, 212, 255, 0.04) !important;
+        border: 1px solid rgba(0, 212, 255, 0.15) !important;
+        border-left: none !important;
+        color: #fff !important;
+        padding: 0.75rem 1rem;
+    }
+
+    .login-input-group .form-control:focus {
+        background: rgba(0, 212, 255, 0.08) !important;
+        border-color: var(--cyber-blue, #00d4ff) !important;
+        box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.12) !important;
+    }
+
+    .login-input-group .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-login {
+        background: linear-gradient(135deg, var(--cyber-blue, #00d4ff) 0%, #0099cc 100%);
+        border: none;
+        color: #020617;
+        font-weight: 700;
+        padding: 0.85rem;
+        font-size: 1rem;
+        border-radius: 12px;
+        letter-spacing: 0.5px;
+        transition: all 0.4s ease;
+        box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
+        position: relative;
+        z-index: 20;
+    }
+
+    .btn-login:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 30px rgba(0, 212, 255, 0.5);
+        color: #020617;
+        background: linear-gradient(135deg, #00e5ff 0%, var(--cyber-blue, #00d4ff) 100%);
+    }
+
+    .back-link {
+        color: var(--cyber-blue, #00d4ff);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+    }
+
+    .security-notice {
+        background: rgba(197, 160, 89, 0.06);
+        border: 1px solid rgba(197, 160, 89, 0.15);
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        margin-top: 1.5rem;
+    }
+
+    .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: var(--cyber-blue, #00d4ff);
+        border-radius: 50%;
+        opacity: 0.3;
+        animation: floatParticle 8s ease-in-out infinite;
+        pointer-events: none;
+    }
+
+    @keyframes floatParticle {
+
+        0%,
+        100% {
+            transform: translate(0, 0) scale(1);
+            opacity: 0.3;
+        }
+
+        50% {
+            transform: translate(20px, -30px) scale(1.5);
+            opacity: 0.6;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="login-section">
+    <div class="particle" style="top: 15%; left: 10%;"></div>
+    <div class="particle" style="top: 75%; left: 85%; animation-delay: 2s;"></div>
+    <div class="particle" style="top: 40%; left: 90%; animation-delay: 4s; background: var(--accent-gold);"></div>
+    <div class="particle" style="top: 85%; left: 15%; animation-delay: 6s; background: var(--accent-gold);"></div>
+
+    <div class="login-card">
+        <div class="login-badge">
+            <img src="{% static 'images/CyberSafe_icon.png' %}" alt="CyberSafe Logo">
+        </div>
+        <h4 class="login-title">Admin Access</h4>
+        <p class="login-subtitle">Secure login for CyberSafe administrators</p>
+
+        <form method="post" action="{% url 'admin_login' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="email" class="form-label login-label">Email Address</label>
+                <div class="input-group login-input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                    <input type="email" class="form-control" id="email" name="email" required
+                        placeholder="cybersafeadmin@deepcytes.uk.in" autocomplete="username">
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="password" class="form-label login-label">Password</label>
+                <div class="input-group login-input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                    <input type="password" class="form-control" id="password" name="password" required
+                        placeholder="••••••••" autocomplete="current-password">
+                    <button class="btn" type="button" id="togglePassword"
+                        style="border: 1px solid rgba(0, 212, 255, 0.15); border-left: none; background: rgba(0, 212, 255, 0.06); color: rgba(255, 255, 255, 0.5);">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-login w-100">
+                <i class="fa-solid fa-right-to-bracket me-2"></i>Login
+            </button>
+        </form>
+
+        <div class="text-center mt-4">
+            <a href="{% url 'home' %}" class="back-link">
+                <i class="fa-solid fa-arrow-left me-1"></i>Back to Website
+            </a>
+        </div>
+
+        <div class="security-notice">
+            <small>
+                <i class="fa-solid fa-circle-info me-1" style="color: var(--accent-gold);"></i>
+                For security reasons, this login is restricted to authorized personnel only.
+            </small>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        const password = document.getElementById('password');
+        const icon = this.querySelector('i');
+        if (password.type === 'password') {
+            password.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            password.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    });
+</script>
+{% endblock %}

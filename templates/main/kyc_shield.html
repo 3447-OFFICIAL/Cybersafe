@@ -1,0 +1,513 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}KYC Document Shield - CyberSafe{% endblock %}
+
+{% block content %}
+<!-- ═══════════ HERO: IMPACT (CYBER BLUE THEME) ═══════════ -->
+<section class="cyber-section reveal d-flex align-items-center" style="min-height: 100vh; padding: 80px 0;">
+    <div class="container text-center">
+        <div class="cyber-badge mb-4 d-inline-flex mx-auto"
+            style="border-color: var(--cyber-blue-border); color: var(--cyber-blue);">
+            <i class="fa-solid fa-file-shield me-2 pulse-blue"></i> Document Integrity Scan
+        </div>
+        <h1 class="display-3 fw-bold text-white text-sharp mb-3">KYC <span class="text-cyber">Document</span> Scan
+        </h1>
+        <p class="lead text-secondary mx-auto mb-5" style="max-width: 700px; font-size: 1.2rem;">
+            Your AADHAR, PAN, Passport, and Driver's License are your most sensitive digital assets. We provide the
+            intelligence you need to audit how your identity documents are being accessed and stored across platforms.
+        </p>
+        <div class="d-flex flex-sm-row flex-column justify-content-center align-items-center gap-3">
+            <a href="#audit-now" class="btn btn-hero-primary px-5 w-100 w-sm-auto">
+                <i class="fa-solid fa-file-contract me-2"></i> Audit DigiLocker Access
+            </a>
+            <a href="#how-it-works" class="btn btn-hero-primary px-4 w-100 w-sm-auto"
+                style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);">
+                <i class="fa-solid fa-circle-info me-2"></i> How it Works
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ HOW IT WORKS ═══════════ -->
+<section id="how-it-works" class="py-5"
+    style="background: rgba(5, 10, 20, 0.4); border-top: 1px solid rgba(104, 204, 217, 0.1);">
+    <div class="container py-5">
+        <div class="text-center mb-5 reveal">
+            <h2 class="text-white fw-bold mb-3">The Leakage <span class="text-cyber">Lifecycle</span></h2>
+            <p class="text-secondary mx-auto" style="max-width: 600px;">Highly sensitive KYC scans are primary targets
+                for identity brokers and institutional attackers.</p>
+        </div>
+
+        <div class="row g-4 stagger-container reveal">
+            <div class="col-lg-4 stagger-child">
+                <div class="cyber-card p-4 h-100">
+                    <div class="module-num blue mb-3">01 / STORAGE</div>
+                    <div class="display-6 mt-2 mb-3 text-cyber"><i class="fa-solid fa-cloud-bolt"></i></div>
+                    <h5 class="text-white fw-bold">Unsecured Buckets</h5>
+                    <p class="text-secondary small">Startups and service providers often store your uploaded PAN/Aadhaar
+                        scans in "Open S3 Buckets" without encryption, leaving them visible to anyone with a browser.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 stagger-child">
+                <div class="cyber-card p-4 h-100">
+                    <div class="module-num blue mb-3">02 / INTERCEPTION</div>
+                    <div class="display-6 mt-2 mb-3 text-cyber"><i class="fa-solid fa-mobile-vibration"></i></div>
+                    <h5 class="text-white fw-bold">Shadow Permissions</h5>
+                    <p class="text-secondary small">Malicious "cleaner" or "utility" apps request library access to
+                        silently scan your phone's gallery for images containing ID card patterns and offload them to
+                        remote servers.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 stagger-child">
+                <div class="cyber-card p-4 h-100">
+                    <div class="module-num blue mb-3">03 / BROKERING</div>
+                    <div class="display-6 mt-2 mb-3 text-cyber"><i class="fa-solid fa-user-ninja"></i></div>
+                    <h5 class="text-white fw-bold">Insider Data Sales</h5>
+                    <p class="text-secondary small">Disgruntled employees at physical KYC verification centers (SIM
+                        shops, agents) sometimes sell bulk copies of visitor IDs to underground identity marketplaces.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ SCANNER: HOW TO & START ═══════════ -->
+<section id="audit-now" class="py-5 cyber-section">
+    <div class="container py-5">
+        <div class="row align-items-center g-5 flex-lg-row-reverse">
+            <div class="col-lg-6 reveal-right">
+                <div class="cyber-badge mb-4" style="border-color: var(--cyber-blue-border); color: var(--cyber-blue);">
+                    <i class="fa-solid fa-clipboard-check me-2"></i> Document Audit Protocol
+                </div>
+                <h2 class="text-white fw-bold mb-4">Protect Your <span class="text-cyber">Identity Assets</span></h2>
+
+                <div class="scan-steps mb-5">
+                    <div class="step-card d-flex gap-4 p-4 mb-3">
+                        <div class="step-icon-main">1</div>
+                        <div>
+                            <h6 class="text-white fw-bold mb-1">Verify DigiLocker Logs</h6>
+                            <p class="text-secondary small mb-0">Navigate to the 'Activity' tab in your DigiLocker to
+                                see exactly which organizations have fetched your official documents.</p>
+                        </div>
+                    </div>
+                    <div class="step-card d-flex gap-4 p-4 mb-3">
+                        <div class="step-icon-main">2</div>
+                        <div>
+                            <h6 class="text-white fw-bold mb-1">Cleanup Shared Links</h6>
+                            <p class="text-secondary small mb-0">Search your email for 'KYC', 'PAN', or 'Aadhaar' and
+                                delete any old attachments sent to brokers or agents.</p>
+                        </div>
+                    </div>
+                    <div class="step-card d-flex gap-4 p-4">
+                        <div class="step-icon-main">3</div>
+                        <div>
+                            <h6 class="text-white fw-bold mb-1">Enable Document Alerts</h6>
+                            <p class="text-secondary small mb-0">Set up notifications for your bank and government
+                                portals to alert you whenever a new KYC update is initiated in your name.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="https://digilocker.gov.in/" target="_blank" class="btn btn-hero-primary w-100 p-4"
+                    style="border-radius: 20px;">
+                    <i class="fa-solid fa-file-export me-3 h4 mb-0"></i>
+                    <span class="h5 mb-0 fw-bold">AUDIT MY OFFICIAL DOCUMENTS</span>
+                </a>
+            </div>
+
+            <div class="col-lg-6 reveal-left">
+                <div class="scanner-visual">
+                    <div class="visual-orb"></div>
+                    <div class="scanning-beam"></div>
+                    <div class="inner-icon">
+                        <i class="fa-solid fa-id-card" style="color: var(--cyber-blue);"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ═══════════ AADHAAR & PAN SAFEGUARD ═══════════ -->
+<section id="safeguard-protocol" class="py-5"
+    style="background: rgba(5, 10, 20, 0.6); border-top: 1px solid rgba(104, 204, 217, 0.1);">
+    <div class="container py-5">
+        <div class="text-center mb-5 reveal">
+            <div class="cyber-badge mb-3" style="border-color: var(--cyber-blue-border); color: var(--cyber-blue);">
+                <i class="fa-solid fa-lock-shield me-2"></i> Identity Hardening
+            </div>
+            <h2 class="text-white fw-bold mb-3">Aadhaar & PAN <span class="text-cyber">Safeguard</span></h2>
+            <p class="text-secondary mx-auto" style="max-width: 650px;">The two most critical identifiers in India need
+                specialized defensive measures to prevent institutional fraud.</p>
+        </div>
+
+        <div class="row g-5">
+            <!-- Left: Aadhaar -->
+            <div class="col-lg-6 reveal-left">
+                <div class="cyber-card p-4 h-100 d-flex flex-column">
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <div class="icon-orb-sm"><i class="fa-solid fa-fingerprint text-cyber h4 mb-0"></i></div>
+                        <h4 class="text-white fw-bold mb-0">Aadhaar Protection</h4>
+                    </div>
+
+                    <div class="safeguard-list mb-5">
+                        <div class="mb-4">
+                            <h6 class="text-white fw-bold mb-1"><i
+                                    class="fa-solid fa-circle-check text-cyber me-2"></i>Enable Biometric Lock</h6>
+                            <p class="text-secondary small mb-0">The single most effective defense. Lock your
+                                fingerprints via MyAadhaar to disable all biometric authentication.</p>
+                        </div>
+                        <div class="mb-4">
+                            <h6 class="text-white fw-bold mb-1"><i
+                                    class="fa-solid fa-circle-check text-cyber me-2"></i>Use Masked Aadhaar</h6>
+                            <p class="text-secondary small mb-0">Download a version of your Aadhaar where only the last
+                                4 digits are visible for general identity verification.</p>
+                        </div>
+                        <div class="mb-0">
+                            <h6 class="text-white fw-bold mb-1"><i
+                                    class="fa-solid fa-circle-check text-cyber me-2"></i>Generate Virtual ID (VID)</h6>
+                            <p class="text-secondary small mb-0">Use a temporary VID instead of your permanent Aadhaar
+                                number when authenticating with third-party services.</p>
+                        </div>
+                    </div>
+
+                    <!-- Steps for Aadhaar -->
+                    <div class="bg-void p-3 rounded-4 mb-4 border border-secondary border-opacity-10 mt-auto">
+                        <h6 class="text-cyber small fw-bold mb-3 text-uppercase">How to secure:</h6>
+                        <ul class="text-secondary small ps-3 mb-0" style="list-style-type: decimal;">
+                            <li class="mb-2">Visit <a href="https://myaadhaar.uidai.gov.in/" target="_blank"
+                                    class="text-white text-decoration-none">myaadhaar.uidai.gov.in</a></li>
+                            <li class="mb-2">Login with your Aadhaar number and OTP received on mobile.</li>
+                            <li class="mb-2">Locate <b>'Lock/Unlock Biometrics'</b> or <b>'VID Generation'</b> in the
+                                dashboard.</li>
+                            <li>Follow the on-screen instructions to enable lock or generate your VID.</li>
+                        </ul>
+                    </div>
+
+                    <a href="https://myaadhaar.uidai.gov.in/" target="_blank" class="btn btn-hero-primary w-100 py-3">
+                        <i class="fa-solid fa-up-right-from-square me-2"></i> GO TO UIDAI PORTAL
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right: PAN -->
+            <div class="col-lg-6 reveal-right">
+                <div class="cyber-card p-4 h-100 d-flex flex-column" style="border-color: rgba(255, 140, 0, 0.2);">
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <div class="icon-orb-sm" style="background: rgba(255, 140, 0, 0.1);"><i
+                                class="fa-solid fa-address-card h4 mb-0" style="color: #ff8c00;"></i></div>
+                        <h4 class="text-white fw-bold mb-0">PAN Security</h4>
+                    </div>
+
+                    <div class="safeguard-list mb-5">
+                        <div class="mb-4">
+                            <h6 class="text-white fw-bold mb-1"><i class="fa-solid fa-circle-check me-2"
+                                    style="color: #ff8c00;"></i>Limit PAN Sharing</h6>
+                            <p class="text-secondary small mb-0">Only share your PAN with banks, ITR filing, or verified
+                                KYC platforms. Avoid unknown websites.</p>
+                        </div>
+                        <div class="mb-4">
+                            <h6 class="text-white fw-bold mb-1"><i class="fa-solid fa-circle-check me-2"
+                                    style="color: #ff8c00;"></i>Mask Your PAN</h6>
+                            <p class="text-secondary small mb-0">When uploading documents, hide part of your PAN (e.g.,
+                                ABCXXXX123X) unless full PAN is required.</p>
+                        </div>
+                        <div class="mb-0">
+                            <h6 class="text-white fw-bold mb-1"><i class="fa-solid fa-circle-check me-2"
+                                    style="color: #ff8c00;"></i>Avoid Public Exposure</h6>
+                            <p class="text-secondary small mb-0">Never post PAN on resumes, social media, or public
+                                platforms.</p>
+                        </div>
+                    </div>
+
+                    <!-- Steps for PAN -->
+                    <div class="bg-void p-3 rounded-4 mb-4 border border-secondary border-opacity-10 mt-auto">
+                        <h6 class="small fw-bold mb-3 text-uppercase" style="color: #ff8c00;">How to verify:</h6>
+                        <ul class="text-secondary small ps-3 mb-0" style="list-style-type: decimal;">
+                            <li class="mb-2">Visit <a href="https://eportal.incometax.gov.in/" target="_blank"
+                                    class="text-white text-decoration-none">eportal.incometax.gov.in</a></li>
+                            <li class="mb-2">Navigate to <b>'Quick Links'</b> and select <b>'Verify Your PAN'</b>.</li>
+                            <li class="mb-2">Check for linked Aadhaar and verify your current validation status.</li>
+                            <li>Review your linked contact details to prevent unauthorized updates.</li>
+                        </ul>
+                    </div>
+
+                    <a href="https://eportal.incometax.gov.in/" target="_blank" class="btn btn-hero-primary w-100 py-3">
+                        <i class="fa-solid fa-up-right-from-square me-2"></i> GO TO INCOME TAX PORTAL
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════ CONSEQUENCES: WHAT HAPPENS IF EXPOSED ═══════════ -->
+    <section class="py-5"
+        style="background: rgba(104, 204, 217, 0.03); border-top: 1px solid rgba(104, 204, 217, 0.1);">
+        <div class="container py-5">
+            <div class="text-center mb-5 reveal">
+                <h2 class="text-white fw-bold mb-3">Dangers of <span class="text-cyber">Document Leaks</span></h2>
+                <p class="text-secondary mx-auto" style="max-width: 650px;">A leaked KYC document is the ultimate
+                    toolkit
+                    for persistent identity impersonation and long-term financial fraud.</p>
+            </div>
+
+            <div class="row g-4 reveal">
+                <div class="col-md-4">
+                    <div class="threat-alert p-4 h-100">
+                        <div class="alert-severity red">CRITICAL</div>
+                        <h5 class="text-white fw-bold mt-3">Synthetic Identity Theft</h5>
+                        <p class="text-secondary small">Criminials combine your real ID details with fake ones to create
+                            "Frankenstein Identity" that can open bank accounts and bypass automated verification.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="threat-alert p-4 h-100">
+                        <div class="alert-severity red">CRITICAL</div>
+                        <h5 class="text-white fw-bold mt-3">Loan Impersonation</h5>
+                        <p class="text-secondary small">Using your PAN card scan, fraudsters apply for instant mobile
+                            loans
+                            or credit cards. You only find out when debt collectors call you for non-payment.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="threat-alert p-4 h-100">
+                        <div class="alert-severity amber">HIGH RISK</div>
+                        <h5 class="text-white fw-bold mt-3">Travel Blocklisting</h5>
+                        <p class="text-secondary small">If your passport details are leaked and used by criminals for
+                            illegal border crossings, your real passport may be flagged globally as high-risk or
+                            invalid.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="threat-alert p-4 h-100">
+                        <div class="alert-severity red">CRITICAL</div>
+                        <h5 class="text-white fw-bold mt-3">Blackmail & Doxing</h5>
+                        <p class="text-secondary small">Attackers use the sensitive personal info in your IDs (like
+                            address/DOB) to blackmail you or your family, threatening to release private data publicly.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="threat-alert p-4 h-100">
+                        <div class="alert-severity amber">HIGH RISK</div>
+                        <h5 class="text-white fw-bold mt-3">Property Fraud</h5>
+                        <p class="text-secondary small">In some jurisdictions, your ID can be used to forge property
+                            transfer documents or rental agreements, leading to massive legal battles over ownership.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="threat-alert p-4 h-100">
+                        <div class="alert-severity amber">HIGH RISK</div>
+                        <h5 class="text-white fw-bold mt-3">Employment Impersonation</h5>
+                        <p class="text-secondary small">Your credentials can be used for "Ghost Working," where someone
+                            works under your name to avoid taxes or legal scrutiny, creating legal liabilities for you.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ PREVENTION & MITIGATION ═══════════ -->
+    <section class="py-5" style="background: transparent;">
+        <div class="container py-5">
+            <div class="row g-5">
+                <!-- Prevention -->
+                <div class="col-lg-6 reveal-left">
+                    <div class="cyber-badge mb-4"
+                        style="border-color: rgba(16,185,129,0.3); color: var(--success-color);">
+                        <i class="fa-solid fa-shield-check me-2"></i> Defensive Strategy
+                    </div>
+                    <h3 class="text-white fw-bold mb-4">Prevention Tips</h3>
+                    <div class="tip-list">
+                        <div class="tip-item d-flex gap-3 mb-4">
+                            <i class="fa-solid fa-check-circle text-success mt-1"></i>
+                            <div>
+                                <h6 class="text-white mb-1">Watermark Every Scan</h6>
+                                <p class="text-secondary small">Write "For [Service Name] Use Only" and the date across
+                                    the
+                                    face of your document scans to prevent reuse.</p>
+                            </div>
+                        </div>
+                        <div class="tip-item d-flex gap-3 mb-4">
+                            <i class="fa-solid fa-check-circle text-success mt-1"></i>
+                            <div>
+                                <h6 class="text-white mb-1">DigiLocker Fetch Only</h6>
+                                <p class="text-secondary small">Whenever possible, use the "Fetch from DigiLocker"
+                                    button on
+                                    sites rather than uploading a raw PDF or JPEG yourself.</p>
+                            </div>
+                        </div>
+                        <div class="tip-item d-flex gap-3">
+                            <i class="fa-solid fa-check-circle text-success mt-1"></i>
+                            <div>
+                                <h6 class="text-white mb-1">Check App Permissions</h6>
+                                <p class="text-secondary small">Revoke 'Gallery' or 'Files' access from any app that
+                                    doesn't
+                                    strictly need it to prevent background document harvesting.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mitigation -->
+                <div class="col-lg-6 reveal-right">
+                    <div class="cyber-badge mb-4"
+                        style="border-color: var(--cyber-blue-border); color: var(--cyber-blue);">
+                        <i class="fa-solid fa-kit-medical me-2"></i> Recovery Protocol
+                    </div>
+                    <h3 class="text-white fw-bold mb-4">Mitigation Tips</h3>
+                    <div class="tip-list">
+                        <div class="tip-item d-flex gap-3 mb-4">
+                            <i class="fa-solid fa-file-circle-xmark mt-1" style="color: var(--cyber-blue);"></i>
+                            <div>
+                                <h6 class="text-white mb-1">Report Lost Documents</h6>
+                                <p class="text-secondary small">If a physical ID is lost, file an F.I.R immediately.
+                                    This
+                                    report acts as your primary legal defense if the ID is used for fraud.</p>
+                            </div>
+                        </div>
+                        <div class="tip-item d-flex gap-3 mb-4">
+                            <i class="fa-solid fa-user-gear mt-1" style="color: var(--cyber-blue);"></i>
+                            <div>
+                                <h6 class="text-white mb-1">Update Document Versions</h6>
+                                <p class="text-secondary small">Many IDs (like Aadhaar) allow you to generate a new VID.
+                                    If
+                                    your ID number is leaked, use the VID for all future verifications.</p>
+                            </div>
+                        </div>
+                        <div class="tip-item d-flex gap-3">
+                            <i class="fa-solid fa-hand-holding-medical mt-1" style="color: var(--cyber-blue);"></i>
+                            <div>
+                                <h6 class="text-white mb-1">CIBIL Alerts</h6>
+                                <p class="text-secondary small">Subscribe to CIBIL paid alerts to get an instant SMS
+                                    whenever any bank inquiries about your PAN for a new loan application.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .step-icon-main {
+            width: 48px;
+            height: 48px;
+            background: var(--cyber-blue);
+            color: var(--bg-void);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            box-shadow: 0 0 15px rgba(104, 204, 217, 0.3);
+        }
+
+        .scanner-visual {
+            height: 500px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--cyber-blue-border);
+            border-radius: 40px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.4), inset 0 0 40px rgba(104, 204, 217, 0.05);
+        }
+
+        .visual-orb {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(104, 204, 217, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: orbPulse 4s infinite alternate;
+        }
+
+        @keyframes orbPulse {
+            from {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            to {
+                transform: scale(1.3);
+                opacity: 0.8;
+            }
+        }
+
+        .scanning-beam {
+            position: absolute;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(to bottom, transparent, rgba(104, 204, 217, 0.2), transparent);
+            top: -200px;
+            animation: scanAnim 4s linear infinite;
+        }
+
+        @keyframes scanAnim {
+            0% {
+                top: -200px;
+            }
+
+            100% {
+                top: 100%;
+            }
+        }
+
+        .inner-icon {
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.2;
+            filter: drop-shadow(0 0 20px var(--cyber-blue));
+        }
+
+        .threat-alert:hover {
+            border-color: rgba(104, 204, 217, 0.4);
+            transform: translateY(-5px);
+            background: rgba(104, 204, 217, 0.08);
+        }
+
+        .pulse-blue {
+            animation: pulseBlue 3s infinite;
+        }
+
+        @keyframes pulseBlue {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .module-num.blue {
+            color: var(--cyber-blue);
+        }
+
+        .icon-orb-sm {
+            width: 44px;
+            height: 44px;
+            background: rgba(104, 204, 217, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .bg-void {
+            background: rgba(2, 6, 23, 0.4);
+        }
+    </style>
+    {% endblock %}

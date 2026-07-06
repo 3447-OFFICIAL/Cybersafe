@@ -1,0 +1,398 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Security Monitoring Dashboard - CyberSafe{% endblock %}
+
+{% block extra_css %}
+<style>
+    .monitoring-dashboard {
+        padding-top: 2rem;
+        padding-bottom: 4rem;
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 2rem;
+        height: 100%;
+        transition: all 0.3s ease;
+    }
+
+    .glass-card:hover {
+        border-color: rgba(0, 212, 255, 0.3);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    }
+
+    .status-indicator {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .status-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        position: relative;
+    }
+
+    .status-dot.healthy { background: #22c55e; box-shadow: 0 0 15px #22c55e; }
+    .status-dot.warning { background: #eab308; box-shadow: 0 0 15px #eab308; }
+    .status-dot.critical { background: #ef4444; box-shadow: 0 0 15px #ef4444; }
+
+    .status-dot::after {
+        content: '';
+        position: absolute;
+        inset: -4px;
+        border-radius: 50%;
+        border: 2px solid inherit;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); opacity: 0.8; }
+        100% { transform: scale(1.8); opacity: 0; }
+    }
+
+    .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .metric-item {
+        text-align: center;
+    }
+
+    .metric-value {
+        font-family: 'Rajdhani', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #00d4ff;
+        display: block;
+    }
+
+    .metric-label {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.6);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .chart-container {
+        position: relative;
+        height: 300px;
+        width: 100%;
+    }
+
+    .event-log {
+        max-height: 400px;
+        overflow-y: auto;
+        padding-right: 10px;
+    }
+
+    .event-log::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .event-log::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+    }
+
+    .event-item {
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .event-item:last-child { border-bottom: none; }
+
+    .severity-badge {
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .severity-low { background: rgba(34, 197, 94, 0.1); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.2); }
+    .severity-medium { background: rgba(234, 179, 8, 0.1); color: #eab308; border: 1px solid rgba(234, 179, 8, 0.2); }
+    .severity-high { background: rgba(249, 115, 22, 0.1); color: #f97316; border: 1px solid rgba(249, 115, 22, 0.2); }
+    .severity-critical { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); }
+
+    .health-details p {
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .health-details span {
+        color: #00d4ff;
+        font-weight: 600;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container monitoring-dashboard">
+    <div class="dash-header mb-4">
+        <div>
+            <h1><a href="{% url 'admin_dashboard' %}" class="text-decoration-none text-white me-2"><i class="fas fa-arrow-left small opacity-50"></i></a> Security Monitoring Dashboard</h1>
+            <p>Real-time system health and security event tracking</p>
+        </div>
+        <div class="text-end">
+            <span class="badge bg-dark border border-secondary p-2">
+                <i class="fas fa-sync-alt fa-spin me-2 text-info"></i>
+                Auto-refreshing in <span id="refresh-timer">15</span>s
+            </span>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- System Health -->
+        <div class="col-lg-4">
+            <div class="glass-card">
+                <h3 class="Rajdhani mb-4">System Health</h3>
+                <div class="status-indicator">
+                    <div id="health-dot" class="status-dot healthy"></div>
+                    <span id="health-text" class="h5 mb-0 Rajdhani">System Healthy</span>
+                </div>
+                <div class="health-details">
+                    <p>Database: <span id="db-status">Checking...</span></p>
+                    <p>Server: <span id="server-status">Checking...</span></p>
+                    <p>CPU Usage: <span id="cpu-usage">--%</span></p>
+                    <p>Memory Usage: <span id="memory-usage">--%</span></p>
+                    <p class="small mt-3 text-muted">Last check: <span id="last-check" class="text-muted">--</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Uptime & Quick Stats -->
+        <div class="col-lg-8">
+            <div class="glass-card">
+                <h3 class="Rajdhani mb-4">Uptime & Quick Stats</h3>
+                <div class="metric-grid">
+                    <div class="metric-item">
+                        <span id="uptime-value" class="metric-value">0h 0m</span>
+                        <span class="metric-label">System Uptime</span>
+                    </div>
+                    <div class="metric-item">
+                        <span id="total-events" class="metric-value">0</span>
+                        <span class="metric-label">Total Events</span>
+                    </div>
+                    <div class="metric-item">
+                        <span id="critical-events" class="metric-value text-danger">0</span>
+                        <span class="metric-label">Critical Issues</span>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="chart-container">
+                            <canvas id="severityChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="chart-container">
+                            <canvas id="typeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Event Log -->
+        <div class="col-12">
+            <div class="glass-card">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="Rajdhani mb-0">Recent Security Events</h3>
+                    <button class="btn btn-sm btn-outline-info" onclick="fetchSecurityEvents()">Refresh Log</button>
+                </div>
+                <div class="event-log" id="event-log">
+                    <div class="text-center py-5">
+                        <div class="spinner-border text-info" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    let severityChart, typeChart;
+    let refreshCountdown = 15;
+
+    function initCharts() {
+        const ctxSeverity = document.getElementById('severityChart').getContext('2d');
+        severityChart = new Chart(ctxSeverity, {
+            type: 'doughnut',
+            data: {
+                labels: ['Low', 'Medium', 'High', 'Critical'],
+                datasets: [{
+                    data: [0, 0, 0, 0],
+                    backgroundColor: ['#22c55e', '#eab308', '#f97316', '#ef4444'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: '#fff' } },
+                    title: { display: true, text: 'Severity Distribution', color: '#fff' }
+                }
+            }
+        });
+
+        const ctxType = document.getElementById('typeChart').getContext('2d');
+        typeChart = new Chart(ctxType, {
+            type: 'bar',
+            data: {
+                labels: ['Login', 'Rate', 'Activity', 'Token'],
+                datasets: [{
+                    label: 'Event Types',
+                    data: [0, 0, 0, 0],
+                    backgroundColor: '#00d4ff',
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true, ticks: { color: '#fff' }, grid: { color: 'rgba(255,255,255,0.1)' } },
+                    x: { ticks: { color: '#fff' }, grid: { display: false } }
+                },
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Event Trends', color: '#fff' }
+                }
+            }
+        });
+    }
+
+    async function fetchHealth() {
+        try {
+            const response = await fetch('/api/system/health/');
+            const data = await response.json();
+            
+            document.getElementById('health-text').textContent = `System ${data.status}`;
+            const dot = document.getElementById('health-dot');
+            dot.className = 'status-dot ' + data.status.toLowerCase();
+            
+            document.getElementById('db-status').textContent = data.database;
+            document.getElementById('server-status').textContent = data.server;
+            document.getElementById('cpu-usage').textContent = data.details.cpu_usage;
+            document.getElementById('memory-usage').textContent = data.details.memory_usage;
+            document.getElementById('last-check').textContent = new Date(data.timestamp).toLocaleTimeString();
+        } catch (error) {
+            console.error('Error fetching health:', error);
+        }
+    }
+
+    async function fetchUptime() {
+        try {
+            const response = await fetch('/api/system/uptime/');
+            const data = await response.json();
+            document.getElementById('uptime-value').textContent = data.duration;
+        } catch (error) {
+            console.error('Error fetching uptime:', error);
+        }
+    }
+
+    async function fetchStats() {
+        try {
+            const response = await fetch('/api/security/stats/');
+            const data = await response.json();
+            
+            document.getElementById('total-events').textContent = data.total_events;
+            document.getElementById('critical-events').textContent = data.high_severity;
+            
+            // Update Bar Chart (Trends)
+            typeChart.data.datasets[0].data = [
+                data.failed_logins, 
+                data.rate_limits, 
+                data.suspicious_activities, 
+                data.invalid_tokens
+            ];
+            typeChart.update();
+
+            // Update Doughnut Chart (Severity Distribution)
+            if (data.severity_counts) {
+                severityChart.data.datasets[0].data = data.severity_counts;
+                severityChart.update();
+            }
+        } catch (error) {
+            console.error('Error fetching stats:', error);
+        }
+    }
+
+    async function fetchSecurityEvents() {
+        try {
+            const response = await fetch('/api/security/events/');
+            const data = await response.json();
+            
+            const logContainer = document.getElementById('event-log');
+            if (data.length === 0) {
+                logContainer.innerHTML = '<div class="text-center py-5 text-muted">No security events recorded.</div>';
+                return;
+            }
+            
+            let html = '';
+            data.forEach(event => {
+                const time = new Date(event.timestamp).toLocaleString();
+                html += `
+                    <div class="event-item">
+                        <div>
+                            <span class="severity-badge severity-${event.severity}">${event.severity}</span>
+                            <strong class="ms-2 Rajdhani">${event.event_type.replace('_', ' ')}</strong>
+                            <p class="mb-0 small text-muted mt-1">${event.description}</p>
+                        </div>
+                        <div class="text-end">
+                            <div class="small text-white">${event.ip_address || 'N/A'}</div>
+                            <div class="x-small text-muted">${time}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            logContainer.innerHTML = html;
+        } catch (error) {
+            console.error('Error fetching events:', error);
+        }
+    }
+
+    function updateRefreshTimer() {
+        document.getElementById('refresh-timer').textContent = refreshCountdown;
+        if (refreshCountdown <= 0) {
+            refreshCountdown = 15;
+            refreshData();
+        } else {
+            refreshCountdown--;
+        }
+    }
+
+    function refreshData() {
+        fetchHealth();
+        fetchUptime();
+        fetchStats();
+        fetchSecurityEvents();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        initCharts();
+        refreshData();
+        setInterval(updateRefreshTimer, 1000);
+    });
+</script>
+{% endblock %}

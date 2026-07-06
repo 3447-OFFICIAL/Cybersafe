@@ -1,0 +1,796 @@
+/**
+ * ══════════════════════════════════════════════════════════
+ *   ANTIGRAVITY PREMIUM ACCESSIBILITY ENGINE
+ *   Senior Citizen Mode v2.0 - High Performance & Aesthetics
+ * ══════════════════════════════════════════════════════════
+ */
+
+:root {
+    --acc-primary: #0052FF;
+    --acc-primary-dark: #003EB3;
+    --acc-accent: #FFC107;
+    --acc-bg-light: #F8FAFC;
+    --acc-text-dark: #0F172A;
+    --acc-panel-bg: rgba(255, 255, 255, 0.95);
+    --acc-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --acc-border: rgba(0, 82, 255, 0.2);
+}
+
+
+
+/* ═══════════ SENIOR MODE ACTIVE STATE ═══════════ */
+body.senior-mode {
+    background: var(--acc-bg-light) !important;
+    color: var(--acc-text-dark) !important;
+    font-family: 'Inter', -apple-system, sans-serif !important;
+    font-size: 24px !important;
+    /* Premium large size */
+    line-height: 1.8 !important;
+    letter-spacing: 0.01em !important;
+}
+
+/* ═══════════ VISIBLE SCROLLBAR FOR SENIOR MODE ═══════════ */
+body.senior-mode::-webkit-scrollbar {
+    width: 12px;
+}
+
+body.senior-mode::-webkit-scrollbar-track {
+    background: rgba(11, 13, 23, 0.5);
+}
+
+body.senior-mode::-webkit-scrollbar-thumb {
+    background: var(--acc-primary);
+    border-radius: 6px;
+}
+
+body.senior-mode::-webkit-scrollbar-thumb:hover {
+    background: var(--acc-primary-dark);
+}
+
+/* ═══════════ TEXT SIZE SYSTEM ═══════════ */
+html.ts-xsmall {
+    font-size: 75% !important;
+}
+
+html.ts-small {
+    font-size: 85% !important;
+}
+
+html.ts-large {
+    font-size: 115% !important;
+}
+
+html.ts-xlarge {
+    font-size: 130% !important;
+}
+
+body.ts-xsmall {
+    --base-font-scale: 0.75;
+}
+
+body.ts-small {
+    --base-font-scale: 0.85;
+}
+
+body.ts-large {
+    --base-font-scale: 1.15;
+}
+
+body.ts-xlarge {
+    --base-font-scale: 1.3;
+}
+
+/* Scaling for non-rem elements and specific overrides if needed */
+body[class*="ts-"] .navbar-brand {
+    font-size: calc(1.5rem * var(--base-font-scale, 1)) !important;
+}
+
+body[class*="ts-"] .hp-h1 {
+    line-height: 1.1 !important;
+}
+
+
+/* Adjustments for specific elements */
+body.ts-xsmall .navbar-brand,
+body.ts-small .navbar-brand,
+body.ts-large .navbar-brand,
+body.ts-xlarge .navbar-brand {
+    font-size: calc(1.5rem * var(--base-font-scale, 1)) !important;
+}
+
+
+
+
+/* Smooth Transition - Exclude scroll-affecting properties */
+body {
+    transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body * {
+    transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Remove Distractions but keep it "Premium" */
+body.senior-mode .global-scanline,
+body.senior-mode .cyber-bg-particles,
+body.senior-mode .global-cursor-glow,
+body.senior-mode .scanline-overlay::before {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* Premium Navbar Reflow */
+body.senior-mode .navbar {
+    background: #ffffff !important;
+    min-height: 80px !important;
+    padding: 0 !important;
+    border-bottom: 4px solid var(--acc-primary) !important;
+    box-shadow: var(--acc-shadow) !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+body.senior-mode .navbar .container {
+    min-height: 80px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+body.senior-mode .navbar-brand {
+    font-size: 26px !important;
+    color: var(--acc-primary) !important;
+    font-weight: 800 !important;
+    letter-spacing: -1px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+    transform: translateY(-5px);
+}
+
+body.senior-mode .navbar-brand .navbar-logo {
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+}
+
+/* Fix for white text/icons that disappear against the white navbar background */
+body.senior-mode .navbar-brand,
+body.senior-mode .navbar-brand span,
+body.senior-mode .navbar .nav-link,
+body.senior-mode .navbar .btn-login-premium {
+    color: var(--acc-text-dark) !important;
+    opacity: 1 !important;
+}
+
+body.senior-mode .navbar .btn-login-premium {
+    padding: 8px 24px !important;
+    font-size: 18px !important;
+    min-height: 48px !important;
+}
+
+body.senior-mode .navbar .navbar-toggler-icon {
+    filter: invert(1);
+}
+
+body.senior-mode .navbar .navbar-nav {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+@media (min-width: 992px) {
+    body.senior-mode .navbar-collapse {
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    body.senior-mode .navbar-nav {
+        margin-left: 32px !important;
+        /* Controlled gap between logo and menu */
+    }
+}
+
+body.senior-mode .nav-link {
+    font-size: 19px !important;
+    font-weight: 700 !important;
+    color: var(--acc-text-dark) !important;
+    padding: 0 18px !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    transition: all 0.3s ease !important;
+    line-height: 1 !important;
+}
+
+body.senior-mode .nav-link:hover,
+body.senior-mode .nav-link.active,
+body.senior-mode .nav-link.active i,
+body.senior-mode .nav-link.active span {
+    background: var(--acc-primary) !important;
+    color: #ffffff !important;
+}
+
+body.senior-mode .nav-link:hover {
+    transform: translateY(-2px);
+}
+
+/* Ultra-Readable Content */
+body.senior-mode h1,
+body.senior-mode h2,
+body.senior-mode h3 {
+    color: var(--acc-primary-dark) !important;
+    font-weight: 800 !important;
+    line-height: 1.3 !important;
+    margin-top: 2rem !important;
+    margin-bottom: 1.5rem !important;
+}
+
+body.senior-mode p,
+body.senior-mode li {
+    font-size: 24px !important;
+    margin-bottom: 1.5rem !important;
+}
+
+/* Premium Buttons */
+body.senior-mode .btn,
+body.senior-mode button:not(.acc-widget-btn):not(#acc-trigger):not(#chatbot-toggle):not(.navbar-toggler) {
+    font-size: 22px !important;
+    font-weight: 800 !important;
+    padding: 18px 40px !important;
+    border-radius: 16px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    transition: all 0.3s ease !important;
+    border: 4px solid currentColor !important;
+    background: transparent !important;
+    color: var(--acc-primary) !important;
+    box-shadow: 0 4px 0 currentColor !important;
+    position: relative;
+    top: 0;
+}
+
+/* Fix: Ensure navbar toggler is only visible on mobile and doesn't look like an empty square on desktop */
+body.senior-mode .navbar button.navbar-toggler {
+    display: none !important;
+}
+
+@media (max-width: 991.98px) {
+    body.senior-mode .navbar button.navbar-toggler {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        min-width: 64px;
+        height: 64px;
+        padding: 0 !important;
+        border: 4px solid var(--acc-primary) !important;
+        background: #ffffff !important;
+        border-radius: 12px !important;
+    }
+
+    body.senior-mode .navbar-toggler-icon {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+body.senior-mode .btn:active {
+    top: 4px;
+    box-shadow: 0 0 0 currentColor !important;
+}
+
+body.senior-mode .btn-primary {
+    background: var(--acc-primary) !important;
+    color: #ffffff !important;
+    border-color: var(--acc-primary) !important;
+}
+
+body.senior-mode .btn-success {
+    background: #10b981 !important;
+    /* Solid Green for Safety */
+    color: #ffffff !important;
+    border: none !important;
+}
+
+body.senior-mode .btn-danger {
+    background: #ef4444 !important;
+    /* Solid Red for Emergency */
+    color: #ffffff !important;
+    border: none !important;
+}
+
+/* High Contrast Cards */
+body.senior-mode .card,
+body.senior-mode .glass-panel {
+    background: #ffffff !important;
+    border: 4px solid var(--acc-text-dark) !important;
+    border-radius: 24px !important;
+    padding: 2rem !important;
+    margin-bottom: 2rem !important;
+}
+
+/* India Map: Hidden in Senior Mode for Maximum Simplicity */
+body.senior-mode .hero-map-accent,
+body.senior-mode .senior-hide-stats,
+body.senior-mode .threat-stats-row,
+body.senior-mode .stats-source-line,
+body.senior-mode #tooltip {
+    display: none !important;
+}
+
+
+body.senior-mode .map-source-line {
+    display: none !important;
+}
+
+body.senior-mode #hero-section .hero-wrap {
+    min-height: auto !important;
+    padding: 2.5rem 0 !important;
+}
+
+body.senior-mode #hero-section .hero-left {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+body.senior-mode #hero-section .threat-stats-row,
+body.senior-mode #hero-section .stats-source-line,
+body.senior-mode #hero-section .senior-hide-stats {
+    display: none !important;
+}
+
+/* Ensure the container flows correctly in Senior Mode */
+body.senior-mode #hero-section {
+    height: auto !important;
+    min-height: auto !important;
+    padding-top: 100px !important;
+    /* Space for navbar */
+    display: flex !important;
+    flex-direction: column !important;
+    background: #002A5C !important;
+    /* Match hero background to remove white outline */
+}
+
+body.senior-mode #hero-section .container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 20px !important;
+}
+
+body.senior-mode #hero-section .hero-wrap {
+    min-height: auto !important;
+    padding: 0 0 60px 0 !important;
+    width: 100% !important;
+}
+
+body.senior-mode .reality-wrap,
+body.senior-mode .modules-wrap,
+body.senior-mode .risk-wrap,
+body.senior-mode .threats-wrap,
+body.senior-mode .defense-wrap,
+body.senior-mode .emergency-wrap,
+body.senior-mode .trust-wrap,
+body.senior-mode .crimes-wrap {
+    display: none !important;
+}
+
+/* ═══════════ SENIOR ACTION ZONE ═══════════ */
+body.senior-mode .action-zone-wrap {
+    display: block !important;
+    background: var(--acc-bg-light) !important;
+    padding: 20px 0 60px 0 !important;
+}
+
+body.senior-mode .action-tile {
+    background: #ffffff !important;
+    border: 3px solid var(--acc-border) !important;
+    padding: 24px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+body.senior-mode .action-tile .tile-title {
+    color: var(--acc-text-dark) !important;
+    font-size: 22px !important;
+    font-weight: 800 !important;
+}
+
+body.senior-mode .action-tile .tile-sub {
+    color: var(--acc-text-dark) !important;
+    font-size: 18px !important;
+}
+
+body.senior-mode .action-tile .tile-arrow {
+    display: inline-block !important;
+    background: var(--acc-primary) !important;
+    color: #ffffff !important;
+    padding: 12px 24px !important;
+    border-radius: 8px !important;
+    font-weight: 700 !important;
+    font-size: 18px !important;
+    margin-top: 16px !important;
+    text-align: center !important;
+}
+
+/* ═══════════ MOTION LOCKDOWN ═══════════ */
+body.senior-mode *,
+body.senior-mode *::before,
+body.senior-mode *::after {
+    animation-duration: 0.001s !important;
+    transition-duration: 0.001s !important;
+}
+
+body.senior-mode .reveal,
+body.senior-mode .reveal-scale,
+body.senior-mode .reveal-left,
+body.senior-mode .reveal-right,
+body.senior-mode .stagger-container {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+}
+
+/* ═══════════ SENIOR DASHBOARD PANEL ═══════════ */
+.senior-entry-panel {
+    display: none;
+    background: #ffffff;
+    border: none;
+    /* Removed white/blue outline as requested */
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    max-width: 1000px;
+    width: 90%;
+    margin: 40px auto;
+    /* Centers the panel horizontally */
+    text-align: center;
+    transition: all 0.4s ease;
+}
+
+body.senior-mode .senior-entry-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.senior-entry-panel h2 {
+    margin: 0 0 16px;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: var(--acc-text-dark);
+    font-weight: 800;
+}
+
+.senior-entry-panel p {
+    margin: 0 0 32px;
+    font-size: 20px !important;
+    line-height: 1.6 !important;
+    max-width: 800px;
+    color: #334155;
+}
+
+.senior-entry-actions {
+    display: grid;
+    gap: 24px;
+    width: 100%;
+    max-width: 600px;
+    /* Constrain button width on large screens */
+}
+
+/* Enhancing the buttons within the panel */
+.senior-entry-actions .btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 16px !important;
+    /* Spacing between icon and text */
+    padding: 20px 32px !important;
+    /* Huge tap areas */
+    font-size: 20px !important;
+    border-radius: 12px !important;
+    min-height: 64px !important;
+    /* Min height for accessibility */
+    transition: all 0.3s ease !important;
+    border-width: 2px !important;
+    /* Override the default thick border */
+}
+
+.senior-entry-actions .btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+    .senior-entry-panel {
+        padding: 24px 16px;
+        margin: 24px auto;
+        width: 95%;
+        border-radius: 12px;
+    }
+
+    .senior-entry-panel p {
+        font-size: 18px !important;
+        margin-bottom: 24px;
+    }
+
+    .senior-entry-actions {
+        gap: 16px;
+    }
+
+    .senior-entry-actions .btn {
+        padding: 16px 20px !important;
+        font-size: 18px !important;
+        min-height: 56px !important;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .senior-entry-panel {
+        padding: 32px 24px;
+        width: 85%;
+    }
+}
+
+/* Halo Focus Effect */
+body.senior-mode *:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 6px var(--acc-accent), 0 0 0 10px rgba(255, 193, 7, 0.3) !important;
+    border-radius: 4px;
+}
+
+/* ═══════════ FLOATING ACCESSIBILITY WIDGET ═══════════ */
+
+#acc-premium-widget {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.acc-main-trigger {
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    background: var(--acc-primary);
+    color: white;
+    border: none;
+    box-shadow: 0 10px 25px rgba(0, 82, 255, 0.4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.acc-main-trigger:hover {
+    transform: scale(1.1) rotate(5deg);
+    background: var(--acc-primary-dark);
+}
+
+.acc-panel {
+    background: var(--acc-panel-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--acc-border);
+    border-radius: 20px;
+    padding: 18px;
+    width: 320px;
+    max-width: calc(100vw - 40px);
+    box-shadow: var(--acc-shadow);
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    transform-origin: bottom left;
+    animation: accPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes accPop {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px) translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0) translateX(0);
+    }
+}
+
+.acc-panel.show {
+    display: flex;
+}
+
+.acc-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 12px;
+    margin-bottom: 5px;
+}
+
+.acc-header h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--acc-text-dark);
+}
+
+.acc-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.acc-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--acc-text-dark);
+}
+
+/* Premium Toggle Switch */
+.acc-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.acc-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.acc-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #CBD5E1;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.acc-slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input:checked+.acc-slider {
+    background-color: var(--acc-primary);
+}
+
+input:checked+.acc-slider:before {
+    transform: translateX(26px);
+}
+
+/* Premium Action Button */
+.acc-action-btn {
+    width: 100%;
+    padding: 10px;
+    border-radius: 12px;
+    border: none;
+    background: #f1f5f9;
+    color: var(--acc-text-dark);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+}
+
+.acc-action-btn:hover {
+    background: #e2e8f0;
+    transform: translateY(-2px);
+}
+
+.acc-action-btn.playing {
+    background: var(--acc-accent);
+    animation: accPulse 2s infinite;
+}
+
+@keyframes accPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(255, 193, 7, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0);
+    }
+}
+
+/* Senior Mode Active UI Adjustments */
+body.senior-mode #acc-premium-widget {
+    bottom: 40px;
+    left: 40px;
+}
+
+/* ----------- UNIVERSAL OVERLAP & RESPONSIVE FIXES ----------- */
+
+/* Prevent Hero overlap when text is scaled on desktop */
+@media (min-width: 992px) {
+
+    body[class*="ts-large"]:not(.senior-mode) .hero-left,
+    body[class*="ts-xlarge"]:not(.senior-mode) .hero-left {
+        max-width: 55% !important;
+        z-index: 2 !important;
+    }
+
+    body[class*="ts-large"]:not(.senior-mode) .hero-map-accent,
+    body[class*="ts-xlarge"]:not(.senior-mode) .hero-map-accent {
+        width: 38% !important;
+        right: 2% !important;
+        opacity: 0.9 !important;
+        z-index: 1 !important;
+    }
+
+    /* Ensure sections grow with content */
+    body[class*="ts-"] .hp-section,
+    body[class*="ts-"] .hero-wrap {
+        height: auto !important;
+        min-height: 100vh !important;
+    }
+}
+
+/* ═══════════ ACCESSIBLE FLOATING BUTTONS ═══════════ */
+body.senior-mode #acc-trigger,
+body.senior-mode #chatbot-toggle {
+    min-width: 72px !important;
+    min-height: 72px !important;
+    outline: none !important;
+}
+
+body.senior-mode #acc-trigger:focus-visible,
+body.senior-mode #chatbot-toggle:focus-visible {
+    box-shadow: 0 0 0 6px var(--acc-accent), 0 0 0 10px rgba(255, 193, 7, 0.3) !important;
+}

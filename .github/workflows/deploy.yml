@@ -1,0 +1,44 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [ merged ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up SSH key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Copy code to server via SCP
+        run: |
+          rsync -avz -e "ssh -o StrictHostKeyChecking=no" --exclude='.git' --exclude='.github' ./ cybersafechatbot@172.191.110.249:~/cybersafe_new
+
+      - name: Deploy to server via SSH
+        run: |
+          ssh -o StrictHostKeyChecking=no cybersafechatbot@172.191.110.249 '
+            set -e
+            if [ ! -d "~/cybersafe" ]; then
+              mkdir -p ~/cybersafe
+            fi
+            cp -r ~/cybersafe_new/* ~/cybersafe/
+            rm -rf ~/cybersafe_new
+            cd ~/cybersafe
+            if [ ! -d "venv" ]; then
+              python3 -m venv venv
+            fi
+            source venv/bin/activate
+            pip install -r requirements.txt
+            python3 manage.py migrate
+            python3 manage.py seed_questions
+            python3 manage.py collectstatic --noinput
+            pm2 restart cybersafe || pm2 start venv/bin/python --name cybersafe -- venv/bin/gunicorn cysafe_project.wsgi:application --bind 127.0.0.1:8000
+          '
+
+    # No artifact upload step, so no storage is used
