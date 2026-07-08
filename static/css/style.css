@@ -545,7 +545,7 @@ textarea.form-control {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   gap: 64px;
-  align-items: center;
+  align-items: start;
   margin-bottom: var(--space-8);
 }
 
