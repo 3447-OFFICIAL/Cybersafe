@@ -9,9 +9,20 @@
      CITIZEN SAFETY PAGE — DARK PREMIUM
   ══════════════════════════════════════════ */
 
-  .py-24 { padding-top: 96px; padding-bottom: 96px; }
-  .py-20 { padding-top: 80px; padding-bottom: 80px; }
-  .py-16 { padding-top: 64px; padding-bottom: 64px; }
+  .py-24 {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+
+  .py-20 {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .py-16 {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
 
   /* ── Hero ── */
   .cs-hero {
@@ -27,19 +38,21 @@
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(0,210,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,210,255,0.03) 1px, transparent 1px);
+      linear-gradient(rgba(0, 210, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 210, 255, 0.03) 1px, transparent 1px);
     background-size: 48px 48px;
     pointer-events: none;
   }
 
   .cs-hero-glow {
     position: absolute;
-    width: 700px; height: 700px;
+    width: 700px;
+    height: 700px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,210,255,0.07) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(0, 210, 255, 0.07) 0%, transparent 70%);
     filter: blur(80px);
-    top: -200px; right: -100px;
+    top: -200px;
+    right: -100px;
     pointer-events: none;
   }
 
@@ -53,22 +66,33 @@
     color: var(--accent-primary);
     font-weight: 700;
     padding: 6px 14px;
-    background: rgba(0,210,255,0.08);
-    border: 1px solid rgba(0,210,255,0.2);
+    background: rgba(0, 210, 255, 0.08);
+    border: 1px solid rgba(0, 210, 255, 0.2);
     border-radius: 999px;
     margin-bottom: 24px;
   }
 
   .cs-hero-badge::before {
     content: '';
-    width: 6px; height: 6px; border-radius: 50%;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
     background: var(--accent-primary);
     animation: pulse-dot 1.5s infinite;
   }
 
   @keyframes pulse-dot {
-    0%,100%{opacity:1;transform:scale(1)}
-    50%{opacity:.4;transform:scale(1.4)}
+
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1)
+    }
+
+    50% {
+      opacity: .4;
+      transform: scale(1.4)
+    }
   }
 
   .cs-hero h1 {
@@ -136,7 +160,7 @@
     font-weight: 600;
     cursor: pointer;
     background: transparent;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     color: var(--text-muted);
     transition: all 0.2s;
     text-decoration: none;
@@ -187,8 +211,8 @@
 
   /* ── Protocol Box ── */
   .protocol-box-dark {
-    background: rgba(10,12,20,0.6);
-    border: 1px solid rgba(255,255,255,0.05);
+    background: rgba(10, 12, 20, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: var(--radius-lg);
     overflow: hidden;
     margin-top: 20px;
@@ -196,8 +220,8 @@
 
   .protocol-box-dark .protocol-header {
     padding: 10px 16px;
-    background: rgba(255,255,255,0.02);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     font-family: var(--font-mono);
     font-size: 0.65rem;
     text-transform: uppercase;
@@ -210,15 +234,21 @@
     align-items: flex-start;
     gap: 14px;
     padding: 14px 16px;
-    border-bottom: 1px solid rgba(255,255,255,0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
     transition: background 0.2s;
   }
 
-  .protocol-item-dark:last-child { border-bottom: none; }
-  .protocol-item-dark:hover { background: rgba(0,210,255,0.02); }
+  .protocol-item-dark:last-child {
+    border-bottom: none;
+  }
+
+  .protocol-item-dark:hover {
+    background: rgba(0, 210, 255, 0.02);
+  }
 
   .protocol-icon {
-    width: 32px; height: 32px;
+    width: 32px;
+    height: 32px;
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -245,8 +275,8 @@
   /* ── Visual Panel ── */
   .cs-visual-panel {
     position: relative;
-    background: rgba(10,12,20,0.8);
-    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(10, 12, 20, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: var(--radius-xl);
     overflow: hidden;
     height: 100%;
@@ -269,28 +299,62 @@
     position: absolute;
     height: 1px;
     width: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0,210,255,0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(0, 210, 255, 0.3), transparent);
     animation: scan-down 3s ease-in-out infinite;
     left: 0;
   }
 
   @keyframes scan-down {
-    0%   { top: 0; opacity: 0; }
-    20%  { opacity: 1; }
-    80%  { opacity: 1; }
-    100% { top: 100%; opacity: 0; }
+    0% {
+      top: 0;
+      opacity: 0;
+    }
+
+    20% {
+      opacity: 1;
+    }
+
+    80% {
+      opacity: 1;
+    }
+
+    100% {
+      top: 100%;
+      opacity: 0;
+    }
   }
 
   .cs-visual-panel .panel-corner {
     position: absolute;
-    width: 16px; height: 16px;
-    border-color: rgba(0,210,255,0.3);
+    width: 16px;
+    height: 16px;
+    border-color: rgba(0, 210, 255, 0.3);
     border-style: solid;
   }
-  .corner-tl { top: 8px; left: 8px; border-width: 1.5px 0 0 1.5px; }
-  .corner-tr { top: 8px; right: 8px; border-width: 1.5px 1.5px 0 0; }
-  .corner-bl { bottom: 8px; left: 8px; border-width: 0 0 1.5px 1.5px; }
-  .corner-br { bottom: 8px; right: 8px; border-width: 0 1.5px 1.5px 0; }
+
+  .corner-tl {
+    top: 8px;
+    left: 8px;
+    border-width: 1.5px 0 0 1.5px;
+  }
+
+  .corner-tr {
+    top: 8px;
+    right: 8px;
+    border-width: 1.5px 1.5px 0 0;
+  }
+
+  .corner-bl {
+    bottom: 8px;
+    left: 8px;
+    border-width: 0 0 1.5px 1.5px;
+  }
+
+  .corner-br {
+    bottom: 8px;
+    right: 8px;
+    border-width: 0 1.5px 1.5px 0;
+  }
 
   .panel-telemetry {
     font-family: var(--font-mono);
@@ -300,27 +364,47 @@
     line-height: 1.8;
   }
 
-  .panel-telemetry .telem-ok { color: var(--accent-safe); }
-  .panel-telemetry .telem-warn { color: var(--accent-warning); }
-  .panel-telemetry .telem-val { color: var(--accent-primary); }
+  .panel-telemetry .telem-ok {
+    color: var(--accent-safe);
+  }
+
+  .panel-telemetry .telem-warn {
+    color: var(--accent-warning);
+  }
+
+  .panel-telemetry .telem-val {
+    color: var(--accent-primary);
+  }
 
   /* ── Checklist ── */
-  .cs-checklist { list-style: none; padding: 0; margin: 16px 0; }
+  .cs-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+  }
+
   .cs-checklist li {
     display: flex;
     align-items: flex-start;
     gap: 10px;
     padding: 8px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     font-size: 0.88rem;
     color: var(--text-secondary);
     line-height: 1.4;
   }
-  .cs-checklist li:last-child { border-bottom: none; }
+
+  .cs-checklist li:last-child {
+    border-bottom: none;
+  }
+
   .cs-checklist .check-dot {
-    width: 18px; height: 18px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
     margin-top: 1px;
     font-size: 0.65rem;
@@ -332,35 +416,43 @@
     gap: 16px;
     align-items: flex-start;
     padding: 20px;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.05);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: var(--radius-lg);
     transition: border-color 0.3s;
     position: relative;
   }
 
-  .incident-step:hover { border-color: rgba(0,210,255,0.2); }
+  .incident-step:hover {
+    border-color: rgba(0, 210, 255, 0.2);
+  }
 
   .step-number {
-    width: 40px; height: 40px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: var(--font-mono);
-    font-size: 0.9rem; font-weight: 800;
+    font-size: 0.9rem;
+    font-weight: 800;
     flex-shrink: 0;
   }
 
   .step-connector {
     position: absolute;
-    left: 36px; bottom: -16px;
-    width: 1px; height: 16px;
-    background: rgba(255,255,255,0.06);
+    left: 36px;
+    bottom: -16px;
+    width: 1px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.06);
   }
 
   /* ── Alert Banner ── */
   .emergency-banner {
-    background: linear-gradient(135deg, rgba(239,68,68,0.08), rgba(239,68,68,0.04));
-    border: 1px solid rgba(239,68,68,0.2);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(239, 68, 68, 0.04));
+    border: 1px solid rgba(239, 68, 68, 0.2);
     border-radius: var(--radius-xl);
     padding: 28px 32px;
     display: flex;
@@ -379,8 +471,8 @@
 
   /* ── Resource Grid ── */
   .resource-card {
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: var(--radius-lg);
     padding: 20px;
     transition: all 0.3s;
@@ -389,8 +481,8 @@
   }
 
   .resource-card:hover {
-    border-color: rgba(0,210,255,0.2);
-    background: rgba(0,210,255,0.02);
+    border-color: rgba(0, 210, 255, 0.2);
+    background: rgba(0, 210, 255, 0.02);
     transform: translateY(-2px);
   }
 
@@ -400,14 +492,20 @@
     transform: translateY(20px);
     transition: opacity 0.6s ease, transform 0.6s ease;
   }
+
   .reveal.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
   @media (max-width: 992px) {
-    .split-grid { grid-template-columns: 1fr !important; }
-    .cs-visual-panel { min-height: 220px; }
+    .split-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    .cs-visual-panel {
+      min-height: 220px;
+    }
   }
 </style>
 {% endblock %}
@@ -416,7 +514,8 @@
 
 <!-- ══════════ HERO ══════════ -->
 <div class="cs-hero">
-  <div class="cs-hero-bg" style="mask-image: radial-gradient(ellipse at top right, rgba(0,0,0,0.7), transparent 75%);"></div>
+  <div class="cs-hero-bg" style="mask-image: radial-gradient(ellipse at top right, rgba(0,0,0,0.7), transparent 75%);">
+  </div>
   <div class="cs-hero-glow"></div>
 
   <div class="container" style="position:relative; z-index:1;">
@@ -424,11 +523,15 @@
       <!-- Left -->
       <div>
         <div class="cs-hero-badge">Official Safety Guide</div>
-        <h1 style="font-size: clamp(2.8rem, 5.5vw, 4.2rem); font-weight:800; line-height:1.05; letter-spacing:-0.02em; margin-bottom:20px; color:var(--text-primary);">
-          Citizen <em style="font-style:normal; background:linear-gradient(135deg,var(--accent-primary),var(--accent-secondary)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Safety Protocols</em>
+        <h1
+          style="font-size: clamp(2.8rem, 5.5vw, 4.2rem); font-weight:800; line-height:1.05; letter-spacing:-0.02em; margin-bottom:20px; color:var(--text-primary);">
+          Citizen <em
+            style="font-style:normal; background:linear-gradient(135deg,var(--accent-primary),var(--accent-secondary)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Safety
+            Protocols</em>
         </h1>
         <p style="font-size:1.05rem; color:var(--text-secondary); line-height:1.75; max-width:500px;">
-          Comprehensive guidelines, response directives, and hardening protocols to protect your identity, devices, and financial assets from modern cyber threats.
+          Comprehensive guidelines, response directives, and hardening protocols to protect your identity, devices, and
+          financial assets from modern cyber threats.
         </p>
 
         <div class="flex gap-4 flex-wrap mt-8">
@@ -464,31 +567,54 @@
         <div class="panel-corner corner-br"></div>
         <div class="panel-scan-line"></div>
 
-        <div style="font-size:0.65rem; font-family:var(--font-mono); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.12em; position:absolute; top:16px; left:16px;">⬡ SHIELD_STATUS_MONITOR</div>
+        <div
+          style="font-size:0.65rem; font-family:var(--font-mono); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.12em; position:absolute; top:16px; left:16px;">
+          ⬡ SHIELD_STATUS_MONITOR</div>
 
         <div style="display:flex; flex-direction:column; gap:10px; width:100%;">
-          <div style="background:rgba(0,0,0,0.3); border:1px solid rgba(16,185,129,0.15); border-radius:8px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">Digital Identity Guard</span>
-            <span style="color:var(--accent-safe); font-family:var(--font-mono); font-size:0.75rem; font-weight:700;">ACTIVE ●</span>
+          <div
+            style="background:rgba(0,0,0,0.3); border:1px solid rgba(16,185,129,0.15); border-radius:8px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">Digital Identity
+              Guard</span>
+            <span
+              style="color:var(--accent-safe); font-family:var(--font-mono); font-size:0.75rem; font-weight:700;">ACTIVE
+              ●</span>
           </div>
-          <div style="background:rgba(0,0,0,0.3); border:1px solid rgba(99,102,241,0.15); border-radius:8px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">Financial Shield Layer</span>
-            <span style="color:var(--accent-secondary); font-family:var(--font-mono); font-size:0.75rem; font-weight:700;">ACTIVE ●</span>
+          <div
+            style="background:rgba(0,0,0,0.3); border:1px solid rgba(99,102,241,0.15); border-radius:8px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">Financial Shield
+              Layer</span>
+            <span
+              style="color:var(--accent-secondary); font-family:var(--font-mono); font-size:0.75rem; font-weight:700;">ACTIVE
+              ●</span>
           </div>
-          <div style="background:rgba(0,0,0,0.3); border:1px solid rgba(245,158,11,0.15); border-radius:8px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">Device Integrity Monitor</span>
-            <span style="color:var(--accent-warning); font-family:var(--font-mono); font-size:0.75rem; font-weight:700;">SCANNING ◌</span>
+          <div
+            style="background:rgba(0,0,0,0.3); border:1px solid rgba(245,158,11,0.15); border-radius:8px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">Device Integrity
+              Monitor</span>
+            <span
+              style="color:var(--accent-warning); font-family:var(--font-mono); font-size:0.75rem; font-weight:700;">SCANNING
+              ◌</span>
           </div>
-          <div style="background:rgba(0,0,0,0.3); border:1px solid rgba(0,210,255,0.15); border-radius:8px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">Network Threat Detection</span>
-            <span style="color:var(--accent-primary); font-family:var(--font-mono); font-size:0.75rem; font-weight:700;">ACTIVE ●</span>
+          <div
+            style="background:rgba(0,0,0,0.3); border:1px solid rgba(0,210,255,0.15); border-radius:8px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">Network Threat
+              Detection</span>
+            <span
+              style="color:var(--accent-primary); font-family:var(--font-mono); font-size:0.75rem; font-weight:700;">ACTIVE
+              ●</span>
           </div>
-          <div style="background:rgba(0,0,0,0.3); border:1px solid rgba(239,68,68,0.15); border-radius:8px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">Dark Web Monitor</span>
-            <span style="color:var(--accent-safe); font-family:var(--font-mono); font-size:0.75rem; font-weight:700;">ACTIVE ●</span>
+          <div
+            style="background:rgba(0,0,0,0.3); border:1px solid rgba(239,68,68,0.15); border-radius:8px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">Dark Web
+              Monitor</span>
+            <span
+              style="color:var(--accent-safe); font-family:var(--font-mono); font-size:0.75rem; font-weight:700;">ACTIVE
+              ●</span>
           </div>
 
-          <div style="margin-top:8px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.04); display:flex; gap:16px; font-family:var(--font-mono); font-size:0.68rem;">
+          <div
+            style="margin-top:8px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.04); display:flex; gap:16px; font-family:var(--font-mono); font-size:0.68rem;">
             <span style="color:var(--accent-safe);">5/5 Systems Online</span>
             <span style="color:var(--text-muted);">Last Sync: Just Now</span>
           </div>
@@ -499,31 +625,55 @@
 </div>
 
 <!-- Quick Nav -->
-<div style="background:rgba(15,17,26,0.5); border-top:1px solid var(--border-subtle); border-bottom:1px solid var(--border-subtle); position:sticky; top:64px; z-index:50; backdrop-filter:blur(16px);">
+<div
+  style="background:rgba(15,17,26,0.5); border-top:1px solid var(--border-subtle); border-bottom:1px solid var(--border-subtle); position:sticky; top:64px; z-index:50; backdrop-filter:blur(16px);">
   <div class="container">
     <div class="nav-tabs-dark">
       <a href="#digital-identity" class="nav-tab-dark">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="3" width="20" height="14" rx="2" />
+          <line x1="8" y1="21" x2="16" y2="21" />
+          <line x1="12" y1="17" x2="12" y2="21" />
+        </svg>
         Digital Identity
       </a>
       <a href="#financial-safety" class="nav-tab-dark">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="5" width="20" height="14" rx="2" />
+          <line x1="2" y1="10" x2="22" y2="10" />
+        </svg>
         Financial Safety
       </a>
       <a href="#device-security" class="nav-tab-dark">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="5" y="2" width="14" height="20" rx="2" />
+          <line x1="12" y1="18" x2="12.01" y2="18" />
+        </svg>
         Device Security
       </a>
       <a href="#network-safety" class="nav-tab-dark">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12.55a11 11 0 0 1 14.08 0" />
+          <path d="M1.42 9a16 16 0 0 1 21.16 0" />
+          <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
+          <line x1="12" y1="20" x2="12.01" y2="20" />
+        </svg>
         Network Safety
       </a>
       <a href="#personal-safety" class="nav-tab-dark">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+        </svg>
         Personal Safety
       </a>
-      <a href="#incident-response" class="nav-tab-dark" style="color:var(--accent-risk); border-color:rgba(239,68,68,0.25);">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <a href="#incident-response" class="nav-tab-dark"
+        style="color:var(--accent-risk); border-color:rgba(239,68,68,0.25);">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="8" x2="12" y2="12" />
+          <line x1="12" y1="16" x2="12.01" y2="16" />
+        </svg>
         Incident Response
       </a>
     </div>
@@ -536,51 +686,106 @@
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;" class="split-grid">
       <div class="reveal">
         <div class="cs-section-header">
-          <span class="badge-line" style="background:rgba(16,185,129,0.1); color:var(--accent-safe); border:1px solid rgba(16,185,129,0.2);">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/></svg>
+          <span class="badge-line"
+            style="background:rgba(16,185,129,0.1); color:var(--accent-safe); border:1px solid rgba(16,185,129,0.2);">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+            </svg>
             Digital Identity
           </span>
           <h2>Digital Identity <span style="color:var(--accent-safe);">Protection</span></h2>
-          <p>Your online footprint is your resume to the world. Protecting it requires more than just a password — it demands a defensive architecture.</p>
+          <p>Your online footprint is your resume to the world. Protecting it requires more than just a password — it
+            demands a defensive architecture.</p>
         </div>
 
         <div class="protocol-box-dark">
           <div class="protocol-header">Standard Protective Protocol</div>
           <div class="protocol-item-dark">
             <div class="protocol-icon" style="background:rgba(16,185,129,0.08); color:var(--accent-safe);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
             </div>
             <div>
               <strong>MFA Integration</strong>
-              <p>Enable Multi-Factor Authentication (App-based, not SMS) on all primary accounts — banking, email, and social.</p>
+              <p>Enable Multi-Factor Authentication (App-based, not SMS) on all primary accounts — banking, email, and
+                social.</p>
             </div>
           </div>
           <div class="protocol-item-dark">
             <div class="protocol-icon" style="background:rgba(16,185,129,0.08); color:var(--accent-safe);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path
+                  d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4" />
+              </svg>
             </div>
             <div>
               <strong>Credential Management</strong>
-              <p>Use a premium password manager to generate and store 16+ character unique passphrases for every service.</p>
+              <p>Use a premium password manager to generate and store 16+ character unique passphrases for every
+                service.</p>
             </div>
           </div>
           <div class="protocol-item-dark">
             <div class="protocol-icon" style="background:rgba(16,185,129,0.08); color:var(--accent-safe);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg>
             </div>
             <div>
               <strong>Software Hardening</strong>
-              <p>Set OS and critical applications to auto-update to patch zero-day vulnerabilities before they are exploited.</p>
+              <p>Set OS and critical applications to auto-update to patch zero-day vulnerabilities before they are
+                exploited.</p>
             </div>
           </div>
           <div class="protocol-item-dark">
             <div class="protocol-icon" style="background:rgba(16,185,129,0.08); color:var(--accent-safe);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
             </div>
             <div>
               <strong>Breach Monitoring</strong>
               <p>Enroll your email and phone in continuous dark web monitoring to receive real-time exposure alerts.</p>
             </div>
+          </div>
+        </div>
+
+        <!-- Identity Verification Suite -->
+        <div
+          style="margin-top: 24px; padding: 20px; background: rgba(0, 210, 255, 0.02); border: 1px dashed rgba(0, 210, 255, 0.15); border-radius: var(--radius-lg);">
+          <div
+            style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--accent-primary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+            <span
+              style="display:inline-block; width:6px; height:6px; background:var(--accent-primary); border-radius:50%;"></span>
+            Active Exposure Scanners
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="{% url 'email_breach_check' %}" class="btn btn-primary"
+              style="font-size: 0.8rem; padding: 10px 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+              Email Breach Check
+            </a>
+            <a href="{% url 'aadhaar_risk_check' %}" class="btn btn-outline"
+              style="font-size: 0.8rem; padding: 10px 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z" />
+                <path d="M14 3v5h5M16 13H8M16 17H8M10 9H8" />
+              </svg>
+              Aadhaar Leak Verify
+            </a>
+            <a href="{% url 'password_strength_scan' %}" class="btn btn-outline"
+              style="font-size: 0.8rem; padding: 10px 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+              Password Strength Scan
+            </a>
           </div>
         </div>
       </div>
@@ -591,8 +796,12 @@
         <div class="panel-corner corner-bl"></div>
         <div class="panel-corner corner-br"></div>
         <div class="panel-scan-line" style="animation-duration:4s;"></div>
-        <div style="font-size:0.6rem; font-family:var(--font-mono); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.12em; position:absolute; top:14px; left:14px;">IDENTITY_GUARD_ACTIVE</div>
-        <div style="font-size:5rem; color:var(--accent-safe); filter:drop-shadow(0 0 40px rgba(16,185,129,0.4)); animation:pulse-icon 3s ease-in-out infinite;">🛡</div>
+        <div
+          style="font-size:0.6rem; font-family:var(--font-mono); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.12em; position:absolute; top:14px; left:14px;">
+          IDENTITY_GUARD_ACTIVE</div>
+        <div
+          style="font-size:5rem; color:var(--accent-safe); filter:drop-shadow(0 0 40px rgba(16,185,129,0.4)); animation:pulse-icon 3s ease-in-out infinite;">
+          🛡</div>
         <div class="panel-telemetry">
           <div class="telem-ok">IDENTITY_LOCK: ENABLED</div>
           <div class="telem-val">MFA_LAYERS: 3_ACTIVE</div>
@@ -603,11 +812,6 @@
     </div>
   </div>
 </div>
-
-@keyframes pulse-icon {
-  0%,100%{transform:scale(1); opacity:0.9;}
-  50%{transform:scale(1.05); opacity:1;}
-}
 
 <!-- ══════════ S2: FINANCIAL SAFETY ══════════ -->
 <div id="financial-safety" class="py-24" style="background:rgba(15,17,26,0.4);">
@@ -620,8 +824,12 @@
         <div class="panel-corner corner-bl"></div>
         <div class="panel-corner corner-br"></div>
         <div class="panel-scan-line" style="animation-duration:5s; animation-delay:1s;"></div>
-        <div style="font-size:0.6rem; font-family:var(--font-mono); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.12em; position:absolute; top:14px; left:14px;">FINANCIAL_SHIELD_LAYER</div>
-        <div style="font-size:5rem; color:var(--accent-secondary); filter:drop-shadow(0 0 40px rgba(99,102,241,0.4)); animation:pulse-icon 3.5s ease-in-out infinite;">💳</div>
+        <div
+          style="font-size:0.6rem; font-family:var(--font-mono); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.12em; position:absolute; top:14px; left:14px;">
+          FINANCIAL_SHIELD_LAYER</div>
+        <div
+          style="font-size:5rem; color:var(--accent-secondary); filter:drop-shadow(0 0 40px rgba(99,102,241,0.4)); animation:pulse-icon 3.5s ease-in-out infinite;">
+          💳</div>
         <div class="panel-telemetry">
           <div class="telem-val">UPI_AUDIT: VERIFIED</div>
           <div class="telem-ok">BANK_TRANSACTIONS: MONITORED</div>
@@ -632,51 +840,102 @@
 
       <div class="reveal" style="animation-delay:0.15s;">
         <div class="cs-section-header">
-          <span class="badge-line" style="background:rgba(99,102,241,0.1); color:var(--accent-secondary); border:1px solid rgba(99,102,241,0.2);">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          <span class="badge-line"
+            style="background:rgba(99,102,241,0.1); color:var(--accent-secondary); border:1px solid rgba(99,102,241,0.2);">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="5" width="20" height="14" rx="2" />
+              <line x1="2" y1="10" x2="22" y2="10" />
+            </svg>
             Financial Safety
           </span>
           <h2>Financial Assets <span style="color:var(--accent-secondary);">Security</span></h2>
-          <p>Digital banking and UPI have made transactions instant — but require instant alertness to prevent unauthorized transfers and UPI fraud.</p>
+          <p>Digital banking and UPI have made transactions instant — but require instant alertness to prevent
+            unauthorized transfers and UPI fraud.</p>
         </div>
 
         <div class="protocol-box-dark">
           <div class="protocol-header">Financial Defense Protocol</div>
           <div class="protocol-item-dark">
             <div class="protocol-icon" style="background:rgba(99,102,241,0.08); color:var(--accent-secondary);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <rect x="3" y="11" width="18" height="11" rx="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
             </div>
             <div>
               <strong>OTP Integrity</strong>
-              <p>Never share OTPs with anyone claiming to be a bank official, telecom company, or government authority — OTPs are always final-step secrets.</p>
+              <p>Never share OTPs with anyone claiming to be a bank official, telecom company, or government authority —
+                OTPs are always final-step secrets.</p>
             </div>
           </div>
           <div class="protocol-item-dark">
             <div class="protocol-icon" style="background:rgba(99,102,241,0.08); color:var(--accent-secondary);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                <line x1="9" y1="9" x2="9.01" y2="9" />
+                <line x1="15" y1="9" x2="15.01" y2="9" />
+              </svg>
             </div>
             <div>
               <strong>UPI QR Verification</strong>
-              <p>Always verify the registered name before confirming any UPI payment. Scammers generate spoofed QR codes with similar-looking merchant names.</p>
+              <p>Always verify the registered name before confirming any UPI payment. Scammers generate spoofed QR codes
+                with similar-looking merchant names.</p>
             </div>
           </div>
           <div class="protocol-item-dark">
             <div class="protocol-icon" style="background:rgba(99,102,241,0.08); color:var(--accent-secondary);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg>
             </div>
             <div>
               <strong>Transaction Alerts</strong>
-              <p>Enable SMS and push alerts for every transaction above ₹1. Immediately call 1930 if any unauthorized debit occurs.</p>
+              <p>Enable SMS and push alerts for every transaction above ₹1. Immediately call 1930 if any unauthorized
+                debit occurs.</p>
             </div>
           </div>
           <div class="protocol-item-dark">
             <div class="protocol-icon" style="background:rgba(99,102,241,0.08); color:var(--accent-secondary);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+              </svg>
             </div>
             <div>
               <strong>Vishing Awareness</strong>
-              <p>Investment scams promising "guaranteed returns" through WhatsApp or Telegram are India's #1 financial cyber fraud vector in 2024.</p>
+              <p>Investment scams promising "guaranteed returns" through WhatsApp or Telegram are India's #1 financial
+                cyber fraud vector in 2024.</p>
             </div>
+          </div>
+        </div>
+
+        <!-- Financial Shield Controls -->
+        <div
+          style="margin-top: 24px; padding: 20px; background: rgba(99, 102, 241, 0.02); border: 1px dashed rgba(99, 102, 241, 0.15); border-radius: var(--radius-lg);">
+          <div
+            style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--accent-secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+            <span
+              style="display:inline-block; width:6px; height:6px; background:var(--accent-secondary); border-radius:50%;"></span>
+            Active Financial Tools
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="{% url 'financial_risk_scan' %}" class="btn btn-primary"
+              style="font-size: 0.8rem; padding: 10px 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; background: var(--accent-secondary); border-color: var(--accent-secondary); color:#fff;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="5" width="20" height="14" rx="2" />
+                <line x1="2" y1="10" x2="22" y2="10" />
+              </svg>
+              UPI &amp; Card Security Scan
+            </a>
+            <a href="{% url 'kyc_document_shield' %}" class="btn btn-outline"
+              style="font-size: 0.8rem; padding: 10px 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+              Verify KYC Document
+            </a>
           </div>
         </div>
       </div>
@@ -692,51 +951,91 @@
 
       <div class="reveal">
         <div class="cs-section-header">
-          <span class="badge-line" style="background:rgba(245,158,11,0.1); color:var(--accent-warning); border:1px solid rgba(245,158,11,0.2);">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          <span class="badge-line"
+            style="background:rgba(245,158,11,0.1); color:var(--accent-warning); border:1px solid rgba(245,158,11,0.2);">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="5" y="2" width="14" height="20" rx="2" />
+              <line x1="12" y1="18" x2="12.01" y2="18" />
+            </svg>
             Device Security
           </span>
           <h2>Device Integrity <span style="color:var(--accent-warning);">Shield</span></h2>
-          <p>Your device is the primary attack surface. Hardening it against APK-based malware, spyware, and remote-access tools is the first line of defense.</p>
+          <p>Your device is the primary attack surface. Hardening it against APK-based malware, spyware, and
+            remote-access tools is the first line of defense.</p>
         </div>
 
         <div class="protocol-box-dark">
           <div class="protocol-header">Device Hardening Protocol</div>
           <div class="protocol-item-dark">
             <div class="protocol-icon" style="background:rgba(245,158,11,0.08); color:var(--accent-warning);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" />
+              </svg>
             </div>
             <div>
               <strong>Sideloading Prevention</strong>
-              <p>Never install APKs from outside official stores. 73% of Android malware in India spreads through WhatsApp-forwarded APK files.</p>
+              <p>Never install APKs from outside official stores. 73% of Android malware in India spreads through
+                WhatsApp-forwarded APK files.</p>
             </div>
           </div>
           <div class="protocol-item-dark">
             <div class="protocol-icon" style="background:rgba(245,158,11,0.08); color:var(--accent-warning);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <rect x="4" y="4" width="16" height="16" rx="2" />
+                <rect x="9" y="9" width="6" height="6" />
+              </svg>
             </div>
             <div>
               <strong>Screen Recording Block</strong>
-              <p>Disable "Display over other apps" permissions for any app that doesn't require it. RAT malware exploits this vector to steal banking credentials.</p>
+              <p>Disable "Display over other apps" permissions for any app that doesn't require it. RAT malware exploits
+                this vector to steal banking credentials.</p>
             </div>
           </div>
           <div class="protocol-item-dark">
             <div class="protocol-icon" style="background:rgba(245,158,11,0.08); color:var(--accent-warning);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
             </div>
             <div>
               <strong>Permission Audit</strong>
-              <p>Monthly review of all app permissions — especially SMS, Contacts, Camera, and Microphone access which are commonly abused by stalkerware.</p>
+              <p>Monthly review of all app permissions — especially SMS, Contacts, Camera, and Microphone access which
+                are commonly abused by stalkerware.</p>
             </div>
           </div>
           <div class="protocol-item-dark">
             <div class="protocol-icon" style="background:rgba(245,158,11,0.08); color:var(--accent-warning);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
             </div>
             <div>
               <strong>Encryption &amp; Lock</strong>
-              <p>Enable full-device encryption and use biometric + strong PIN (6+ digit) lock. Never use pattern locks on public-facing devices.</p>
+              <p>Enable full-device encryption and use biometric + strong PIN (6+ digit) lock. Never use pattern locks
+                on public-facing devices.</p>
             </div>
+          </div>
+        </div>
+
+        <!-- Device Diagnostics -->
+        <div
+          style="margin-top: 24px; padding: 20px; background: rgba(245, 158, 11, 0.02); border: 1px dashed rgba(245, 158, 11, 0.15); border-radius: var(--radius-lg);">
+          <div
+            style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--accent-warning); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+            <span
+              style="display:inline-block; width:6px; height:6px; background:var(--accent-warning); border-radius:50%;"></span>
+            Device Diagnostics
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="{% url 'phone_exposure_check' %}" class="btn btn-primary"
+              style="font-size: 0.8rem; padding: 10px 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; background: var(--accent-warning); border-color: var(--accent-warning); color: #090a0f;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+                <line x1="12" y1="18" x2="12.01" y2="18" />
+              </svg>
+              Phone Exposure Check
+            </a>
           </div>
         </div>
       </div>
@@ -747,8 +1046,12 @@
         <div class="panel-corner corner-bl"></div>
         <div class="panel-corner corner-br"></div>
         <div class="panel-scan-line" style="animation-duration:3.5s; animation-delay:0.5s;"></div>
-        <div style="font-size:0.6rem; font-family:var(--font-mono); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.12em; position:absolute; top:14px; left:14px;">DEVICE_INTEGRITY_SCAN</div>
-        <div style="font-size:5rem; color:var(--accent-warning); filter:drop-shadow(0 0 40px rgba(245,158,11,0.4)); animation:pulse-icon 3.2s ease-in-out infinite;">📱</div>
+        <div
+          style="font-size:0.6rem; font-family:var(--font-mono); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.12em; position:absolute; top:14px; left:14px;">
+          DEVICE_INTEGRITY_SCAN</div>
+        <div
+          style="font-size:5rem; color:var(--accent-warning); filter:drop-shadow(0 0 40px rgba(245,158,11,0.4)); animation:pulse-icon 3.2s ease-in-out infinite;">
+          📱</div>
         <div class="panel-telemetry">
           <div class="telem-ok">APK_THREATS: 0_DETECTED</div>
           <div class="telem-val">PERMISSIONS_AUDITED: 28</div>
@@ -772,8 +1075,12 @@
         <div class="panel-corner corner-bl"></div>
         <div class="panel-corner corner-br"></div>
         <div class="panel-scan-line" style="animation-duration:4.5s; animation-delay:2s;"></div>
-        <div style="font-size:0.6rem; font-family:var(--font-mono); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.12em; position:absolute; top:14px; left:14px;">NETWORK_THREAT_MONITOR</div>
-        <div style="font-size:5rem; color:var(--accent-primary); filter:drop-shadow(0 0 40px rgba(0,210,255,0.35)); animation:pulse-icon 4s ease-in-out infinite;">📡</div>
+        <div
+          style="font-size:0.6rem; font-family:var(--font-mono); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.12em; position:absolute; top:14px; left:14px;">
+          NETWORK_THREAT_MONITOR</div>
+        <div
+          style="font-size:5rem; color:var(--accent-primary); filter:drop-shadow(0 0 40px rgba(0,210,255,0.35)); animation:pulse-icon 4s ease-in-out infinite;">
+          📡</div>
         <div class="panel-telemetry">
           <div class="telem-ok">DNS_LEAKS: 0_FOUND</div>
           <div class="telem-val">VPN_TUNNEL: ENCRYPTED</div>
@@ -784,42 +1091,93 @@
 
       <div class="reveal" style="animation-delay:0.15s;">
         <div class="cs-section-header">
-          <span class="badge-line" style="background:rgba(0,210,255,0.1); color:var(--accent-primary); border:1px solid rgba(0,210,255,0.2);">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+          <span class="badge-line"
+            style="background:rgba(0,210,255,0.1); color:var(--accent-primary); border:1px solid rgba(0,210,255,0.2);">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12.55a11 11 0 0 1 14.08 0" />
+              <path d="M1.42 9a16 16 0 0 1 21.16 0" />
+              <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
+              <line x1="12" y1="20" x2="12.01" y2="20" />
+            </svg>
             Network Safety
           </span>
           <h2>Network <span style="color:var(--accent-primary);">Defense</span></h2>
-          <p>Unsecured networks are the easiest point of entry for man-in-the-middle attacks targeting OTPs and session tokens on public Wi-Fi.</p>
+          <p>Unsecured networks are the easiest point of entry for man-in-the-middle attacks targeting OTPs and session
+            tokens on public Wi-Fi.</p>
         </div>
 
         <div class="protocol-box-dark">
           <div class="protocol-header">Network Security Protocol</div>
           <div class="protocol-item-dark">
             <div class="protocol-icon" style="background:rgba(0,210,255,0.08); color:var(--accent-primary);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <rect x="3" y="11" width="18" height="11" rx="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
             </div>
             <div>
               <strong>VPN Encryption</strong>
-              <p>Use a zero-log VPN when connecting to public Wi-Fi. Never access banking portals or OTP flows on open networks.</p>
+              <p>Use a zero-log VPN when connecting to public Wi-Fi. Never access banking portals or OTP flows on open
+                networks.</p>
             </div>
           </div>
           <div class="protocol-item-dark">
             <div class="protocol-icon" style="background:rgba(0,210,255,0.08); color:var(--accent-primary);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12.55a11 11 0 0 1 14.08 0" />
+                <line x1="12" y1="20" x2="12.01" y2="20" />
+              </svg>
             </div>
             <div>
               <strong>Router Hardening</strong>
-              <p>Change default router admin password, disable WPS, and update firmware quarterly. Use WPA3 encryption where available.</p>
+              <p>Change default router admin password, disable WPS, and update firmware quarterly. Use WPA3 encryption
+                where available.</p>
             </div>
           </div>
           <div class="protocol-item-dark">
             <div class="protocol-icon" style="background:rgba(0,210,255,0.08); color:var(--accent-primary);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="2" y1="12" x2="22" y2="12" />
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+              </svg>
             </div>
             <div>
               <strong>DNS Security</strong>
-              <p>Configure encrypted DNS (DNS-over-HTTPS) using Cloudflare 1.1.1.1 or Google 8.8.8.8 to prevent DNS spoofing attacks.</p>
+              <p>Configure encrypted DNS (DNS-over-HTTPS) using Cloudflare 1.1.1.1 or Google 8.8.8.8 to prevent DNS
+                spoofing attacks.</p>
             </div>
+          </div>
+        </div>
+
+        <!-- Vulnerability Metrics -->
+        <div
+          style="margin-top: 24px; padding: 20px; background: rgba(0, 210, 255, 0.02); border: 1px dashed rgba(0, 210, 255, 0.15); border-radius: var(--radius-lg);">
+          <div
+            style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--accent-primary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+            <span
+              style="display:inline-block; width:6px; height:6px; background:var(--accent-primary); border-radius:50%;"></span>
+            Vulnerability Metrics
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="{% url 'scorecard' %}" class="btn btn-primary"
+              style="font-size: 0.8rem; padding: 10px 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="20" x2="18" y2="10" />
+                <line x1="12" y1="20" x2="12" y2="4" />
+                <line x1="6" y1="20" x2="6" y2="14" />
+              </svg>
+              Evaluate Security Score
+            </a>
+            <a href="{% url 'risk_calculator' %}" class="btn btn-outline"
+              style="font-size: 0.8rem; padding: 10px 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="16" />
+                <line x1="8" y1="12" x2="16" y2="12" />
+              </svg>
+              Risk Calculator
+            </a>
           </div>
         </div>
       </div>
@@ -834,51 +1192,95 @@
 
       <div class="reveal">
         <div class="cs-section-header">
-          <span class="badge-line" style="background:rgba(239,68,68,0.1); color:var(--accent-risk); border:1px solid rgba(239,68,68,0.2);">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="badge-line"
+            style="background:rgba(239,68,68,0.1); color:var(--accent-risk); border:1px solid rgba(239,68,68,0.2);">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
             Personal Safety
           </span>
           <h2>Personal Data <span style="color:var(--accent-risk);">Hygiene</span></h2>
-          <p>Oversharing on social platforms and messaging apps creates a detailed intelligence profile that scammers exploit for social engineering.</p>
+          <p>Oversharing on social platforms and messaging apps creates a detailed intelligence profile that scammers
+            exploit for social engineering.</p>
         </div>
 
         <div class="protocol-box-dark">
           <div class="protocol-header">Personal Data Protocol</div>
           <div class="protocol-item-dark">
             <div class="protocol-icon" style="background:rgba(239,68,68,0.08); color:var(--accent-risk);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
             </div>
             <div>
               <strong>Social Media Footprint</strong>
-              <p>Audit and restrict privacy settings on all platforms. Never post your Aadhaar, PAN, address, or phone number in public posts or groups.</p>
+              <p>Audit and restrict privacy settings on all platforms. Never post your Aadhaar, PAN, address, or phone
+                number in public posts or groups.</p>
             </div>
           </div>
           <div class="protocol-item-dark">
             <div class="protocol-icon" style="background:rgba(239,68,68,0.08); color:var(--accent-risk);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.17h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.81-.81a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.17h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.81-.81a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
             </div>
             <div>
               <strong>Vishing Defense</strong>
-              <p>Hang up on unexpected calls claiming to be CBI, police, or TRAI threatening "digital arrest." India's law enforcement never calls to demand payment.</p>
+              <p>Hang up on unexpected calls claiming to be CBI, police, or TRAI threatening "digital arrest." India's
+                law enforcement never calls to demand payment.</p>
             </div>
           </div>
           <div class="protocol-item-dark">
             <div class="protocol-icon" style="background:rgba(239,68,68,0.08); color:var(--accent-risk);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
             </div>
             <div>
               <strong>Phishing Recognition</strong>
-              <p>Check sender domain carefully — scammers use domains like "support-sbi-in.com" vs real "sbi.co.in". Never click links in unsolicited SMS or email.</p>
+              <p>Check sender domain carefully — scammers use domains like "support-sbi-in.com" vs real "sbi.co.in".
+                Never click links in unsolicited SMS or email.</p>
             </div>
           </div>
           <div class="protocol-item-dark">
             <div class="protocol-icon" style="background:rgba(239,68,68,0.08); color:var(--accent-risk);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
             </div>
             <div>
               <strong>Telegram/WhatsApp Scams</strong>
-              <p>Investment groups on messaging apps offering 30-200% returns are fraud operations. India lost ₹7,061 crore to online investment scams in 2023 alone.</p>
+              <p>Investment groups on messaging apps offering 30-200% returns are fraud operations. India lost ₹7,061
+                crore to online investment scams in 2023 alone.</p>
             </div>
+          </div>
+        </div>
+
+        <!-- Intelligence & Monitor -->
+        <div
+          style="margin-top: 24px; padding: 20px; background: rgba(239, 68, 68, 0.02); border: 1px dashed rgba(239, 68, 68, 0.15); border-radius: var(--radius-lg);">
+          <div
+            style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--accent-risk); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+            <span
+              style="display:inline-block; width:6px; height:6px; background:var(--accent-risk); border-radius:50%;"></span>
+            Intelligence &amp; Monitor
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="{% url 'dark_web' %}" class="btn btn-primary"
+              style="font-size: 0.8rem; padding: 10px 16px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; background: var(--accent-risk); border-color: var(--accent-risk); color:#fff;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+              Dark Web Monitor
+            </a>
           </div>
         </div>
       </div>
@@ -889,8 +1291,12 @@
         <div class="panel-corner corner-bl"></div>
         <div class="panel-corner corner-br"></div>
         <div class="panel-scan-line" style="animation-duration:4.8s; animation-delay:1.2s;"></div>
-        <div style="font-size:0.6rem; font-family:var(--font-mono); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.12em; position:absolute; top:14px; left:14px;">PERSONAL_DATA_SHIELD</div>
-        <div style="font-size:5rem; color:var(--accent-risk); filter:drop-shadow(0 0 40px rgba(239,68,68,0.35)); animation:pulse-icon 3.8s ease-in-out infinite;">🎭</div>
+        <div
+          style="font-size:0.6rem; font-family:var(--font-mono); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.12em; position:absolute; top:14px; left:14px;">
+          PERSONAL_DATA_SHIELD</div>
+        <div
+          style="font-size:5rem; color:var(--accent-risk); filter:drop-shadow(0 0 40px rgba(239,68,68,0.35)); animation:pulse-icon 3.8s ease-in-out infinite;">
+          🎭</div>
         <div class="panel-telemetry">
           <div class="telem-ok">SOCIAL_FOOTPRINT: MINIMAL</div>
           <div class="telem-val">PHISH_ATTEMPTS_BLOCKED: 48</div>
@@ -907,25 +1313,36 @@
 <div id="incident-response" class="py-24" style="background:rgba(15,17,26,0.4);">
   <div class="container">
     <div class="cs-section-header reveal" style="text-align:center; max-width:680px; margin:0 auto 48px;">
-      <span class="badge-line" style="background:rgba(239,68,68,0.1); color:var(--accent-risk); border:1px solid rgba(239,68,68,0.2); display:inline-flex;">
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span class="badge-line"
+        style="background:rgba(239,68,68,0.1); color:var(--accent-risk); border:1px solid rgba(239,68,68,0.2); display:inline-flex;">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="8" x2="12" y2="12" />
+          <line x1="12" y1="16" x2="12.01" y2="16" />
+        </svg>
         Incident Response
       </span>
       <h2>What To Do <span style="color:var(--accent-risk);">Immediately</span> After a Cyber Attack</h2>
-      <p>Time is critical. Every minute of delay allows attackers to deepen access or transfer funds. Follow this exact protocol.</p>
+      <p>Time is critical. Every minute of delay allows attackers to deepen access or transfer funds. Follow this exact
+        protocol.</p>
     </div>
 
     <!-- Emergency Banner -->
     <div class="emergency-banner reveal mb-10">
       <div>
-        <div style="font-size:0.65rem; font-family:var(--font-mono); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">NATIONAL CYBERCRIME HELPLINE</div>
+        <div
+          style="font-size:0.65rem; font-family:var(--font-mono); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">
+          NATIONAL CYBERCRIME HELPLINE</div>
         <div class="emergency-number">1930</div>
-        <div style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Call immediately to freeze fraudulent transactions</div>
+        <div style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Call immediately to freeze fraudulent
+          transactions</div>
       </div>
       <div style="height:60px; width:1px; background:rgba(239,68,68,0.2); flex-shrink:0;"></div>
       <div style="flex:1;">
         <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.6; margin:0;">
-          Reporting within the <strong style="color:var(--accent-warning);">golden hour</strong> (first 60 minutes) gives the highest probability of recovering stolen funds. The Citizen Financial Cyber Fraud Reporting and Management System allows banks to freeze transactions in the fraud chain in real-time.
+          Reporting within the <strong style="color:var(--accent-warning);">golden hour</strong> (first 60 minutes)
+          gives the highest probability of recovering stolen funds. The Citizen Financial Cyber Fraud Reporting and
+          Management System allows banks to freeze transactions in the fraud chain in real-time.
         </p>
       </div>
     </div>
@@ -933,46 +1350,71 @@
     <!-- Steps -->
     <div style="display:flex; flex-direction:column; gap:0; max-width:800px; margin:0 auto;">
       <div class="incident-step reveal">
-        <div class="step-number" style="background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); color:var(--accent-risk);">01</div>
+        <div class="step-number"
+          style="background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); color:var(--accent-risk);">01
+        </div>
         <div>
-          <h4 style="font-size:1rem; font-weight:700; color:var(--text-primary); margin-bottom:6px;">Call 1930 — Immediately</h4>
-          <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.55; margin:0;">Report financial fraud to freeze fund transfers before they reach mule accounts. Have your transaction ID, bank account number, and timestamps ready.</p>
+          <h4 style="font-size:1rem; font-weight:700; color:var(--text-primary); margin-bottom:6px;">Call 1930 —
+            Immediately</h4>
+          <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.55; margin:0;">Report financial fraud to
+            freeze fund transfers before they reach mule accounts. Have your transaction ID, bank account number, and
+            timestamps ready.</p>
         </div>
         <div class="step-connector"></div>
       </div>
       <div style="height:16px;"></div>
       <div class="incident-step reveal" style="animation-delay:0.08s;">
-        <div class="step-number" style="background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.3); color:var(--accent-warning);">02</div>
+        <div class="step-number"
+          style="background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.3); color:var(--accent-warning);">
+          02</div>
         <div>
-          <h4 style="font-size:1rem; font-weight:700; color:var(--text-primary); margin-bottom:6px;">File on cybercrime.gov.in</h4>
-          <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.55; margin:0;">Submit a formal complaint on the National Cyber Crime Reporting Portal. For financial fraud, use the "Financial Fraud" category. Screenshot all evidence before filing.</p>
+          <h4 style="font-size:1rem; font-weight:700; color:var(--text-primary); margin-bottom:6px;">File on
+            cybercrime.gov.in</h4>
+          <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.55; margin:0;">Submit a formal complaint
+            on the National Cyber Crime Reporting Portal. For financial fraud, use the "Financial Fraud" category.
+            Screenshot all evidence before filing.</p>
         </div>
         <div class="step-connector"></div>
       </div>
       <div style="height:16px;"></div>
       <div class="incident-step reveal" style="animation-delay:0.16s;">
-        <div class="step-number" style="background:rgba(99,102,241,0.1); border:1px solid rgba(99,102,241,0.3); color:var(--accent-secondary);">03</div>
+        <div class="step-number"
+          style="background:rgba(99,102,241,0.1); border:1px solid rgba(99,102,241,0.3); color:var(--accent-secondary);">
+          03</div>
         <div>
-          <h4 style="font-size:1rem; font-weight:700; color:var(--text-primary); margin-bottom:6px;">Revoke All Active Sessions</h4>
-          <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.55; margin:0;">Log out of all devices on Google, WhatsApp, banking apps. Change passwords from a clean, trusted device — not the compromised one. Enable new MFA codes.</p>
+          <h4 style="font-size:1rem; font-weight:700; color:var(--text-primary); margin-bottom:6px;">Revoke All Active
+            Sessions</h4>
+          <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.55; margin:0;">Log out of all devices on
+            Google, WhatsApp, banking apps. Change passwords from a clean, trusted device — not the compromised one.
+            Enable new MFA codes.</p>
         </div>
         <div class="step-connector"></div>
       </div>
       <div style="height:16px;"></div>
       <div class="incident-step reveal" style="animation-delay:0.24s;">
-        <div class="step-number" style="background:rgba(0,210,255,0.1); border:1px solid rgba(0,210,255,0.3); color:var(--accent-primary);">04</div>
+        <div class="step-number"
+          style="background:rgba(0,210,255,0.1); border:1px solid rgba(0,210,255,0.3); color:var(--accent-primary);">04
+        </div>
         <div>
-          <h4 style="font-size:1rem; font-weight:700; color:var(--text-primary); margin-bottom:6px;">Preserve Evidence</h4>
-          <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.55; margin:0;">Screenshot all suspicious messages, transaction IDs, caller numbers, and UPI IDs involved. Do not delete anything — this is admissible evidence in cybercell FIR proceedings.</p>
+          <h4 style="font-size:1rem; font-weight:700; color:var(--text-primary); margin-bottom:6px;">Preserve Evidence
+          </h4>
+          <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.55; margin:0;">Screenshot all suspicious
+            messages, transaction IDs, caller numbers, and UPI IDs involved. Do not delete anything — this is admissible
+            evidence in cybercell FIR proceedings.</p>
         </div>
         <div class="step-connector"></div>
       </div>
       <div style="height:16px;"></div>
       <div class="incident-step reveal" style="animation-delay:0.32s;">
-        <div class="step-number" style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); color:var(--accent-safe);">05</div>
+        <div class="step-number"
+          style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); color:var(--accent-safe);">05
+        </div>
         <div>
-          <h4 style="font-size:1rem; font-weight:700; color:var(--text-primary); margin-bottom:6px;">File FIR at Local Cyber Cell</h4>
-          <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.55; margin:0;">Visit your nearest Cyber Crime Cell or local police station to file a formal FIR. Bring all evidence, the online complaint reference number, and identity documents.</p>
+          <h4 style="font-size:1rem; font-weight:700; color:var(--text-primary); margin-bottom:6px;">File FIR at Local
+            Cyber Cell</h4>
+          <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.55; margin:0;">Visit your nearest Cyber
+            Crime Cell or local police station to file a formal FIR. Bring all evidence, the online complaint reference
+            number, and identity documents.</p>
         </div>
       </div>
     </div>
@@ -989,33 +1431,45 @@
     <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px;" class="split-grid">
       <a href="https://cybercrime.gov.in" target="_blank" rel="noopener noreferrer" class="resource-card reveal">
         <div style="font-size:1.5rem; margin-bottom:10px;">🏛</div>
-        <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:4px; color:var(--text-primary);">cybercrime.gov.in</h4>
-        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">National Cyber Crime Reporting Portal — File online complaints and track case status.</p>
+        <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:4px; color:var(--text-primary);">cybercrime.gov.in
+        </h4>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">National Cyber Crime Reporting Portal — File
+          online complaints and track case status.</p>
       </a>
       <a href="{% url 'scorecard' %}" class="resource-card reveal" style="animation-delay:0.08s;">
         <div style="font-size:1.5rem; margin-bottom:10px;">📊</div>
-        <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:4px; color:var(--text-primary);">Cyber Risk Scorecard</h4>
-        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">Run a full risk assessment to quantify your cybersecurity exposure across 12 risk dimensions.</p>
+        <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:4px; color:var(--text-primary);">Cyber Risk
+          Scorecard</h4>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">Run a full risk assessment to quantify your
+          cybersecurity exposure across 12 risk dimensions.</p>
       </a>
       <a href="{% url 'email_breach_check' %}" class="resource-card reveal" style="animation-delay:0.16s;">
         <div style="font-size:1.5rem; margin-bottom:10px;">🔍</div>
-        <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:4px; color:var(--text-primary);">Email Breach Check</h4>
-        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">Verify if your email credentials appear in known data breaches and dark web dumps.</p>
+        <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:4px; color:var(--text-primary);">Email Breach Check
+        </h4>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">Verify if your email credentials appear in known
+          data breaches and dark web dumps.</p>
       </a>
       <a href="{% url 'phone_exposure_check' %}" class="resource-card reveal" style="animation-delay:0.24s;">
         <div style="font-size:1.5rem; margin-bottom:10px;">📱</div>
-        <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:4px; color:var(--text-primary);">Phone Exposure Check</h4>
-        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">Detect if your phone number is indexed in leaked telemarketer or scammer databases.</p>
+        <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:4px; color:var(--text-primary);">Phone Exposure
+          Check</h4>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">Detect if your phone number is indexed in leaked
+          telemarketer or scammer databases.</p>
       </a>
       <a href="{% url 'aadhaar_risk_check' %}" class="resource-card reveal" style="animation-delay:0.32s;">
         <div style="font-size:1.5rem; margin-bottom:10px;">🪪</div>
-        <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:4px; color:var(--text-primary);">Aadhaar Risk Check</h4>
-        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">Verify Aadhaar exposure in unauthorized databases and check UIDAI lock status.</p>
+        <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:4px; color:var(--text-primary);">Aadhaar Risk Check
+        </h4>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">Verify Aadhaar exposure in unauthorized
+          databases and check UIDAI lock status.</p>
       </a>
       <a href="{% url 'reporting_guide' %}" class="resource-card reveal" style="animation-delay:0.40s;">
         <div style="font-size:1.5rem; margin-bottom:10px;">📋</div>
-        <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:4px; color:var(--text-primary);">Reporting Guide</h4>
-        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">Step-by-step guide on how to properly report cyber crimes to Indian authorities.</p>
+        <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:4px; color:var(--text-primary);">Reporting Guide
+        </h4>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">Step-by-step guide on how to properly report
+          cyber crimes to Indian authorities.</p>
       </a>
     </div>
   </div>
@@ -1029,7 +1483,7 @@
   document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
   // Active nav highlight on scroll
-  const sections = ['digital-identity','financial-safety','device-security','network-safety','personal-safety','incident-response'];
+  const sections = ['digital-identity', 'financial-safety', 'device-security', 'network-safety', 'personal-safety', 'incident-response'];
   const tabs = document.querySelectorAll('.nav-tab-dark');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
