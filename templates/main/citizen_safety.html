@@ -1,1304 +1,1047 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Citizen Safety Guide - CyberSafe{% endblock %}
+{% block title %}Citizen Safety Guide — CyberSafe{% endblock %}
 
 {% block extra_css %}
 <style>
-/* ═══════════ PREMIUM BRAND-ALIGNED ALIGNMENT ═══════════ */
-    :root {
-        --bg-void: #CDE4F5; /* Matches exact shade of home page cloud-white */
-        --deep-navy: #002A5C;
-        --corp-blue: #1A5F9E;
-        --link-blue: #1A7FC1;
-        --slate: #333333;
-        --accent-gold: #D14F00;
-        --bg-panel: rgba(255, 255, 255, 0.7);
-        --bg-panel-hover: rgba(255, 255, 255, 0.95);
-        --border-glow: rgba(26, 95, 158, 0.15);
-    }
-    
-    main {
-        --cyber-blue: #1A5F9E;
-        --cyber-blue-border: rgba(26, 95, 158, 0.15);
-    }
-    
-    html, body, main, .safety-sections-wrapper {
-        background: var(--bg-void) !important;
-        overflow-x: hidden;
-    }
-    
-    body {
-        padding-top: 0 !important;
-    }
-    
-    /* ─── Hero Section Scoped Dark Navy ─── */
-    .safety-hero {
-        min-height: 80vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: radial-gradient(circle at 20% 30%, rgba(0, 42, 92, 0.4) 0%, var(--deep-navy) 70%) !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        position: relative;
-        overflow: hidden;
-        padding: 100px 0;
-    }
-
-    .safety-hero::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background-image: url('{% static "images/cyber_shield_hero.png" %}');
-        background-size: cover;
-        background-position: center;
-        opacity: 0.12;
-        z-index: 0;
-        pointer-events: none;
-        transition: opacity 0.5s ease;
-    }
-
-    .safety-hero:hover::before {
-        opacity: 0.22;
-    }
-
-    .hero-glass-core {
-        background: rgba(11, 13, 23, 0.55);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 60px 40px;
-        border-radius: 32px;
-        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
-        position: relative;
-        z-index: 2;
-        max-width: 900px;
-        margin: 0 auto;
-    }
-
-    .safety-hero h1, .safety-hero .text-gradient {
-        background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%) !important;
-        -webkit-background-clip: text !important;
-        background-clip: text !important;
-        -webkit-text-fill-color: transparent !important;
-        color: #ffffff !important;
-        text-shadow: none !important;
-    }
-
-    .safety-hero .lead, .safety-hero .text-secondary {
-        color: rgba(226, 232, 240, 0.9) !important;
-    }
-    
-    /* ─── Readable Light Mode Typography ─── */
-    .safety-sections-wrapper h2, 
-    .safety-sections-wrapper h3, 
-    .safety-sections-wrapper h4, 
-    .safety-sections-wrapper h5, 
-    .safety-sections-wrapper h6, 
-    .safety-sections-wrapper strong,
-    .safety-sections-wrapper .text-navy,
-    #incident-response h2,
-    #incident-response h3,
-    #incident-response h4,
-    #incident-response h5,
-    #incident-response h6,
-    #incident-response strong,
-    #incident-response .text-navy,
-    .steps-container h2,
-    .steps-container h3,
-    .steps-container h4,
-    .steps-container h5,
-    .steps-container h6,
-    .steps-container strong,
-    .steps-container .text-navy {
-        color: var(--deep-navy) !important;
-    }
-    
-    .safety-sections-wrapper p,
-    .safety-sections-wrapper span,
-    .safety-sections-wrapper .text-secondary,
-    #incident-response p,
-    #incident-response span,
-    #incident-response .text-secondary,
-    .steps-container p,
-    .steps-container span,
-    .steps-container .text-secondary {
-        color: var(--slate) !important;
-    }
-    
-    .safety-content-indent {
-        padding-left: 20px;
-    }
-    
-    .safety-content-indent p.text-secondary {
-        font-size: 1.1rem;
-        line-height: 1.7;
-    }
-
-    .official-badge {
-        background: rgba(255, 255, 255, 0.15);
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        color: #ffffff;
-        padding: 8px 20px;
-        border-radius: 50px;
-        font-size: 0.8rem;
-        font-weight: 700;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    /* ─── Frosted White Pillar Cards ─── */
-    .pillar-card {
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(26, 95, 158, 0.15);
-        border-radius: 24px;
-        padding: 40px 30px;
-        height: 100%;
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0, 42, 92, 0.04);
-    }
-
-    .pillar-card:hover {
-        transform: translateY(-8px);
-        background: rgba(255, 255, 255, 0.95);
-        border-color: var(--corp-blue);
-        box-shadow: 0 20px 40px rgba(0, 42, 92, 0.12);
-    }
-
-    .icon-circle {
-        width: 72px;
-        height: 72px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 30px;
-        position: relative;
-        font-size: 1.5rem;
-    }
-
-    .safety-section .icon-circle {
-        margin: 0 !important;
-        width: 64px;
-        height: 64px;
-        flex-shrink: 0;
-    }
-
-    .safety-section h2 {
-        line-height: 1.2 !important;
-        margin: 0 !important;
-    }
-
-    .icon-circle::after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        filter: blur(15px);
-        opacity: 0.18;
-        z-index: -1;
-    }
-
-    /* Scoped Pillar Themes for High-Contrast */
-    .pillar-digital .icon-circle {
-        background: rgba(16, 185, 129, 0.1);
-        border: 1px solid rgba(16, 185, 129, 0.25);
-        color: #10b981;
-    }
-    .pillar-digital .icon-circle::after { background: #10b981; }
-    .pillar-digital .check-icon { color: #10b981; }
-
-    .pillar-financial .icon-circle {
-        background: rgba(99, 102, 241, 0.1);
-        border: 1px solid rgba(99, 102, 241, 0.25);
-        color: #6366f1;
-    }
-    .pillar-financial .icon-circle::after { background: #6366f1; }
-    .pillar-financial .check-icon { color: #6366f1; }
-
-    .pillar-personal .icon-circle {
-        background: rgba(217, 119, 6, 0.1);
-        border: 1px solid rgba(217, 119, 6, 0.25);
-        color: #d97706;
-    }
-    .pillar-personal .icon-circle::after { background: #d97706; }
-    .pillar-personal .check-icon { color: #d97706; }
-
-    .pillar-network .icon-circle {
-        background: rgba(29, 78, 216, 0.1);
-        border: 1px solid rgba(29, 78, 216, 0.25);
-        color: #1d4ed8;
-    }
-    .pillar-network .icon-circle::after { background: #1d4ed8; }
-    .pillar-network .check-icon { color: #1d4ed8; }
-
-    .pillar-device .icon-circle {
-        background: rgba(3, 105, 161, 0.1);
-        border: 1px solid rgba(3, 105, 161, 0.25);
-        color: #0369a1;
-    }
-    .pillar-device .icon-circle::after { background: #0369a1; }
-    .pillar-device .check-icon { color: #0369a1; }
-
-    .pillar-identity .icon-circle {
-        background: rgba(190, 18, 60, 0.1);
-        border: 1px solid rgba(190, 18, 60, 0.25);
-        color: #be123c;
-    }
-    .pillar-identity .icon-circle::after { background: #be123c; }
-    .pillar-identity .check-icon { color: #be123c; }
-
-    .pillar-card h4 {
-        color: var(--deep-navy) !important;
-        font-weight: 700;
-        margin-bottom: 15px;
-        font-family: 'Rajdhani', sans-serif;
-        font-size: 1.5rem;
-        letter-spacing: 0.5px;
-    }
-
-    .pillar-card p {
-        color: var(--slate) !important;
-        font-size: 0.95rem;
-        line-height: 1.6;
-        margin-bottom: 25px;
-    }
-
-    .checklist-item {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 12px;
-        color: var(--slate) !important;
-        font-size: 0.9rem;
-        text-align: left;
-    }
-
-    /* ─── Accordion steps ─── */
-    .steps-container {
-        max-width: 1000px;
-        margin: 60px auto;
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(26, 95, 158, 0.15);
-        border-radius: 30px;
-        padding: 50px;
-        box-shadow: 0 20px 50px rgba(0, 42, 92, 0.04);
-    }
-
-    .steps-header .step-badge {
-        width: 64px;
-        height: 64px;
-        background: rgba(26, 95, 158, 0.1);
-        border: 1px solid rgba(26, 95, 158, 0.25);
-        color: var(--corp-blue);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 20px;
-    }
-
-    .accordion-item {
-        background: rgba(255, 255, 255, 0.6) !important;
-        border: 1px solid rgba(26, 95, 158, 0.1) !important;
-        border-radius: 16px !important;
-        margin-bottom: 16px;
-        overflow: hidden;
-        transition: all 0.3s ease;
-    }
-
-    .accordion-item:hover {
-        border-color: rgba(26, 95, 158, 0.25) !important;
-        box-shadow: 0 10px 25px rgba(0, 42, 92, 0.06);
-    }
-
-    .accordion-button {
-        background: transparent !important;
-        color: var(--deep-navy) !important;
-        padding: 25px 30px;
-        box-shadow: none !important;
-        font-weight: 700;
-        font-family: 'Rajdhani', sans-serif;
-        font-size: 1.25rem;
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        letter-spacing: 0.5px;
-    }
-
-    .accordion-button:not(.collapsed) {
-        border-bottom: 1px solid rgba(26, 95, 158, 0.1);
-        background: rgba(26, 95, 158, 0.04) !important;
-    }
-
-    .step-number {
-        width: 36px;
-        height: 36px;
-        border: 1px solid rgba(26, 95, 158, 0.3);
-        background: rgba(26, 95, 158, 0.1);
-        color: var(--corp-blue);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.9rem;
-        flex-shrink: 0;
-        font-weight: bold;
-    }
-
-    .accordion-body {
-        background: rgba(255, 255, 255, 0.4);
-        padding: 35px 30px;
-    }
-
-    .checklist-title {
-        color: var(--deep-navy) !important;
-        font-weight: 700;
-        margin-bottom: 25px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-size: 1.1rem;
-        font-family: 'Rajdhani', sans-serif;
-        letter-spacing: 0.5px;
-    }
-
-    .checklist-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
-
-    .check-list-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 15px;
-        color: var(--slate) !important;
-        font-size: 0.95rem;
-        line-height: 1.6;
-    }
-
-    .check-list-item i {
-        color: #10b981;
-        margin-top: 4px;
-        font-size: 1rem;
-    }
-
-    @media (max-width: 768px) {
-        .checklist-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .steps-container {
-            padding: 30px 20px;
-        }
-    }
-
-    /* ─── Global Visual Animations ─── */
-    .visual-rings {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 300px;
-        height: 300px;
-        pointer-events: none;
-        z-index: 1;
-    }
-
-    .v-ring {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        border: 1px dashed rgba(104, 204, 217, 0.25);
-    }
-
-    .ring-1 {
-        animation: rotateClockwise 25s linear infinite;
-    }
-
-    .ring-2 {
-        width: 80%;
-        height: 80%;
-        top: 10%;
-        left: 10%;
-        border: 1px solid rgba(104, 204, 217, 0.08);
-        border-style: dashed dotted;
-        animation: rotateCounter 18s linear infinite;
-    }
-
-    @keyframes rotateClockwise {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-    }
-
-    @keyframes rotateCounter {
-        from { transform: rotate(360deg); }
-        to { transform: rotate(0deg); }
-    }
-
-    /* ── Safety Visual Boxes ── */
-    .safety-visual-box {
-        height: 480px;
-        background: radial-gradient(circle at center, #071b3a 0%, #041633 100%);
-        border: 1px solid rgba(26, 95, 158, 0.2);
-        border-radius: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        box-shadow: 0 15px 35px rgba(0, 42, 92, 0.15), inset 0 0 40px rgba(0, 42, 92, 0.25);
-        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        overflow: hidden;
-    }
-
-    .safety-visual-box:hover {
-        border-color: var(--corp-blue);
-        transform: translateY(-5px);
-        box-shadow: 0 25px 50px rgba(0, 42, 92, 0.25);
-    }
-
-    .visual-image-layer {
-        position: absolute;
-        inset: 0;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        opacity: 0.25;
-        mix-blend-mode: plus-lighter;
-        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        z-index: 0;
-        pointer-events: none;
-    }
-
-    .safety-visual-box:hover .visual-image-layer {
-        transform: scale(1.08);
-        opacity: 0.4;
-    }
-
-    /* --- HUD Elements --- */
-    .hud-corners {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        z-index: 10;
-    }
-
-    .hud-corners::before,
-    .hud-corners::after {
-        content: '';
-        position: absolute;
-        width: 30px;
-        height: 30px;
-        pointer-events: none;
-    }
-
-    .hud-corners::before {
-        top: 25px;
-        left: 25px;
-        border-top: 2px solid rgba(104, 204, 217, 0.6);
-        border-left: 2px solid rgba(104, 204, 217, 0.6);
-    }
-
-    .hud-corners::after {
-        bottom: 25px;
-        right: 25px;
-        border-bottom: 2px solid rgba(104, 204, 217, 0.6);
-        border-right: 2px solid rgba(104, 204, 217, 0.6);
-    }
-
-    .hud-scanline {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background: linear-gradient(to bottom, transparent, rgba(104, 204, 217, 0.2), transparent);
-        animation: hudScan 4s linear infinite;
-        pointer-events: none;
-        z-index: 2;
-    }
-
-    @keyframes hudScan {
-        0% { top: 5%; opacity: 0; }
-        50% { opacity: 1; }
-        100% { top: 95%; opacity: 0; }
-    }
-
-    /* --- HUD Grid --- */
-    .hud-data-grid {
-        position: absolute;
-        inset: 40px;
-        background-image: radial-gradient(rgba(104, 204, 217, 0.3) 1px, transparent 1px);
-        background-size: 20px 20px;
-        opacity: 0.15;
-        mask-image: radial-gradient(circle, black 60%, transparent 95%);
-        -webkit-mask-image: radial-gradient(circle, black 60%, transparent 95%);
-    }
-
-    .hud-scanning-line {
-        position: absolute;
-        inset: 30px;
-        border-left: 1px solid rgba(104, 204, 217, 0.4);
-        animation: moveScan 4s ease-in-out infinite;
-        opacity: 0.35;
-        pointer-events: none;
-        z-index: 2;
-    }
-
-    @keyframes moveScan {
-        0%, 100% { left: 10%; }
-        50% { left: 90%; }
-    }
-
-    .hud-target-lock {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        pointer-events: none;
-    }
-
-    .hud-target-lock::before,
-    .hud-target-lock::after {
-        content: '';
-        position: absolute;
-        width: 120px;
-        height: 120px;
-        border: 1px solid rgba(245, 158, 11, 0.35);
-        border-radius: 50%;
-        animation: targetPulse 3s ease-out infinite;
-    }
-
-    .hud-target-lock::after {
-        animation-delay: 1.5s;
-    }
-
-    @keyframes targetPulse {
-        0% { transform: scale(0.8); opacity: 0.8; }
-        100% { transform: scale(1.4); opacity: 0; }
-    }
-
-    .hud-tech-ring {
-        position: absolute;
-        width: 250px;
-        height: 250px;
-        border: 1px dashed rgba(34, 211, 238, 0.3);
-        border-radius: 50%;
-        animation: slowRotate 25s linear infinite;
-        pointer-events: none;
-    }
-
-    @keyframes slowRotate {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-    }
-
-    .hud-dna-helix {
-        position: absolute;
-        inset: 0;
-        background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(251, 113, 133, 0.04) 10px, rgba(251, 113, 133, 0.04) 11px);
-        mask-image: radial-gradient(circle, black 50%, transparent 70%);
-        -webkit-mask-image: radial-gradient(circle, black 50%, transparent 70%);
-    }
-
-    spline-viewer {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: auto;
-        background: transparent !important;
-        mix-blend-mode: screen;
-        -webkit-mask-image: radial-gradient(circle, black 65%, transparent 95%);
-        mask-image: radial-gradient(circle, black 65%, transparent 95%);
-        z-index: 2;
-    }
-
-    .green-theme { border-color: rgba(16, 185, 129, 0.35); }
-    .purple-theme { border-color: rgba(129, 140, 248, 0.35); }
-    .blue-theme { border-color: rgba(104, 204, 217, 0.35); }
-    .gold-theme { border-color: rgba(245, 158, 11, 0.35); }
-    .cyan-theme { border-color: rgba(34, 211, 238, 0.35); }
-    .red-theme { border-color: rgba(244, 63, 94, 0.35); }
-
-    .orbit-container {
-        position: relative;
-        z-index: 5;
-        font-size: 8rem;
-        color: #10b981;
-        filter: drop-shadow(0 0 35px rgba(16, 185, 129, 0.5));
-        animation: pulseVisual 4s ease-in-out infinite;
-    }
-
-    .vault-container {
-        position: relative;
-        z-index: 5;
-        font-size: 8rem;
-        color: #818cf8;
-        filter: drop-shadow(0 0 35px rgba(129, 140, 248, 0.5));
-        animation: pulseVisual 4s ease-in-out infinite;
-    }
-
-    .network-pulse {
-        position: relative;
-        z-index: 5;
-        font-size: 8rem;
-        color: #1A7FC1;
-        filter: drop-shadow(0 0 35px rgba(26, 127, 193, 0.5));
-    }
-
-    .shimmer-scanner {
-        position: relative;
-        z-index: 5;
-        font-size: 8rem;
-        color: #f59e0b;
-        filter: drop-shadow(0 0 35px rgba(245, 158, 11, 0.5));
-        animation: shimmerEffect 3s linear infinite;
-    }
-
-    .device-glow {
-        position: relative;
-        z-index: 5;
-        font-size: 8rem;
-        color: #22d3ee;
-        filter: drop-shadow(0 0 35px rgba(34, 211, 238, 0.5));
-        animation: pulseVisual 4s ease-in-out infinite;
-    }
-
-    .dna-double-helix {
-        position: relative;
-        z-index: 5;
-        font-size: 8rem;
-        color: #fb7185;
-        filter: drop-shadow(0 0 35px rgba(251, 113, 133, 0.5));
-    }
-
-    .network-pulse::after {
-        content: '';
-        position: absolute;
-        inset: -20px;
-        border: 2px solid rgba(26, 127, 193, 0.3);
-        border-radius: 50%;
-        animation: networkRipple 2s linear infinite;
-    }
-
-    @keyframes pulseVisual {
-        0%, 100% { transform: scale(1); opacity: 0.85; }
-        50% { transform: scale(1.04); opacity: 1; }
-    }
-
-    @keyframes networkRipple {
-        0% { transform: scale(0.5); opacity: 0; }
-        50% { opacity: 0.5; }
-        100% { transform: scale(1.4); opacity: 0; }
-    }
-
-    @keyframes shimmerEffect {
-        0%, 100% { opacity: 0.8; filter: brightness(1); }
-        50% { opacity: 1; filter: brightness(1.3); }
-    }
-
-    .protocol-item i {
-        font-size: 1.25rem;
-    }
-
-    /* ─── Cyber Background Particles ─── */
-    .cyber-bg-particles {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 0;
-        overflow: hidden;
-    }
-
-    .particle {
-        position: absolute;
-        background: var(--corp-blue);
-        border-radius: 50%;
-        animation: floatParticle linear infinite;
-    }
-
-    .particle.bubble {
-        background: transparent;
-        border: 1px solid rgba(26, 95, 158, 0.2);
-    }
-
-    @keyframes floatParticle {
-        0% { transform: translateY(100vh) scale(0); opacity: 0; }
-        10% { opacity: 0.8; }
-        90% { opacity: 0.8; }
-        100% { transform: translateY(-100px) scale(1); opacity: 0; }
-    }
-</style>(100vh) scale(0); opacity: 0; }
-        10% { opacity: 1; }
-        90% { opacity: 1; }
-        100% { transform: translateY(-100px) scale(1); opacity: 0; }
-    }
+  /* ══════════════════════════════════════════
+     CITIZEN SAFETY PAGE — DARK PREMIUM
+  ══════════════════════════════════════════ */
+
+  .py-24 { padding-top: 96px; padding-bottom: 96px; }
+  .py-20 { padding-top: 80px; padding-bottom: 80px; }
+  .py-16 { padding-top: 64px; padding-bottom: 64px; }
+
+  /* ── Hero ── */
+  .cs-hero {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: calc(var(--space-16) + 40px) 0 var(--space-16);
+  }
+
+  .cs-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,210,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,210,255,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+  }
+
+  .cs-hero-glow {
+    position: absolute;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,210,255,0.07) 0%, transparent 70%);
+    filter: blur(80px);
+    top: -200px; right: -100px;
+    pointer-events: none;
+  }
+
+  .cs-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent-primary);
+    font-weight: 700;
+    padding: 6px 14px;
+    background: rgba(0,210,255,0.08);
+    border: 1px solid rgba(0,210,255,0.2);
+    border-radius: 999px;
+    margin-bottom: 24px;
+  }
+
+  .cs-hero-badge::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent-primary);
+    animation: pulse-dot 1.5s infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%,100%{opacity:1;transform:scale(1)}
+    50%{opacity:.4;transform:scale(1.4)}
+  }
+
+  .cs-hero h1 {
+    font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+
+  .cs-hero h1 em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Stat Chips */
+  .stat-chips {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .stat-chip {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .stat-chip-value {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--accent-primary);
+  }
+
+  .stat-chip-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    font-weight: 700;
+  }
+
+  /* ── Quick Links Tabs ── */
+  .nav-tabs-dark {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: 0;
+  }
+
+  .nav-tab-dark {
+    padding: 8px 18px;
+    border-radius: var(--radius-full);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--text-muted);
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .nav-tab-dark:hover,
+  .nav-tab-dark.active {
+    background: var(--accent-primary);
+    color: var(--bg-void);
+    border-color: var(--accent-primary);
+  }
+
+  /* ── Section Layout ── */
+  .cs-section-header {
+    margin-bottom: 48px;
+  }
+
+  .cs-section-header .badge-line {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.7rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+
+  .cs-section-header h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .cs-section-header p {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+    max-width: 620px;
+  }
+
+  /* ── Protocol Box ── */
+  .protocol-box-dark {
+    background: rgba(10,12,20,0.6);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-top: 20px;
+  }
+
+  .protocol-box-dark .protocol-header {
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.02);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+  }
+
+  .protocol-item-dark {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    transition: background 0.2s;
+  }
+
+  .protocol-item-dark:last-child { border-bottom: none; }
+  .protocol-item-dark:hover { background: rgba(0,210,255,0.02); }
+
+  .protocol-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .protocol-item-dark strong {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 3px;
+  }
+
+  .protocol-item-dark p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ── Visual Panel ── */
+  .cs-visual-panel {
+    position: relative;
+    background: rgba(10,12,20,0.8);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    height: 100%;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    padding: 32px;
+  }
+
+  .cs-visual-panel .panel-icon {
+    font-size: 4rem;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .cs-visual-panel .panel-scan-line {
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0,210,255,0.3), transparent);
+    animation: scan-down 3s ease-in-out infinite;
+    left: 0;
+  }
+
+  @keyframes scan-down {
+    0%   { top: 0; opacity: 0; }
+    20%  { opacity: 1; }
+    80%  { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+  }
+
+  .cs-visual-panel .panel-corner {
+    position: absolute;
+    width: 16px; height: 16px;
+    border-color: rgba(0,210,255,0.3);
+    border-style: solid;
+  }
+  .corner-tl { top: 8px; left: 8px; border-width: 1.5px 0 0 1.5px; }
+  .corner-tr { top: 8px; right: 8px; border-width: 1.5px 1.5px 0 0; }
+  .corner-bl { bottom: 8px; left: 8px; border-width: 0 0 1.5px 1.5px; }
+  .corner-br { bottom: 8px; right: 8px; border-width: 0 1.5px 1.5px 0; }
+
+  .panel-telemetry {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.8;
+  }
+
+  .panel-telemetry .telem-ok { color: var(--accent-safe); }
+  .panel-telemetry .telem-warn { color: var(--accent-warning); }
+  .panel-telemetry .telem-val { color: var(--accent-primary); }
+
+  /* ── Checklist ── */
+  .cs-checklist { list-style: none; padding: 0; margin: 16px 0; }
+  .cs-checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+  .cs-checklist li:last-child { border-bottom: none; }
+  .cs-checklist .check-dot {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-size: 0.65rem;
+  }
+
+  /* ── Incident Response Steps ── */
+  .incident-step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 20px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: var(--radius-lg);
+    transition: border-color 0.3s;
+    position: relative;
+  }
+
+  .incident-step:hover { border-color: rgba(0,210,255,0.2); }
+
+  .step-number {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.9rem; font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .step-connector {
+    position: absolute;
+    left: 36px; bottom: -16px;
+    width: 1px; height: 16px;
+    background: rgba(255,255,255,0.06);
+  }
+
+  /* ── Alert Banner ── */
+  .emergency-banner {
+    background: linear-gradient(135deg, rgba(239,68,68,0.08), rgba(239,68,68,0.04));
+    border: 1px solid rgba(239,68,68,0.2);
+    border-radius: var(--radius-xl);
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .emergency-number {
+    font-family: var(--font-mono);
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ef4444;
+    letter-spacing: -0.03em;
+  }
+
+  /* ── Resource Grid ── */
+  .resource-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: block;
+  }
+
+  .resource-card:hover {
+    border-color: rgba(0,210,255,0.2);
+    background: rgba(0,210,255,0.02);
+    transform: translateY(-2px);
+  }
+
+  /* Reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 992px) {
+    .split-grid { grid-template-columns: 1fr !important; }
+    .cs-visual-panel { min-height: 220px; }
+  }
 </style>
 {% endblock %}
 
 {% block content %}
-<!-- ═══════════ LIVE WALLPAPER SYSTEM ═══════════ -->
-<div class="cyber-bg-particles" id="particle-container"></div>
-<script>
-    function createParticles() {
-        const container = document.getElementById('particle-container');
-        if (!container) return;
-        const count = 60;
-        for (let i = 0; i < count; i++) {
-            const particle = document.createElement('div');
-            const isBubble = Math.random() > 0.5;
-            particle.className = isBubble ? 'particle bubble' : 'particle';
-            const size = isBubble ? (Math.random() * 8 + 4) : (Math.random() * 3 + 1);
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-            particle.style.left = `${Math.random() * 100}vw`;
-            const duration = Math.random() * 15 + 10;
-            particle.style.animationDuration = `${duration}s`;
-            particle.style.animationDelay = `${Math.random() * 20}s`;
-            particle.style.opacity = Math.random() * 0.4 + 0.1;
-            container.appendChild(particle);
-        }
-    }
-    document.addEventListener('DOMContentLoaded', createParticles);
-</script>
 
-<section class="safety-hero">
-    <div class="container text-center reveal">
-        <div class="hero-glass-core">
-            <div class="official-badge mb-4">
-                <i class="fas fa-shield-halved"></i>
-                Official Safety Guide
-            </div>
-            <h1 class="display-3 fw-bold mb-3 text-gradient">
-                Citizen Safety
-            </h1>
-            <p class="text-secondary lead mx-auto mb-0" style="max-width: 700px;">
-                Comprehensive guidelines, response directives, and hardening protocols to protect your identity, devices, and financial assets from modern cyber threats.
-            </p>
+<!-- ══════════ HERO ══════════ -->
+<div class="cs-hero">
+  <div class="cs-hero-bg" style="mask-image: radial-gradient(ellipse at top right, rgba(0,0,0,0.7), transparent 75%);"></div>
+  <div class="cs-hero-glow"></div>
+
+  <div class="container" style="position:relative; z-index:1;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;" class="split-grid">
+      <!-- Left -->
+      <div>
+        <div class="cs-hero-badge">Official Safety Guide</div>
+        <h1 style="font-size: clamp(2.8rem, 5.5vw, 4.2rem); font-weight:800; line-height:1.05; letter-spacing:-0.02em; margin-bottom:20px; color:var(--text-primary);">
+          Citizen <em style="font-style:normal; background:linear-gradient(135deg,var(--accent-primary),var(--accent-secondary)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Safety Protocols</em>
+        </h1>
+        <p style="font-size:1.05rem; color:var(--text-secondary); line-height:1.75; max-width:500px;">
+          Comprehensive guidelines, response directives, and hardening protocols to protect your identity, devices, and financial assets from modern cyber threats.
+        </p>
+
+        <div class="flex gap-4 flex-wrap mt-8">
+          <a href="{% url 'scorecard' %}" class="btn btn-primary" style="padding:14px 24px; font-weight:700;">
+            Check My Risk Score
+          </a>
+          <a href="{% url 'report_crime' %}" class="btn btn-outline" style="padding:14px 20px;">
+            Report an Incident
+          </a>
         </div>
+
+        <div class="stat-chips">
+          <div class="stat-chip">
+            <span class="stat-chip-value">36L+</span>
+            <span class="stat-chip-label">Cases in 2024</span>
+          </div>
+          <div class="stat-chip">
+            <span class="stat-chip-value" style="color:var(--accent-secondary);">₹22K Cr</span>
+            <span class="stat-chip-label">Financial Losses</span>
+          </div>
+          <div class="stat-chip">
+            <span class="stat-chip-value" style="color:var(--accent-safe);">1930</span>
+            <span class="stat-chip-label">Emergency Helpline</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Status Monitor Panel -->
+      <div class="cs-visual-panel" style="min-height:380px;">
+        <div class="panel-corner corner-tl"></div>
+        <div class="panel-corner corner-tr"></div>
+        <div class="panel-corner corner-bl"></div>
+        <div class="panel-corner corner-br"></div>
+        <div class="panel-scan-line"></div>
+
+        <div style="font-size:0.65rem; font-family:var(--font-mono); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.12em; position:absolute; top:16px; left:16px;">⬡ SHIELD_STATUS_MONITOR</div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; width:100%;">
+          <div style="background:rgba(0,0,0,0.3); border:1px solid rgba(16,185,129,0.15); border-radius:8px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">Digital Identity Guard</span>
+            <span style="color:var(--accent-safe); font-family:var(--font-mono); font-size:0.75rem; font-weight:700;">ACTIVE ●</span>
+          </div>
+          <div style="background:rgba(0,0,0,0.3); border:1px solid rgba(99,102,241,0.15); border-radius:8px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">Financial Shield Layer</span>
+            <span style="color:var(--accent-secondary); font-family:var(--font-mono); font-size:0.75rem; font-weight:700;">ACTIVE ●</span>
+          </div>
+          <div style="background:rgba(0,0,0,0.3); border:1px solid rgba(245,158,11,0.15); border-radius:8px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">Device Integrity Monitor</span>
+            <span style="color:var(--accent-warning); font-family:var(--font-mono); font-size:0.75rem; font-weight:700;">SCANNING ◌</span>
+          </div>
+          <div style="background:rgba(0,0,0,0.3); border:1px solid rgba(0,210,255,0.15); border-radius:8px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">Network Threat Detection</span>
+            <span style="color:var(--accent-primary); font-family:var(--font-mono); font-size:0.75rem; font-weight:700;">ACTIVE ●</span>
+          </div>
+          <div style="background:rgba(0,0,0,0.3); border:1px solid rgba(239,68,68,0.15); border-radius:8px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">Dark Web Monitor</span>
+            <span style="color:var(--accent-safe); font-family:var(--font-mono); font-size:0.75rem; font-weight:700;">ACTIVE ●</span>
+          </div>
+
+          <div style="margin-top:8px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.04); display:flex; gap:16px; font-family:var(--font-mono); font-size:0.68rem;">
+            <span style="color:var(--accent-safe);">5/5 Systems Online</span>
+            <span style="color:var(--text-muted);">Last Sync: Just Now</span>
+          </div>
+        </div>
+      </div>
     </div>
-</section>
-
-<!-- Global Safety Sections Container -->
-<div class="safety-sections-wrapper">
-    <!-- Section 1: Digital Safety -->
-    <section class="safety-section reveal" id="digital-safety">
-        <div class="container py-5">
-            <div class="row align-items-center g-5">
-                <div class="col-lg-6">
-                    <div class="d-flex align-items-center gap-4 mb-4">
-                        <div class="icon-circle"
-                            style="background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);">
-                            <i class="fas fa-desktop fa-xl"></i>
-                        </div>
-                        <h2 class="text-navy fw-bold" style="font-size: 2.5rem; color: var(--deep-navy) !important;">Digital Identity <span
-                                class="text-cyber">Protection</span></h2>
-                    </div>
-                    <div class="safety-content-indent text-navy">
-                        <p class="text-secondary lead mb-5">Your online footprint is your resume to the world.
-                            Protecting it
-                            requires more than just a password; it requires a defensive mindset.</p>
-
-                        <div class="protocol-box mb-5">
-                            <h6 class="text-navy fw-bold mb-4 text-uppercase" style="letter-spacing: 2px;">Standard
-                                Protective Protocol:</h6>
-                            <div class="protocol-item d-flex gap-3 mb-4">
-                                <i class="fas fa-shield-check text-cyber mt-1"></i>
-                                <div>
-                                    <strong class="text-navy d-block mb-1">MFA Integration</strong>
-                                    <p class="text-secondary small mb-0">Enable Multi-Factor Authentication
-                                        (App-based) on all primary accounts.</p>
-                                </div>
-                            </div>
-                            <div class="protocol-item d-flex gap-3 mb-4">
-                                <i class="fas fa-shield-check text-cyber mt-1"></i>
-                                <div>
-                                    <strong class="text-navy d-block mb-1">Software Hardening</strong>
-                                    <p class="text-secondary small mb-0">Set your OS and critical applications to
-                                        "Auto-Update" to patch vulnerabilities.</p>
-                                </div>
-                            </div>
-                            <div class="protocol-item d-flex gap-3 mb-4">
-                                <i class="fas fa-shield-check text-cyber mt-1"></i>
-                                <div>
-                                    <strong class="text-navy d-block mb-1">Credential Management</strong>
-                                    <p class="text-secondary small mb-0">Utilize a premium password manager to
-                                        generate and store 16+ character passphrases.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="safety-visual-box green-theme shadow-lg overflow-hidden">
-                        <!-- Immersive Image Layer Slot -->
-                        <div class="visual-image-layer" style="background-image: url(/static/images/cyber_shield_hero.png); opacity: 0.55;"></div>
-                        
-                        <div class="hud-corners"></div>
-                        <div class="hud-scanline"></div>
-
-                        <div class="visual-rings">
-                            <div class="v-ring ring-1"></div>
-                            <div class="v-ring ring-2"></div>
-                        </div>
-
-                        <div class="orbit-container">
-                            <i class="fas fa-id-card-clip"
-                                style="font-family: 'Font Awesome 6 Free', 'Font Awesome 5 Free', sans-serif; font-weight: 900; color: #10b981;"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 2: Financial Safety -->
-    <section class="safety-section reveal" id="financial-safety">
-        <div class="container py-5">
-            <div class="row align-items-center g-5 flex-lg-row-reverse">
-                <div class="col-lg-6">
-                    <div class="d-flex align-items-center gap-4 mb-4">
-                        <div class="icon-circle"
-                            style="background: rgba(99, 102, 241, 0.1); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.25); box-shadow: 0 0 20px rgba(99, 102, 241, 0.25);">
-                            <i class="fas fa-credit-card fa-xl"></i>
-                        </div>
-                        <h2 class="text-navy fw-bold" style="font-size: 2.5rem; color: var(--deep-navy) !important;">Financial Assets <span
-                                style="color: #6366f1;">Security</span></h2>
-                    </div>
-                    <div class="safety-content-indent text-navy">
-                        <p class="text-secondary lead mb-5">Digital banking and UPI have made transactions instant,
-                            but they also require instant alertness to prevent unauthorized transfers.</p>
-
-                        <div class="protocol-box mb-5">
-                            <h6 class="text-navy fw-bold mb-4 text-uppercase" style="letter-spacing: 2px;">
-                                Financial
-                                Defense Protocol:</h6>
-                            <div class="protocol-item d-flex gap-3 mb-4">
-                                <i class="fas fa-shield-check mt-1" style="color: #818cf8;"></i>
-                                <div>
-                                    <strong class="text-navy d-block mb-1">OTP Integrity</strong>
-                                    <p class="text-secondary small mb-0">Never share One-Time Passwords with anyone,
-                                        including individuals claiming to be bank officials.</p>
-                                </div>
-                            </div>
-                            <div class="protocol-item d-flex gap-3 mb-4">
-                                <i class="fas fa-shield-check mt-1" style="color: #818cf8;"></i>
-                                <div>
-                                    <strong class="text-navy d-block mb-1">UPI Vigilance</strong>
-                                    <p class="text-secondary small mb-0">Remember: You only enter your UPI PIN to
-                                        SEND
-                                        money, never to receive it.</p>
-                                </div>
-                            </div>
-                            <div class="protocol-item d-flex gap-3 mb-4">
-                                <i class="fas fa-shield-check mt-1" style="color: #818cf8;"></i>
-                                <div>
-                                    <strong class="text-navy d-block mb-1">Transaction Auditing</strong>
-                                    <p class="text-secondary small mb-0">Set up instant SMS/Email alerts and review
-                                        your bank statements weekly.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="safety-visual-box purple-theme overflow-hidden">
-                        <!-- Immersive Image Layer Slot -->
-                        <div class="visual-image-layer" style="background-image: url(/static/images/cyber_vault_finance.png);"></div>
-                        
-                        <div class="hud-corners"></div>
-                        <div class="hud-data-grid"></div>
-                        <div class="vault-container">
-                            <i class="fas fa-vault"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 3: Network Safety -->
-    <section class="safety-section reveal" id="network-safety">
-        <div class="container py-5">
-            <div class="row align-items-center g-5">
-                <div class="col-lg-6">
-                    <div class="d-flex align-items-center gap-4 mb-4">
-                        <div class="icon-circle"
-                            style="background: rgba(104, 204, 217, 0.1); color: var(--cyber-blue); border: 1px solid rgba(104, 204, 217, 0.25); box-shadow: 0 0 20px rgba(104, 204, 217, 0.25);">
-                            <i class="fas fa-wifi fa-xl"></i>
-                        </div>
-                        <h2 class="text-navy fw-bold" style="font-size: 2.5rem; color: var(--deep-navy) !important;">Network Perimeter <span
-                                style="color: var(--cyber-blue);">Defense</span></h2>
-                    </div>
-                    <div class="safety-content-indent text-navy">
-                        <p class="text-secondary lead mb-5">Your home Wi-Fi is the primary entry point for your
-                            smart
-                            devices. Secure the perimeter to prevent eavesdropping and data theft.</p>
-
-                        <div class="protocol-box mb-5">
-                            <h6 class="text-navy fw-bold mb-4 text-uppercase" style="letter-spacing: 2px;">Network
-                                Hardening Protocol:</h6>
-                            <div class="protocol-item d-flex gap-3 mb-4">
-                                <i class="fas fa-shield-check mt-1" style="color: var(--cyber-blue);"></i>
-                                <div>
-                                    <strong class="text-navy d-block mb-1">Encryption Standard</strong>
-                                    <p class="text-secondary small mb-0">Use WPA3 or WPA2-AES encryption. Change
-                                        default
-                                        router admin credentials immediately.</p>
-                                </div>
-                            </div>
-                            <div class="protocol-item d-flex gap-3 mb-4">
-                                <i class="fas fa-shield-check mt-1" style="color: var(--cyber-blue);"></i>
-                                <div>
-                                    <strong class="text-navy d-block mb-1">SSID Strategy</strong>
-                                    <p class="text-secondary small mb-0">Disable SSID broadcasting and use a generic
-                                        name
-                                        that doesn't reveal your identity or location.</p>
-                                </div>
-                            </div>
-                            <div class="protocol-item d-flex gap-3 mb-4">
-                                <i class="fas fa-shield-check mt-1" style="color: var(--cyber-blue);"></i>
-                                <div>
-                                    <strong class="text-navy d-block mb-1">Secure Transit</strong>
-                                    <p class="text-secondary small mb-0">Avoid public Wi-Fi for sensitive tasks. Use
-                                        a
-                                        trusted VPN if connection is mandatory.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="safety-visual-box blue-theme overflow-hidden">
-                        <!-- Immersive Image Layer Slot -->
-                        <div class="visual-image-layer" style="background-image: url(/static/images/cyber_network_tower.png);"></div>
-                        
-                        <div class="hud-corners"></div>
-                        <div class="hud-scanning-line"></div>
-                        <div class="network-pulse">
-                            <i class="fas fa-tower-broadcast"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 4: Personal Safety -->
-    <section class="safety-section reveal" id="personal-safety">
-        <div class="container py-5">
-            <div class="row align-items-center g-5 flex-lg-row-reverse">
-                <div class="col-lg-6">
-                    <div class="d-flex align-items-center gap-4 mb-4">
-                        <div class="icon-circle"
-                            style="background: rgba(245, 158, 11, 0.1); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.25); box-shadow: 0 0 20px rgba(245, 158, 11, 0.25);">
-                            <i class="fas fa-user-shield fa-xl"></i>
-                        </div>
-                        <h2 class="text-navy fw-bold" style="font-size: 2.5rem; color: var(--deep-navy) !important;">Personal Data <span
-                                style="color: #d97706;">Privacy</span></h2>
-                    </div>
-                    <div class="safety-content-indent text-navy">
-                        <p class="text-secondary lead mb-5">Social engineering is the most common entry point for
-                            hackers.
-                            Protecting your personal information is as much about behavior as it is about
-                            technology.</p>
-
-                        <div class="protocol-box mb-5">
-                            <h6 class="text-navy fw-bold mb-4 text-uppercase" style="letter-spacing: 2px;">
-                                Behavioral
-                                Defense Protocol:</h6>
-                            <div class="protocol-item d-flex gap-3 mb-4">
-                                <i class="fas fa-shield-check mt-1" style="color: #f59e0b;"></i>
-                                <div>
-                                    <strong class="text-navy d-block mb-1">Information Siloing</strong>
-                                    <p class="text-secondary small mb-0">Avoid sharing sensitive details like
-                                        mothers maiden name or location on public social profiles.</p>
-                                </div>
-                            </div>
-                            <div class="protocol-item d-flex gap-3 mb-4">
-                                <i class="fas fa-shield-check mt-1" style="color: #f59e0b;"></i>
-                                <div>
-                                    <strong class="text-navy d-block mb-1">Stranger Vigilance</strong>
-                                    <p class="text-secondary small mb-0">Never accept friend requests from unknown
-                                        profiles. Verify identity of callers requesting data.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="safety-visual-box gold-theme overflow-hidden">
-                        <!-- Immersive Image Layer Slot -->
-                        <div class="visual-image-layer" style="background-image: url(/static/images/cyber_privacy_badge.png);"></div>
-                        
-                        <div class="hud-corners"></div>
-                        <div class="hud-target-lock"></div>
-                        <div class="shimmer-scanner">
-                            <i class="fas fa-id-badge"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 5: Device Protection -->
-    <section class="safety-section reveal" id="device-protection">
-        <div class="container py-5">
-            <div class="row align-items-center g-5">
-                <div class="col-lg-6">
-                    <div class="d-flex align-items-center gap-4 mb-4">
-                        <div class="icon-circle"
-                            style="background: rgba(34, 211, 238, 0.1); color: #22d3ee; border: 1px solid rgba(34, 211, 238, 0.25); box-shadow: 0 0 20px rgba(34, 211, 238, 0.25);">
-                            <i class="fas fa-mobile-screen-button fa-xl"></i>
-                        </div>
-                        <h2 class="text-navy fw-bold" style="font-size: 2.5rem; color: var(--deep-navy) !important;">Hardware Integrity <span
-                                style="color: #0369a1;">Shield</span></h2>
-                    </div>
-                    <div class="safety-content-indent text-navy">
-                        <p class="text-secondary lead mb-5">Your physical devices are the endpoints of your digital
-                            life.
-                            Hardening them ensures that even if stolen, your data remains encrypted.</p>
-
-                        <div class="protocol-box mb-5">
-                            <h6 class="text-navy fw-bold mb-4 text-uppercase" style="letter-spacing: 2px;">Hardware
-                                Hardening Protocol:</h6>
-                            <div class="protocol-item d-flex gap-3 mb-4">
-                                <i class="fas fa-shield-check mt-1" style="color: #22d3ee;"></i>
-                                <div>
-                                    <strong class="text-navy d-block mb-1">Disk Encryption</strong>
-                                    <p class="text-secondary small mb-0">Enable BitLocker or FileVault. Mobile
-                                        devices are encrypted by default if using a passcode.</p>
-                                </div>
-                            </div>
-                            <div class="protocol-item d-flex gap-3 mb-4">
-                                <i class="fas fa-shield-check mt-1" style="color: #22d3ee;"></i>
-                                <div>
-                                    <strong class="text-navy d-block mb-1">Biometric Locks</strong>
-                                    <p class="text-secondary small mb-0">Use Fingerprint or Face ID for
-                                        authentication. Ensure your PIN is a random 6+ digit number.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="safety-visual-box cyan-theme overflow-hidden">
-                        <!-- Immersive Image Layer Slot -->
-                        <div class="visual-image-layer" style="background-image: url(/static/images/cyber_hardware_chip.png);"></div>
-                        
-                        <div class="hud-corners"></div>
-                        <div class="hud-tech-ring"></div>
-                        <div class="device-glow">
-                            <i class="fas fa-microchip"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 6: Identity Shield -->
-    <section class="safety-section reveal" id="identity-shield">
-        <div class="container py-5">
-            <div class="row align-items-center g-5 flex-lg-row-reverse">
-                <div class="col-lg-6">
-                    <div class="d-flex align-items-center gap-4 mb-4">
-                        <div class="icon-circle"
-                            style="background: rgba(244, 63, 94, 0.1); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.25); box-shadow: 0 0 20px rgba(244, 63, 94, 0.25);">
-                            <i class="fas fa-id-card-clip fa-xl"></i>
-                        </div>
-                        <h2 class="text-navy fw-bold" style="font-size: 2.5rem; color: var(--deep-navy) !important;">Identity Document <span
-                                style="color: #be123c;">Shield</span></h2>
-                    </div>
-                    <div class="safety-content-indent text-navy">
-                        <p class="text-secondary lead mb-5">Your Aadhaar and PAN are the keys to your legal and
-                            financial
-                            existence. Securing them is paramount to preventing loan frauds and impersonation.</p>
-
-                        <div class="protocol-box mb-5">
-                            <h6 class="text-navy fw-bold mb-4 text-uppercase" style="letter-spacing: 2px;">Identity
-                                Protection Protocol:</h6>
-                            <div class="protocol-item d-flex gap-3 mb-4">
-                                <i class="fas fa-shield-check mt-1" style="color: #fb7185;"></i>
-                                <div>
-                                    <strong class="text-navy d-block mb-1">Biometric Locking</strong>
-                                    <p class="text-secondary small mb-0">Use the mAdhaar app to lock your
-                                        biometrics. Unlock them only when you need to authenticate.</p>
-                                </div>
-                            </div>
-                            <div class="protocol-item d-flex gap-3 mb-4">
-                                <i class="fas fa-shield-check mt-1" style="color: #fb7185;"></i>
-                                <div>
-                                    <strong class="text-navy d-block mb-1">E-KYC Auditing</strong>
-                                    <p class="text-secondary small mb-0">Periodically check your Aadhaar
-                                        authentication history for unknown logins.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="safety-visual-box red-theme overflow-hidden">
-                        <!-- Immersive Image Layer Slot -->
-                        <div class="visual-image-layer" style="background-image: url(/static/images/cyber_biometric_scan.png);"></div>
-                        
-                        <div class="hud-corners"></div>
-                        <div class="hud-dna-helix"></div>
-                        <div class="dna-double-helix">
-                            <i class="fas fa-fingerprint"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  </div>
 </div>
 
-<!-- ═══════════ ACCORDION SECTION ═══════════ -->
-<section class="safety-section reveal" id="incident-response">
-    <div class="container py-5">
-        <div class="steps-container">
-            <div class="steps-header text-center mb-5">
-                <div class="step-badge">
-                    <i class="fas fa-bolt fa-2x"></i>
-                </div>
-                <h2 class="display-5 fw-bold mb-3">Immediate Steps if Compromised</h2>
-                <p class="text-secondary">Follow these crucial steps to mitigate damage and secure your digital presence.</p>
-            </div>
-
-            <div class="accordion" id="safetyAccordion">
-                <!-- Step 1 -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#step1">
-                            <span class="step-number">1</span>
-                            Disconnect & Isolate
-                        </button>
-                    </h2>
-                    <div id="step1" class="accordion-collapse collapse show" data-bs-parent="#safetyAccordion">
-                        <div class="accordion-body">
-                            <div class="checklist-title">
-                                <i class="fas fa-shield-halved text-cyber"></i>
-                                Critical Safety Checklist:
-                            </div>
-                            <div class="checklist-grid">
-                                <div class="check-list-item"><i class="fas fa-circle-check"></i> Turn off Wi-Fi &
-                                    Mobile
-                                    Data immediately</div>
-                                <div class="check-list-item"><i class="fas fa-circle-check"></i> Do NOT restart the
-                                    device (preserves evidence)</div>
-                                <div class="check-list-item"><i class="fas fa-circle-check"></i> Unplug Ethernet
-                                    cables
-                                    from the machine</div>
-                                <div class="check-list-item"><i class="fas fa-circle-check"></i> Isolate from shared
-                                    home networks</div>
-                                <div class="check-list-item"><i class="fas fa-circle-check"></i> Enable Airplane
-                                    Mode on
-                                    mobile devices</div>
-                                <div class="check-list-item"><i class="fas fa-circle-check"></i> Disconnect external
-                                    hard drives/USBs</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#step2">
-                            <span class="step-number">2</span>
-                            Secure Accounts
-                        </button>
-                    </h2>
-                    <div id="step2" class="accordion-collapse collapse" data-bs-parent="#safetyAccordion">
-                        <div class="accordion-body">
-                            <div class="checklist-title">
-                                <i class="fas fa-user-lock text-cyber"></i>
-                                Account Hardening Steps:
-                            </div>
-                            <div class="checklist-grid">
-                                <div class="check-list-item"><i class="fas fa-lock"></i> Change Email & Banking
-                                    passwords first</div>
-                                <div class="check-list-item"><i class="fas fa-lock"></i> Logout from all active
-                                    sessions
-                                    remotely</div>
-                                <div class="check-list-item"><i class="fas fa-lock"></i> Use unique 12+ character
-                                    passphrases</div>
-                                <div class="check-list-item"><i class="fas fa-lock"></i> Check for unknown recovery
-                                    emails</div>
-                                <div class="check-list-item"><i class="fas fa-lock"></i> Setup physical 2FA keys if
-                                    available</div>
-                                <div class="check-list-item"><i class="fas fa-lock"></i> Enable App-based 2FA
-                                    immediately</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#step3">
-                            <span class="step-number">3</span>
-                            Report Incident
-                        </button>
-                    </h2>
-                    <div id="step3" class="accordion-collapse collapse" data-bs-parent="#safetyAccordion">
-                        <div class="accordion-body">
-                            <div class="checklist-title">
-                                <i class="fas fa-file-signature text-cyber"></i>
-                                Reporting & Evidence:
-                            </div>
-                            <div class="checklist-grid">
-                                <div class="check-list-item"><i class="fas fa-file-lines"></i> Keep logs of all
-                                    suspicious transactions</div>
-                                <div class="check-list-item"><i class="fas fa-file-lines"></i> Email
-                                    cybercrime.gov.in
-                                    with artifacts</div>
-                                <div class="check-list-item"><i class="fas fa-file-lines"></i> Screenshot threats
-                                    and IP
-                                    address logs</div>
-                                <div class="check-list-item"><i class="fas fa-file-lines"></i> Request bank to
-                                    freeze
-                                    sensitive cards</div>
-                                <div class="check-list-item"><i class="fas fa-file-lines"></i> Call National
-                                    Helpline at
-                                    1930</div>
-                                <div class="check-list-item"><i class="fas fa-file-lines"></i> Notify local Cyber
-                                    Police
-                                    Station</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- Quick Nav -->
+<div style="background:rgba(15,17,26,0.5); border-top:1px solid var(--border-subtle); border-bottom:1px solid var(--border-subtle); position:sticky; top:64px; z-index:50; backdrop-filter:blur(16px);">
+  <div class="container">
+    <div class="nav-tabs-dark">
+      <a href="#digital-identity" class="nav-tab-dark">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        Digital Identity
+      </a>
+      <a href="#financial-safety" class="nav-tab-dark">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        Financial Safety
+      </a>
+      <a href="#device-security" class="nav-tab-dark">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        Device Security
+      </a>
+      <a href="#network-safety" class="nav-tab-dark">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+        Network Safety
+      </a>
+      <a href="#personal-safety" class="nav-tab-dark">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Personal Safety
+      </a>
+      <a href="#incident-response" class="nav-tab-dark" style="color:var(--accent-risk); border-color:rgba(239,68,68,0.25);">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Incident Response
+      </a>
     </div>
-</section>
+  </div>
+</div>
 
-<!-- Safety Fallback: ensure all reveals become visible -->
-<script src="{% static 'js/citizen_safety.js' %}"></script>
+<!-- ══════════ S1: DIGITAL IDENTITY ══════════ -->
+<div id="digital-identity" class="py-24">
+  <div class="container">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;" class="split-grid">
+      <div class="reveal">
+        <div class="cs-section-header">
+          <span class="badge-line" style="background:rgba(16,185,129,0.1); color:var(--accent-safe); border:1px solid rgba(16,185,129,0.2);">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/></svg>
+            Digital Identity
+          </span>
+          <h2>Digital Identity <span style="color:var(--accent-safe);">Protection</span></h2>
+          <p>Your online footprint is your resume to the world. Protecting it requires more than just a password — it demands a defensive architecture.</p>
+        </div>
+
+        <div class="protocol-box-dark">
+          <div class="protocol-header">Standard Protective Protocol</div>
+          <div class="protocol-item-dark">
+            <div class="protocol-icon" style="background:rgba(16,185,129,0.08); color:var(--accent-safe);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <strong>MFA Integration</strong>
+              <p>Enable Multi-Factor Authentication (App-based, not SMS) on all primary accounts — banking, email, and social.</p>
+            </div>
+          </div>
+          <div class="protocol-item-dark">
+            <div class="protocol-icon" style="background:rgba(16,185,129,0.08); color:var(--accent-safe);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+            </div>
+            <div>
+              <strong>Credential Management</strong>
+              <p>Use a premium password manager to generate and store 16+ character unique passphrases for every service.</p>
+            </div>
+          </div>
+          <div class="protocol-item-dark">
+            <div class="protocol-icon" style="background:rgba(16,185,129,0.08); color:var(--accent-safe);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <strong>Software Hardening</strong>
+              <p>Set OS and critical applications to auto-update to patch zero-day vulnerabilities before they are exploited.</p>
+            </div>
+          </div>
+          <div class="protocol-item-dark">
+            <div class="protocol-icon" style="background:rgba(16,185,129,0.08); color:var(--accent-safe);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <div>
+              <strong>Breach Monitoring</strong>
+              <p>Enroll your email and phone in continuous dark web monitoring to receive real-time exposure alerts.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-visual-panel reveal" style="animation-delay:0.15s;">
+        <div class="panel-corner corner-tl"></div>
+        <div class="panel-corner corner-tr"></div>
+        <div class="panel-corner corner-bl"></div>
+        <div class="panel-corner corner-br"></div>
+        <div class="panel-scan-line" style="animation-duration:4s;"></div>
+        <div style="font-size:0.6rem; font-family:var(--font-mono); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.12em; position:absolute; top:14px; left:14px;">IDENTITY_GUARD_ACTIVE</div>
+        <div style="font-size:5rem; color:var(--accent-safe); filter:drop-shadow(0 0 40px rgba(16,185,129,0.4)); animation:pulse-icon 3s ease-in-out infinite;">🛡</div>
+        <div class="panel-telemetry">
+          <div class="telem-ok">IDENTITY_LOCK: ENABLED</div>
+          <div class="telem-val">MFA_LAYERS: 3_ACTIVE</div>
+          <div class="telem-ok">BREACH_INDEX: 0_MATCHES</div>
+          <div style="color:var(--text-muted);">LAST_SCAN: 00:00:02 AGO</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@keyframes pulse-icon {
+  0%,100%{transform:scale(1); opacity:0.9;}
+  50%{transform:scale(1.05); opacity:1;}
+}
+
+<!-- ══════════ S2: FINANCIAL SAFETY ══════════ -->
+<div id="financial-safety" class="py-24" style="background:rgba(15,17,26,0.4);">
+  <div class="container">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;" class="split-grid">
+
+      <div class="cs-visual-panel reveal" style="order:-1; min-height:380px;">
+        <div class="panel-corner corner-tl"></div>
+        <div class="panel-corner corner-tr"></div>
+        <div class="panel-corner corner-bl"></div>
+        <div class="panel-corner corner-br"></div>
+        <div class="panel-scan-line" style="animation-duration:5s; animation-delay:1s;"></div>
+        <div style="font-size:0.6rem; font-family:var(--font-mono); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.12em; position:absolute; top:14px; left:14px;">FINANCIAL_SHIELD_LAYER</div>
+        <div style="font-size:5rem; color:var(--accent-secondary); filter:drop-shadow(0 0 40px rgba(99,102,241,0.4)); animation:pulse-icon 3.5s ease-in-out infinite;">💳</div>
+        <div class="panel-telemetry">
+          <div class="telem-val">UPI_AUDIT: VERIFIED</div>
+          <div class="telem-ok">BANK_TRANSACTIONS: MONITORED</div>
+          <div class="telem-warn">OTP_HYGIENE: CRITICAL</div>
+          <div style="color:var(--text-muted);">TXNS_SCANNED: 1,847</div>
+        </div>
+      </div>
+
+      <div class="reveal" style="animation-delay:0.15s;">
+        <div class="cs-section-header">
+          <span class="badge-line" style="background:rgba(99,102,241,0.1); color:var(--accent-secondary); border:1px solid rgba(99,102,241,0.2);">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            Financial Safety
+          </span>
+          <h2>Financial Assets <span style="color:var(--accent-secondary);">Security</span></h2>
+          <p>Digital banking and UPI have made transactions instant — but require instant alertness to prevent unauthorized transfers and UPI fraud.</p>
+        </div>
+
+        <div class="protocol-box-dark">
+          <div class="protocol-header">Financial Defense Protocol</div>
+          <div class="protocol-item-dark">
+            <div class="protocol-icon" style="background:rgba(99,102,241,0.08); color:var(--accent-secondary);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div>
+              <strong>OTP Integrity</strong>
+              <p>Never share OTPs with anyone claiming to be a bank official, telecom company, or government authority — OTPs are always final-step secrets.</p>
+            </div>
+          </div>
+          <div class="protocol-item-dark">
+            <div class="protocol-icon" style="background:rgba(99,102,241,0.08); color:var(--accent-secondary);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+            </div>
+            <div>
+              <strong>UPI QR Verification</strong>
+              <p>Always verify the registered name before confirming any UPI payment. Scammers generate spoofed QR codes with similar-looking merchant names.</p>
+            </div>
+          </div>
+          <div class="protocol-item-dark">
+            <div class="protocol-icon" style="background:rgba(99,102,241,0.08); color:var(--accent-secondary);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <strong>Transaction Alerts</strong>
+              <p>Enable SMS and push alerts for every transaction above ₹1. Immediately call 1930 if any unauthorized debit occurs.</p>
+            </div>
+          </div>
+          <div class="protocol-item-dark">
+            <div class="protocol-icon" style="background:rgba(99,102,241,0.08); color:var(--accent-secondary);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <div>
+              <strong>Vishing Awareness</strong>
+              <p>Investment scams promising "guaranteed returns" through WhatsApp or Telegram are India's #1 financial cyber fraud vector in 2024.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ S3: DEVICE SECURITY ══════════ -->
+<div id="device-security" class="py-24">
+  <div class="container">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;" class="split-grid">
+
+      <div class="reveal">
+        <div class="cs-section-header">
+          <span class="badge-line" style="background:rgba(245,158,11,0.1); color:var(--accent-warning); border:1px solid rgba(245,158,11,0.2);">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            Device Security
+          </span>
+          <h2>Device Integrity <span style="color:var(--accent-warning);">Shield</span></h2>
+          <p>Your device is the primary attack surface. Hardening it against APK-based malware, spyware, and remote-access tools is the first line of defense.</p>
+        </div>
+
+        <div class="protocol-box-dark">
+          <div class="protocol-header">Device Hardening Protocol</div>
+          <div class="protocol-item-dark">
+            <div class="protocol-icon" style="background:rgba(245,158,11,0.08); color:var(--accent-warning);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+            </div>
+            <div>
+              <strong>Sideloading Prevention</strong>
+              <p>Never install APKs from outside official stores. 73% of Android malware in India spreads through WhatsApp-forwarded APK files.</p>
+            </div>
+          </div>
+          <div class="protocol-item-dark">
+            <div class="protocol-icon" style="background:rgba(245,158,11,0.08); color:var(--accent-warning);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg>
+            </div>
+            <div>
+              <strong>Screen Recording Block</strong>
+              <p>Disable "Display over other apps" permissions for any app that doesn't require it. RAT malware exploits this vector to steal banking credentials.</p>
+            </div>
+          </div>
+          <div class="protocol-item-dark">
+            <div class="protocol-icon" style="background:rgba(245,158,11,0.08); color:var(--accent-warning);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <div>
+              <strong>Permission Audit</strong>
+              <p>Monthly review of all app permissions — especially SMS, Contacts, Camera, and Microphone access which are commonly abused by stalkerware.</p>
+            </div>
+          </div>
+          <div class="protocol-item-dark">
+            <div class="protocol-icon" style="background:rgba(245,158,11,0.08); color:var(--accent-warning);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <strong>Encryption &amp; Lock</strong>
+              <p>Enable full-device encryption and use biometric + strong PIN (6+ digit) lock. Never use pattern locks on public-facing devices.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-visual-panel reveal" style="animation-delay:0.15s;">
+        <div class="panel-corner corner-tl"></div>
+        <div class="panel-corner corner-tr"></div>
+        <div class="panel-corner corner-bl"></div>
+        <div class="panel-corner corner-br"></div>
+        <div class="panel-scan-line" style="animation-duration:3.5s; animation-delay:0.5s;"></div>
+        <div style="font-size:0.6rem; font-family:var(--font-mono); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.12em; position:absolute; top:14px; left:14px;">DEVICE_INTEGRITY_SCAN</div>
+        <div style="font-size:5rem; color:var(--accent-warning); filter:drop-shadow(0 0 40px rgba(245,158,11,0.4)); animation:pulse-icon 3.2s ease-in-out infinite;">📱</div>
+        <div class="panel-telemetry">
+          <div class="telem-ok">APK_THREATS: 0_DETECTED</div>
+          <div class="telem-val">PERMISSIONS_AUDITED: 28</div>
+          <div class="telem-warn">ENCRYPTION: VERIFY_ENABLED</div>
+          <div style="color:var(--text-muted);">OS_PATCH: 2026-06-LATEST</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ S4: NETWORK SAFETY ══════════ -->
+<div id="network-safety" class="py-24" style="background:rgba(15,17,26,0.4);">
+  <div class="container">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;" class="split-grid">
+
+      <div class="cs-visual-panel reveal" style="order:-1; min-height:360px;">
+        <div class="panel-corner corner-tl"></div>
+        <div class="panel-corner corner-tr"></div>
+        <div class="panel-corner corner-bl"></div>
+        <div class="panel-corner corner-br"></div>
+        <div class="panel-scan-line" style="animation-duration:4.5s; animation-delay:2s;"></div>
+        <div style="font-size:0.6rem; font-family:var(--font-mono); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.12em; position:absolute; top:14px; left:14px;">NETWORK_THREAT_MONITOR</div>
+        <div style="font-size:5rem; color:var(--accent-primary); filter:drop-shadow(0 0 40px rgba(0,210,255,0.35)); animation:pulse-icon 4s ease-in-out infinite;">📡</div>
+        <div class="panel-telemetry">
+          <div class="telem-ok">DNS_LEAKS: 0_FOUND</div>
+          <div class="telem-val">VPN_TUNNEL: ENCRYPTED</div>
+          <div class="telem-warn">PUBLIC_WIFI: AVOID_BANKING</div>
+          <div style="color:var(--text-muted);">ROUTER_FIRMWARE: CURRENT</div>
+        </div>
+      </div>
+
+      <div class="reveal" style="animation-delay:0.15s;">
+        <div class="cs-section-header">
+          <span class="badge-line" style="background:rgba(0,210,255,0.1); color:var(--accent-primary); border:1px solid rgba(0,210,255,0.2);">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+            Network Safety
+          </span>
+          <h2>Network <span style="color:var(--accent-primary);">Defense</span></h2>
+          <p>Unsecured networks are the easiest point of entry for man-in-the-middle attacks targeting OTPs and session tokens on public Wi-Fi.</p>
+        </div>
+
+        <div class="protocol-box-dark">
+          <div class="protocol-header">Network Security Protocol</div>
+          <div class="protocol-item-dark">
+            <div class="protocol-icon" style="background:rgba(0,210,255,0.08); color:var(--accent-primary);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div>
+              <strong>VPN Encryption</strong>
+              <p>Use a zero-log VPN when connecting to public Wi-Fi. Never access banking portals or OTP flows on open networks.</p>
+            </div>
+          </div>
+          <div class="protocol-item-dark">
+            <div class="protocol-icon" style="background:rgba(0,210,255,0.08); color:var(--accent-primary);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+            </div>
+            <div>
+              <strong>Router Hardening</strong>
+              <p>Change default router admin password, disable WPS, and update firmware quarterly. Use WPA3 encryption where available.</p>
+            </div>
+          </div>
+          <div class="protocol-item-dark">
+            <div class="protocol-icon" style="background:rgba(0,210,255,0.08); color:var(--accent-primary);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div>
+              <strong>DNS Security</strong>
+              <p>Configure encrypted DNS (DNS-over-HTTPS) using Cloudflare 1.1.1.1 or Google 8.8.8.8 to prevent DNS spoofing attacks.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ S5: PERSONAL SAFETY ══════════ -->
+<div id="personal-safety" class="py-24">
+  <div class="container">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;" class="split-grid">
+
+      <div class="reveal">
+        <div class="cs-section-header">
+          <span class="badge-line" style="background:rgba(239,68,68,0.1); color:var(--accent-risk); border:1px solid rgba(239,68,68,0.2);">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Personal Safety
+          </span>
+          <h2>Personal Data <span style="color:var(--accent-risk);">Hygiene</span></h2>
+          <p>Oversharing on social platforms and messaging apps creates a detailed intelligence profile that scammers exploit for social engineering.</p>
+        </div>
+
+        <div class="protocol-box-dark">
+          <div class="protocol-header">Personal Data Protocol</div>
+          <div class="protocol-item-dark">
+            <div class="protocol-icon" style="background:rgba(239,68,68,0.08); color:var(--accent-risk);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <div>
+              <strong>Social Media Footprint</strong>
+              <p>Audit and restrict privacy settings on all platforms. Never post your Aadhaar, PAN, address, or phone number in public posts or groups.</p>
+            </div>
+          </div>
+          <div class="protocol-item-dark">
+            <div class="protocol-icon" style="background:rgba(239,68,68,0.08); color:var(--accent-risk);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.17h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.81-.81a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <strong>Vishing Defense</strong>
+              <p>Hang up on unexpected calls claiming to be CBI, police, or TRAI threatening "digital arrest." India's law enforcement never calls to demand payment.</p>
+            </div>
+          </div>
+          <div class="protocol-item-dark">
+            <div class="protocol-icon" style="background:rgba(239,68,68,0.08); color:var(--accent-risk);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <strong>Phishing Recognition</strong>
+              <p>Check sender domain carefully — scammers use domains like "support-sbi-in.com" vs real "sbi.co.in". Never click links in unsolicited SMS or email.</p>
+            </div>
+          </div>
+          <div class="protocol-item-dark">
+            <div class="protocol-icon" style="background:rgba(239,68,68,0.08); color:var(--accent-risk);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div>
+              <strong>Telegram/WhatsApp Scams</strong>
+              <p>Investment groups on messaging apps offering 30-200% returns are fraud operations. India lost ₹7,061 crore to online investment scams in 2023 alone.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-visual-panel reveal" style="animation-delay:0.15s;">
+        <div class="panel-corner corner-tl"></div>
+        <div class="panel-corner corner-tr"></div>
+        <div class="panel-corner corner-bl"></div>
+        <div class="panel-corner corner-br"></div>
+        <div class="panel-scan-line" style="animation-duration:4.8s; animation-delay:1.2s;"></div>
+        <div style="font-size:0.6rem; font-family:var(--font-mono); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.12em; position:absolute; top:14px; left:14px;">PERSONAL_DATA_SHIELD</div>
+        <div style="font-size:5rem; color:var(--accent-risk); filter:drop-shadow(0 0 40px rgba(239,68,68,0.35)); animation:pulse-icon 3.8s ease-in-out infinite;">🎭</div>
+        <div class="panel-telemetry">
+          <div class="telem-ok">SOCIAL_FOOTPRINT: MINIMAL</div>
+          <div class="telem-val">PHISH_ATTEMPTS_BLOCKED: 48</div>
+          <div class="telem-warn">VISHING_ALERTS: 3_THIS_WEEK</div>
+          <div style="color:var(--text-muted);">DATA_SHARED: RESTRICTED</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ INCIDENT RESPONSE ══════════ -->
+<div id="incident-response" class="py-24" style="background:rgba(15,17,26,0.4);">
+  <div class="container">
+    <div class="cs-section-header reveal" style="text-align:center; max-width:680px; margin:0 auto 48px;">
+      <span class="badge-line" style="background:rgba(239,68,68,0.1); color:var(--accent-risk); border:1px solid rgba(239,68,68,0.2); display:inline-flex;">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Incident Response
+      </span>
+      <h2>What To Do <span style="color:var(--accent-risk);">Immediately</span> After a Cyber Attack</h2>
+      <p>Time is critical. Every minute of delay allows attackers to deepen access or transfer funds. Follow this exact protocol.</p>
+    </div>
+
+    <!-- Emergency Banner -->
+    <div class="emergency-banner reveal mb-10">
+      <div>
+        <div style="font-size:0.65rem; font-family:var(--font-mono); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">NATIONAL CYBERCRIME HELPLINE</div>
+        <div class="emergency-number">1930</div>
+        <div style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Call immediately to freeze fraudulent transactions</div>
+      </div>
+      <div style="height:60px; width:1px; background:rgba(239,68,68,0.2); flex-shrink:0;"></div>
+      <div style="flex:1;">
+        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.6; margin:0;">
+          Reporting within the <strong style="color:var(--accent-warning);">golden hour</strong> (first 60 minutes) gives the highest probability of recovering stolen funds. The Citizen Financial Cyber Fraud Reporting and Management System allows banks to freeze transactions in the fraud chain in real-time.
+        </p>
+      </div>
+    </div>
+
+    <!-- Steps -->
+    <div style="display:flex; flex-direction:column; gap:0; max-width:800px; margin:0 auto;">
+      <div class="incident-step reveal">
+        <div class="step-number" style="background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); color:var(--accent-risk);">01</div>
+        <div>
+          <h4 style="font-size:1rem; font-weight:700; color:var(--text-primary); margin-bottom:6px;">Call 1930 — Immediately</h4>
+          <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.55; margin:0;">Report financial fraud to freeze fund transfers before they reach mule accounts. Have your transaction ID, bank account number, and timestamps ready.</p>
+        </div>
+        <div class="step-connector"></div>
+      </div>
+      <div style="height:16px;"></div>
+      <div class="incident-step reveal" style="animation-delay:0.08s;">
+        <div class="step-number" style="background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.3); color:var(--accent-warning);">02</div>
+        <div>
+          <h4 style="font-size:1rem; font-weight:700; color:var(--text-primary); margin-bottom:6px;">File on cybercrime.gov.in</h4>
+          <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.55; margin:0;">Submit a formal complaint on the National Cyber Crime Reporting Portal. For financial fraud, use the "Financial Fraud" category. Screenshot all evidence before filing.</p>
+        </div>
+        <div class="step-connector"></div>
+      </div>
+      <div style="height:16px;"></div>
+      <div class="incident-step reveal" style="animation-delay:0.16s;">
+        <div class="step-number" style="background:rgba(99,102,241,0.1); border:1px solid rgba(99,102,241,0.3); color:var(--accent-secondary);">03</div>
+        <div>
+          <h4 style="font-size:1rem; font-weight:700; color:var(--text-primary); margin-bottom:6px;">Revoke All Active Sessions</h4>
+          <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.55; margin:0;">Log out of all devices on Google, WhatsApp, banking apps. Change passwords from a clean, trusted device — not the compromised one. Enable new MFA codes.</p>
+        </div>
+        <div class="step-connector"></div>
+      </div>
+      <div style="height:16px;"></div>
+      <div class="incident-step reveal" style="animation-delay:0.24s;">
+        <div class="step-number" style="background:rgba(0,210,255,0.1); border:1px solid rgba(0,210,255,0.3); color:var(--accent-primary);">04</div>
+        <div>
+          <h4 style="font-size:1rem; font-weight:700; color:var(--text-primary); margin-bottom:6px;">Preserve Evidence</h4>
+          <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.55; margin:0;">Screenshot all suspicious messages, transaction IDs, caller numbers, and UPI IDs involved. Do not delete anything — this is admissible evidence in cybercell FIR proceedings.</p>
+        </div>
+        <div class="step-connector"></div>
+      </div>
+      <div style="height:16px;"></div>
+      <div class="incident-step reveal" style="animation-delay:0.32s;">
+        <div class="step-number" style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); color:var(--accent-safe);">05</div>
+        <div>
+          <h4 style="font-size:1rem; font-weight:700; color:var(--text-primary); margin-bottom:6px;">File FIR at Local Cyber Cell</h4>
+          <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.55; margin:0;">Visit your nearest Cyber Crime Cell or local police station to file a formal FIR. Bring all evidence, the online complaint reference number, and identity documents.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ RESOURCES CTA ══════════ -->
+<div class="py-20" style="border-top:1px solid var(--border-subtle);">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:40px;" class="reveal">
+      <h2 style="font-size:2rem; font-weight:800; margin-bottom:8px;">Official Resources</h2>
+      <p class="text-muted">Direct links to verified government portals and CyberSafe diagnostic tools.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px;" class="split-grid">
+      <a href="https://cybercrime.gov.in" target="_blank" rel="noopener noreferrer" class="resource-card reveal">
+        <div style="font-size:1.5rem; margin-bottom:10px;">🏛</div>
+        <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:4px; color:var(--text-primary);">cybercrime.gov.in</h4>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">National Cyber Crime Reporting Portal — File online complaints and track case status.</p>
+      </a>
+      <a href="{% url 'scorecard' %}" class="resource-card reveal" style="animation-delay:0.08s;">
+        <div style="font-size:1.5rem; margin-bottom:10px;">📊</div>
+        <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:4px; color:var(--text-primary);">Cyber Risk Scorecard</h4>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">Run a full risk assessment to quantify your cybersecurity exposure across 12 risk dimensions.</p>
+      </a>
+      <a href="{% url 'email_breach_check' %}" class="resource-card reveal" style="animation-delay:0.16s;">
+        <div style="font-size:1.5rem; margin-bottom:10px;">🔍</div>
+        <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:4px; color:var(--text-primary);">Email Breach Check</h4>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">Verify if your email credentials appear in known data breaches and dark web dumps.</p>
+      </a>
+      <a href="{% url 'phone_exposure_check' %}" class="resource-card reveal" style="animation-delay:0.24s;">
+        <div style="font-size:1.5rem; margin-bottom:10px;">📱</div>
+        <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:4px; color:var(--text-primary);">Phone Exposure Check</h4>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">Detect if your phone number is indexed in leaked telemarketer or scammer databases.</p>
+      </a>
+      <a href="{% url 'aadhaar_risk_check' %}" class="resource-card reveal" style="animation-delay:0.32s;">
+        <div style="font-size:1.5rem; margin-bottom:10px;">🪪</div>
+        <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:4px; color:var(--text-primary);">Aadhaar Risk Check</h4>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">Verify Aadhaar exposure in unauthorized databases and check UIDAI lock status.</p>
+      </a>
+      <a href="{% url 'reporting_guide' %}" class="resource-card reveal" style="animation-delay:0.40s;">
+        <div style="font-size:1.5rem; margin-bottom:10px;">📋</div>
+        <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:4px; color:var(--text-primary);">Reporting Guide</h4>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">Step-by-step guide on how to properly report cyber crimes to Indian authorities.</p>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Reveal observer
+  const ro = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  // Active nav highlight on scroll
+  const sections = ['digital-identity','financial-safety','device-security','network-safety','personal-safety','incident-response'];
+  const tabs = document.querySelectorAll('.nav-tab-dark');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        tabs.forEach(t => {
+          t.classList.remove('active');
+          if (t.getAttribute('href') === `#${id}`) t.classList.add('active');
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+</script>
 {% endblock %}
