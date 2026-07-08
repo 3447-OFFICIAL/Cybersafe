@@ -13,7 +13,6 @@
     const ROOT_MARGIN = '0px 0px -60px 0px';
 
     function initRevealObserver() {
-        return; // DISABLED: Testing if reveal animations cause scrollbar jumping
         const elements = document.querySelectorAll(REVEAL_SELECTORS);
         if (!elements.length) return;
 
@@ -68,7 +67,6 @@
     }
 
     function initCounters() {
-        return; // DISABLED: Testing if counter animations cause scrollbar jumping
         const counters = document.querySelectorAll('[data-counter]');
         if (!counters.length) return;
 
@@ -86,14 +84,13 @@
 
     // ─── Navbar Scroll Effect (Optimized) ─────────────────────────────────
     function initNavbarScroll() {
-        return; // DISABLED: Testing if navbar scroll handler causes scrollbar jumping
-        const navbar = document.querySelector('.navbar');
+        const navbar = document.querySelector('.cyber-navbar');
         if (!navbar) return;
 
         let ticking = false;
 
         function updateNavbar() {
-            if (window.scrollY > 60) {
+            if (window.scrollY > 40) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
@@ -111,7 +108,6 @@
 
     // ─── Parallax Background Elements (Optimized - Skip in Senior Mode) ─────────────────────────
     function initParallax() {
-        return; // DISABLED: Testing if parallax causes scrollbar jumping
         // Disable parallax in senior mode for smoother scrolling
         if (document.body.classList.contains('senior-mode') ||
             document.documentElement.classList.contains('senior-mode')) {
@@ -473,6 +469,8 @@ class Chatbot {
             if (this.isOpen) {
                 const input = document.getElementById('chatbot-input-field');
                 if (input) input.focus();
+            } else {
+                document.body.style.overflow = '';
             }
         }
     }
@@ -483,6 +481,7 @@ class Chatbot {
         const toggleBtn = document.getElementById('chatbot-toggle');
         if (widget) widget.style.display = 'none';
         if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
     }
 
     async sendMessage() {
@@ -663,12 +662,11 @@ function filterCrimes(category, btn) {
 
     cards.forEach(card => {
         const cardCat = card.dataset.category;
-        const parent = card.closest('.col-md-6, .col-lg-4, .col-md-4, [class*=col]');
         if (category === 'all' || cardCat === category) {
-            if (parent) parent.style.display = '';
-            card.style.animation = 'fadeInUp 0.5s ease-out both';
+            card.style.display = '';
+            card.style.animation = 'fadeIn 0.4s ease-out both';
         } else {
-            if (parent) parent.style.display = 'none';
+            card.style.display = 'none';
         }
     });
 }

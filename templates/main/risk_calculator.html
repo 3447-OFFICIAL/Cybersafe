@@ -1,564 +1,301 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Personal Cyber Risk Assessment - CyberSafe Score{% endblock %}
+{% block title %}Cyber Risk Assessment - CyberSafe{% endblock %}
 
 {% block extra_css %}
 <style>
-    /* ═══════════ CYBER-TECH ASSESSMENT THEME ═══════════ */
-    :root {
-        --crit-red: #ff4d4d;
-        --action-blue: #00d4ff;
-        --step-gold: #ffcc00;
-        --bg-void: #020617;
-        --card-bg: rgba(15, 23, 42, 0.8);
-    }
-
-    body { background: var(--bg-void) !important; color: white !important; min-height: 100vh; }
-
     .calc-container {
-        padding-top: 120px;
-        padding-bottom: 60px;
-        min-height: 100vh;
+        padding: var(--space-16) 0 var(--space-12);
+        min-height: calc(100vh - 80px);
         display: flex;
-        flex-direction: column;
         align-items: center;
-        background: radial-gradient(circle at center top, rgba(0, 212, 255, 0.08) 0%, transparent 60%);
+        background: radial-gradient(circle at center, rgba(var(--accent-primary-rgb), 0.05), transparent 70%);
     }
 
     .q-card {
-        background: var(--card-bg);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 24px;
+        background: var(--bg-surface-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-xl);
+        padding: var(--space-8);
+        box-shadow: var(--shadow-md);
         width: 100%;
         max-width: 800px;
-        padding: 35px 40px;
-        backdrop-filter: blur(20px);
+        margin: 0 auto;
         position: relative;
         overflow: hidden;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-        z-index: 2;
     }
 
-    /* Progress UI */
-    .progress-track {
+    .progress-bar {
         height: 6px;
-        background: rgba(255,255,255,0.05);
-        border-radius: 10px;
-        margin-bottom: 40px;
-        position: relative;
+        background: var(--bg-surface-elevated);
+        border-radius: var(--radius-full);
+        margin-bottom: var(--space-8);
+        overflow: hidden;
     }
 
     .progress-fill {
         height: 100%;
         width: 0%;
-        background: linear-gradient(to right, var(--action-blue), #00ffcc);
-        border-radius: 10px;
-        transition: width 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-        box-shadow: 0 0 10px var(--action-blue);
+        background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        transition: width 0.5s ease;
     }
 
-    .progress-stats {
-        display: flex;
-        justify-content: space-between;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.8rem;
-        color: #94a3b8;
-        margin-bottom: 10px;
-    }
-
-    /* Questions UI */
-    .q-title {
-        font-family: 'Rajdhani', sans-serif;
-        font-weight: 700;
-        font-size: 1.8rem;
-        margin-bottom: 20px;
-        line-height: 1.2;
-    }
-
-    .section-label {
-        font-family: 'JetBrains Mono', monospace;
-        color: var(--action-blue);
-        text-transform: uppercase;
-        font-size: 0.85rem;
-        letter-spacing: 2px;
-        margin-bottom: 15px;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
+    .question-title {
+        font-family: var(--font-display);
+        font-size: 2rem;
+        margin-bottom: var(--space-6);
+        color: var(--text-primary);
     }
 
     .option-btn {
-        width: 100%;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 12px;
-        padding: 14px 25px;
-        margin-bottom: 12px;
-        color: #cbd5e1;
-        text-align: left;
-        font-size: 1.05rem;
-        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         display: flex;
         align-items: center;
-        gap: 15px;
+        width: 100%;
+        background: var(--bg-surface-elevated);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-lg);
+        padding: var(--space-4);
+        margin-bottom: var(--space-3);
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        transition: var(--transition-normal);
         cursor: pointer;
+        text-align: left;
     }
 
     .option-btn:hover {
-        background: rgba(0, 212, 255, 0.05);
-        border-color: var(--action-blue);
-        color: white;
-        transform: translateX(10px);
-        box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
-    }
-
-    .option-btn.active {
-        background: linear-gradient(to right, rgba(0, 212, 255, 0.2), transparent);
-        border-color: var(--action-blue);
-        color: white;
+        background: rgba(var(--accent-primary-rgb), 0.05);
+        border-color: var(--accent-primary);
+        color: var(--text-primary);
+        transform: translateX(8px);
     }
 
     .option-letter {
-        width: 35px;
-        height: 35px;
-        background: rgba(255,255,255,0.05);
-        border-radius: 10px;
-        display: flex;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
-        font-weight: 800;
-        font-size: 0.9rem;
-        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        border-radius: var(--radius-md);
+        background: rgba(255, 255, 255, 0.05);
+        margin-right: var(--space-4);
+        font-family: var(--font-mono);
+        font-weight: 700;
+        color: var(--text-tertiary);
     }
 
     .option-btn:hover .option-letter {
-        background: var(--action-blue);
-        color: var(--bg-void);
+        background: var(--accent-primary);
+        color: #fff;
     }
 
-    /* Result UI */
-    .result-view { text-align: center; display: none; }
-    
-    .score-circle {
-        width: 200px;
-        height: 200px;
-        border: 10px solid var(--action-blue);
+    .result-view {
+        display: none;
+        text-align: center;
+        animation: fadeIn 0.5s ease forwards;
+    }
+
+    .score-gauge {
+        width: 240px;
+        height: 240px;
         border-radius: 50%;
+        border: 8px solid var(--accent-primary);
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 30px;
-        box-shadow: 0 0 40px rgba(0, 212, 255, 0.2);
+        margin: 0 auto var(--space-6);
+        background: radial-gradient(circle at center, rgba(var(--accent-primary-rgb), 0.1), transparent);
+        box-shadow: 0 0 30px rgba(var(--accent-primary-rgb), 0.2);
     }
 
-    .risk-level-badge {
-        padding: 10px 30px;
-        border-radius: 50px;
+    .score-number {
+        font-family: var(--font-display);
+        font-size: 4rem;
         font-weight: 800;
+        color: var(--text-primary);
+        line-height: 1;
+    }
+
+    .score-label {
+        color: var(--text-tertiary);
+        font-weight: 600;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
-        font-size: 1.5rem;
-        margin-bottom: 20px;
-        display: inline-block;
+        margin-top: var(--space-2);
     }
 
-    .retry-btn {
-        background: rgba(255,255,255,0.05);
-        border: 1px solid rgba(255,255,255,0.1);
-        color: white;
-        padding: 15px 40px;
-        border-radius: 50px;
-        font-family: 'Rajdhani', sans-serif;
-        font-weight: 700;
-        transition: all 0.3s ease;
-        text-decoration: none;
-        display: inline-block;
-        margin-top: 30px;
-    }
-
-    .retry-btn:hover {
-        background: white;
-        color: black;
-    }
-
-    /* Animations */
-    .fade-in-up {
-        animation: fadeInUp 0.6s ease forwards;
-    }
-
-    @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+    .btn-action-group {
+        display: flex;
+        gap: var(--space-4);
+        justify-content: center;
+        margin-top: var(--space-8);
     }
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="calc-container">
-    <!-- Hero Text Element -->
-    <div class="container text-center mb-5 fade-in-up" style="z-index: 1; max-width: 700px;">
-        <h1 class="hero-h1 mb-3" style="font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 3.5rem;">
-            Cyber Risk <span style="color:var(--action-blue);">Assessor</span>
-        </h1>
-        <p class="text-secondary fs-5 mx-auto">
-            Answer 25 quick situational questions to uncover hidden vulnerabilities in your digital footprint and get a personalized security roadmap.
-        </p>
-    </div>
-
-    <div class="q-card reveal" id="calculator-box">
-        <!-- Progress Info -->
-        <div class="progress-stats">
-            <span id="current-section-name">SECURITY PROTOCOL</span>
-            <span id="step-count">Question 1 / 25</span>
-        </div>
-        <div class="progress-track">
-            <div class="progress-fill" id="p-bar"></div>
-        </div>
-
-        <!-- Question View -->
-        <div id="question-view">
-            <span class="section-label" id="q-section">Password & Account</span>
-            <h2 class="q-title" id="q-text">Loading security parameters...</h2>
+    <div class="container">
+        
+        <div class="q-card" id="quiz-card">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
             
-            <div id="options-container">
-                <!-- Buttons added via JS -->
+            <div id="question-container">
+                <h2 class="question-title" id="question-text">Loading question...</h2>
+                <div id="options-container">
+                    <!-- Options injected via JS -->
+                </div>
+            </div>
+
+            <div class="result-view" id="result-container">
+                <div class="score-gauge" id="score-gauge">
+                    <div class="score-number" id="final-score">0</div>
+                    <div class="score-label">Risk Score</div>
+                </div>
+                <h2 id="risk-level-title" class="mb-4">Calculating...</h2>
+                <p id="risk-advice" class="text-muted mb-8 max-w-2xl mx-auto">
+                    Based on your answers, we are generating your personalized cyber risk profile.
+                </p>
+                <div class="btn-action-group">
+                    <a href="{% url 'reporting_guide' %}" class="btn btn-primary pulse-primary">View Reporting Guide</a>
+                    <a href="{% url 'citizen_safety' %}" class="btn btn-secondary">Explore Security Tools</a>
+                </div>
             </div>
         </div>
 
-        <!-- Result View -->
-        <div class="result-view" id="result-view">
-            <h2 class="hero-h1 mb-4">Risk Audit <span style="color:var(--action-blue);">Complete</span></h2>
-            
-            <div class="score-circle">
-                <div style="font-size: 0.8rem; opacity: 0.7;">TOTAL SCORE</div>
-                <div style="font-size: 4rem; font-weight: 800; font-family: 'Rajdhani', sans-serif;" id="final-score">85</div>
-                <div style="font-size: 0.8rem; opacity: 0.7;">/ 250</div>
-            </div>
-
-            <div class="risk-level-badge" id="risk-label">SECURE</div>
-            <p id="risk-description" class="text-secondary px-lg-5">You have strong security habits. Keep maintaining your digital hygiene to stay safe.</p>
-            
-            <a href="{% url 'reporting_guide' %}" class="retry-btn me-3"><i class="fa-solid fa-file-contract"></i> Reporting Guide</a>
-            <a href="javascript:location.reload();" class="retry-btn"><i class="fa-solid fa-rotate-right"></i> Restart Test</a>
-        </div>
     </div>
 </div>
+{% endblock %}
 
+{% block extra_js %}
 <script>
-    const riskQuestions = [
-        // 🔐 Password & Account Security
+    const questions = [
         {
-            section: '🔐 Password & Account',
-            q: 'How do you manage your passwords?',
+            text: "How often do you reuse the same password across multiple online accounts?",
             options: [
-                { text: 'I use a password manager (unique for each account)', weight: 0 },
-                { text: 'I reuse the same password across multiple accounts', weight: 8 },
-                { text: 'I use simple, easy-to-remember passwords', weight: 10 },
-                { text: 'I write them down physically', weight: 4 }
+                { text: "Never, every account has a unique password.", score: 0 },
+                { text: "Rarely, only for low-importance accounts.", score: 2 },
+                { text: "Sometimes, for convenience.", score: 5 },
+                { text: "Always, it's too hard to remember multiple.", score: 10 }
             ]
         },
         {
-            section: '🔐 Password & Account',
-            q: 'Do you use MFA/2FA on your email and banking accounts?',
+            text: "Do you use Two-Factor Authentication (2FA) for your primary email and banking?",
             options: [
-                { text: 'Yes, app-based (Google Authenticator / Authy)', weight: 0 },
-                { text: 'Yes, SMS OTP only', weight: 4 },
-                { text: 'No, but I\'m aware of it', weight: 8 },
-                { text: 'No, I don\'t use it', weight: 10 }
+                { text: "Yes, on all accounts that support it.", score: 0 },
+                { text: "Yes, but only on my bank account.", score: 3 },
+                { text: "No, I find it annoying.", score: 8 },
+                { text: "What is Two-Factor Authentication?", score: 10 }
             ]
         },
         {
-            section: '🔐 Password & Account',
-            q: 'How often do you change your important account passwords?',
+            text: "How do you verify a call claiming to be from your bank asking for an OTP?",
             options: [
-                { text: 'Every 3–6 months or after any suspected breach', weight: 0 },
-                { text: 'Once a year', weight: 5 },
-                { text: 'Rarely or never', weight: 10 }
-            ]
-        },
-        // 💳 Financial & UPI Safety
-        {
-            section: '💳 Financial & UPI',
-            q: 'Have you ever entered your UPI PIN to "receive" money?',
-            options: [
-                { text: 'Never — I know that\'s a scam', weight: 0 },
-                { text: 'Once or twice, but not sure', weight: 7 },
-                { text: 'Yes, I did', weight: 10 }
+                { text: "I hang up immediately and call the official bank number.", score: 0 },
+                { text: "I ask them verifying questions first.", score: 5 },
+                { text: "I usually provide it if they sound legitimate.", score: 10 }
             ]
         },
         {
-            section: '💳 Financial & UPI',
-            q: 'Have you shared your OTP with someone claiming to be bank official?',
+            text: "Have you ever shared a photo of your Aadhaar or PAN card on WhatsApp?",
             options: [
-                { text: 'Never', weight: 0 },
-                { text: 'Once, under pressure', weight: 8 },
-                { text: 'Yes, more than once', weight: 10 }
-            ]
-        },
-        {
-            section: '💳 Financial & UPI',
-            q: 'Do you review your bank/UPI statements regularly?',
-            options: [
-                { text: 'Yes, weekly with instant alerts', weight: 0 },
-                { text: 'I check sometimes when I remember', weight: 5 },
-                { text: 'Rarely or never', weight: 10 }
-            ]
-        },
-        {
-            section: '💳 Financial & UPI',
-            q: 'Invested money based on unknown person\'s WhatsApp tips?',
-            options: [
-                { text: 'Never', weight: 0 },
-                { text: 'I was tempted but didn\'t', weight: 4 },
-                { text: 'Yes, I have', weight: 10 }
-            ]
-        },
-        // 📶 Network & Wi-Fi Security
-        {
-            section: '📶 Network & Wi-Fi',
-            q: 'Do you use public Wi-Fi for banking or shopping?',
-            options: [
-                { text: 'Never — mobile data or VPN only', weight: 0 },
-                { text: 'Occasionally', weight: 6 },
-                { text: 'Yes, regularly', weight: 10 }
-            ]
-        },
-        {
-            section: '📶 Network & Wi-Fi',
-            q: 'Have you secured your home Wi-Fi router?',
-            options: [
-                { text: 'Yes — changed defaults & using WPA3', weight: 0 },
-                { text: 'Changed password but not admin creds', weight: 5 },
-                { text: 'Using default ISP settings', weight: 10 }
-            ]
-        },
-        {
-            section: '📶 Network & Wi-Fi',
-            q: 'Do you use a VPN for sensitive services?',
-            options: [
-                { text: 'Yes, always on public networks', weight: 0 },
-                { text: 'Sometimes', weight: 4 },
-                { text: 'Never', weight: 10 }
-            ]
-        },
-        // 📱 Device & App Security
-        {
-            section: '📱 Device & App',
-            q: 'How often do you update your phone\'s OS and apps?',
-            options: [
-                { text: 'As soon as updates are available', weight: 0 },
-                { text: 'Every few months', weight: 5 },
-                { text: 'Rarely or never', weight: 10 }
-            ]
-        },
-        {
-            section: '📱 Device & App',
-            q: 'Do you review app permissions regularly?',
-            options: [
-                { text: 'Yes, regularly revoke unnecessary access', weight: 0 },
-                { text: 'Occasionally', weight: 4 },
-                { text: 'Never reviewed', weight: 10 }
-            ]
-        },
-        {
-            section: '📱 Device & App',
-            q: 'Do you have a screen lock on your phone?',
-            options: [
-                { text: 'Yes, biometric + 6-digit PIN', weight: 0 },
-                { text: 'Just a simple PIN or pattern', weight: 4 },
-                { text: 'No lock at all', weight: 10 }
-            ]
-        },
-        {
-            section: '📱 Device & App',
-            q: 'Have you ever installed an APK from outside official store?',
-            options: [
-                { text: 'Never', weight: 0 },
-                { text: 'Once or twice', weight: 6 },
-                { text: 'Frequently', weight: 10 }
-            ]
-        },
-        // 🪪 Identity & Aadhaar Protection
-        {
-            section: '🪪 Identity & Aadhaar',
-            q: 'Locked your Aadhaar biometrics using mAadhaar?',
-            options: [
-                { text: 'Yes, I lock/unlock as needed', weight: 0 },
-                { text: 'No, but I\'m aware of it', weight: 6 },
-                { text: 'Didn\'t know this was possible', weight: 10 }
-            ]
-        },
-        {
-            section: '🪪 Identity & Aadhaar',
-            q: 'Checked Aadhaar authentication history?',
-            options: [
-                { text: 'Yes, periodically', weight: 0 },
-                { text: 'Never checked', weight: 8 },
-                { text: 'Didnt know I could check', weight: 10 }
-            ]
-        },
-        {
-            section: '🪪 Identity & Aadhaar',
-            q: 'Shared Aadhaar photocopy without purpose note?',
-            options: [
-                { text: 'Never — always write purpose', weight: 0 },
-                { text: 'Sometimes without note', weight: 6 },
-                { text: 'Share freely when asked', weight: 10 }
-            ]
-        },
-        // 🎣 Phishing & Social Engineering
-        {
-            section: '🎣 Phishing & Scams',
-            q: 'Can you identify a phishing email or fake SMS?',
-            options: [
-                { text: 'Yes, always verify sender/links', weight: 0 },
-                { text: 'I try, not always sure', weight: 6 },
-                { text: 'Click first, verify later', weight: 10 }
-            ]
-        },
-        {
-            section: '🎣 Phishing & Scams',
-            q: 'Clicked a link from an unknown WhatsApp/SMS number?',
-            options: [
-                { text: 'Never', weight: 0 },
-                { text: 'Occasionally', weight: 7 },
-                { text: 'Frequently', weight: 10 }
-            ]
-        },
-        {
-            section: '🎣 Phishing & Scams',
-            q: 'Received "TRAI/CBI" disconnection threat calls?',
-            options: [
-                { text: 'Yes, hung up immediately', weight: 0 },
-                { text: 'Yes, engaged with them', weight: 6 },
-                { text: 'Yes, followed instructions', weight: 10 }
-            ]
-        },
-        // 🌐 Social Media & Privacy
-        {
-            section: '🌐 Social Media',
-            q: 'Is your social media set to public?',
-            options: [
-                { text: 'No, profiles are private', weight: 0 },
-                { text: 'Some public, some private', weight: 5 },
-                { text: 'Yes, fully public', weight: 10 }
-            ]
-        },
-        {
-            section: '🌐 Social Media',
-            q: 'Share location or daily routine on Social Media?',
-            options: [
-                { text: 'Never', weight: 0 },
-                { text: 'Occasionally', weight: 4 },
-                { text: 'Frequently', weight: 10 }
-            ]
-        },
-        {
-            section: '🌐 Social Media',
-            q: 'Accept unknown friend/follow requests?',
-            options: [
-                { text: 'Rarely or never', weight: 0 },
-                { text: 'Sometimes', weight: 5 },
-                { text: 'Frequently', weight: 10 }
-            ]
-        },
-        // 🚨 Awareness & Response
-        {
-            section: '🚨 Incident Response',
-            q: 'Do you know what to do if hacked/money lost?',
-            options: [
-                { text: 'Yes — 1930, portal, bank contact', weight: 0 },
-                { text: 'I have a vague idea', weight: 6 },
-                { text: 'No idea what steps to take', weight: 10 }
-            ]
-        },
-        {
-            section: '🚨 Incident Response',
-            q: 'Any family member been a victim in the past?',
-            options: [
-                { text: 'No', weight: 0 },
-                { text: 'Suspected something', weight: 3 },
-                { text: 'Yes, victimized', weight: 6 }
+                { text: "No, I never share documents via messaging apps.", score: 0 },
+                { text: "Yes, but I delete it immediately after.", score: 4 },
+                { text: "Yes, it is still in my chat history.", score: 8 },
+                { text: "Yes, frequently to various agents.", score: 10 }
             ]
         }
     ];
 
-    let currentIdx = 0;
+    let currentQ = 0;
     let totalScore = 0;
 
+    const qText = document.getElementById('question-text');
+    const optionsContainer = document.getElementById('options-container');
+    const progressFill = document.getElementById('progress-fill');
+    const qContainer = document.getElementById('question-container');
+    const rContainer = document.getElementById('result-container');
+
     function renderQuestion() {
-        if (currentIdx >= riskQuestions.length) {
-            showResult();
+        if(currentQ >= questions.length) {
+            showResults();
             return;
         }
 
-        const question = riskQuestions[currentIdx];
-        const percent = ((currentIdx) / riskQuestions.length) * 100;
-        
-        document.getElementById('p-bar').style.width = percent + '%';
-        document.getElementById('step-count').innerText = `Question ${currentIdx + 1} / ${riskQuestions.length}`;
-        document.getElementById('q-section').innerText = question.section;
-        document.getElementById('q-text').innerText = question.q;
-        
-        const container = document.getElementById('options-container');
-        container.innerHTML = '';
-        
-        question.options.forEach((opt, i) => {
-            const letter = String.fromCharCode(65 + i);
-            const btn = document.createElement('div');
-            btn.className = 'option-btn fade-in-up';
-            btn.style.animationDelay = (i * 0.1) + 's';
-            btn.innerHTML = `<div class="option-letter">${letter}</div> <div>${opt.text}</div>`;
-            btn.onclick = () => selectOption(opt.weight);
-            container.appendChild(btn);
+        const q = questions[currentQ];
+        qText.innerText = q.text;
+        optionsContainer.innerHTML = '';
+
+        const letters = ['A', 'B', 'C', 'D'];
+
+        q.options.forEach((opt, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerHTML = `<span class="option-letter">${letters[index]}</span> ${opt.text}`;
+            btn.onclick = () => selectOption(opt.score);
+            optionsContainer.appendChild(btn);
         });
+
+        // Update progress
+        const percent = (currentQ / questions.length) * 100;
+        progressFill.style.width = percent + '%';
     }
 
-    function selectOption(weight) {
-        totalScore += weight;
-        currentIdx++;
-        
-        // Brief pause for visual feedback
-        const activeBtn = event.currentTarget;
-        activeBtn.classList.add('active');
-        
-        setTimeout(renderQuestion, 300);
+    function selectOption(score) {
+        totalScore += score;
+        currentQ++;
+        renderQuestion();
     }
 
-    function showResult() {
-        document.getElementById('question-view').style.display = 'none';
-        document.getElementById('result-view').style.display = 'block';
-        document.getElementById('p-bar').style.width = '100%';
-        document.getElementById('final-score').innerText = totalScore;
-        
-        const label = document.getElementById('risk-label');
-        const desc = document.getElementById('risk-description');
-        
-        if (totalScore <= 40) {
-            label.innerText = 'SECURE';
-            label.style.background = 'rgba(0, 255, 102, 0.1)';
-            label.style.color = '#00ff66';
-            desc.innerText = "Excellent habits! You possess strong defensive awareness. Stay vigilant as cyber threats evolve.";
-        } else if (totalScore <= 100) {
-            label.innerText = 'VULNERABLE';
-            label.style.background = 'rgba(0, 212, 255, 0.1)';
-            label.style.color = '#00d4ff';
-            desc.innerText = "You have basic awareness but are making some risky trade-offs. We recommend reviewing our security protocols.";
-        } else if (totalScore <= 180) {
-            label.innerText = 'HIGH RISK';
-            label.style.background = 'rgba(255, 204, 0, 0.1)';
-            label.style.color = '#ffcc00';
-            desc.innerText = "Your digital profile is highly exposed. You are a prime target for fraudsters. Immediate hygiene improvements are needed.";
-        } else {
-            label.innerText = 'CRITICAL';
-            label.style.background = 'rgba(255, 77, 77, 0.1)';
-            label.style.color = '#ff4d4d';
-            desc.innerText = "URGENT: Your current habits leave you completely open to total account takeover or financial loss. Take the 6 security steps immediately.";
-        }
+    function showResults() {
+        qContainer.style.display = 'none';
+        rContainer.style.display = 'block';
+        progressFill.style.width = '100%';
+
+        const scoreEl = document.getElementById('final-score');
+        const titleEl = document.getElementById('risk-level-title');
+        const adviceEl = document.getElementById('risk-advice');
+        const gaugeEl = document.getElementById('score-gauge');
+
+        // Animate score
+        let currentScore = 0;
+        const targetScore = totalScore;
+        const interval = setInterval(() => {
+            if(currentScore >= targetScore) {
+                clearInterval(interval);
+                scoreEl.innerText = targetScore;
+                
+                // Determine risk level
+                if(targetScore <= 5) {
+                    titleEl.innerText = "Low Risk Profile";
+                    titleEl.style.color = "var(--accent-safe)";
+                    gaugeEl.style.borderColor = "var(--accent-safe)";
+                    adviceEl.innerText = "Excellent! You follow strong security practices. Keep staying vigilant against new threats.";
+                } else if(targetScore <= 20) {
+                    titleEl.innerText = "Moderate Risk Profile";
+                    titleEl.style.color = "var(--accent-warning)";
+                    gaugeEl.style.borderColor = "var(--accent-warning)";
+                    adviceEl.innerText = "You have some good habits, but there are areas of exposure. Consider reviewing our safety guides.";
+                } else {
+                    titleEl.innerText = "Critical Risk Profile";
+                    titleEl.style.color = "var(--accent-risk)";
+                    gaugeEl.style.borderColor = "var(--accent-risk)";
+                    adviceEl.innerText = "You are highly vulnerable to cyber attacks. Please immediately change your passwords, enable 2FA, and review our reporting guides.";
+                }
+            } else {
+                currentScore++;
+                scoreEl.innerText = currentScore;
+            }
+        }, 30);
     }
 
-    // Initialize
+    // Init
     renderQuestion();
 </script>
 {% endblock %}

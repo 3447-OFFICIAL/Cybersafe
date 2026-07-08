@@ -1,51 +1,45 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Security Assessment | Cyber-Safe Portal{% endblock %}
+{% block title %}Security Assessment | CyberSafe{% endblock %}
 
 {% block extra_css %}
 <style>
-    :root {
-        --quiz-bg: #0f172a;
-        --quiz-accent: #3b82f6;
-        --glass-bg: rgba(255, 255, 255, 0.05);
-        --glass-border: rgba(255, 255, 255, 0.1);
-    }
-
-    body {
-        background: radial-gradient(circle at top right, #1e293b, #0f172a);
-        color: #f8fafc;
-    }
-
     .quiz-container {
-        max-width: 900px;
-        margin: 4rem auto;
-        padding: 2rem;
+        padding: var(--space-16) 0 var(--space-12);
+        min-height: calc(100vh - 80px);
+        display: flex;
+        align-items: center;
+        background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.05), transparent 60%);
     }
 
-    .glass-card {
-        background: var(--glass-bg);
-        backdrop-filter: blur(16px);
-        border: 1px solid var(--glass-border);
-        border-radius: 24px;
-        padding: 3rem;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    }
-
-    .progress-bar-container {
+    .q-card {
+        background: var(--bg-surface-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-xl);
+        padding: var(--space-8);
+        box-shadow: var(--shadow-md);
         width: 100%;
-        height: 8px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 4px;
-        margin-bottom: 3rem;
+        max-width: 900px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .progress-bar {
+        height: 6px;
+        background: var(--bg-surface-elevated);
+        border-radius: var(--radius-full);
+        margin-bottom: var(--space-8);
         overflow: hidden;
     }
 
     .progress-fill {
         height: 100%;
-        background: linear-gradient(90deg, #3b82f6, #60a5fa);
         width: 0%;
-        transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        background: linear-gradient(90deg, var(--accent-secondary), #818cf8);
+        transition: width 0.5s ease;
     }
 
     .question-box {
@@ -57,49 +51,45 @@
         display: block;
     }
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
     .question-text {
-        font-size: 1.75rem;
-        font-weight: 600;
-        margin-bottom: 2rem;
-        line-height: 1.4;
+        font-family: var(--font-display);
+        font-size: 2rem;
+        margin-bottom: var(--space-6);
+        color: var(--text-primary);
     }
 
     .options-grid {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: var(--space-4);
     }
 
     .option-btn {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid var(--glass-border);
-        padding: 1.25rem 1.5rem;
-        border-radius: 16px;
-        color: #e2e8f0;
-        text-align: left;
+        background: var(--bg-surface-elevated);
+        border: 1px solid var(--border-subtle);
+        padding: var(--space-4);
+        border-radius: var(--radius-lg);
+        color: var(--text-secondary);
         font-size: 1.1rem;
-        transition: all 0.2s ease;
+        transition: var(--transition-normal);
         cursor: pointer;
         display: flex;
         align-items: center;
-        gap: 1rem;
+        gap: var(--space-4);
+        text-align: left;
     }
 
     .option-btn:hover {
-        background: rgba(59, 130, 246, 0.1);
-        border-color: var(--quiz-accent);
+        background: rgba(99, 102, 241, 0.05);
+        border-color: var(--accent-secondary);
+        color: var(--text-primary);
         transform: translateX(8px);
     }
 
     .option-btn.selected {
-        background: var(--quiz-accent);
-        border-color: var(--quiz-accent);
-        color: white;
+        background: var(--accent-secondary);
+        border-color: var(--accent-secondary);
+        color: #fff;
     }
 
     .option-letter {
@@ -108,271 +98,96 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: var(--radius-md);
+        font-family: var(--font-mono);
         font-weight: 700;
-        font-size: 0.9rem;
+        color: var(--text-tertiary);
     }
 
     .option-btn.correct {
         background: rgba(16, 185, 129, 0.2);
-        border-color: #10b981;
-        color: white;
+        border-color: var(--accent-safe);
+        color: #fff;
     }
+    
+    .option-btn.correct .option-letter { background: var(--accent-safe); color: #fff; }
 
     .option-btn.incorrect {
         background: rgba(239, 68, 68, 0.2);
-        border-color: #ef4444;
-        color: white;
+        border-color: var(--accent-risk);
+        color: #fff;
     }
+    
+    .option-btn.incorrect .option-letter { background: var(--accent-risk); color: #fff; }
 
     .explanation-box {
         display: none;
-        margin-top: 1.5rem;
-        padding: 1.5rem;
-        border-radius: 16px;
-        background: rgba(255, 255, 255, 0.05);
-        border-left: 4px solid var(--quiz-accent);
+        margin-top: var(--space-6);
+        padding: var(--space-6);
+        border-radius: var(--radius-lg);
+        background: var(--bg-surface-elevated);
+        border-left: 4px solid var(--accent-secondary);
         animation: fadeIn 0.4s ease;
     }
 
     .nav-buttons {
-        margin-top: 3rem;
+        margin-top: var(--space-8);
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
 
-    .btn-quiz {
-        padding: 0.75rem 2rem;
-        border-radius: 12px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-    }
-
-    .btn-next {
-        background: #3b82f6;
-        color: white;
-        border: none;
-    }
-
-    .btn-next:disabled {
-        background: #1e293b;
-        color: #64748b;
-        cursor: not-allowed;
-    }
-
-    /* Result Dashboard Styles */
-    .result-card {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid var(--glass-border);
-        border-radius: 20px;
-        backdrop-filter: blur(10px);
-    }
-    
-    .score-circle-wrapper {
-        position: relative;
-        width: 200px;
-        height: 200px;
-        margin: 0 auto;
-    }
-    
-    .score-svg {
-        transform: rotate(-90deg);
-        width: 100%;
-        height: 100%;
-    }
-    
-    .score-bg {
-        fill: none;
-        stroke: rgba(255,255,255,0.05);
-        stroke-width: 8;
-    }
-    
-    .score-progress {
-        fill: none;
-        stroke: #3b82f6;
-        stroke-width: 8;
-        stroke-dasharray: 283;
-        stroke-dashoffset: 283;
-        transition: stroke-dashoffset 1.5s ease-out, stroke 0.5s;
-        stroke-linecap: round;
-    }
-    
-    .score-text {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 3rem;
-        font-weight: 800;
-    }
-    
-    .risk-badge {
-        display: inline-block;
-        padding: 0.5rem 1.5rem;
-        border-radius: 50px;
-        font-weight: 700;
-        font-size: 1.2rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-    
-    .cat-progress-container {
-        height: 10px;
-        background: rgba(255,255,255,0.1);
-        border-radius: 5px;
-        overflow: hidden;
-        margin-top: 0.5rem;
-    }
-    
-    .cat-progress-bar {
-        height: 100%;
-        background: #3b82f6;
-        transition: width 1s ease-out;
-    }
-    
-    .badge-icon {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        background: rgba(59, 130, 246, 0.1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2.5rem;
-        color: #60a5fa;
-        border: 2px solid #3b82f6;
-        margin: 0 auto 1rem;
-        box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-    }
-    
-    .badge-card {
+    .result-view {
+        display: none;
         text-align: center;
-        width: 140px;
-        transition: transform 0.3s ease;
     }
-    
-    .badge-card:hover {
-        transform: translateY(-5px);
-    }
-
-    .bg-orange { background-color: #f97316 !important; }
-
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="quiz-container">
-    <div class="glass-card" id="quiz-wrapper">
-        <div class="progress-bar-container" id="progress-container">
-            <div class="progress-fill" id="progress"></div>
-        </div>
-
-        <form id="assessment-form">
-            {% csrf_token %}
-            {% for q in questions %}
-            <div class="question-box {% if forloop.first %}active{% endif %}" data-index="{{ forloop.counter0 }}" data-id="{{ q.id }}" data-correct="{{ q.correct_option }}" data-explanation="{{ q.explanation|escapejs }}">
-                <span class="badge bg-primary mb-3">{{ q.get_category_display }}</span>
-                <h2 class="question-text">{{ q.text }}</h2>
-                
-                <div class="options-grid">
-                    <button type="button" class="option-btn" data-value="A">
-                        <span class="option-letter">A</span> <span>{{ q.option_a }}</span>
-                    </button>
-                    <button type="button" class="option-btn" data-value="B">
-                        <span class="option-letter">B</span> <span>{{ q.option_b }}</span>
-                    </button>
-                    <button type="button" class="option-btn" data-value="C">
-                        <span class="option-letter">C</span> <span>{{ q.option_c }}</span>
-                    </button>
-                    <button type="button" class="option-btn" data-value="D">
-                        <span class="option-letter">D</span> <span>{{ q.option_d }}</span>
-                    </button>
-                </div>
-                <div class="explanation-box">
-                    <h5 class="mb-2"><i class="fas fa-info-circle me-2"></i>Explanation</h5>
-                    <p class="mb-0 explanation-text"></p>
-                </div>
-            </div>
-            {% endfor %}
-
-            <div class="nav-buttons">
-                <div class="text-muted">Question <span id="current-q">1</span> of {{ questions|length }}</div>
-                <button type="button" id="next-btn" class="btn btn-quiz btn-next" disabled>Next Question</button>
-            </div>
-        </form>
-
-        <div class="results-container" id="results-wrapper" style="display:none;">
-            <div class="results-header text-center mb-5">
-                <h2 class="display-4 fw-bold">Security Assessment Results</h2>
-                <p class="text-muted lead">Based on your responses, here is your comprehensive risk analysis.</p>
+    <div class="container">
+        <div class="q-card" id="quiz-card">
+            
+            <div id="quiz-intro" class="text-center">
+                <div class="badge mb-4" style="background: rgba(99, 102, 241, 0.1); color: var(--accent-secondary); border: 1px solid rgba(99, 102, 241, 0.2);">Knowledge Check</div>
+                <h1 class="mb-4">Security <span class="text-gradient" style="background: linear-gradient(135deg, var(--accent-secondary), #818cf8); -webkit-background-clip: text;">Assessment</span></h1>
+                <p class="text-muted mb-8 max-w-2xl mx-auto">Test your cybersecurity awareness and learn best practices to protect your digital identity.</p>
+                <button class="btn btn-primary" onclick="startQuiz()" style="background: linear-gradient(135deg, var(--accent-secondary), #4f46e5);">Start Assessment</button>
             </div>
 
-            <div class="row g-4 mb-5">
-                <!-- Section 1 & 2: Score & Badge -->
-                <div class="col-md-6">
-                    <div class="result-card score-card text-center h-100 p-4">
-                        <h4 class="fw-bold mb-3">Overall Security Score</h4>
-                        <div class="score-circle-wrapper my-4">
-                            <svg class="score-svg" viewBox="0 0 100 100">
-                                <circle class="score-bg" cx="50" cy="50" r="45"></circle>
-                                <circle class="score-progress" cx="50" cy="50" r="45" id="score-svg-path"></circle>
-                            </svg>
-                            <div class="score-text" id="final-score">0%</div>
-                        </div>
-                        <div class="risk-badge mt-2" id="risk-badge">Analyzing...</div>
-                    </div>
+            <div id="quiz-body" style="display: none;">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
                 </div>
 
-                <!-- Section 4 & 5: Strengths & Weaknesses -->
-                <div class="col-md-6">
-                    <div class="result-card h-100 p-4 d-flex flex-column justify-content-center gap-4">
-                        <div class="strengths-box border-bottom border-secondary border-opacity-50 pb-3">
-                            <h5 class="text-success fw-bold"><i class="fas fa-shield-check me-2"></i>Top Strengths</h5>
-                            <ul id="strengths-list" class="list-unstyled mb-0 mt-3 text-start"></ul>
-                        </div>
-                        <div class="weaknesses-box">
-                            <h5 class="text-danger fw-bold"><i class="fas fa-exclamation-triangle me-2"></i>Areas for Improvement</h5>
-                            <ul id="weaknesses-list" class="list-unstyled mb-0 mt-3 text-start"></ul>
-                        </div>
-                    </div>
+                <div id="questions-container">
+                    <!-- Dynamic Questions -->
+                </div>
+
+                <div class="explanation-box" id="explanation-box">
+                    <h5 style="color: var(--text-primary); margin-bottom: var(--space-2);">Explanation:</h5>
+                    <p id="explanation-text" class="text-muted mb-0"></p>
+                </div>
+
+                <div class="nav-buttons">
+                    <div class="text-muted text-sm font-mono" id="question-counter">Question 1 of 5</div>
+                    <button class="btn btn-primary" id="next-btn" style="display: none; background: linear-gradient(135deg, var(--accent-secondary), #4f46e5);" onclick="nextQuestion()">Next Question</button>
                 </div>
             </div>
 
-            <!-- Section 3: Category Breakdown -->
-            <div class="result-card p-4 mb-5 text-start">
-                <h4 class="fw-bold mb-4"><i class="fas fa-chart-bar text-primary me-2"></i>Category Breakdown</h4>
-                <div id="category-breakdown" class="row g-4">
-                    <!-- Progress bars injected via JS -->
+            <div class="result-view" id="result-container">
+                <h2 class="mb-4">Assessment Complete</h2>
+                <div class="display-4 font-bold mb-4" style="color: var(--accent-secondary);" id="final-score">0/0</div>
+                <p class="text-muted mb-8">Review the reporting guides to further enhance your security posture.</p>
+                <div class="flex justify-center gap-4">
+                    <a href="{% url 'citizen_safety' %}" class="btn btn-secondary">Explore Tools</a>
+                    <a href="#" id="download-scorecard-btn" class="btn btn-primary" style="display: none; background: linear-gradient(135deg, var(--accent-secondary), #4f46e5);">Download Scorecard</a>
+                    <button class="btn btn-primary" onclick="location.reload()" style="background: linear-gradient(135deg, var(--accent-secondary), #4f46e5);">Retake Quiz</button>
                 </div>
             </div>
-
-            <!-- Section 6: Recommendations -->
-            <div class="result-card p-4 mb-5 text-start" id="recommendations-container" style="display:none;">
-                <h4 class="fw-bold mb-4"><i class="fas fa-lightbulb text-warning me-2"></i>Personalized Recommendations</h4>
-                <div class="row g-3" id="recommendations-list">
-                    <!-- Cards injected via JS -->
-                </div>
-            </div>
-
-            <!-- Section 7: Earned Badges -->
-            <div class="result-card p-4 mb-5 text-start" id="badges-container" style="display:none;">
-                <h4 class="fw-bold mb-4"><i class="fas fa-medal text-warning me-2"></i>Earned Badges</h4>
-                <div class="d-flex flex-wrap gap-4 justify-content-center pt-3" id="badges-list">
-                    <!-- Badges injected via JS -->
-                </div>
-            </div>
-
-            <!-- Section 8: Action Buttons -->
-            <div class="d-flex justify-content-center gap-3 mt-5 flex-wrap">
-                <a href="{% url 'scorecard' %}" class="btn btn-primary btn-lg px-5 py-3 rounded-pill fw-bold shadow">
-                    <i class="fas fa-chart-pie me-2"></i>View Full Scorecard
-                </a>
-                <button onclick="window.location.reload()" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill fw-bold">
-                    <i class="fas fa-redo me-2"></i>Retake Assessment
-                </button>
-            </div>
+            
         </div>
     </div>
 </div>
@@ -380,210 +195,135 @@
 
 {% block extra_js %}
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const questions = document.querySelectorAll('.question-box');
-        const nextBtn = document.getElementById('next-btn');
-        const progressFill = document.getElementById('progress');
-        const currentQText = document.getElementById('current-q');
-        const totalQ = questions.length;
-        let currentIndex = 0;
-        const answers = {};
+    const questions = [
+        {% for q in questions %}
+        {
+            id: "{{ q.id|escapejs }}",
+            q: "{{ q.text|escapejs }}",
+            opts: [
+                "{{ q.option_a|escapejs }}",
+                "{{ q.option_b|escapejs }}",
+                "{{ q.option_c|escapejs }}",
+                "{{ q.option_d|escapejs }}"
+            ],
+            ans: {% if q.correct_option == 'A' %}0{% elif q.correct_option == 'B' %}1{% elif q.correct_option == 'C' %}2{% else %}3{% endif %},
+            exp: "{{ q.explanation|escapejs }}"
+        }{% if not forloop.last %},{% endif %}
+        {% endfor %}
+    ];
 
-        function updateProgress() {
-            const percent = ((currentIndex + 1) / totalQ) * 100;
-            progressFill.style.width = `${percent}%`;
+    let currentQ = 0;
+    let score = 0;
+    let answered = false;
+    let userAnswers = {};
+    const letters = ['A', 'B', 'C', 'D'];
+
+    function startQuiz() {
+        document.getElementById('quiz-intro').style.display = 'none';
+        document.getElementById('quiz-body').style.display = 'block';
+        renderQuestion();
+    }
+
+    function renderQuestion() {
+        answered = false;
+        document.getElementById('explanation-box').style.display = 'none';
+        document.getElementById('next-btn').style.display = 'none';
+        document.getElementById('question-counter').innerText = `Question ${currentQ + 1} of ${questions.length}`;
+        
+        const percent = ((currentQ) / questions.length) * 100;
+        document.getElementById('progress-fill').style.width = percent + '%';
+
+        const q = questions[currentQ];
+        const container = document.getElementById('questions-container');
+        
+        let html = `<div class="question-box active"><h2 class="question-text">${q.q}</h2><div class="options-grid">`;
+        
+        q.opts.forEach((opt, idx) => {
+            html += `<button class="option-btn" id="opt-${idx}" onclick="selectOption(${idx})">
+                        <span class="option-letter">${letters[idx]}</span>
+                        ${opt}
+                     </button>`;
+        });
+        html += `</div></div>`;
+        container.innerHTML = html;
+    }
+
+    function selectOption(idx) {
+        if (answered) return;
+        answered = true;
+        
+        // Disable all option buttons immediately
+        const buttons = document.querySelectorAll('.option-btn');
+        buttons.forEach(btn => {
+            btn.disabled = true;
+            btn.style.cursor = 'default';
+        });
+        
+        const q = questions[currentQ];
+        const selectedBtn = document.getElementById(`opt-${idx}`);
+        const correctBtn = document.getElementById(`opt-${q.ans}`);
+        
+        if (idx === q.ans) {
+            selectedBtn.classList.add('correct');
+            score++;
+        } else {
+            selectedBtn.classList.add('incorrect');
+            correctBtn.classList.add('correct');
         }
 
-        document.querySelectorAll('.option-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const parent = this.closest('.question-box');
-                
-                if (parent.dataset.answered === 'true') return;
-                parent.dataset.answered = 'true';
-                
-                const qId = parent.dataset.id;
-                const correctVal = parent.dataset.correct;
-                const explanation = parent.dataset.explanation;
-                const selectedVal = this.dataset.value;
-                
-                answers[qId] = selectedVal;
-                
-                parent.querySelectorAll('.option-btn').forEach(b => {
-                    b.style.pointerEvents = 'none';
-                    if (b.dataset.value === correctVal) {
-                        b.classList.add('correct');
-                    } else if (b.dataset.value === selectedVal) {
-                        b.classList.add('incorrect');
-                    }
-                });
-                
-                const explBox = parent.querySelector('.explanation-box');
-                explBox.querySelector('.explanation-text').innerText = explanation;
-                explBox.style.display = 'block';
-                
-                nextBtn.disabled = false;
-                
-                if (currentIndex === totalQ - 1) {
-                    nextBtn.innerText = 'Submit Assessment';
-                }
-            });
-        });
+        userAnswers[q.id] = letters[idx];
 
-        nextBtn.addEventListener('click', async () => {
-            if (currentIndex < totalQ - 1) {
-                questions[currentIndex].classList.remove('active');
-                currentIndex++;
-                questions[currentIndex].classList.add('active');
-                nextBtn.disabled = true;
-                currentQText.innerText = currentIndex + 1;
-                updateProgress();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.getElementById('explanation-text').innerText = q.exp;
+        document.getElementById('explanation-box').style.display = 'block';
+        document.getElementById('next-btn').style.display = 'block';
+    }
+
+    function nextQuestion() {
+        currentQ++;
+        if (currentQ < questions.length) {
+            renderQuestion();
+        } else {
+            submitQuiz();
+        }
+    }
+
+    function submitQuiz() {
+        document.getElementById('quiz-body').style.display = 'none';
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        
+        fetch("{% url 'security_assessment' %}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken
+            },
+            body: JSON.stringify({
+                answers: userAnswers
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('result-container').style.display = 'block';
+                const correctCount = Math.round(data.score / 10);
+                const totalCount = Math.round(data.total / 10);
+                document.getElementById('final-score').innerText = `${correctCount} / ${totalCount}`;
+                document.getElementById('progress-fill').style.width = '100%';
+                
+                const downloadUrl = `/download-report/${data.assessment_id}/`;
+                const downloadBtn = document.getElementById('download-scorecard-btn');
+                if (downloadBtn) {
+                    downloadBtn.href = downloadUrl;
+                    downloadBtn.style.display = 'inline-flex';
+                }
             } else {
-                nextBtn.disabled = true;
-                const originalText = nextBtn.innerText;
-                nextBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Analyzing...';
-                
-                try {
-                    const response = await fetch('{% url "security_assessment" %}', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
-                        },
-                        body: JSON.stringify({ answers })
-                    });
-                    
-                    const data = await response.json();
-                    if (data.success) {
-                        document.getElementById('assessment-form').style.display = 'none';
-                        document.getElementById('progress-container').style.display = 'none';
-                        document.getElementById('results-wrapper').style.display = 'block';
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                        
-                        // Score & Circular Gauge
-                        const percentage = Math.round(data.percentage);
-                        document.getElementById('final-score').innerText = `${percentage}%`;
-                        
-                        const offset = 283 - (283 * percentage) / 100;
-                        const svgPath = document.getElementById('score-svg-path');
-                        
-                        let color = '#ef4444';
-                        let badgeClass = 'bg-danger text-white';
-                        let badgeIcon = '<i class="fas fa-skull-crossbones me-2"></i>';
-                        
-                        if (percentage >= 90) {
-                            color = '#10b981'; badgeClass = 'bg-success text-white'; badgeIcon = '<i class="fas fa-trophy me-2"></i>';
-                        } else if (percentage >= 75) {
-                            color = '#3b82f6'; badgeClass = 'bg-primary text-white'; badgeIcon = '<i class="fas fa-shield-alt me-2"></i>';
-                        } else if (percentage >= 60) {
-                            color = '#f59e0b'; badgeClass = 'bg-warning text-dark'; badgeIcon = '<i class="fas fa-exclamation-triangle me-2"></i>';
-                        } else if (percentage >= 40) {
-                            color = '#f97316'; badgeClass = 'bg-orange text-white'; badgeIcon = '<i class="fas fa-radiation me-2"></i>';
-                        }
-                        
-                        svgPath.style.stroke = color;
-                        setTimeout(() => { svgPath.style.strokeDashoffset = offset; }, 100);
-                        
-                        const riskBadge = document.getElementById('risk-badge');
-                        riskBadge.className = `risk-badge shadow-lg ${badgeClass}`;
-                        riskBadge.innerHTML = `${badgeIcon}${data.risk_level}`;
-                        
-                        // Strengths & Weaknesses
-                        const sList = document.getElementById('strengths-list');
-                        const wList = document.getElementById('weaknesses-list');
-                        
-                        if(data.strengths.length > 0) {
-                            sList.innerHTML = data.strengths.map(s => `<li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>${s}</li>`).join('');
-                        } else {
-                            sList.innerHTML = '<li class="text-muted">Need more data to identify strengths.</li>';
-                        }
-                        
-                        if(data.weaknesses.length > 0) {
-                            wList.innerHTML = data.weaknesses.map(w => `<li class="mb-2"><i class="fas fa-times-circle text-danger me-2"></i>${w}</li>`).join('');
-                        } else {
-                            wList.innerHTML = '<li class="text-muted"><i class="fas fa-star text-warning me-2"></i>No major weaknesses identified!</li>';
-                        }
-                        
-                        // Category Breakdown
-                        const catBreakdown = document.getElementById('category-breakdown');
-                        let catHTML = '';
-                        const recommendations = [];
-                        const badges = [];
-                        
-                        for (const [key, stat] of Object.entries(data.category_scores)) {
-                            let catColor = stat.percentage >= 80 ? '#10b981' : (stat.percentage >= 60 ? '#f59e0b' : '#ef4444');
-                            catHTML += `
-                            <div class="col-md-6 mb-3">
-                                <div class="d-flex justify-content-between mb-2">
-                                    <span class="fw-bold text-light">${stat.name}</span>
-                                    <span class="fw-bold" style="color: ${catColor}">${Math.round(stat.percentage)}%</span>
-                                </div>
-                                <div class="cat-progress-container">
-                                    <div class="cat-progress-bar" style="width: 0%; background: ${catColor}" data-width="${stat.percentage}%"></div>
-                                </div>
-                            </div>
-                            `;
-                            
-                            if (stat.percentage < 60) {
-                                recommendations.push(`Strengthen your <strong>${stat.name}</strong> practices. Review recent case studies and enable multi-factor authentication where applicable.`);
-                            } else if (stat.percentage >= 80) { // Changed badge threshold to 80% for realism
-                                badges.push(stat.name);
-                            }
-                        }
-                        catBreakdown.innerHTML = catHTML;
-                        
-                        setTimeout(() => {
-                            document.querySelectorAll('.cat-progress-bar').forEach(bar => {
-                                bar.style.width = bar.dataset.width;
-                            });
-                        }, 200);
-                        
-                        // Recommendations
-                        if (recommendations.length > 0) {
-                            document.getElementById('recommendations-container').style.display = 'block';
-                            document.getElementById('recommendations-list').innerHTML = recommendations.map(r => `
-                                <div class="col-12">
-                                    <div class="p-3 rounded border border-warning border-opacity-25" style="background: rgba(245, 158, 11, 0.05);">
-                                        <i class="fas fa-arrow-right text-warning me-3"></i>${r}
-                                    </div>
-                                </div>
-                            `).join('');
-                        }
-                        
-                        // Badges
-                        if (badges.length > 0) {
-                            document.getElementById('badges-container').style.display = 'block';
-                            document.getElementById('badges-list').innerHTML = badges.map(b => {
-                                let icon = 'fa-shield-alt';
-                                if(b.includes('Password')) icon = 'fa-key';
-                                if(b.includes('Phishing')) icon = 'fa-fish';
-                                if(b.includes('Mobile')) icon = 'fa-mobile-alt';
-                                if(b.includes('Bank')) icon = 'fa-piggy-bank';
-                                if(b.includes('Privacy')) icon = 'fa-user-secret';
-                                if(b.includes('WiFi')) icon = 'fa-wifi';
-                                
-                                return `
-                                <div class="badge-card">
-                                    <div class="badge-icon"><i class="fas ${icon}"></i></div>
-                                    <div class="fw-bold text-light">${b.split(' ')[0]} Defender</div>
-                                </div>
-                                `;
-                            }).join('');
-                        }
-                    } else {
-                        alert('Error: ' + (data.error || 'Unknown error occurred'));
-                        nextBtn.disabled = false;
-                        nextBtn.innerText = originalText;
-                    }
-                } catch (e) {
-                    alert('Error submitting assessment. Please check your connection and try again.');
-                    nextBtn.disabled = false;
-                    nextBtn.innerText = originalText;
-                }
+                alert("Error submitting assessment: " + (data.error || "Unknown error"));
             }
+        })
+        .catch(error => {
+            console.error("Error submitting quiz:", error);
+            alert("Connection error. Please try again.");
         });
-
-        updateProgress();
-    });
+    }
 </script>
 {% endblock %}

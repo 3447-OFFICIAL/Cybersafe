@@ -1,358 +1,46 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Aadhaar Identity Intelligence - CyberSafe{% endblock %}
+{% block title %}Aadhaar & PAN Audit - CyberSafe{% endblock %}
 
 {% block content %}
-<!-- ═══════════ HERO: IMPACT (RED/DANGER THEME) ═══════════ -->
-<section class="cyber-section reveal d-flex align-items-center" style="min-height: 100vh; padding: 80px 0;">
+<section class="tool-hero animate-fade-in" style="background: radial-gradient(circle at center, rgba(99, 102, 241, 0.05), transparent 70%);">
     <div class="container text-center">
-        <div class="cyber-badge mb-4 d-inline-flex mx-auto"
-            style="border-color: rgba(239, 68, 68, 0.3); color: #ef4444;">
-            <i class="fa-solid fa-id-card-clip me-2 pulse-red"></i> Biometric Integrity Monitor
-        </div>
-        <h1 class="display-3 fw-bold text-white text-sharp mb-3">Aadhaar <span style="color: #ef4444;">Risk
-                Signals</span></h1>
-        <p class="lead text-secondary mx-auto mb-5" style="max-width: 700px; font-size: 1.2rem;">
-            Your Aadhaar is the cornerstone of your financial and legal identity. We help you monitor unauthorized
-            authentication attempts and secure your biometric data against Aadhaar-enabled fraud.
+        <div class="badge mb-4" style="background: rgba(99, 102, 241, 0.1); color: var(--accent-secondary); border: 1px solid rgba(99, 102, 241, 0.2);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-2"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"></path><path d="M14 3v5h5M16 13H8M16 17H8M10 9H8"></path></svg> Identity Auditor</div>
+        <h1 class="hero-title">Identity <span class="text-gradient" style="background: linear-gradient(135deg, var(--accent-secondary), #818cf8); -webkit-background-clip: text;">Risk Scan</span></h1>
+        <p class="hero-subtitle text-muted">
+            Ensure your critical identity documents are not publicly exposed or associated with synthetic identities on illicit forums.
         </p>
-        <div class="d-flex flex-sm-row flex-column justify-content-center align-items-center gap-3">
-            <a href="#audit-now" class="btn btn-hero-danger px-5 w-100 w-sm-auto">
-                <i class="fa-solid fa-fingerprint me-2"></i> Audit Authentication History
-            </a>
-            <a href="#how-it-works" class="btn btn-hero-primary px-4 w-100 w-sm-auto"
-                style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);">
-                <i class="fa-solid fa-circle-info me-2"></i> How it Works
+        
+        <div class="mt-8">
+            <a href="https://uidai.gov.in/" target="_blank" class="btn btn-primary pulse-primary" style="background: linear-gradient(135deg, var(--accent-secondary), #4f46e5); font-size: 1.1rem; padding: var(--space-4) var(--space-8); box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);">
+                Access UIDAI Portal <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
             </a>
         </div>
     </div>
 </section>
 
-<!-- ═══════════ HOW IT WORKS ═══════════ -->
-<section id="how-it-works" class="py-5"
-    style="background: rgba(23, 6, 6, 0.4); border-top: 1px solid rgba(239, 68, 68, 0.1);">
-    <div class="container py-5">
-        <div class="text-center mb-5 reveal">
-            <h2 class="text-white fw-bold mb-3">How <span style="color: #ef4444;">Identity Compromise</span> Occurs</h2>
-            <p class="text-secondary mx-auto" style="max-width: 600px;">Aadhaar data is often exposed through secondary
-                service providers and sophisticated social engineering.</p>
-        </div>
-
-        <div class="row g-4 stagger-container reveal">
-            <div class="col-lg-4 stagger-child">
-                <div class="cyber-card p-4 h-100 border-danger-subtle">
-                    <div class="module-num red mb-3">01 / EXPOSURE</div>
-                    <div class="display-6 mt-2 mb-3" style="color: #ef4444;"><i
-                            class="fa-solid fa-cloud-arrow-down"></i></div>
-                    <h5 class="text-white fw-bold">Provider Leaks</h5>
-                    <p class="text-secondary small">Banks, telcos, and utility providers store Aadhaar data. If their
-                        cloud buckets are unsecured, your ID and sensitive metadata are leaked to the dark web.</p>
-                </div>
+<section class="py-12" style="padding: var(--space-12) 0;">
+    <div class="container">
+        <div class="grid grid-cols-3">
+            <div class="cyber-card animate-fade-in" style="animation-delay: 0.1s;">
+                <div class="text-accent mb-4" style="color: var(--accent-secondary);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path></svg></div>
+                <h4 style="margin-bottom: var(--space-2);">1. Review Authentication History</h4>
+                <p class="text-muted text-sm mb-0">Check the official UIDAI portal for recent Aadhaar authentication requests made using your biometrics or OTP.</p>
             </div>
-            <div class="col-lg-4 stagger-child">
-                <div class="cyber-card p-4 h-100 border-danger-subtle">
-                    <div class="module-num red mb-3">02 / INTERCEPTION</div>
-                    <div class="display-6 mt-2 mb-3" style="color: #ef4444;"><i class="fa-solid fa-user-gear"></i></div>
-                    <h5 class="text-white fw-bold">Biometric Cloning</h5>
-                    <p class="text-secondary small">Advanced scammers harvest fingerprint data from public property
-                        registries or use specialized gummy-finger tech to bypass AePS authentication.</p>
-                </div>
+            
+            <div class="cyber-card animate-fade-in" style="animation-delay: 0.2s;">
+                <div class="text-accent mb-4" style="color: var(--accent-secondary);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
+                <h4 style="margin-bottom: var(--space-2);">2. Biometric Locking</h4>
+                <p class="text-muted text-sm mb-0">Learn how to lock your biometrics online to prevent unauthorized authentication.</p>
             </div>
-            <div class="col-lg-4 stagger-child">
-                <div class="cyber-card p-4 h-100 border-danger-subtle">
-                    <div class="module-num red mb-3">03 / TAKE OVER</div>
-                    <div class="display-6 mt-2 mb-3" style="color: #ef4444;"><i class="fa-solid fa-comment-dots"></i>
-                    </div>
-                    <h5 class="text-white fw-bold">OTP Social Engineering</h5>
-                    <p class="text-secondary small">Criminials call you posing as government officials to trick you into
-                        sharing the Aadhaar OTP, allowing them to verify fraudulent transactions in your name.</p>
-                </div>
+            
+            <div class="cyber-card animate-fade-in" style="animation-delay: 0.3s;">
+                <div class="text-accent mb-4" style="color: var(--accent-secondary);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12h4l2-9 5 18 3-10h6"></path></svg></div>
+                <h4 style="margin-bottom: var(--space-2);">3. Monitor PAN</h4>
+                <p class="text-muted text-sm mb-0">Check your CIBIL score regularly to spot loans taken fraudulently using your PAN card.</p>
             </div>
         </div>
     </div>
 </section>
-
-<!-- ═══════════ SCANNER: HOW TO & START ═══════════ -->
-<section id="audit-now" class="py-5 cyber-section">
-    <div class="container py-5">
-        <div class="row align-items-center g-5">
-            <div class="col-lg-6 reveal-left">
-                <div class="cyber-badge mb-4" style="border-color: rgba(239, 68, 68, 0.3); color: #ef4444;">
-                    <i class="fa-solid fa-shield-halved me-2"></i> Official Verification Flow
-                </div>
-                <h2 class="text-white fw-bold mb-4">How to Audit <span style="color: #ef4444;">Your Identity</span></h2>
-
-                <div class="scan-steps mb-5">
-                    <div class="step-card d-flex gap-4 p-4 mb-3 danger-step">
-                        <div class="step-icon-danger">1</div>
-                        <div>
-                            <h6 class="text-white fw-bold mb-1">Access MyAadhaar Portal</h6>
-                            <p class="text-secondary small mb-0">Navigate to the UIDAI official self-service portal
-                                (myaadhaar.uidai.gov.in) to access your secure records.</p>
-                        </div>
-                    </div>
-                    <div class="step-card d-flex gap-4 p-4 mb-3 danger-step">
-                        <div class="step-icon-danger">2</div>
-                        <div>
-                            <h6 class="text-white fw-bold mb-1">Audit Auth History</h6>
-                            <p class="text-secondary small mb-0">Review the 'Authentication History' section to see
-                                every successful and failed usage of your Aadhaar in the last 6 months.</p>
-                        </div>
-                    </div>
-                    <div class="step-card d-flex gap-4 p-4 danger-step">
-                        <div class="step-icon-danger">3</div>
-                        <div>
-                            <h6 class="text-white fw-bold mb-1">Toggle Biometric Lock</h6>
-                            <p class="text-secondary small mb-0">Use the portal to lock your biometrics. This prevents
-                                anyone (even hackers with your fingerprints) from using your ID for AePS.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <a href="https://myaadhaar.uidai.gov.in/" target="_blank" class="btn btn-hero-danger w-100 p-4"
-                    style="border-radius: 20px;">
-                    <i class="fa-solid fa-user-shield me-3 h4 mb-0"></i>
-                    <span class="h5 mb-0 fw-bold">OPEN OFFICIAL MYAADHAAR PORTAL</span>
-                </a>
-            </div>
-
-            <div class="col-lg-6 reveal-right">
-                <div class="scanner-visual danger">
-                    <div class="visual-orb danger"></div>
-                    <div class="scanning-beam danger"></div>
-                    <div class="inner-icon danger">
-                        <i class="fa-solid fa-fingerprint" style="color: #ef4444;"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════ CONSEQUENCES: WHAT HAPPENS IF EXPOSED ═══════════ -->
-<section class="py-5" style="background: rgba(239, 68, 68, 0.03); border-top: 1px solid rgba(239, 68, 68, 0.1);">
-    <div class="container py-5">
-        <div class="text-center mb-5 reveal">
-            <h2 class="text-white fw-bold mb-3">Impact of <span style="color: #ef4444;">Identity Theft</span></h2>
-            <p class="text-secondary mx-auto" style="max-width: 650px;">A compromised Aadhaar is not just a leak—it is a
-                total compromise of your legal and financial standing.</p>
-        </div>
-
-        <div class="row g-4 reveal">
-            <div class="col-md-4">
-                <div class="threat-alert danger p-4 h-100">
-                    <div class="alert-severity red">CRITICAL</div>
-                    <h5 class="text-white fw-bold mt-3">AePS Fraud</h5>
-                    <p class="text-secondary small">Attackers use biometric clones to silently withdraw up to ₹10,000
-                        per day from your bank without needing an OTP or Physical Card.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="threat-alert danger p-4 h-100">
-                    <div class="alert-severity red">CRITICAL</div>
-                    <h5 class="text-white fw-bold mt-3">Ghost Bank Accounts</h5>
-                    <p class="text-secondary small">Your leaked Aadhaar can be used to open fraudulent bank accounts
-                        used for money laundering, making you legally liable for their crimes.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="threat-alert danger p-4 h-100">
-                    <div class="alert-severity amber">HIGH RISK</div>
-                    <h5 class="text-white fw-bold mt-3">Illegal Sim Cards</h5>
-                    <p class="text-secondary small">Criminals use your identity for bulk SIM registration. These numbers
-                        are then used in terrorism or high-value extortion scams.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="threat-alert danger p-4 h-100">
-                    <div class="alert-severity red">CRITICAL</div>
-                    <h5 class="text-white fw-bold mt-3">Loan Liabilities</h5>
-                    <p class="text-secondary small">By linking your Aadhaar to fake income documents, fraudsters can
-                        obtain high-interest loans in your name, destroying your credit score.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="threat-alert danger p-4 h-100">
-                    <div class="alert-severity amber">HIGH RISK</div>
-                    <h5 class="text-white fw-bold mt-3">Tax Evasion Link</h5>
-                    <p class="text-secondary small">Unauthorized linking of your Aadhaar to malicious PAN cards is used
-                        to hide income, leading to severe penalties from tax authorities.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="threat-alert danger p-4 h-100">
-                    <div class="alert-severity amber">HIGH RISK</div>
-                    <h5 class="text-white fw-bold mt-3">Welfare Fraud</h5>
-                    <p class="text-secondary small">Attackers can attempt to hijack your government subsidies or PDS
-                        rations by authenticating using cloned identity markers.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════ PREVENTION & MITIGATION ═══════════ -->
-<section class="py-5" style="background: transparent;">
-    <div class="container py-5">
-        <div class="row g-5">
-            <!-- Prevention -->
-            <div class="col-lg-6 reveal-left">
-                <div class="cyber-badge mb-4" style="border-color: rgba(16,185,129,0.3); color: var(--success-color);">
-                    <i class="fa-solid fa-shield-check me-2"></i> Defensive Strategy
-                </div>
-                <h3 class="text-white fw-bold mb-4">Prevention Tips</h3>
-                <div class="tip-list">
-                    <div class="tip-item d-flex gap-3 mb-4">
-                        <i class="fa-solid fa-check-circle text-success mt-1"></i>
-                        <div>
-                            <h6 class="text-white mb-1">Enable Biometric Lock</h6>
-                            <p class="text-secondary small">The single most effective defense. Lock your fingerprints
-                                via MyAadhaar to disable all biometric authentication.</p>
-                        </div>
-                    </div>
-                    <div class="tip-item d-flex gap-3 mb-4">
-                        <i class="fa-solid fa-check-circle text-success mt-1"></i>
-                        <div>
-                            <h6 class="text-white mb-1">Use Masked Aadhaar</h6>
-                            <p class="text-secondary small">Download a version of your Aadhaar where only the last 4
-                                digits are visible for general identity verification.</p>
-                        </div>
-                    </div>
-                    <div class="tip-item d-flex gap-3">
-                        <i class="fa-solid fa-check-circle text-success mt-1"></i>
-                        <div>
-                            <h6 class="text-white mb-1">Generate Virtual ID (VID)</h6>
-                            <p class="text-secondary small">Use a temporary VID instead of your permanent Aadhaar number
-                                when authenticating with third-party services.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Mitigation -->
-            <div class="col-lg-6 reveal-right">
-                <div class="cyber-badge mb-4" style="border-color: rgba(239, 68, 68, 0.3); color: #ef4444;">
-                    <i class="fa-solid fa-kit-medical me-2"></i> Crisis Response
-                </div>
-                <h3 class="text-white fw-bold mb-4">Mitigation Tips</h3>
-                <div class="tip-list">
-                    <div class="tip-item d-flex gap-3 mb-4">
-                        <i class="fa-solid fa-phone mt-1" style="color: #ef4444;"></i>
-                        <div>
-                            <h6 class="text-white mb-1">Call 1947 Immediately</h6>
-                            <p class="text-secondary small">UIDAI's dedicated helpline for reporting unauthorized
-                                Aadhaar usage or authentication failures.</p>
-                        </div>
-                    </div>
-                    <div class="tip-item d-flex gap-3 mb-4">
-                        <i class="fa-solid fa-file-invoice-dollar mt-1" style="color: #ef4444;"></i>
-                        <div>
-                            <h6 class="text-white mb-1">Audit Bank Statements</h6>
-                            <p class="text-secondary small">Check for 'AePS Withdrawal' entries. If you find one you
-                                didn't authorize, report it to your bank's fraud cell within 24 hours.</p>
-                        </div>
-                    </div>
-                    <div class="tip-item d-flex gap-3">
-                        <i class="fa-solid fa-building-circle-exclamation mt-1" style="color: #ef4444;"></i>
-                        <div>
-                            <h6 class="text-white mb-1">Lodge Cyber Grievance</h6>
-                            <p class="text-secondary small">File an official report on the National Cyber Crime
-                                Reporting Portal (cybercrime.gov.in) with your auth history logs.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<style>
-    .step-icon-danger {
-        width: 48px;
-        height: 48px;
-        background: #ef4444;
-        color: var(--bg-void);
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 800;
-        font-size: 1.2rem;
-        flex-shrink: 0;
-        box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
-    }
-
-    .danger-step {
-        background: rgba(239, 68, 68, 0.03) !important;
-        border-color: rgba(239, 68, 68, 0.1) !important;
-    }
-
-    .scanner-visual.danger {
-        height: 500px;
-        background: rgba(15, 5, 5, 0.6);
-        border: 1px solid rgba(239, 68, 68, 0.2);
-        border-radius: 40px;
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 0 60px rgba(0, 0, 0, 0.4), inset 0 0 40px rgba(239, 68, 68, 0.05);
-    }
-
-    .visual-orb.danger {
-        width: 200px;
-        height: 200px;
-        background: radial-gradient(circle, rgba(239, 68, 68, 0.2) 0%, transparent 70%);
-        border-radius: 50%;
-        animation: orbPulse 4s infinite alternate;
-    }
-
-    .scanning-beam.danger {
-        position: absolute;
-        width: 100%;
-        height: 200px;
-        background: linear-gradient(to bottom, transparent, rgba(239, 68, 68, 0.2), transparent);
-        top: -200px;
-        animation: scanAnim 4s linear infinite;
-    }
-
-    .inner-icon.danger {
-        position: absolute;
-        font-size: 8rem;
-        opacity: 0.2;
-        filter: drop-shadow(0 0 20px #ef4444);
-    }
-
-    .threat-alert.danger:hover {
-        border-color: rgba(239, 68, 68, 0.4);
-        transform: translateY(-5px);
-        background: rgba(239, 68, 68, 0.08);
-    }
-
-    .pulse-red {
-        animation: pulseRed 3s infinite;
-    }
-
-    @keyframes pulseRed {
-
-        0%,
-        100% {
-            opacity: 1;
-        }
-
-        50% {
-            opacity: 0.5;
-        }
-    }
-
-    .module-num.red {
-        color: #ef4444;
-    }
-
-    .border-danger-subtle {
-        border-color: rgba(239, 68, 68, 0.1) !important;
-    }
-</style>
 {% endblock %}

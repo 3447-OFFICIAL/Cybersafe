@@ -2,8 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Advanced statistics counter animation
     const counters = document.querySelectorAll('.counter');
     counters.forEach(counter => {
-        const target = +counter.innerText.replace(/,/g, '');
-        const duration = 1800; // 1.8 seconds duration
+        const text = counter.innerText.trim();
+        const target = parseInt(text.replace(/[^0-9]/g, '')) || 0;
+        const duration = 1500; // 1.5 seconds duration
         const step = target / (duration / 16); // ~60 FPS steps
         
         let current = 0;
@@ -20,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (target > 0) {
             updateCounter();
         } else {
-            counter.innerText = '0';
+            counter.innerText = target.toLocaleString();
         }
     });
 });

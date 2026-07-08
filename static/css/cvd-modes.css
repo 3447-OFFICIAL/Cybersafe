@@ -25,6 +25,7 @@ body.mode-tritanopia #cvd-filter-layer {
 /* --- Protanopia Mode (Red-Blind) --- */
 body.mode-protanopia #cvd-filter-layer {
     backdrop-filter: url('#protanopia-filter');
+    -webkit-backdrop-filter: url('#protanopia-filter');
 }
 
 body.mode-protanopia .btn-danger,
@@ -38,6 +39,7 @@ body.mode-protanopia .severity-high {
 /* --- Deuteranopia Mode (Green-Blind) --- */
 body.mode-deuteranopia #cvd-filter-layer {
     backdrop-filter: url('#deuteranopia-filter');
+    -webkit-backdrop-filter: url('#deuteranopia-filter');
 }
 
 body.mode-deuteranopia .btn-success,
@@ -49,6 +51,7 @@ body.mode-deuteranopia .severity-low {
 /* --- Tritanopia Mode (Blue-Blind) --- */
 body.mode-tritanopia #cvd-filter-layer {
     backdrop-filter: url('#tritanopia-filter');
+    -webkit-backdrop-filter: url('#tritanopia-filter');
 }
 
 body.mode-tritanopia .btn-hero-primary,

@@ -1,597 +1,210 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}How to Report Cyber Crime - Instant Action Guide{% endblock %}
+{% block title %}Reporting Guide - CyberSafe{% endblock %}
 
 {% block extra_css %}
 <style>
-    /* ═══════════ CYBER-TECH REPORTING THEME ═══════════ */
-    :root {
-        --crit-red: #ff4d4d;
-        --action-blue: #00d4ff;
-        --step-gold: #ffcc00;
-        --bg-void: #020617;
-        --card-bg: rgba(15, 23, 42, 0.6);
+    .guide-hero {
+        padding: var(--space-16) 0 var(--space-12);
+        background: radial-gradient(circle at center, rgba(16, 185, 129, 0.05), transparent 70%);
+        text-align: center;
     }
-
-    body { background: var(--bg-void) !important; }
-
-    .report-hero {
-        padding: 120px 0 80px;
-        background: radial-gradient(circle at top right, rgba(255, 77, 77, 0.05) 0%, transparent 50%),
-                    radial-gradient(circle at bottom left, rgba(0, 212, 255, 0.05) 0%, transparent 50%);
-    }
-
-    .urgency-badge {
-        background: rgba(255, 77, 77, 0.1);
-        border: 1px solid var(--crit-red);
-        color: var(--crit-red);
-        padding: 8px 20px;
-        border-radius: 50px;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.9rem;
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 25px;
-        animation: pulseRed 2s infinite;
-    }
-
-    @keyframes pulseRed {
-        0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.4); }
-        70% { box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); }
-    }
-
-    .hero-h1 {
-        font-family: 'Rajdhani', sans-serif;
-        font-weight: 800;
-        letter-spacing: -1px;
-        line-height: 1;
-    }
-
-    .emergency-btn-container {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-        margin-top: 40px;
-    }
-
-    .btn-emergency {
-        padding: 12px 30px;
-        border-radius: 12px;
-        font-family: 'Rajdhani', sans-serif;
-        font-weight: 700;
-        text-transform: uppercase;
-        font-size: 1.1rem;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        text-decoration: none;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .btn-1930 {
-        background: linear-gradient(135deg, #ff4d4d 0%, #b30000 100%);
-        color: white;
-        box-shadow: 0 8px 25px rgba(255, 77, 77, 0.25);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .btn-1930:hover {
-        transform: translateY(-3px) scale(1.02);
-        box-shadow: 0 12px 35px rgba(255, 77, 77, 0.45);
-        border-color: rgba(255, 255, 255, 0.3);
-        color: white;
-    }
-
-    .btn-gov {
-        background: rgba(255, 255, 255, 0.03);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        color: white;
-    }
-
-    .btn-gov:hover {
-        background: rgba(0, 212, 255, 0.1);
-        border-color: var(--action-blue);
-        color: var(--action-blue);
-        transform: translateY(-3px) scale(1.02);
-        box-shadow: 0 12px 35px rgba(0, 212, 255, 0.15);
-    }
-
-    /* Shine effect */
-    .btn-emergency::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-        transform: rotate(45deg);
-        transition: 0.6s;
-        pointer-events: none;
-    }
-
-    .btn-emergency:hover::before {
-        left: 100%;
-        top: 100%;
-    }
-
-    /* ═══════════ SECTION CARDS ═══════════ */
-    .info-card {
-        background: var(--card-bg);
-        border: 1px solid rgba(255,255,255,0.05);
-        border-radius: 24px;
-        padding: 40px;
-        height: 100%;
-        transition: all 0.3s ease;
-    }
-
-    .info-card:hover {
-        border-color: rgba(255,255,255,0.1);
-        background: rgba(15, 23, 42, 0.8);
-    }
-
-    .section-title {
-        font-family: 'Rajdhani', sans-serif;
-        font-weight: 700;
-        color: white;
-        margin-bottom: 30px;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
-
-    .section-title i {
-        color: var(--action-blue);
-    }
-
-    /* Checklist Style */
-    .checklist {
+    
+    .accordion {
+        max-width: 800px;
+        margin: 0 auto;
         display: flex;
         flex-direction: column;
+        gap: var(--space-4);
     }
-
-    .checklist-item {
-        background: rgba(0,0,0,0.2);
-        border-radius: 12px;
-        padding: 12px 20px;
-        margin-bottom: 10px;
-        border-left: 4px solid var(--action-blue);
-        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    
+    .accordion-item {
+        background: var(--bg-surface-elevated);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+    }
+    
+    .accordion-header {
+        width: 100%;
+        padding: var(--space-6);
         display: flex;
-        gap: 15px;
-        align-items: flex-start;
-    }
-
-    .checklist-item:hover {
-        transform: translateX(8px);
-        background: rgba(255,255,255,0.03);
-    }
-
-    .checklist-item i {
-        color: var(--action-blue);
-        font-size: 1rem;
-        text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
-        flex-shrink: 0;
-        margin-top: 4px;
-    }
-
-    .checklist-item strong {
-        color: white;
-        display: block;
-        font-family: 'Rajdhani', sans-serif;
-        font-size: 1rem;
-        margin-bottom: 3px;
-    }
-
-    .checklist-item .text-desc {
-        color: #94a3b8;
-        font-size: 0.85rem;
-        line-height: 1.4;
-    }
-
-    /* Step Path Style */
-    .path-step {
-        background: rgba(0,0,0,0.2);
-        border-radius: 16px;
-        padding: 25px;
-        margin-bottom: 20px;
-        border-left: 4px solid var(--action-blue);
-        transition: all 0.3s ease;
-    }
-
-    .path-step:hover {
-        transform: translateX(10px);
-        background: rgba(255,255,255,0.03);
-    }
-
-    .path-step h6 {
-        color: white;
+        align-items: center;
+        justify-content: space-between;
+        background: transparent;
+        border: none;
+        color: var(--text-primary);
+        font-family: var(--font-display);
+        font-size: 1.25rem;
         font-weight: 700;
-        margin-bottom: 5px;
+        cursor: pointer;
+        text-align: left;
+        transition: var(--transition-normal);
     }
-
-    /* Process Timeline */
-    .process-timeline {
+    
+    .accordion-header:hover {
+        background: rgba(255, 255, 255, 0.02);
+    }
+    
+    .accordion-header .icon {
+        color: var(--accent-safe);
+        transition: transform 0.3s;
+    }
+    
+    .accordion-item.active .accordion-header {
+        border-bottom: 1px solid var(--border-subtle);
+        background: rgba(16, 185, 129, 0.05);
+    }
+    
+    .accordion-item.active .icon {
+        transform: rotate(180deg);
+    }
+    
+    .accordion-content {
+        padding: 0 var(--space-6);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, padding 0.4s ease;
+        background: var(--bg-surface);
+    }
+    
+    .accordion-item.active .accordion-content {
+        padding: var(--space-6);
+        max-height: 1000px; /* arbitrary max-height for animation */
+    }
+    
+    .step-list {
+        list-style: none;
+        counter-reset: guide-counter;
+        margin-left: 0;
+        padding-left: 0;
+    }
+    
+    .step-list li {
         position: relative;
-        padding-left: 30px;
+        padding-left: var(--space-12);
+        margin-bottom: var(--space-4);
+        color: var(--text-secondary);
     }
-
-    .process-timeline::before {
-        content: '';
+    
+    .step-list li::before {
+        counter-increment: guide-counter;
+        content: counter(guide-counter);
         position: absolute;
         left: 0;
         top: 0;
-        bottom: 0;
-        width: 2px;
-        background: linear-gradient(to bottom, var(--action-blue), transparent);
-    }
-
-    .timeline-item {
-        position: relative;
-        margin-bottom: 30px;
-    }
-
-    .timeline-item::after {
-        content: '';
-        position: absolute;
-        left: -35px;
-        top: 5px;
-        width: 12px;
-        height: 12px;
-        background: var(--bg-void);
-        border: 2px solid var(--action-blue);
+        width: 32px;
+        height: 32px;
+        background: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        color: var(--accent-safe);
         border-radius: 50%;
-    }
-
-    /* Evidence Guide */
-    .evidence-badge {
-        background: rgba(255, 204, 0, 0.1);
-        border: 1px solid var(--step-gold);
-        color: var(--step-gold);
-        padding: 10px 20px;
-        border-radius: 12px;
-        font-size: 0.8rem;
-        font-weight: 800;
-        margin-bottom: 25px;
-        display: inline-block;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-    }
-
-    .protocol-step {
         display: flex;
-        gap: 15px;
-        margin-bottom: 20px;
-        padding-bottom: 15px;
-        border-bottom: 1px solid rgba(255, 204, 0, 0.1);
-    }
-
-    .protocol-step:last-child {
-        border-bottom: none;
-        margin-bottom: 0;
-        padding-bottom: 0;
-    }
-
-    .protocol-step i {
-        color: var(--step-gold);
-        font-size: 1.1rem;
-        margin-top: 5px;
-        text-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
-    }
-
-    .protocol-step h6 {
-        color: white;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-mono);
         font-weight: 700;
-        font-size: 0.95rem;
-        margin-bottom: 4px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-
-    .protocol-step p {
-        color: #94a3b8;
-        font-size: 0.85rem;
-        line-height: 1.4;
-        margin-bottom: 0;
-    }
-
-    /* State Select */
-    .cyber-select {
-        background: rgba(255,255,255,0.05);
-        border: 1px solid rgba(255,255,255,0.1);
-        color: white;
-        padding: 15px;
-        border-radius: 12px;
-        width: 100%;
-        outline: none;
-    }
-
-    .cyber-select option {
-        background: var(--bg-void);
-    }
-
-    @media (max-width: 768px) {
-        .emergency-btn-container {
-            flex-direction: column;
-        }
+        font-size: 0.9rem;
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<!-- ═══════════ HERO: IMPACT SECTON ═══════════ -->
-<section class="report-hero">
-    <div class="container text-center reveal">
-        <div class="urgency-badge">
-            <i class="fa-solid fa-clock-rotate-left"></i> Every minute matters — act within the first hour
-        </div>
-        <h1 class="display-3 hero-h1 text-white mb-4">Been scammed? <br><span style="color:var(--crit-red);">Here's exactly what to do.</span></h1>
-        
-        <div class="emergency-btn-container">
-            <a href="tel:1930" class="btn-emergency btn-1930">
-                <i class="fa-solid fa-phone"></i>
-                <div>
-                    <div style="font-size: 0.8rem; opacity: 0.8;">Financial Fraud?</div>
-                    <div>Call 1930 Now</div>
-                </div>
-            </a>
-            <a href="https://cybercrime.gov.in" target="_blank" class="btn-emergency btn-gov">
-                <i class="fa-solid fa-building-shield"></i>
-                <div>
-                    <div style="font-size: 0.8rem; opacity: 0.8;">All Other Crimes</div>
-                    <div>Visit CyberCrime.gov.in</div>
-                </div>
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════ MAIN CONTENT GRID ═══════════ -->
-<section class="py-5">
+<section class="guide-hero animate-fade-in">
     <div class="container">
-        <div class="row g-4">
-            <!-- 1. Gather Info Checklist -->
-            <div class="col-lg-6 reveal-left d-flex flex-column">
-                <div class="info-card h-100">
-                    <h4 class="section-title"><i class="fa-solid fa-clipboard-list"></i> Before you report — gather this info</h4>
-                    <p class="text-secondary small mb-4">Keep these details ready to ensure the fastest response from investigators.</p>
-                    
-                    <div class="checklist flex-grow-1">
-                        <div class="checklist-item">
-                            <i class="fa-solid fa-id-card text-cyber"></i>
-                            <div>
-                                <strong>Scammer Identity</strong>
-                                <div class="text-desc">Collect any phone numbers, UPI IDs, or Bank account details used by the criminal.</div>
-                            </div>
-                        </div>
-                        <div class="checklist-item">
-                            <i class="fa-solid fa-file-invoice text-cyber"></i>
-                            <div>
-                                <strong>Hard Evidence</strong>
-                                <div class="text-desc">Save screenshots of WhatsApp/Facebook chats, SMS threads, or call recordings.</div>
-                            </div>
-                        </div>
-                        <div class="checklist-item">
-                            <i class="fa-solid fa-receipt text-cyber"></i>
-                            <div>
-                                <strong>Transaction Data</strong>
-                                <div class="text-desc">Keep your Transaction ID (UTR), exact amount lost, and the timestamp of the event.</div>
-                            </div>
-                        </div>
-                        <div class="checklist-item mb-0">
-                            <i class="fa-solid fa-user-shield text-cyber"></i>
-                            <div>
-                                <strong>Your Details</strong>
-                                <div class="text-desc">Provide your account number and branch details to help nodal officers stop outgoing funds.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 2. Step by Step Reporting Guide -->
-            <div class="col-lg-6 reveal-right d-flex flex-column">
-                <div class="info-card h-100">
-                    <h4 class="section-title"><i class="fa-solid fa-route"></i> Three Clear Paths to Reporting</h4>
-                    
-                    <div class="flex-grow-1">
-                        <div class="path-step">
-                            <h6>1. Call 1930 Helpline</h6>
-                            <p class="text-secondary small mb-0">Best for <strong>Financial Fraud</strong>. Direct access to the National Cyber Crime portal to freeze scammer accounts.</p>
-                        </div>
-                        
-                        <div class="path-step" style="border-left-color: var(--step-gold);">
-                            <h6>2. Online Portal</h6>
-                            <p class="text-secondary small mb-0">Visit <strong>cybercrime.gov.in</strong> for all cases including social media hacking, harassment, or data theft.</p>
-                        </div>
-
-                        <div class="path-step mb-0" style="border-left-color: var(--crit-red);">
-                            <h6>3. Nearest Cyber Police Station</h6>
-                            <p class="text-secondary small mb-0">For serious cases involving large sums or physical threats, visit your local designated Cyber Cell.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3. What happens after -->
-            <div class="col-lg-8 reveal-left">
-                <div class="info-card">
-                    <h4 class="section-title"><i class="fa-solid fa-gears"></i> What happens after you report?</h4>
-                    <div class="process-timeline">
-                        <div class="timeline-item">
-                            <h6 class="text-white">I4C Processing</h6>
-                            <p class="text-secondary small">The Indian Cyber Crime Coordination Centre (I4C) validates your complaint and alerts the relevant bank or platform.</p>
-                        </div>
-                        <div class="timeline-item">
-                            <h6 class="text-white">Funds Freezing</h6>
-                            <p class="text-secondary small">If reported within the "Golden Hour" (first 2 hours), the nodal officer can flag and freeze the stolen amount in the scammer's bank account.</p>
-                        </div>
-                        <div class="timeline-item">
-                            <h6 class="text-white">Investigation & FIR</h6>
-                            <p class="text-secondary small">Based on the evidence, your complaint may be converted into an FIR for formal investigation by local police.</p>
-                        </div>
-                        <div class="timeline-item">
-                            <h6 class="text-white">Status Tracking</h6>
-                            <p class="text-secondary small mb-0">You can track your complaint status using the Acknowledgement Number on the official portal at any time.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 4. Evidence Guide -->
-            <div class="col-lg-4 reveal-right">
-                <div class="info-card" style="border-top: 4px solid var(--step-gold);">
-                    <div class="evidence-badge"><i class="fa-solid fa-triangle-exclamation me-1"></i> Data Preservation</div>
-                    <h5 class="text-white mb-4">Don't lose your proof!</h5>
-                    
-                    <div class="protocol-wrap">
-                        <div class="protocol-step">
-                            <i class="fa-solid fa-eye-slash"></i>
-                            <div>
-                                <h6>Never Delete</h6>
-                                <p>Keep all chats and call logs, even if you find them distressing.</p>
-                            </div>
-                        </div>
-                        <div class="protocol-step">
-                            <i class="fa-solid fa-camera"></i>
-                            <div>
-                                <h6>Screenshots</h6>
-                                <p>Capture everything immediately before blocking the scammer.</p>
-                            </div>
-                        </div>
-                        <div class="protocol-step">
-                            <i class="fa-solid fa-envelope-open-text"></i>
-                            <div>
-                                <h6>Email Headers</h6>
-                                <p>Forward full email headers for IP and domain tracking.</p>
-                            </div>
-                        </div>
-                        <div class="protocol-step">
-                            <i class="fa-solid fa-receipt"></i>
-                            <div>
-                                <h6>Bank Records</h6>
-                                <p>Save the exact UTR/Transaction ID and timestamp.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 5. State Specific Cyber Cells -->
-            <div class="col-12 reveal">
-                <div class="info-card text-center">
-                    <h4 class="section-title justify-content-center"><i class="fa-solid fa-map-location-dot"></i> Statewise Cyber Helpdesk</h4>
-                    <p class="text-secondary small mb-4">Select your state to find dedicated regional contact points and nodal officers.</p>
-                    
-                    <div class="row justify-content-center">
-                        <div class="col-md-6">
-                            <select class="cyber-select" onchange="showStateContact(this.value)">
-                                <option value="">--- Select Your State / UT ---</option>
-                                <option value="andaman">Andaman & Nicobar Islands</option>
-                                <option value="andhra">Andhra Pradesh</option>
-                                <option value="arunachal">Arunachal Pradesh</option>
-                                <option value="assam">Assam</option>
-                                <option value="bihar">Bihar</option>
-                                <option value="chandigarh">Chandigarh</option>
-                                <option value="chhattisgarh">Chhattisgarh</option>
-                                <option value="dadra">Dadra & Nagar Haveli / Daman & Diu</option>
-                                <option value="delhi">Delhi</option>
-                                <option value="goa">Goa</option>
-                                <option value="gujarat">Gujarat</option>
-                                <option value="haryana">Haryana</option>
-                                <option value="himachal">Himachal Pradesh</option>
-                                <option value="jammu">Jammu & Kashmir</option>
-                                <option value="jharkhand">Jharkhand</option>
-                                <option value="karnataka">Karnataka</option>
-                                <option value="kerala">Kerala</option>
-                                <option value="ladakh">Ladakh</option>
-                                <option value="lakshadweep">Lakshadweep</option>
-                                <option value="mp">Madhya Pradesh</option>
-                                <option value="maharashtra">Maharashtra</option>
-                                <option value="manipur">Manipur</option>
-                                <option value="meghalaya">Meghalaya</option>
-                                <option value="mizoram">Mizoram</option>
-                                <option value="nagaland">Nagaland</option>
-                                <option value="odisha">Odisha</option>
-                                <option value="puducherry">Puducherry</option>
-                                <option value="punjab">Punjab</option>
-                                <option value="rajasthan">Rajasthan</option>
-                                <option value="sikkim">Sikkim</option>
-                                <option value="tamilnadu">Tamil Nadu</option>
-                                <option value="telangana">Telangana</option>
-                                <option value="tripura">Tripura</option>
-                                <option value="up">Uttar Pradesh</option>
-                                <option value="uttarakhand">Uttarakhand</option>
-                                <option value="wb">West Bengal</option>
-                            </select>
-                            <div id="state-contact-info" class="mt-4 p-3 rounded-4 bg-void border border-info border-opacity-10 text-white fw-bold d-none"></div>
-                            <p class="text-muted small mt-4">The National Helpline <strong>1930</strong> is the primary 24/7 gateway for financial frauds across all states.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="badge badge-safe mb-4">Official Protocol</div>
+        <h1 class="hero-title">Detailed <span class="text-gradient" style="background: linear-gradient(135deg, var(--accent-safe), #34d399); -webkit-background-clip: text;">Reporting Guide</span></h1>
+        <p class="hero-subtitle text-muted mx-auto" style="max-width: 700px;">
+            A comprehensive, step-by-step checklist to help you report cyber incidents correctly and preserve crucial evidence for authorities.
+        </p>
     </div>
 </section>
 
-<!-- ═══════════ SCRIPTS ═══════════ -->
+<section class="py-12" style="padding: var(--space-12) 0;">
+    <div class="container">
+        <div class="accordion" id="guideAccordion">
+            
+            <div class="accordion-item active">
+                <button class="accordion-header" onclick="toggleAccordion(this)">
+                    Phase 1: Immediate Mitigation
+                    <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="accordion-content">
+                    <ul class="step-list">
+                        <li><strong>Disconnect from Network:</strong> Turn off Wi-Fi and unplug ethernet cables immediately to prevent further data exfiltration or malware spread.</li>
+                        <li><strong>Lock Accounts:</strong> Change passwords for your primary email, banking, and social media from a different, secure device.</li>
+                        <li><strong>Freeze Assets:</strong> Call your bank's 24/7 fraud helpline to block credit cards, debit cards, and UPI access.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <button class="accordion-header" onclick="toggleAccordion(this)">
+                    Phase 2: Evidence Preservation
+                    <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="accordion-content">
+                    <ul class="step-list">
+                        <li><strong>Take Screenshots:</strong> Capture screenshots of malicious URLs, phishing emails, fake profiles, and unauthorized transactions.</li>
+                        <li><strong>Do Not Delete:</strong> Do not delete suspicious emails, text messages, or chat histories. They contain metadata essential for investigation.</li>
+                        <li><strong>Export Logs:</strong> If it's a corporate breach, export server logs, firewall logs, and access records immediately.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <button class="accordion-header" onclick="toggleAccordion(this)">
+                    Phase 3: Formal Reporting (India)
+                    <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="accordion-content">
+                    <ul class="step-list">
+                        <li><strong>Call 1930:</strong> Dial the National Cyber Crime Reporting Portal helpline for immediate assistance with financial fraud.</li>
+                        <li><strong>Register Complaint Online:</strong> Visit <a href="https://cybercrime.gov.in" target="_blank" style="color: var(--accent-safe);">cybercrime.gov.in</a> and file a formal report. Keep the generated reference number safe.</li>
+                        <li><strong>Visit Local Cyber Cell:</strong> Take printed copies of your evidence and the online complaint reference number to your nearest police cyber cell to file an FIR.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header" onclick="toggleAccordion(this)">
+                    Phase 4: Post-Incident Recovery
+                    <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="accordion-content">
+                    <ul class="step-list">
+                        <li><strong>Scan Devices:</strong> Run a full system scan using reputed antivirus and anti-malware software.</li>
+                        <li><strong>Implement 2FA:</strong> Enable Two-Factor Authentication on all recovered and critical accounts using an authenticator app.</li>
+                        <li><strong>Monitor Credit:</strong> Check your CIBIL score regularly for the next 12 months to detect any unauthorized loans taken in your name.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="text-center mt-12">
+            <a href="{% url 'report_crime' %}" class="btn btn-outline" style="border-color: var(--accent-safe); color: var(--accent-safe);">Go to Emergency Reporting</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
 <script>
-    function showStateContact(value) {
-        const infoDiv = document.getElementById('state-contact-info');
-        if (!value) {
-            infoDiv.classList.add('d-none');
-            return;
-        }
+    function toggleAccordion(btn) {
+        const item = btn.parentElement;
+        const allItems = document.querySelectorAll('.accordion-item');
         
-        const contacts = {
-            'andaman': 'A&N Islands: 03192-232820 (IT Nodal)',
-            'andhra': 'Andhra Pradesh: 1930 / 040-23456408',
-            'arunachal': 'Arunachal Pradesh CID: 9915912113',
-            'assam': 'Assam IT: 9435039534 / 1930',
-            'bihar': 'Bihar Cyber Cell: 0612-2545315 / 1930',
-            'chandigarh': 'Chandigarh Cyber HQ: 0172-2740641',
-            'chhattisgarh': 'Chhattisgarh Intelligence: 0771-2436525 / 1930',
-            'dadra': 'D&N Haveli & Daman Diu: 8375065282',
-            'delhi': 'Delhi Nodal Office: 011-20892633 / 1930',
-            'goa': 'Goa Cyber Cell: 1930',
-            'gujarat': 'Gujarat Cyber Cell: 1930 / 079-23213390',
-            'haryana': 'Haryana Helpline: 1930',
-            'himachal': 'Himachal Pradesh: 1930 / 0177-2621714',
-            'jammu': 'J&K Cyber Police: 1930 / 0194-2453949',
-            'jharkhand': 'Jharkhand CID: 1930 / 0651-2490044',
-            'karnataka': 'Karnataka CID: 080-22340356 / 1930',
-            'kerala': 'Kerala Cyber Cell: 1930 / 0471-2722500',
-            'ladakh': 'Ladakh Police: 1930',
-            'lakshadweep': 'Lakshadweep Police: 1930',
-            'mp': 'MP Cyber Cell: 1930 / 0755-2770248',
-            'maharashtra': 'Maharashtra Cyber HQ: 022-22160080 / 1930',
-            'manipur': 'Manipur Cyber Cell: 1930',
-            'meghalaya': 'Meghalaya Cyber Cell: 1930',
-            'mizoram': 'Mizoram ICT: 0389-2319637 / 9436140113',
-            'nagaland': 'Nagaland IT: 9402012562 / 1930',
-            'odisha': 'Odisha CID CB: 0674-2916800 / 1930',
-            'puducherry': 'Puducherry IT: 0413-2246090',
-            'punjab': 'Punjab ADGP Office: 0172-2226258 / 1930',
-            'rajasthan': 'Rajasthan Police: 1930',
-            'sikkim': 'Sikkim IT: 9647853159 / 1930',
-            'tamilnadu': 'Tamil Nadu SP Cyber: 044-28447712 / 1930',
-            'telangana': 'Telangana Cyber Bureau: 155260 / 1930',
-            'tripura': 'Tripura Cyber Cell: 1930',
-            'up': 'UP Cyber Police: 0522-2306852 / 1930',
-            'uttarakhand': 'Uttarakhand Cyber Cell: 1930',
-            'wb': 'West Bengal CID: 033-23246071 / 1930'
-        };
+        // Close others
+        allItems.forEach(i => {
+            if (i !== item) {
+                i.classList.remove('active');
+            }
+        });
         
-        infoDiv.innerHTML = `<i class="fa-solid fa-phone me-2 text-cyber"></i> ${contacts[value]}`;
-        infoDiv.classList.remove('d-none');
+        // Toggle current
+        item.classList.toggle('active');
     }
 </script>
-
 {% endblock %}

@@ -1361,11 +1361,14 @@ def scorecard(request):
                 "tooltip": f"Score 60% or higher in {cat_key} to unlock."
             })
 
+    vulnerability_factor = 100 - percentage
+
     return render(request, 'main/scorecard.html', {
         'current_month': current_month,
         'latest_assessment': latest_assessment,
         'percentage': percentage,
         'dash_offset': dash_offset,
+        'vulnerability_factor': vulnerability_factor,
         'historical_scores': historical_scores,
         'weak_category': weak_category,
         'action_plan': action_plan,
