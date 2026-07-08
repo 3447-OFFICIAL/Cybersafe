@@ -6,40 +6,67 @@
 {% block extra_css %}
 <style>
   /* ══════════════════════════════════════════
-     HOME PAGE — DARK PREMIUM OVERRIDES
-  ══════════════════════════════════════════ */
+     HOME PAGE — ENTERPRISE STYLE SYSTEM
+     ══════════════════════════════════════════ */
 
-  /* Hero */
+  /* Section Rhythm - 20% Spacing Reduction */
+  .py-24 { padding-top: var(--space-16); padding-bottom: var(--space-16); } /* 64px */
+  .py-20 { padding-top: var(--space-12); padding-bottom: var(--space-12); } /* 48px */
+  .py-16 { padding-top: var(--space-10); padding-bottom: var(--space-10); } /* 40px */
+
+  .hp-section-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+  }
+  .hp-section-header .badge {
+    display: inline-flex;
+    margin-bottom: var(--space-3);
+  }
+  .hp-section-header h2 {
+    font-size: clamp(1.8rem, 3.2vw, 2.3rem);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin-bottom: var(--space-3);
+  }
+  .hp-section-header p {
+    max-width: 580px;
+    margin: 0 auto;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* Hero Section */
   .hero-section {
-    padding: calc(var(--space-16) + 40px) 0 var(--space-20);
+    padding: calc(var(--space-12) + 20px) 0 var(--space-16);
     position: relative;
     overflow: hidden;
-    min-height: 90vh;
+    min-height: 82vh;
     display: flex;
     align-items: center;
   }
 
   .split-hero-container {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: var(--space-10);
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: var(--space-12);
     align-items: center;
   }
 
   .hp-badge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-size: 0.72rem;
-    letter-spacing: .12em;
+    gap: var(--space-2);
+    font-size: 0.7rem;
+    letter-spacing: .1em;
     text-transform: uppercase;
     color: var(--accent-primary);
     font-weight: 700;
-    padding: 6px 14px;
-    background: rgba(0,210,255,0.08);
-    border: 1px solid rgba(0,210,255,0.2);
-    border-radius: 999px;
-    margin-bottom: 20px;
+    padding: 4px 12px;
+    background: rgba(0, 210, 255, 0.06);
+    border: 1px solid rgba(0, 210, 255, 0.15);
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-5);
   }
 
   .hp-badge::before {
@@ -51,17 +78,17 @@
   }
 
   @keyframes pulse-dot {
-    0%,100%{opacity:1;transform:scale(1)}
-    50%{opacity:.4;transform:scale(1.4)}
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.3); }
   }
 
   .hp-h1 {
-    font-size: clamp(2.8rem, 5.5vw, 4.4rem);
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
     font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
     color: var(--text-primary);
-    margin-bottom: 24px;
+    margin-bottom: var(--space-5);
   }
 
   .hp-h1 em {
@@ -73,95 +100,121 @@
   }
 
   .hp-subtitle {
-    font-size: 1.1rem;
-    line-height: 1.75;
+    font-size: 1rem;
+    line-height: 1.65;
     color: var(--text-secondary);
-    max-width: 520px;
-    margin-bottom: 36px;
+    max-width: 500px;
+    margin-bottom: var(--space-8);
   }
 
   /* Live Terminal Panel */
   .terminal-panel {
+    position: relative;
     background: rgba(10, 12, 20, 0.95);
     border: 1px solid rgba(0, 210, 255, 0.15);
     border-radius: var(--radius-xl);
     overflow: hidden;
     backdrop-filter: blur(20px);
-    box-shadow: 0 32px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+    box-shadow: 0 24px 64px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
   }
 
   .terminal-titlebar {
+    position: relative;
     display: flex;
     align-items: center;
-    padding: 12px 16px;
-    background: rgba(255,255,255,0.03);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: var(--space-3) var(--space-4);
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     gap: 8px;
   }
 
-  .terminal-dot { width:10px; height:10px; border-radius:50%; }
+  .terminal-dot { width: 8px; height: 8px; border-radius: 50%; }
   .dot-red { background: #ff5f57; }
   .dot-yellow { background: #febc2e; }
   .dot-green { background: #28c840; }
 
   .terminal-title {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     margin-left: auto;
     margin-right: auto;
   }
 
-  .terminal-body { padding: 16px; }
+  .terminal-body { padding: var(--space-4); }
 
   .feed-row {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
-    padding: 5px 8px;
-    border-radius: 4px;
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
     margin-bottom: 4px;
     transition: background 0.3s;
   }
-  .feed-row.blocked { color: #10b981; background: rgba(16,185,129,0.07); }
-  .feed-row.alert   { color: #f59e0b; background: rgba(245,158,11,0.07); }
-  .feed-row.safe    { color: #60a5fa; background: rgba(96,165,250,0.07); }
+  .feed-row.blocked { color: var(--accent-safe); background: rgba(16, 185, 129, 0.05); }
+  .feed-row.alert   { color: var(--accent-warning); background: rgba(245, 158, 11, 0.05); }
+  .feed-row.safe    { color: #60a5fa; background: rgba(96, 165, 250, 0.05); }
 
   .terminal-map {
     position: relative;
-    height: 160px;
-    margin-top: 12px;
-    border-top: 1px solid rgba(255,255,255,0.04);
-    padding-top: 10px;
+    height: 150px;
+    margin-top: var(--space-3);
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    padding-top: var(--space-3);
     overflow: hidden;
+  }
+
+  .threat-level-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: #f87171;
+    font-weight: 700;
+    margin-top: 8px;
+  }
+  .threat-level-chip::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #ef4444;
+    animation: pulse-dot 1s infinite;
   }
 
   /* Accuracy badge inside terminal */
   .accuracy-badge {
     position: absolute;
-    top: 14px; right: 12px;
-    background: rgba(0,210,255,0.1);
-    border: 1px solid rgba(0,210,255,0.2);
-    border-radius: 6px;
-    padding: 6px 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    right: var(--space-3);
+    background: rgba(0, 210, 255, 0.06);
+    border: 1px solid rgba(0, 210, 255, 0.15);
+    border-radius: 4px;
+    padding: 3px 8px;
     font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     color: var(--accent-primary);
+    line-height: 1.1;
+    text-align: right;
   }
 
   .accuracy-badge strong {
     display: block;
-    font-size: 0.85rem;
-    font-weight: 800;
+    font-size: 0.7rem;
+    font-weight: 700;
     color: var(--accent-primary);
   }
 
-  /* Hero stats row */
   .hero-stats {
     display: flex;
-    gap: 40px;
-    padding-top: 32px;
+    gap: var(--space-8);
+    padding-top: var(--space-6);
     border-top: 1px solid var(--border-subtle);
   }
 
@@ -169,110 +222,170 @@
     font-size: 0.65rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     color: var(--text-muted);
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
 
   .hero-stat-value {
     font-family: var(--font-mono);
-    font-size: 1.5rem;
+    font-size: 1.35rem;
     font-weight: 800;
     color: var(--accent-primary);
     letter-spacing: -0.02em;
   }
-
   .hero-stat-value.cyan  { color: var(--accent-primary); }
   .hero-stat-value.violet{ color: var(--accent-secondary); }
   .hero-stat-value.green { color: var(--accent-safe); }
 
-  /* Threat level chip inside terminal */
-  .threat-level-chip {
-    display: inline-flex;
+  /* ── Metrics Dashboard Grid ── */
+  .metrics-dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+  .micro-dash {
+    background: rgba(15, 17, 26, 0.45);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition-normal);
+  }
+  .micro-dash:hover {
+    border-color: rgba(0, 210, 255, 0.2);
+    transform: translateY(-2px);
+  }
+  .micro-dash-header {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 8px;
-    padding: 8px 14px;
-    background: rgba(239,68,68,0.1);
-    border: 1px solid rgba(239,68,68,0.3);
-    border-radius: 6px;
+    margin-bottom: var(--space-2);
+  }
+  .micro-dash-status {
     font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--accent-safe);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .micro-dash-status.sync { color: var(--accent-secondary); }
+  .micro-dash-status::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%; background: currentColor;
+  }
+  .micro-dash-value {
+    font-family: var(--font-mono);
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+  .micro-dash-label {
     font-size: 0.72rem;
-    color: #f87171;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 4px;
+  }
+  .micro-dash-chart {
+    height: 30px;
+    margin-top: var(--space-4);
+  }
+
+  /* ── SOC Dashboard (Threat Intel) ── */
+  .soc-dashboard {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: var(--space-6);
+  }
+  .soc-map-container {
+    background: rgba(10, 12, 20, 0.7);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .soc-map-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-4);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    padding-bottom: var(--space-3);
+  }
+  .soc-stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    padding-top: var(--space-4);
+  }
+  .soc-stat-node {
+    display: flex;
+    flex-direction: column;
+  }
+  .soc-stat-title {
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
     font-weight: 700;
     letter-spacing: 0.05em;
-    margin-top: 10px;
   }
-
-  .threat-level-chip::before {
-    content: '';
-    width: 8px; height: 8px; border-radius: 50%;
-    background: #ef4444;
-    animation: pulse-dot 1s infinite;
-  }
-
-  /* ── Section Spacing ── */
-  .py-24 { padding-top: 96px; padding-bottom: 96px; }
-  .py-20 { padding-top: 80px; padding-bottom: 80px; }
-  .py-16 { padding-top: 64px; padding-bottom: 64px; }
-
-  /* ── Section Headers ── */
-  .hp-section-header {
-    text-align: center;
-    margin-bottom: 48px;
-  }
-  .hp-section-header .badge {
-    display: block;
-    margin: 0 auto 16px;
-    width: fit-content;
-  }
-  .hp-section-header h2 {
-    display: block;
-    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  .soc-stat-val {
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
     font-weight: 800;
-    letter-spacing: -0.015em;
-    margin-bottom: 16px;
+    margin-top: 2px;
   }
-  .hp-section-header p {
-    max-width: 600px;
-    margin: 0 auto;
-    color: var(--text-muted);
-    font-size: 1.05rem;
-    line-height: 1.65;
+  .soc-stat-val.critical { color: var(--accent-risk); }
+  .soc-stat-val.high { color: var(--accent-warning); }
+  .soc-stat-val.medium { color: var(--accent-secondary); }
+  .soc-stat-val.low { color: var(--accent-safe); }
+
+  .attack-feed-panel {
+    background: rgba(10,12,20,0.7);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    height: 100%;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    overflow: hidden;
   }
 
-  /* ── Threat Cards ── */
   .threat-badge {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    padding: 3px 10px;
+    gap: 4px;
+    padding: 2px 8px;
     border-radius: var(--radius-full);
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
   }
-  .threat-badge-critical { background: rgba(239,68,68,.15); color:#f87171; border:1px solid rgba(239,68,68,.3); }
-  .threat-badge-high     { background: rgba(245,158,11,.15);color:#fbbf24; border:1px solid rgba(245,158,11,.3); }
-  .threat-badge-medium   { background: rgba(99,102,241,.15); color:#a5b4fc; border:1px solid rgba(99,102,241,.3); }
-  .threat-badge-low      { background: rgba(16,185,129,.15); color:#6ee7b7; border:1px solid rgba(16,185,129,.3); }
+  .threat-badge-critical { background: rgba(239,68,68,.1); color:#f87171; border:1px solid rgba(239,68,68,.2); }
+  .threat-badge-high     { background: rgba(245,158,11,.1); color:#fbbf24; border:1px solid rgba(245,158,11,.2); }
+  .threat-badge-medium   { background: rgba(99,102,241,.1); color:#a5b4fc; border:1px solid rgba(99,102,241,.2); }
+  .threat-badge-low      { background: rgba(16,185,129,.1); color:#6ee7b7; border:1px solid rgba(16,185,129,.2); }
 
-  .conf-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--accent-primary);
-    font-weight: 700;
-  }
-
-  /* ── Filter Tabs ── */
   .filter-tab {
-    padding: 6px 16px;
+    padding: 5px 12px;
     border-radius: var(--radius-full);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 600;
     cursor: pointer;
     background: transparent;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.06);
     color: var(--text-muted);
     transition: all 0.2s;
   }
@@ -282,326 +395,10 @@
     border-color: var(--accent-primary);
   }
 
-  /* Threat Meta Row */
-  .threat-meta-row { display: flex; gap: 16px; flex-wrap: wrap; }
-  .threat-meta-item {
-    display: flex; align-items: center; gap: 6px;
-    font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted);
-  }
-  .threat-meta-item svg { width: 12px; height: 12px; flex-shrink: 0; }
-
-  /* ── Attack Feed Panel (SOC) ── */
-  .attack-feed-panel {
-    background: rgba(10,12,20,0.8);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: var(--radius-lg);
-    padding: 12px;
-    height: 100%;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    overflow: hidden;
-  }
-
-  /* ── How It Works Timeline ── */
-  .workflow-step {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-    padding: 24px;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: var(--radius-lg);
-    transition: border-color 0.3s;
-  }
-  .workflow-step:hover { border-color: rgba(0,210,255,0.2); }
-
-  .workflow-number {
-    width: 40px; height: 40px; min-width: 40px;
-    border-radius: 50%;
-    background: rgba(0,210,255,0.1);
-    border: 1px solid rgba(0,210,255,0.25);
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-mono);
-    font-size: 0.85rem; font-weight: 800;
-    color: var(--accent-primary);
-  }
-
-  /* ── Diagnostics Tools ── */
-  .tools-grid-premium {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
-  .tool-card-premium {
-    position: relative;
-    background: rgba(10,12,20,0.7);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: var(--radius-xl);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: border-color 0.3s, transform 0.3s;
-    backdrop-filter: blur(10px);
-  }
-  .tool-card-premium:hover {
-    border-color: rgba(0,210,255,0.25);
-    transform: translateY(-3px);
-  }
-  .tool-card-premium.scanning { border-color: rgba(0,210,255,0.5); }
-
-  .tool-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 16px 0;
-  }
-
-  .tool-icon-wrap {
-    width: 40px; height: 40px;
-    border-radius: var(--radius-md);
-    background: rgba(0,210,255,0.08);
-    border: 1px solid rgba(0,210,255,0.15);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--accent-primary);
-  }
-  .tool-icon-wrap svg { width: 20px; height: 20px; }
-
-  .tool-status-badge {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    padding: 3px 8px;
-    border-radius: 4px;
-  }
-  .status-ready { color: var(--accent-safe); background: rgba(16,185,129,0.1); }
-
-  .tool-card-body {
-    padding: 14px 16px;
-    flex: 1;
-  }
-
-  .tool-card-body h5 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 6px;
-  }
-
-  .mock-telemetry-preview {
-    background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 6px;
-    padding: 8px 10px;
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-    margin-top: 10px;
-  }
-
-  .tool-card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 16px;
-    border-top: 1px solid rgba(255,255,255,0.04);
-  }
-
-  .scan-time {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    color: var(--text-muted);
-  }
-  .scan-time svg { width: 12px; height: 12px; }
-
-  .scanning-overlay {
-    position: absolute; inset: 0;
-    background: rgba(10,12,20,0.92);
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    z-index: 10;
-  }
-  .tool-card-premium.scanning .scanning-overlay { display: flex; }
-
-  .spinner-cyber {
-    width: 32px; height: 32px;
-    border: 2px solid rgba(0,210,255,0.2);
-    border-top-color: var(--accent-primary);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
-
-  .scan-progress-bar {
-    height: 2px;
-    background: var(--accent-primary);
-    width: 0%;
-    transition: width 0.15s ease;
-    border-radius: 2px;
-    position: absolute;
-    bottom: 0; left: 0;
-  }
-
-  /* ── Compliance Cards ── */
-  .compliance-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
-  .compliance-card {
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: var(--radius-lg);
-    padding: 24px;
-    transition: all 0.3s;
-  }
-  .compliance-card:hover {
-    border-color: rgba(0,210,255,0.2);
-    background: rgba(0,210,255,0.02);
-  }
-
-  .compliance-progress-bar {
-    height: 4px;
-    border-radius: 2px;
-    background: rgba(255,255,255,0.08);
-    margin-top: 12px;
-    overflow: hidden;
-  }
-  .compliance-progress-fill {
-    height: 100%;
-    border-radius: 2px;
-    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-    transition: width 1s ease;
-  }
-
-  /* ── Comparison Table ── */
-  .comparison-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9rem;
-  }
-  .comparison-table th {
-    padding: 12px 16px;
-    text-align: left;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-muted);
-    border-bottom: 1px solid var(--border-subtle);
-  }
-  .comparison-table td {
-    padding: 14px 16px;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-  }
-  .comparison-table tr:hover td { background: rgba(255,255,255,0.02); }
-
-  /* ── Testimonials ── */
-  .testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-  }
-
-  .testimonial-card {
-    padding: 28px;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: var(--radius-xl);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 20px;
-    transition: border-color 0.3s;
-  }
-  .testimonial-card:hover { border-color: rgba(0,210,255,0.15); }
-
-  /* ── FAQ ── */
-  .faq-accordion {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    max-width: 760px;
-    margin: 0 auto;
-  }
-
-  .faq-item {
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    transition: border-color 0.3s;
-  }
-  .faq-item.active { border-color: rgba(0,210,255,0.2); }
-
-  .faq-trigger {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 20px;
-    background: transparent;
-    border: none;
-    color: var(--text-primary);
-    font-size: 0.95rem;
-    font-weight: 600;
-    text-align: left;
-    cursor: pointer;
-    gap: 16px;
-  }
-
-  .chevron-down { transition: transform 0.3s; flex-shrink: 0; }
-  .faq-item.active .chevron-down { transform: rotate(180deg); }
-
-  .faq-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s ease;
-  }
-  .faq-content p {
-    padding: 0 20px 18px;
-    color: var(--text-muted);
-    line-height: 1.7;
-    font-size: 0.92rem;
-  }
-
-  /* ── Animated Grid BG ── */
-  .animated-grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0,210,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,210,255,0.03) 1px, transparent 1px);
-    background-size: 50px 50px;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* ── Cyber Map ── */
-  .cyber-map-panel {
-    position: relative;
-    background: rgba(10,12,20,0.6);
-    border: 1px solid rgba(0,210,255,0.08);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    min-height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
   /* pulse dots on map */
   .map-pulse {
     position: absolute;
-    width: 10px; height: 10px;
+    width: 8px; height: 8px;
     border-radius: 50%;
   }
   .map-pulse::before {
@@ -615,91 +412,428 @@
   }
   @keyframes map-ring {
     0%  { transform: scale(0.5); opacity: 0.8; }
-    100%{ transform: scale(2.5); opacity: 0; }
+    100%{ transform: scale(2.2); opacity: 0; }
   }
 
-  /* SOC Split layout */
-  .soc-layout {
+  /* ── AI Pipeline Flow ── */
+  .pipeline-flow-layout {
     display: grid;
-    grid-template-columns: 3fr 1fr;
-    gap: 16px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+    margin-top: var(--space-8);
   }
-
-  /* AI Pipeline */
-  .pipeline-steps {
+  .pipeline-node {
+    background: rgba(15, 17, 26, 0.45);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    margin-top: 20px;
+    transition: var(--transition-normal);
   }
-  .pipeline-step {
+  .pipeline-node:hover {
+    border-color: rgba(0, 210, 255, 0.25);
+    background: rgba(0, 210, 255, 0.02);
+  }
+  .pipeline-node-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-3);
+  }
+  .pipeline-step-num {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+  .pipeline-node-indicator {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+  }
+  .pipeline-node-indicator.active {
+    background: var(--accent-safe);
+    box-shadow: 0 0 8px var(--accent-safe);
+    animation: pulse-dot 1.5s infinite;
+  }
+  .pipeline-node-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+  }
+  .pipeline-node-desc {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+  }
+
+  /* ── Interactive Workspace Console ── */
+  .diagnostics-workspace {
+    display: grid;
+    grid-template-columns: 270px 1fr;
+    border-radius: var(--radius-xl);
+    background: rgba(10, 12, 20, 0.85);
+    border: 1px solid var(--border-subtle);
+    overflow: hidden;
+    margin-top: var(--space-8);
+  }
+  .workspace-sidebar {
+    background: rgba(255, 255, 255, 0.01);
+    border-right: 1px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar-header {
+    padding: var(--space-4) var(--space-5);
+    border-bottom: 1px solid var(--border-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-3);
+    gap: 6px;
+  }
+  .sidebar-tab {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 12px 14px;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 8px;
-    font-size: 0.85rem;
+    padding: 10px 14px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    text-align: left;
+    transition: var(--transition-fast);
+    width: 100%;
   }
-  .pipeline-dot {
-    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  .sidebar-tab:hover {
+    background: rgba(255, 255, 255, 0.02);
   }
-
-  /* Metric Block */
-  .metric-block { padding: 24px; }
-  .metric-value {
-    font-family: var(--font-mono);
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--accent-primary);
-    letter-spacing: -0.03em;
-    line-height: 1;
-    margin-bottom: 6px;
+  .sidebar-tab.active {
+    background: rgba(0, 210, 255, 0.08);
+    border-color: rgba(0, 210, 255, 0.15);
   }
-
-  /* Advisory Cards */
-  .advisory-card {
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: var(--radius-lg);
-    padding: 20px;
-    transition: all 0.3s;
+  .sidebar-tab-status {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent-safe);
+    flex-shrink: 0;
+  }
+  .sidebar-tab-info {
     display: flex;
     flex-direction: column;
-    gap: 12px;
   }
-  .advisory-card:hover {
-    border-color: rgba(0,210,255,0.2);
-    transform: translateY(-2px);
+  .sidebar-tab-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .sidebar-tab-metric {
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    margin-top: 1px;
+  }
+  .workspace-panel {
+    padding: var(--space-8);
+    position: relative;
+  }
+  .workspace-content-tab {
+    display: none;
+    flex-direction: column;
+    height: 100%;
+    animation: tab-fade-in 0.25s ease-out forwards;
+  }
+  .workspace-content-tab.active {
+    display: flex;
+  }
+  @keyframes tab-fade-in {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  /* bg-surface utility for sections */
-  .bg-surface { background: rgba(15,17,26,0.4) !important; }
+  .tool-card-premium {
+    position: relative;
+    background: transparent;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .tool-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-4);
+  }
+  .tool-icon-wrap {
+    width: 36px; height: 36px;
+    border-radius: var(--radius-md);
+    background: rgba(0, 210, 255, 0.08);
+    border: 1px solid rgba(0, 210, 255, 0.15);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent-primary);
+  }
+  .tool-icon-wrap svg { width: 16px; height: 16px; }
 
-  /* Reveal animation */
+  .tool-status-badge {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .status-ready { color: var(--accent-safe); background: rgba(16, 185, 129, 0.08); }
+
+  .mock-telemetry-preview {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: var(--radius-md);
+    padding: 8px 12px;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+
+  .tool-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--space-6);
+    padding-top: var(--space-4);
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .scanning-overlay {
+    position: absolute; inset: 0;
+    background: rgba(10,12,20,0.95);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    z-index: 10;
+    border-radius: var(--radius-lg);
+  }
+  .tool-card-premium.scanning .scanning-overlay { display: flex; }
+
+  .spinner-cyber {
+    width: 28px; height: 28px;
+    border: 2px solid rgba(0,210,255,0.15);
+    border-top-color: var(--accent-primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { 100% { transform: rotate(360deg); } }
+
+  .scan-progress-bar {
+    height: 2px;
+    background: var(--accent-primary);
+    width: 0%;
+    transition: width 0.15s ease;
+    border-radius: 2px;
+    position: absolute;
+    bottom: 0; left: 0;
+  }
+
+  /* ── Compliance Grids ── */
+  .compliance-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+  }
+  .compliance-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    transition: all 0.3s;
+  }
+  .compliance-card:hover {
+    border-color: rgba(0, 210, 255, 0.2);
+    background: rgba(0, 210, 255, 0.02);
+  }
+  .compliance-progress-bar {
+    height: 3px;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.06);
+    margin-top: 10px;
+    overflow: hidden;
+  }
+  .compliance-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  }
+
+  /* ── Comparison Table ── */
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  .comparison-table th {
+    padding: var(--space-4);
+    text-align: left;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .comparison-table td {
+    padding: var(--space-4);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .comparison-table tr:hover td { background: rgba(255,255,255,0.01); }
+
+  /* Testimonials & FAQ Accordions */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+  .testimonial-card {
+    padding: var(--space-6);
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: var(--radius-xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-5);
+    transition: border-color 0.3s;
+  }
+  .testimonial-card:hover { border-color: rgba(0, 210, 255, 0.15); }
+
+  .faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .faq-item {
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .faq-item.active { border-color: rgba(0, 210, 255, 0.2); }
+  .faq-trigger {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4) var(--space-5);
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    gap: var(--space-4);
+  }
+  .faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .faq-content p {
+    padding: 0 var(--space-5) var(--space-4);
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-size: 0.88rem;
+  }
+
+  .animated-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0, 210, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 210, 255, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Reveal Animations */
   .reveal {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transform: translateY(16px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .reveal.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  /* Responsive */
-  @media (max-width: 992px) {
+  /* ── Card Telemetry Snippets ── */
+  .card-ui-preview {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: var(--radius-md);
+    padding: var(--space-3);
+    margin-top: var(--space-4);
+    font-family: var(--font-mono);
+  }
+  .card-ui-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    padding-bottom: var(--space-1);
+    margin-bottom: var(--space-2);
+  }
+  .card-ui-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    margin-bottom: 2px;
+  }
+  .card-ui-bar {
+    height: 4px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+  .card-ui-fill {
+    height: 100%;
+    background: var(--accent-primary);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 1024px) {
     .split-hero-container { grid-template-columns: 1fr; }
-    .tools-grid-premium { grid-template-columns: repeat(2, 1fr); }
+    .diagnostics-workspace { grid-template-columns: 1fr; }
+    .workspace-sidebar { border-right: none; border-bottom: 1px solid var(--border-subtle); }
+    .sidebar-menu { flex-direction: row; flex-wrap: wrap; }
+    .sidebar-tab { width: calc(50% - 4px); }
     .compliance-grid { grid-template-columns: repeat(2, 1fr); }
-    .testimonials-grid { grid-template-columns: 1fr; }
-    .soc-layout { grid-template-columns: 1fr; }
   }
   @media (max-width: 640px) {
-    .tools-grid-premium { grid-template-columns: 1fr; }
+    .sidebar-menu { flex-direction: column; }
+    .sidebar-tab { width: 100%; }
+    .pipeline-flow-layout { grid-template-columns: 1fr; }
     .compliance-grid { grid-template-columns: 1fr; }
-    .hero-stats { gap: 24px; flex-wrap: wrap; }
+    .metrics-dashboard-grid { grid-template-columns: 1fr; }
+    .soc-dashboard { grid-template-columns: 1fr; }
   }
 </style>
 {% endblock %}
@@ -799,196 +933,306 @@
 </section>
 
 <!-- ═══════════ METRICS SECTION ═══════════ -->
-<section class="py-16" style="background: rgba(15,17,26,0.4); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+<section class="py-12" style="background: rgba(10, 12, 20, 0.4); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
   <div class="container">
-    <div class="glass-panel p-8">
-      <div class="grid grid-cols-3 text-center">
-        <div class="metric-block reveal">
-          <div class="metric-value">2.4M+</div>
-          <div class="text-secondary font-semibold" style="text-transform:uppercase; font-size:0.85rem; letter-spacing:0.5px;">Threats Blocked</div>
+    <div class="metrics-dashboard-grid">
+      <!-- Metric 1: Threats Blocked -->
+      <div class="micro-dash reveal">
+        <div class="micro-dash-header">
+          <span class="micro-dash-label">Threat Ingestion</span>
+          <span class="micro-dash-status">LIVE NODE</span>
         </div>
-        <div class="metric-block reveal" style="border-left:1px solid var(--border-subtle); border-right:1px solid var(--border-subtle); animation-delay:0.1s;">
-          <div class="metric-value" style="color:var(--accent-secondary);">99.9%</div>
-          <div class="text-secondary font-semibold" style="text-transform:uppercase; font-size:0.85rem; letter-spacing:0.5px;">Mitigation Speed</div>
+        <div class="micro-dash-value" id="metrics-live-threats">2,431,905</div>
+        <svg class="micro-dash-chart" viewBox="0 0 200 40" width="100%" height="100%">
+          <path d="M0,35 Q20,30 40,32 T80,15 T120,28 T160,10 T200,5" fill="none" stroke="var(--accent-primary)" stroke-width="2" style="opacity: 0.85;"></path>
+          <path d="M0,35 Q20,30 40,32 T80,15 T120,28 T160,10 T200,5 L200,40 L0,40 Z" fill="rgba(0, 210, 255, 0.03)"></path>
+        </svg>
+      </div>
+
+      <!-- Metric 2: Mitigation Speed -->
+      <div class="micro-dash reveal" style="animation-delay: 0.1s;">
+        <div class="micro-dash-header">
+          <span class="micro-dash-label">Mitigation Speed</span>
+          <span class="micro-dash-status">OPTIMAL</span>
         </div>
-        <div class="metric-block reveal" style="animation-delay:0.2s;">
-          <div class="metric-value" style="color:var(--accent-secondary); font-size:1.8rem;">Real-Time</div>
-          <div class="text-secondary font-semibold" style="text-transform:uppercase; font-size:0.85rem; letter-spacing:0.5px;">Intelligence Sync</div>
+        <div class="micro-dash-value">99.9%</div>
+        <svg class="micro-dash-chart" viewBox="0 0 200 40" width="100%" height="100%">
+          <path d="M0,20 Q30,18 60,22 T120,12 T180,5 T200,5" fill="none" stroke="var(--accent-safe)" stroke-width="2" style="opacity: 0.85;"></path>
+          <path d="M0,20 Q30,18 60,22 T120,12 T180,5 T200,5 L200,40 L0,40 Z" fill="rgba(16, 185, 129, 0.03)"></path>
+        </svg>
+      </div>
+
+      <!-- Metric 3: Intelligence Sync -->
+      <div class="micro-dash reveal" style="animation-delay: 0.2s;">
+        <div class="micro-dash-header">
+          <span class="micro-dash-label">Database Status</span>
+          <span class="micro-dash-status sync">SYNCHRONIZED</span>
         </div>
+        <div class="micro-dash-value">REAL-TIME</div>
+        <svg class="micro-dash-chart" viewBox="0 0 200 40" width="100%" height="100%">
+          <path d="M0,35 L40,35 L50,10 L60,35 L90,35 L100,5 L110,35 L140,35 L150,20 L160,35 L200,35" fill="none" stroke="var(--accent-secondary)" stroke-width="1.8" style="opacity: 0.85;"></path>
+        </svg>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ═══════════ THREAT LANDSCAPE SOC SECTION ═══════════ -->
-<section class="py-24" style="position:relative;">
-  <div style="position:absolute; width:350px; height:350px; border-radius:50%; background:radial-gradient(circle,rgba(239,68,68,0.05),transparent 70%); filter:blur(80px); top:10%; left:-5%; pointer-events:none; z-index:-1;"></div>
+<section class="py-20" style="position:relative; background: rgba(10, 12, 20, 0.2);">
+  <div style="position:absolute; width:350px; height:350px; border-radius:50%; background:radial-gradient(circle,rgba(239,68,68,0.03),transparent 70%); filter:blur(80px); top:10%; left:-5%; pointer-events:none; z-index:-1;"></div>
   <div class="container">
-    <div class="flex justify-between items-end mb-10 flex-wrap gap-6">
+    <div class="flex justify-between items-end mb-8 flex-wrap gap-6">
       <div class="reveal" style="flex:1; min-width:280px;">
-        <span class="badge badge-safe mb-4" style="background:rgba(239,68,68,0.1); color:var(--accent-risk); border:1px solid rgba(239,68,68,0.2);">LIVE SOC INDEX</span>
-        <h2 style="font-size:clamp(1.8rem,4vw,2.6rem); font-weight:800; margin-bottom:8px;">Active Threat Intelligence</h2>
-        <p class="text-muted" style="font-size:0.95rem;">Live cyber incidents sourced from CERT-In, I4C &amp; DeepCytes AI feeds.</p>
+        <span class="badge badge-safe mb-3" style="background:rgba(239,68,68,0.08); color:var(--accent-risk); border:1px solid rgba(239,68,68,0.15);">LIVE SOC STREAM</span>
+        <h2 style="font-size:clamp(1.8rem,3vw,2.3rem); font-weight:700; margin-bottom:8px; letter-spacing:-0.02em;">Threat Intelligence Center</h2>
+        <p class="text-secondary" style="font-size:0.95rem;">Real-time indicators and intelligence feeds synced with CERT-In &amp; national databases.</p>
       </div>
-      <div class="flex gap-3 flex-wrap reveal-right">
-        <button class="filter-tab active" onclick="filterBySeverity('all', this)">All Threats</button>
+      <div class="flex gap-2 flex-wrap reveal-right">
+        <button class="filter-tab active" onclick="filterBySeverity('all', this)">All Feeds</button>
         <button class="filter-tab" onclick="filterBySeverity('critical', this)">Critical</button>
         <button class="filter-tab" onclick="filterBySeverity('high', this)">High</button>
         <button class="filter-tab" onclick="filterBySeverity('medium', this)">Medium</button>
       </div>
     </div>
 
-    <div class="soc-layout">
-      <!-- Featured Threat -->
-      <div>
+    <div class="soc-dashboard">
+      <!-- Left Column: Map and Counters -->
+      <div class="soc-map-container reveal">
+        <div class="soc-map-header">
+          <span style="font-family:var(--font-mono); font-size:0.65rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em; display:flex; align-items:center; gap:8px;">
+            <span style="width:6px; height:6px; background:var(--accent-risk); border-radius:50%; display:inline-block; animation:pulse-dot 1s infinite;"></span>
+            Ingesting Threat Nodes (India Segment)
+          </span>
+          <span id="soc-last-sync" style="font-family:var(--font-mono); font-size:0.6rem; color:var(--text-muted);">SYNC_OK // JUST NOW</span>
+        </div>
+
+        <div style="position:relative; height:180px; width:100%; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+          <svg viewBox="0 0 300 160" width="100%" height="100%" aria-label="India Threat Map" style="opacity:0.95;">
+            <g fill="none" stroke="rgba(0,210,255,0.04)" stroke-width="0.75">
+              <line x1="0" y1="40" x2="300" y2="40"/><line x1="0" y1="80" x2="300" y2="80"/>
+              <line x1="0" y1="120" x2="300" y2="120"/><line x1="75" y1="0" x2="75" y2="160"/>
+              <line x1="150" y1="0" x2="150" y2="160"/><line x1="225" y1="0" x2="225" y2="160"/>
+            </g>
+            <!-- India map outline -->
+            <path d="M120,10 L140,8 L165,15 L175,30 L180,50 L170,70 L165,90 L155,115 L150,140 L148,155 L145,155 L142,140 L135,120 L125,100 L115,80 L105,60 L100,40 L108,22 Z" fill="rgba(0,210,255,0.02)" stroke="rgba(0,210,255,0.12)" stroke-width="0.75"/>
+            <!-- Target Dots -->
+            <circle cx="145" cy="55" r="3" fill="var(--accent-risk)" style="animation:map-ring 2s infinite;"/>
+            <circle cx="160" cy="80" r="2.5" fill="var(--accent-warning)" style="animation:map-ring 2.5s infinite 0.5s;"/>
+            <circle cx="130" cy="95" r="2.5" fill="var(--accent-risk)" style="animation:map-ring 3s infinite 1s;"/>
+            <circle cx="150" cy="40" r="2" fill="var(--accent-secondary)" style="animation:map-ring 2s infinite 0.3s;"/>
+          </svg>
+        </div>
+
+        <div class="soc-stats-bar">
+          <div class="soc-stat-node">
+            <span class="soc-stat-title">Critical</span>
+            <span class="soc-stat-val critical">12</span>
+          </div>
+          <div class="soc-stat-node" style="border-left: 1px solid rgba(255,255,255,0.03); padding-left:12px;">
+            <span class="soc-stat-title">High</span>
+            <span class="soc-stat-val high">38</span>
+          </div>
+          <div class="soc-stat-node" style="border-left: 1px solid rgba(255,255,255,0.03); padding-left:12px;">
+            <span class="soc-stat-title">Medium</span>
+            <span class="soc-stat-val medium">94</span>
+          </div>
+          <div class="soc-stat-node" style="border-left: 1px solid rgba(255,255,255,0.03); padding-left:12px;">
+            <span class="soc-stat-title">Low</span>
+            <span class="soc-stat-val low">172</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Featured advisory & Live feed -->
+      <div class="soc-feed-container">
+        <!-- Featured Threat Box -->
         {% with featured=trending_crimes.0 %}
         {% if featured %}
-        <div class="cyber-card reveal" data-severity="{{ featured.severity|lower }}" style="padding:var(--space-6); height:100%;">
-          <div class="flex justify-between items-start mb-4">
-            <div>
-              <span class="threat-badge threat-badge-{{ featured.severity|lower }} mb-2" style="display:inline-flex;">
-                <svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-                {{ featured.severity|upper }}
-              </span>
-              <h3 style="font-size:1.4rem; font-weight:800; line-height:1.2; margin-top:8px; color:var(--text-primary);">{{ featured.title }}</h3>
-            </div>
-            <span class="conf-label">92% CONF</span>
+        <div class="cyber-card reveal" data-severity="{{ featured.severity|lower }}" style="padding:16px; border-color:rgba(255,255,255,0.04);">
+          <div class="flex justify-between items-center mb-2">
+            <span class="threat-badge threat-badge-{{ featured.severity|lower }}">
+              {{ featured.severity|upper }}
+            </span>
+            <span class="conf-label" style="font-size:0.6rem; font-family:var(--font-mono);">99.4% CONF</span>
           </div>
-          <p class="text-muted" style="font-size:0.9rem; line-height:1.6; margin-bottom:16px;">{{ featured.description|truncatewords:40 }}</p>
-          <div class="threat-meta-row">
-            <div class="threat-meta-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              <span>Est. Victims: <strong>14.2k</strong></span>
-            </div>
-            <div class="threat-meta-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              <span>Last Synced: <strong>Just Now</strong></span>
-            </div>
-            <div class="threat-meta-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              <span>Severity Index: <strong>{% if featured.severity|lower == 'critical' %}98%{% else %}85%{% endif %}</strong></span>
-            </div>
-          </div>
-          <div class="mt-6 flex justify-between items-center flex-wrap gap-4">
-            <span class="text-xs text-muted" style="font-family:var(--font-mono); text-transform:uppercase;">Source: CERT-In Advisory</span>
-            <a href="{% url 'crime_detail' featured.id %}" class="btn btn-primary" style="font-size:0.8rem; padding:10px 20px; background:linear-gradient(135deg,rgba(239,68,68,0.9),rgba(239,68,68,0.7)); box-shadow:0 4px 15px rgba(239,68,68,0.3); border:none;">
-              Analyze In-Depth &rarr;
-            </a>
+          <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:4px; color:var(--text-primary); line-height:1.3;">{{ featured.title }}</h4>
+          <p class="text-secondary" style="font-size:0.78rem; line-height:1.45; margin-bottom:8px;">{{ featured.description|truncatewords:15 }}</p>
+          <div class="flex justify-between items-center" style="font-family:var(--font-mono); font-size:0.6rem; color:var(--text-muted); border-top:1px solid rgba(255,255,255,0.03); padding-top:8px;">
+            <span>Source: CERT-In</span>
+            <a href="{% url 'crime_detail' featured.id %}" style="color:var(--accent-primary); font-weight:700;">INVESTIGATE &rarr;</a>
           </div>
         </div>
         {% endif %}
         {% endwith %}
-      </div>
 
-      <!-- Side: attack feed + small cards -->
-      <div style="display:flex; flex-direction:column; gap:12px;">
-        <div class="attack-feed-panel">
-          <div style="font-family:var(--font-mono); font-size:0.65rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px;">⬡ Live Attack Feed</div>
+        <!-- Live Feed Log Console -->
+        <div class="attack-feed-panel reveal">
+          <div style="font-family:var(--font-mono); font-size:0.62rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px; display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.04); padding-bottom:4px;">
+            <span>⬡ Live Activity Stream</span>
+            <span style="color:var(--accent-safe);">STATUS: OK</span>
+          </div>
           <div id="attack-feed-container">
-            <div class="feed-row safe">[15:28:24] Threat intel database synced.</div>
           </div>
         </div>
-        {% for crime in trending_crimes|slice:"1:4" %}
-        <div class="cyber-card reveal" data-severity="{{ crime.severity|lower }}" style="padding:16px; flex:1;">
-          <div class="flex justify-between items-start mb-2">
-            <span class="threat-badge threat-badge-{{ crime.severity|lower }}">{{ crime.severity|upper }}</span>
-            <span class="conf-label" style="font-size:0.6rem;">{{ forloop.counter|add:80 }}% CONF</span>
-          </div>
-          <h5 style="font-size:0.88rem; font-weight:700; margin-bottom:4px; color:var(--text-primary); line-height:1.3;">{{ crime.title }}</h5>
-          <p style="font-size:0.75rem; color:var(--text-muted); line-height:1.4; margin-bottom:8px;">{{ crime.description|truncatewords:12 }}</p>
-          <a href="{% url 'crime_detail' crime.id %}" style="font-size:0.72rem; color:var(--accent-primary); font-family:var(--font-mono); font-weight:700;">VIEW DETAILS &rarr;</a>
-        </div>
-        {% endfor %}
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════ PLATFORM FEATURES ═══════════ -->
-<section class="py-24" style="background:rgba(15,17,26,0.2);">
+<!-- ═══════════ ARCHITECTED CORE ═══════════ -->
+<section class="py-20" style="background:rgba(15,17,26,0.2); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
   <div class="container">
-    <div class="hp-section-header reveal">
+    <div class="mb-12 reveal">
       <span class="badge badge-safe mb-2" style="background:rgba(99,102,241,0.1); color:var(--accent-secondary); border:1px solid rgba(99,102,241,0.2);">Architected Core</span>
-      <h2>Enterprise Defense Platform</h2>
-      <p>CyberSafe integrates advanced intelligence feeds directly into localized citizen shield utilities.</p>
+      <h2 style="font-size:clamp(1.8rem,3vw,2.3rem); font-weight:700; margin-bottom:8px; letter-spacing:-0.02em;">Enterprise Defense Platform</h2>
+      <p class="text-secondary" style="font-size:0.95rem;">CyberSafe integrates advanced intelligence feeds directly into localized citizen shield utilities.</p>
     </div>
-    <div class="grid grid-cols-4 gap-6">
+    
+    <div class="grid grid-cols-3 gap-6">
+      <!-- Card 1: Autonomous Shield -->
       <div class="cyber-card reveal">
-        <div class="tool-icon-wrap mb-4" style="background:rgba(99,102,241,0.08); color:var(--accent-secondary);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div class="flex justify-between items-start mb-4">
+          <div class="tool-icon-wrap" style="background:rgba(99,102,241,0.08); color:var(--accent-secondary);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <span class="conf-label">ACTIVE SHIELD</span>
         </div>
-        <h4 style="font-size:1.1rem; margin-bottom:8px;">Autonomous Shield</h4>
-        <p class="text-muted text-sm">Real-time checks and digital exposure monitoring powered by low-latency pipelines.</p>
+        <h4 style="font-size:1.1rem; margin-bottom:8px; font-weight:700;">Autonomous Protection</h4>
+        <p class="text-muted text-sm" style="line-height:1.5;">Real-time checks and digital exposure monitoring powered by high-throughput analytics pipelines.</p>
+        
+        <div class="card-ui-preview">
+          <div class="card-ui-header">
+            <span>SHIELD_INGESTION_RATE</span>
+            <span style="color:var(--accent-primary);">942 MS/S</span>
+          </div>
+          <div class="card-ui-row">
+            <span>Threat filtering load</span>
+            <span style="color:var(--accent-safe);">OPTIMAL</span>
+          </div>
+          <div class="card-ui-bar">
+            <div class="card-ui-fill" style="width: 42%;"></div>
+          </div>
+        </div>
       </div>
+
+      <!-- Card 2: Credential Guard -->
       <div class="cyber-card reveal" style="animation-delay:0.1s;">
-        <div class="tool-icon-wrap mb-4">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="14.31" y1="8" x2="20.05" y2="17.94"/><line x1="9.69" y1="8" x2="21.17" y2="8"/><line x1="7.38" y1="12" x2="13.12" y2="2.06"/><line x1="9.69" y1="16" x2="3.95" y2="6.06"/><line x1="14.31" y1="16" x2="2.83" y2="16"/><line x1="16.62" y1="12" x2="10.88" y2="21.94"/></svg>
+        <div class="flex justify-between items-start mb-4">
+          <div class="tool-icon-wrap" style="background:rgba(16,185,129,0.08); color:var(--accent-safe);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <span class="conf-label" style="border-color:rgba(16, 185, 129, 0.2); color:var(--accent-safe);">VERIFICATION</span>
         </div>
-        <h4 style="font-size:1.1rem; margin-bottom:8px;">Incident Remediation</h4>
-        <p class="text-muted text-sm">Step-by-step guidance tailored to India's regulatory frameworks and helpline dispatch.</p>
+        <h4 style="font-size:1.1rem; margin-bottom:8px; font-weight:700;">Identity Credential Guard</h4>
+        <p class="text-muted text-sm" style="line-height:1.5;">Verification engine evaluating exposed databases, Aadhaar, PAN, and UPI vectors globally.</p>
+        
+        <div class="card-ui-preview">
+          <div class="card-ui-header">
+            <span>DB_EXPOSURE_INDEX</span>
+            <span style="color:var(--accent-risk);">HIGH RISK</span>
+          </div>
+          <div class="card-ui-row">
+            <span>Aadhaar/PAN hashes scanned</span>
+            <span>128.4M</span>
+          </div>
+          <div class="card-ui-bar">
+            <div class="card-ui-fill" style="width: 78%; background: var(--accent-risk);"></div>
+          </div>
+        </div>
       </div>
+
+      <!-- Card 3: Incident Remediation -->
       <div class="cyber-card reveal" style="animation-delay:0.2s;">
-        <div class="tool-icon-wrap mb-4" style="background:rgba(16,185,129,0.08); color:var(--accent-safe);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <div class="flex justify-between items-start mb-4">
+          <div class="tool-icon-wrap" style="background:rgba(239,68,68,0.08); color:var(--accent-risk);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <span class="conf-label" style="border-color:rgba(239, 68, 68, 0.2); color:var(--accent-risk);">SOC SYNC</span>
         </div>
-        <h4 style="font-size:1.1rem; margin-bottom:8px;">Credential Guard</h4>
-        <p class="text-muted text-sm">Verification engine evaluating exposed databases, Aadhaar, PAN, and UPI vectors.</p>
-      </div>
-      <div class="cyber-card reveal" style="animation-delay:0.3s;">
-        <div class="tool-icon-wrap mb-4" style="background:rgba(239,68,68,0.08); color:var(--accent-risk);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <h4 style="font-size:1.1rem; margin-bottom:8px; font-weight:700;">Incident Response Command</h4>
+        <p class="text-muted text-sm" style="line-height:1.5;">Step-by-step guidance mapped to national helpline 1930 and state FIR dispatch nodes.</p>
+        
+        <div class="card-ui-preview">
+          <div class="card-ui-header">
+            <span>REMEDIATION_ROUTING</span>
+            <span style="color:var(--accent-safe);">ONLINE</span>
+          </div>
+          <div class="card-ui-row">
+            <span>Average routing latency</span>
+            <span>140ms</span>
+          </div>
+          <div class="card-ui-bar">
+            <div class="card-ui-fill" style="width: 15%; background: var(--accent-safe);"></div>
+          </div>
         </div>
-        <h4 style="font-size:1.1rem; margin-bottom:8px;">Threat Intelligence</h4>
-        <p class="text-muted text-sm">Continuous scans tracking scam operations, online extortion waves, and SMS phishing campaigns.</p>
       </div>
     </div>
   </div>
 </section>
-
-<!-- ═══════════ AI ENGINE SPLIT SECTION ═══════════ -->
-<section class="py-24" style="position:relative;">
-  <div style="position:absolute; width:400px; height:400px; border-radius:50%; background:radial-gradient(circle,rgba(99,102,241,0.05),transparent 70%); filter:blur(100px); bottom:-10%; right:10%; pointer-events:none; z-index:-1;"></div>
+<section class="py-20" style="position:relative; border-bottom: 1px solid var(--border-subtle);">
+  <div style="position:absolute; width:400px; height:400px; border-radius:50%; background:radial-gradient(circle,rgba(99,102,241,0.03),transparent 70%); filter:blur(100px); bottom:-10%; right:10%; pointer-events:none; z-index:-1;"></div>
   <div class="container">
-    <div class="glass-panel p-10 reveal" style="background:rgba(15,17,26,0.6); border-color:rgba(255,255,255,0.05);">
-      <div class="grid grid-cols-2 gap-10 items-center">
-        <div>
-          <span class="badge badge-safe mb-3" style="background:rgba(0,210,255,0.1); color:var(--accent-primary); border:1px solid rgba(0,210,255,0.2);">AI Engine</span>
-          <h2 style="font-size:2.2rem; font-weight:800; line-height:1.2; letter-spacing:-0.02em;">DeepCytes AI Ingestion &amp; Analysis Pipeline</h2>
-          <p class="text-muted mt-3" style="font-size:0.95rem; line-height:1.7;">Powered by transformer-based classification models, the DeepCytes AI continuously processes threat advisories from 40+ national and global cybersecurity sources.</p>
-          <div class="pipeline-steps">
-            <div class="pipeline-step">
-              <div class="pipeline-dot" style="background:var(--accent-primary);"></div>
-              <span style="font-size:0.85rem; color:var(--text-secondary);">Raw Feed Ingestion from CERT-In, I4C, NTRO Sources</span>
-              <span class="conf-label" style="margin-left:auto;">LIVE</span>
-            </div>
-            <div class="pipeline-step">
-              <div class="pipeline-dot" style="background:var(--accent-secondary);"></div>
-              <span style="font-size:0.85rem; color:var(--text-secondary);">NLP Threat Categorization &amp; Severity Scoring</span>
-              <span class="conf-label" style="margin-left:auto;">99.4%</span>
-            </div>
-            <div class="pipeline-step">
-              <div class="pipeline-dot" style="background:var(--accent-safe);"></div>
-              <span style="font-size:0.85rem; color:var(--text-secondary);">Citizen Alert Generation &amp; Remediation Workflow</span>
-              <span class="conf-label" style="margin-left:auto; color:var(--accent-safe);">AUTO</span>
-            </div>
+    <div class="glass-panel p-8 reveal" style="background:rgba(15,17,26,0.45); border-color:rgba(255,255,255,0.05);">
+      <div style="margin-bottom: var(--space-6);">
+        <span class="badge badge-safe mb-3" style="background:rgba(0,210,255,0.08); color:var(--accent-primary); border:1px solid rgba(0,210,255,0.15);">AI PIPELINE</span>
+        <h2 style="font-size:clamp(1.6rem,3vw,2.1rem); font-weight:700; line-height:1.2; letter-spacing:-0.02em; margin-bottom:8px;">DeepCytes Ingestion &amp; Classification Pipeline</h2>
+        <p class="text-secondary" style="font-size:0.92rem; max-width:680px;">Continuous parsing, categorization, and scoring of raw threat alerts from national CERT-In &amp; global intelligence directories.</p>
+      </div>
+
+      <div class="pipeline-flow-layout">
+        <!-- Node 1 -->
+        <div class="pipeline-node">
+          <div class="pipeline-node-header">
+            <span class="pipeline-step-num">STAGE 01</span>
+            <span class="pipeline-node-indicator active"></span>
           </div>
+          <div class="pipeline-node-title">Harvesting</div>
+          <p class="pipeline-node-desc">Continuous scraping of national feeds, APIs, OSINT directories, and security advisories.</p>
         </div>
-        <div style="display:flex; flex-direction:column; gap:12px;">
-          <div class="glass-panel p-4" style="border-color:rgba(0,210,255,0.1);">
-            <div style="font-family:var(--font-mono); font-size:0.65rem; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.1em;">AI Scan Velocity</div>
-            <div style="font-family:var(--font-mono); font-size:1.8rem; font-weight:800; color:var(--accent-primary);">4.8 Gb/s</div>
-            <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Realtime processing bandwidth</div>
+
+        <!-- Node 2 -->
+        <div class="pipeline-node" style="animation-delay: 0.1s;">
+          <div class="pipeline-node-header">
+            <span class="pipeline-step-num">STAGE 02</span>
+            <span class="pipeline-node-indicator active"></span>
           </div>
-          <div class="glass-panel p-4" style="border-color:rgba(99,102,241,0.1);">
-            <div style="font-family:var(--font-mono); font-size:0.65rem; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.1em;">Data Sources</div>
-            <div style="font-family:var(--font-mono); font-size:1.8rem; font-weight:800; color:var(--accent-secondary);">40+</div>
-            <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Global threat intelligence feeds</div>
+          <div class="pipeline-node-title">NLP Processing</div>
+          <p class="pipeline-node-desc">Transformer-based models classify TTPs and extract threat vectors.</p>
+        </div>
+
+        <!-- Node 3 -->
+        <div class="pipeline-node" style="animation-delay: 0.2s;">
+          <div class="pipeline-node-header">
+            <span class="pipeline-step-num">STAGE 03</span>
+            <span class="pipeline-node-indicator active"></span>
           </div>
-          <div class="glass-panel p-4" style="border-color:rgba(16,185,129,0.1);">
-            <div style="font-family:var(--font-mono); font-size:0.65rem; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.1em;">CERT-In Compliance</div>
-            <div style="font-family:var(--font-mono); font-size:1.8rem; font-weight:800; color:var(--accent-safe);">100%</div>
-            <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Aligned with national directives</div>
+          <div class="pipeline-node-title">Threat Scoring</div>
+          <p class="pipeline-node-desc">Heuristics scoring evaluates confidence levels and severity indices.</p>
+        </div>
+
+        <!-- Node 4 -->
+        <div class="pipeline-node" style="animation-delay: 0.3s;">
+          <div class="pipeline-node-header">
+            <span class="pipeline-step-num">STAGE 04</span>
+            <span class="pipeline-node-indicator active"></span>
           </div>
+          <div class="pipeline-node-title">Remediation Sync</div>
+          <p class="pipeline-node-desc">Automatic generation of action guides and Aadhaar exposure verification.</p>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; border-top:1px solid rgba(255,255,255,0.03); padding-top:20px;">
+        <div>
+          <div style="font-family:var(--font-mono); font-size:0.6rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em;">AI Ingestion Rate</div>
+          <div style="font-family:var(--font-mono); font-size:1.3rem; font-weight:800; color:var(--accent-primary); margin-top:2px;">4.8 Gb/s</div>
+        </div>
+        <div>
+          <div style="font-family:var(--font-mono); font-size:0.6rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em;">Scanned Repositories</div>
+          <div style="font-family:var(--font-mono); font-size:1.3rem; font-weight:800; color:var(--accent-secondary); margin-top:2px;">40+ directories</div>
+        </div>
+        <div>
+          <div style="font-family:var(--font-mono); font-size:0.6rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em;">Compliance Scoring</div>
+          <div style="font-family:var(--font-mono); font-size:1.3rem; font-weight:800; color:var(--accent-safe); margin-top:2px;">100% compliant</div>
         </div>
       </div>
     </div>
@@ -1045,182 +1289,253 @@
       <p>Deploy custom tools to analyze exposure logs and verify credential safety.</p>
     </div>
 
-    <div class="tools-grid-premium">
-
-      <!-- 1. Email Exposure -->
-      <div class="tool-card-premium reveal" id="tool-email">
-        <div class="tool-card-header">
-          <div class="tool-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <span class="tool-status-badge status-ready" id="status-val-email">Ready</span>
+    <div class="diagnostics-workspace reveal">
+      <!-- Sidebar Menu -->
+      <div class="workspace-sidebar">
+        <div class="sidebar-header">
+          <span>OPERATIONAL MODULES</span>
+          <span style="width: 8px; height: 8px; background: var(--accent-safe); border-radius: 50%;"></span>
         </div>
-        <div class="tool-card-body">
-          <h5 style="margin-bottom:6px;">Email Exposure</h5>
-          <p class="text-muted text-xs" style="margin-bottom:10px; line-height:1.4;">Scan breaches for exposed passwords and identity leaks.</p>
-          <input type="email" placeholder="enter email address..." style="width:100%; padding:8px 12px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.08); border-radius:6px; font-family:var(--font-mono); font-size:0.75rem; color:#fff;" readonly value="user@domain.in">
-          <div class="mock-telemetry-preview">
-            <div>INDEXED_BREACHES: <strong>14,891</strong></div>
-            <div>HASH_MATCH: <strong>NONE_DETECTED</strong></div>
-          </div>
-        </div>
-        <div class="tool-card-footer">
-          <span class="scan-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Est: 15s</span>
-          <button class="btn btn-outline" style="font-size:0.75rem; padding:6px 12px;" onclick="triggerSimulatedScan('email','{% url 'email_breach_check' %}')">Scan Exposure</button>
-        </div>
-        <div class="scanning-overlay" id="overlay-email">
-          <div class="spinner-cyber"></div>
-          <div class="mono-text" style="font-size:0.8rem; color:var(--accent-primary);">SCANNING_BREACH_DB...</div>
-          <div class="scan-progress-bar" id="progress-email"></div>
-        </div>
-      </div>
-
-      <!-- 2. Aadhaar Exposure -->
-      <div class="tool-card-premium reveal" style="animation-delay:0.05s;" id="tool-aadhaar">
-        <div class="tool-card-header">
-          <div class="tool-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M14 3v5h5M16 13H8M16 17H8M10 9H8"/></svg>
-          </div>
-          <span class="tool-status-badge status-ready" id="status-val-aadhaar">Ready</span>
-        </div>
-        <div class="tool-card-body">
-          <h5 style="margin-bottom:6px;">Aadhaar Exposure</h5>
-          <p class="text-muted text-xs" style="margin-bottom:10px; line-height:1.4;">Verify if your Aadhaar number is indexed in exposure caches.</p>
-          <input type="text" placeholder="XXXX-XXXX-XXXX" style="width:100%; padding:8px 12px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.08); border-radius:6px; font-family:var(--font-mono); font-size:0.75rem; color:#fff;" readonly value="•••• •••• 5842">
-          <div class="mock-telemetry-preview" style="color:var(--accent-secondary);">
-            <div>VAULT_STATUS: <strong>SECURED_UIDAI</strong></div>
-            <div>LEAK_INDEX: <strong>0x00_SAFE</strong></div>
-          </div>
-        </div>
-        <div class="tool-card-footer">
-          <span class="scan-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Est: 20s</span>
-          <button class="btn btn-outline" style="font-size:0.75rem; padding:6px 12px;" onclick="triggerSimulatedScan('aadhaar','{% url 'aadhaar_risk_check' %}')">Verify Aadhaar</button>
-        </div>
-        <div class="scanning-overlay" id="overlay-aadhaar">
-          <div class="spinner-cyber"></div>
-          <div class="mono-text" style="font-size:0.8rem; color:var(--accent-primary);">VERIFYING_UIDAI_FEED...</div>
-          <div class="scan-progress-bar" id="progress-aadhaar"></div>
+        <div class="sidebar-menu">
+          <button class="sidebar-tab active" onclick="switchDiagnosticTab('email')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Email Exposure
+          </button>
+          <button class="sidebar-tab" onclick="switchDiagnosticTab('aadhaar')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M14 3v5h5M16 13H8M16 17H8M10 9H8"/></svg>
+            Aadhaar Leak Verify
+          </button>
+          <button class="sidebar-tab" onclick="switchDiagnosticTab('pan')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            PAN Exposure
+          </button>
+          <button class="sidebar-tab" onclick="switchDiagnosticTab('upi')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            UPI Security Audit
+          </button>
+          <button class="sidebar-tab" onclick="switchDiagnosticTab('device')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="15" x2="23" y2="15"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="15" x2="4" y2="15"/></svg>
+            Device Integrity
+          </button>
+          <button class="sidebar-tab" onclick="switchDiagnosticTab('darkweb')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Dark Web Monitor
+          </button>
         </div>
       </div>
 
-      <!-- 3. PAN Exposure -->
-      <div class="tool-card-premium reveal" style="animation-delay:0.1s;" id="tool-pan">
-        <div class="tool-card-header">
-          <div class="tool-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      <!-- Content Area -->
+      <div class="workspace-content">
+        <!-- 1. Email Exposure -->
+        <div class="workspace-content-tab active" id="tab-content-email">
+          <div class="workspace-tab-header">
+            <div>
+              <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin: 0;">Email Database Exposure Scan</h4>
+              <p class="text-secondary" style="font-size: 0.8rem; margin: 2px 0 0 0;">Check email credentials against global breach data caches and password dump indices.</p>
+            </div>
+            <span class="tool-status-badge status-ready" id="status-val-email">Ready</span>
           </div>
-          <span class="tool-status-badge status-ready" id="status-val-pan">Ready</span>
-        </div>
-        <div class="tool-card-body">
-          <h5 style="margin-bottom:6px;">PAN Exposure</h5>
-          <p class="text-muted text-xs" style="margin-bottom:10px; line-height:1.4;">Scan financial databases for PAN record exposures.</p>
-          <input type="text" placeholder="ABCDE1234F" style="width:100%; padding:8px 12px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.08); border-radius:6px; font-family:var(--font-mono); font-size:0.75rem; color:#fff;" readonly value="••••••429F">
-          <div class="mock-telemetry-preview" style="color:var(--accent-safe);">
-            <div>TAX_LOGS: <strong>VERIFIED_INTEGRIT</strong></div>
-            <div>HASHES_COMPARED: <strong>4.2M</strong></div>
+
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 16px; width: 100%;">
+            <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 16px;">
+              <div>
+                <label style="font-size: 0.65rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 6px; text-transform: uppercase;">Identity Target Address</label>
+                <input type="email" placeholder="enter email address..." style="width:100%; padding:10px 14px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.08); border-radius:6px; font-family:var(--font-mono); font-size:0.8rem; color:#fff;" readonly value="user@domain.in">
+              </div>
+              <div class="mock-telemetry-preview" style="height: auto; margin-top: 18px;">
+                <div>INDEXED_BREACHES: <strong>14,891</strong></div>
+                <div>HASH_MATCH: <strong>NONE_DETECTED</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="workspace-tab-footer">
+            <span class="scan-time"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Est: 15s</span>
+            <button class="btn btn-outline" style="font-size:0.8rem; padding:8px 16px;" onclick="triggerSimulatedScan('email','{% url 'email_breach_check' %}')">Deploy Diagnostic Scan</button>
+          </div>
+
+          <div class="scanning-overlay" id="overlay-email">
+            <div class="spinner-cyber"></div>
+            <div class="mono-text" style="font-size:0.85rem; color:var(--accent-primary);">SCANNING_BREACH_DB...</div>
+            <div class="scan-progress-bar" id="progress-email"></div>
           </div>
         </div>
-        <div class="tool-card-footer">
-          <span class="scan-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Est: 20s</span>
-          <button class="btn btn-outline" style="font-size:0.75rem; padding:6px 12px;" onclick="triggerSimulatedScan('pan','{% url 'aadhaar_risk_check' %}')">Verify PAN</button>
+
+        <!-- 2. Aadhaar Exposure -->
+        <div class="workspace-content-tab" id="tab-content-aadhaar">
+          <div class="workspace-tab-header">
+            <div>
+              <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin: 0;">Aadhaar Identity Leak Verify</h4>
+              <p class="text-secondary" style="font-size: 0.8rem; margin: 2px 0 0 0;">Verify if your unique UIDAI identifier has been leaked in financial or utility databases.</p>
+            </div>
+            <span class="tool-status-badge status-ready" id="status-val-aadhaar">Ready</span>
+          </div>
+
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 16px; width: 100%;">
+            <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 16px;">
+              <div>
+                <label style="font-size: 0.65rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 6px; text-transform: uppercase;">Aadhaar Number (UID)</label>
+                <input type="text" placeholder="XXXX-XXXX-XXXX" style="width:100%; padding:10px 14px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.08); border-radius:6px; font-family:var(--font-mono); font-size:0.8rem; color:#fff;" readonly value="•••• •••• 5842">
+              </div>
+              <div class="mock-telemetry-preview" style="height: auto; margin-top: 18px; color:var(--accent-secondary);">
+                <div>VAULT_STATUS: <strong>SECURED_UIDAI</strong></div>
+                <div>LEAK_INDEX: <strong>0x00_SAFE</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="workspace-tab-footer">
+            <span class="scan-time"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Est: 20s</span>
+            <button class="btn btn-outline" style="font-size:0.8rem; padding:8px 16px;" onclick="triggerSimulatedScan('aadhaar','{% url 'aadhaar_risk_check' %}')">Deploy Diagnostic Scan</button>
+          </div>
+
+          <div class="scanning-overlay" id="overlay-aadhaar">
+            <div class="spinner-cyber"></div>
+            <div class="mono-text" style="font-size:0.85rem; color:var(--accent-primary);">VERIFYING_UIDAI_FEED...</div>
+            <div class="scan-progress-bar" id="progress-aadhaar"></div>
+          </div>
         </div>
-        <div class="scanning-overlay" id="overlay-pan">
-          <div class="spinner-cyber"></div>
-          <div class="mono-text" style="font-size:0.8rem; color:var(--accent-primary);">MAPPING_TAX_BREACHES...</div>
-          <div class="scan-progress-bar" id="progress-pan"></div>
+
+        <!-- 3. PAN Exposure -->
+        <div class="workspace-content-tab" id="tab-content-pan">
+          <div class="workspace-tab-header">
+            <div>
+              <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin: 0;">PAN Financial Record Scan</h4>
+              <p class="text-secondary" style="font-size: 0.8rem; margin: 2px 0 0 0;">Search banking and tax declaration databases for PAN exposures.</p>
+            </div>
+            <span class="tool-status-badge status-ready" id="status-val-pan">Ready</span>
+          </div>
+
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 16px; width: 100%;">
+            <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 16px;">
+              <div>
+                <label style="font-size: 0.65rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 6px; text-transform: uppercase;">PAN Card Number</label>
+                <input type="text" placeholder="ABCDE1234F" style="width:100%; padding:10px 14px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.08); border-radius:6px; font-family:var(--font-mono); font-size:0.8rem; color:#fff;" readonly value="••••••429F">
+              </div>
+              <div class="mock-telemetry-preview" style="height: auto; margin-top: 18px; color:var(--accent-safe);">
+                <div>TAX_LOGS: <strong>VERIFIED_INTEGRITY</strong></div>
+                <div>HASHES_COMPARED: <strong>4.2M</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="workspace-tab-footer">
+            <span class="scan-time"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Est: 20s</span>
+            <button class="btn btn-outline" style="font-size:0.8rem; padding:8px 16px;" onclick="triggerSimulatedScan('pan','{% url 'aadhaar_risk_check' %}')">Deploy Diagnostic Scan</button>
+          </div>
+
+          <div class="scanning-overlay" id="overlay-pan">
+            <div class="spinner-cyber"></div>
+            <div class="mono-text" style="font-size:0.85rem; color:var(--accent-primary);">MAPPING_TAX_BREACHES...</div>
+            <div class="scan-progress-bar" id="progress-pan"></div>
+          </div>
+        </div>
+
+        <!-- 4. UPI Security -->
+        <div class="workspace-content-tab" id="tab-content-upi">
+          <div class="workspace-tab-header">
+            <div>
+              <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin: 0;">UPI Security &amp; QR Check</h4>
+              <p class="text-secondary" style="font-size: 0.8rem; margin: 2px 0 0 0;">Evaluate UPI VPA configurations and check for phishing/routing hijack vulnerability.</p>
+            </div>
+            <span class="tool-status-badge status-ready" id="status-val-upi">Ready</span>
+          </div>
+
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 16px; width: 100%;">
+            <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 16px;">
+              <div>
+                <label style="font-size: 0.65rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 6px; text-transform: uppercase;">UPI Virtual Payment Address (VPA)</label>
+                <input type="text" placeholder="username@upi" style="width:100%; padding:10px 14px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.08); border-radius:6px; font-family:var(--font-mono); font-size:0.8rem; color:#fff;" readonly value="active-handle@okaxis">
+              </div>
+              <div class="mock-telemetry-preview" style="height: auto; margin-top: 18px;">
+                <div>VPA_STATUS: <strong>VERIFIED_CHECKSUM</strong></div>
+                <div>SPOOF_RISK: <strong>NEGLIGIBLE</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="workspace-tab-footer">
+            <span class="scan-time"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Est: 30s</span>
+            <button class="btn btn-outline" style="font-size:0.8rem; padding:8px 16px;" onclick="triggerSimulatedScan('upi','{% url 'financial_risk_scan' %}')">Deploy Diagnostic Scan</button>
+          </div>
+
+          <div class="scanning-overlay" id="overlay-upi">
+            <div class="spinner-cyber"></div>
+            <div class="mono-text" style="font-size:0.85rem; color:var(--accent-primary);">AUDITING_VPA_CONFIG...</div>
+            <div class="scan-progress-bar" id="progress-upi"></div>
+          </div>
+        </div>
+
+        <!-- 5. Device Integrity -->
+        <div class="workspace-content-tab" id="tab-content-device">
+          <div class="workspace-tab-header">
+            <div>
+              <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin: 0;">Device Kernel &amp; Configuration Scan</h4>
+              <p class="text-secondary" style="font-size: 0.8rem; margin: 2px 0 0 0;">Inspect firmware, drop APKs, or check network configs for malicious rooting or configurations.</p>
+            </div>
+            <span class="tool-status-badge status-ready" id="status-val-device">Ready</span>
+          </div>
+
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 16px; width: 100%;">
+            <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 16px;">
+              <div style="border:1px dashed rgba(0,210,255,0.2); border-radius:6px; padding:12px; text-align:center; background:rgba(0,210,255,0.02); display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--accent-primary); opacity:0.8; margin-bottom:4px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                <div style="font-size:0.7rem; color:var(--text-muted);">Drop configuration profile (.apk / .ovpn)</div>
+              </div>
+              <div class="mock-telemetry-preview" style="height: auto; color:var(--accent-secondary);">
+                <div>OS_KERNEL: <strong>VERIFIED_SECURE</strong></div>
+                <div>ROOT_STATUS: <strong>SHIELD_ACTIVE</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="workspace-tab-footer">
+            <span class="scan-time"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Est: 40s</span>
+            <button class="btn btn-outline" style="font-size:0.8rem; padding:8px 16px;" onclick="triggerSimulatedScan('device','{% url 'citizen_safety' %}')">Deploy Diagnostic Scan</button>
+          </div>
+
+          <div class="scanning-overlay" id="overlay-device">
+            <div class="spinner-cyber"></div>
+            <div class="mono-text" style="font-size:0.85rem; color:var(--accent-primary);">CHECKING_OS_INTEGRITY...</div>
+            <div class="scan-progress-bar" id="progress-device"></div>
+          </div>
+        </div>
+
+        <!-- 6. Dark Web Monitor -->
+        <div class="workspace-content-tab" id="tab-content-darkweb">
+          <div class="workspace-tab-header">
+            <div>
+              <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin: 0;">Dark Web Log &amp; Dump Monitor</h4>
+              <p class="text-secondary" style="font-size: 0.8rem; margin: 2px 0 0 0;">Continuous tracking of credit logs, aadhaar dumps, and credential indices.</p>
+            </div>
+            <span class="tool-status-badge status-ready" id="status-val-darkweb">Ready</span>
+          </div>
+
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 16px; width: 100%;">
+            <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 16px;">
+              <div style="background:rgba(0,0,0,0.25); padding:12px; border-radius:6px; border:1px solid rgba(255,255,255,0.05); display:flex; flex-direction:column; gap:8px; justify-content:center;">
+                <div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span style="color:var(--text-muted);">Auto-Sync Feed</span><span style="color:var(--accent-safe); font-weight:700;">ON</span></div>
+                <div style="display:flex; justify-content:space-between; font-size:0.8rem;"><span style="color:var(--text-muted);">Alert Dispatch</span><span style="color:var(--accent-safe); font-weight:700;">ON</span></div>
+              </div>
+              <div class="mock-telemetry-preview" style="height: auto; color:var(--accent-risk);">
+                <div>MONITOR_STATUS: <strong>ACTIVE_STREAM</strong></div>
+                <div>EXPOSED_PASSHASH: <strong>0_LEAKS</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="workspace-tab-footer">
+            <span class="scan-time"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Est: 25s</span>
+            <button class="btn btn-outline" style="font-size:0.8rem; padding:8px 16px;" onclick="triggerSimulatedScan('darkweb','{% url 'citizen_safety' %}')">Deploy Diagnostic Scan</button>
+          </div>
+
+          <div class="scanning-overlay" id="overlay-darkweb">
+            <div class="spinner-cyber"></div>
+            <div class="mono-text" style="font-size:0.85rem; color:var(--accent-primary);">SCANNING_DARKNET_DUMPS...</div>
+            <div class="scan-progress-bar" id="progress-darkweb"></div>
+          </div>
         </div>
       </div>
-
-      <!-- 4. UPI Security -->
-      <div class="tool-card-premium reveal" style="animation-delay:0.15s;" id="tool-upi">
-        <div class="tool-card-header">
-          <div class="tool-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-          </div>
-          <span class="tool-status-badge status-ready" id="status-val-upi">Ready</span>
-        </div>
-        <div class="tool-card-body">
-          <h5 style="margin-bottom:6px;">UPI Security Audit</h5>
-          <p class="text-muted text-xs" style="margin-bottom:10px; line-height:1.4;">Audit your UPI VPA handle and QR configuration for spoofing risks.</p>
-          <input type="text" placeholder="username@upi" style="width:100%; padding:8px 12px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.08); border-radius:6px; font-family:var(--font-mono); font-size:0.75rem; color:#fff;" readonly value="active-handle@okaxis">
-          <div class="mock-telemetry-preview">
-            <div>VPA_STATUS: <strong>VERIFIED_CHECKSUM</strong></div>
-            <div>SPOOF_RISK: <strong>NEGLIGIBLE</strong></div>
-          </div>
-        </div>
-        <div class="tool-card-footer">
-          <span class="scan-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Est: 30s</span>
-          <button class="btn btn-outline" style="font-size:0.75rem; padding:6px 12px;" onclick="triggerSimulatedScan('upi','{% url 'financial_risk_scan' %}')">Audit UPI</button>
-        </div>
-        <div class="scanning-overlay" id="overlay-upi">
-          <div class="spinner-cyber"></div>
-          <div class="mono-text" style="font-size:0.8rem; color:var(--accent-primary);">AUDITING_VPA_CONFIG...</div>
-          <div class="scan-progress-bar" id="progress-upi"></div>
-        </div>
-      </div>
-
-      <!-- 5. Device Integrity -->
-      <div class="tool-card-premium reveal" style="animation-delay:0.2s;" id="tool-device">
-        <div class="tool-card-header">
-          <div class="tool-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="15" x2="23" y2="15"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="15" x2="4" y2="15"/></svg>
-          </div>
-          <span class="tool-status-badge status-ready" id="status-val-device">Ready</span>
-        </div>
-        <div class="tool-card-body">
-          <h5 style="margin-bottom:6px;">Device Integrity</h5>
-          <p class="text-muted text-xs" style="margin-bottom:10px; line-height:1.4;">Scan system configs for malicious settings or indicators.</p>
-          <div style="border:1px dashed rgba(0,210,255,0.2); border-radius:6px; padding:12px; text-align:center; background:rgba(0,210,255,0.02);">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--accent-primary); opacity:0.8; display:inline-block; margin-bottom:4px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
-            <div style="font-size:0.7rem; color:var(--text-muted);">Drop APK or config file here</div>
-          </div>
-          <div class="mock-telemetry-preview" style="color:var(--accent-secondary);">
-            <div>OS_KERNEL: <strong>VERIFIED_SECURE</strong></div>
-            <div>ROOT_STATUS: <strong>SHIELD_ACTIVE</strong></div>
-          </div>
-        </div>
-        <div class="tool-card-footer">
-          <span class="scan-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Est: 40s</span>
-          <button class="btn btn-outline" style="font-size:0.75rem; padding:6px 12px;" onclick="triggerSimulatedScan('device','{% url 'citizen_safety' %}')">Scan Integrity</button>
-        </div>
-        <div class="scanning-overlay" id="overlay-device">
-          <div class="spinner-cyber"></div>
-          <div class="mono-text" style="font-size:0.8rem; color:var(--accent-primary);">CHECKING_OS_INTEGRITY...</div>
-          <div class="scan-progress-bar" id="progress-device"></div>
-        </div>
-      </div>
-
-      <!-- 6. Dark Web Monitor -->
-      <div class="tool-card-premium reveal" style="animation-delay:0.25s;" id="tool-darkweb">
-        <div class="tool-card-header">
-          <div class="tool-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          </div>
-          <span class="tool-status-badge status-ready" id="status-val-darkweb">Ready</span>
-        </div>
-        <div class="tool-card-body">
-          <h5 style="margin-bottom:6px;">Dark Web Monitor</h5>
-          <p class="text-muted text-xs" style="margin-bottom:10px; line-height:1.4;">Continuous validation of credentials against indexed logs.</p>
-          <div style="background:rgba(0,0,0,0.25); padding:10px; border-radius:6px; border:1px solid rgba(255,255,255,0.05); display:flex; flex-direction:column; gap:8px;">
-            <div style="display:flex; justify-content:space-between; font-size:0.75rem;"><span style="color:var(--text-muted);">Auto-Sync Feed</span><span style="color:var(--accent-safe); font-weight:700;">ON</span></div>
-            <div style="display:flex; justify-content:space-between; font-size:0.75rem;"><span style="color:var(--text-muted);">Alert Dispatch</span><span style="color:var(--accent-safe); font-weight:700;">ON</span></div>
-          </div>
-          <div class="mock-telemetry-preview" style="color:var(--accent-risk);">
-            <div>MONITOR_STATUS: <strong>ACTIVE_STREAM</strong></div>
-            <div>EXPOSED_PASSHASH: <strong>0_LEAKS</strong></div>
-          </div>
-        </div>
-        <div class="tool-card-footer">
-          <span class="scan-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Est: 25s</span>
-          <button class="btn btn-outline" style="font-size:0.75rem; padding:6px 12px;" onclick="triggerSimulatedScan('darkweb','{% url 'citizen_safety' %}')">Monitor Logs</button>
-        </div>
-        <div class="scanning-overlay" id="overlay-darkweb">
-          <div class="spinner-cyber"></div>
-          <div class="mono-text" style="font-size:0.8rem; color:var(--accent-primary);">SCANNING_DARKNET_DUMPS...</div>
-          <div class="scan-progress-bar" id="progress-darkweb"></div>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
@@ -1283,59 +1598,92 @@
       <p>Continuous validation metrics mapped directly to global and national cybersecurity benchmarks.</p>
     </div>
     <div class="compliance-grid">
+      <!-- 1. NIST CSF -->
       <div class="compliance-card reveal">
         <div class="flex justify-between items-center mb-2">
           <span style="font-family:var(--font-mono); font-size:0.75rem; font-weight:700; color:var(--accent-primary);">NIST CSF</span>
           <span style="font-size:0.72rem; color:var(--accent-safe); font-weight:600;">94%</span>
         </div>
         <h5 style="font-size:0.95rem; font-weight:700; margin-bottom:4px;">NIST Cybersecurity Framework</h5>
-        <p class="text-muted" style="font-size:0.8rem; line-height:1.5;">Identify, Protect, Detect, Respond, Recover controls mapped to platform capabilities.</p>
+        <p class="text-secondary" style="font-size:0.8rem; line-height:1.5;">Core protection controls mapped directly to autonomous detection layers.</p>
         <div class="compliance-progress-bar"><div class="compliance-progress-fill" style="width:94%;"></div></div>
       </div>
+
+      <!-- 2. ISO 27001 -->
       <div class="compliance-card reveal" style="animation-delay:0.05s;">
         <div class="flex justify-between items-center mb-2">
           <span style="font-family:var(--font-mono); font-size:0.75rem; font-weight:700; color:var(--accent-secondary);">ISO 27001</span>
           <span style="font-size:0.72rem; color:var(--accent-safe); font-weight:600;">88%</span>
         </div>
         <h5 style="font-size:0.95rem; font-weight:700; margin-bottom:4px;">ISO/IEC 27001:2022</h5>
-        <p class="text-muted" style="font-size:0.8rem; line-height:1.5;">Information security management controls validated against latest ISO standard.</p>
+        <p class="text-secondary" style="font-size:0.8rem; line-height:1.5;">Information security management guidelines validated against current standards.</p>
         <div class="compliance-progress-bar"><div class="compliance-progress-fill" style="width:88%; background:linear-gradient(90deg,var(--accent-secondary),var(--accent-primary));"></div></div>
       </div>
+
+      <!-- 3. OWASP -->
       <div class="compliance-card reveal" style="animation-delay:0.1s;">
         <div class="flex justify-between items-center mb-2">
           <span style="font-family:var(--font-mono); font-size:0.75rem; font-weight:700; color:var(--accent-risk);">OWASP</span>
           <span style="font-size:0.72rem; color:var(--accent-safe); font-weight:600;">91%</span>
         </div>
         <h5 style="font-size:0.95rem; font-weight:700; margin-bottom:4px;">OWASP Top 10</h5>
-        <p class="text-muted" style="font-size:0.8rem; line-height:1.5;">Web application security risks continuously evaluated and mitigated across platform.</p>
+        <p class="text-secondary" style="font-size:0.8rem; line-height:1.5;">Web vulnerabilities systematically analyzed and mitigated across endpoints.</p>
         <div class="compliance-progress-bar"><div class="compliance-progress-fill" style="width:91%; background:linear-gradient(90deg,var(--accent-risk),var(--accent-warning));"></div></div>
       </div>
+
+      <!-- 4. CERT-In -->
       <div class="compliance-card reveal" style="animation-delay:0.15s;">
         <div class="flex justify-between items-center mb-2">
           <span style="font-family:var(--font-mono); font-size:0.75rem; font-weight:700; color:var(--accent-safe);">CERT-In</span>
           <span style="font-size:0.72rem; color:var(--accent-safe); font-weight:600;">100%</span>
         </div>
         <h5 style="font-size:0.95rem; font-weight:700; margin-bottom:4px;">CERT-In Directives</h5>
-        <p class="text-muted" style="font-size:0.8rem; line-height:1.5;">Full compliance with India's national CERT directives, incident reporting SLAs.</p>
+        <p class="text-secondary" style="font-size:0.8rem; line-height:1.5;">Full compliance with national cyber incident reporting directives and SLAs.</p>
         <div class="compliance-progress-bar"><div class="compliance-progress-fill" style="width:100%; background:linear-gradient(90deg,var(--accent-safe),#00e5ff);"></div></div>
       </div>
+
+      <!-- 5. DPDP Act -->
       <div class="compliance-card reveal" style="animation-delay:0.2s;">
         <div class="flex justify-between items-center mb-2">
           <span style="font-family:var(--font-mono); font-size:0.75rem; font-weight:700; color:var(--accent-warning);">DPDP Act</span>
           <span style="font-size:0.72rem; color:var(--accent-safe); font-weight:600;">96%</span>
         </div>
-        <h5 style="font-size:0.95rem; font-weight:700; margin-bottom:4px;">Digital Personal Data Protection</h5>
-        <p class="text-muted" style="font-size:0.8rem; line-height:1.5;">Aligned with India's DPDP Act 2023 for personal data processing obligations.</p>
+        <h5 style="font-size:0.95rem; font-weight:700; margin-bottom:4px;">DPDP Act 2023</h5>
+        <p class="text-secondary" style="font-size:0.8rem; line-height:1.5;">Strict alignment with India's personal data processing regulations.</p>
         <div class="compliance-progress-bar"><div class="compliance-progress-fill" style="width:96%; background:linear-gradient(90deg,var(--accent-warning),#f59e0b);"></div></div>
       </div>
+
+      <!-- 6. MITRE -->
       <div class="compliance-card reveal" style="animation-delay:0.25s;">
         <div class="flex justify-between items-center mb-2">
           <span style="font-family:var(--font-mono); font-size:0.75rem; font-weight:700; color:var(--accent-primary);">MITRE</span>
           <span style="font-size:0.72rem; color:var(--accent-safe); font-weight:600;">87%</span>
         </div>
-        <h5 style="font-size:0.95rem; font-weight:700; margin-bottom:4px;">MITRE ATT&amp;CK Framework</h5>
-        <p class="text-muted" style="font-size:0.8rem; line-height:1.5;">Threat modeling mapped to MITRE ATT&amp;CK tactics, techniques, and procedures.</p>
+        <h5 style="font-size:0.95rem; font-weight:700; margin-bottom:4px;">MITRE ATT&amp;CK</h5>
+        <p class="text-secondary" style="font-size:0.8rem; line-height:1.5;">Continuous modeling mapped to attacker tactics and procedures.</p>
         <div class="compliance-progress-bar"><div class="compliance-progress-fill" style="width:87%;"></div></div>
+      </div>
+
+      <!-- 7. IT Act 2000 -->
+      <div class="compliance-card reveal" style="animation-delay:0.3s;">
+        <div class="flex justify-between items-center mb-2">
+          <span style="font-family:var(--font-mono); font-size:0.75rem; font-weight:700; color:var(--accent-secondary);">IT ACT 2000</span>
+          <span style="font-size:0.72rem; color:var(--accent-safe); font-weight:600;">95%</span>
+        </div>
+        <h5 style="font-size:0.95rem; font-weight:700; margin-bottom:4px;">Information Technology Act</h5>
+        <p class="text-secondary" style="font-size:0.8rem; line-height:1.5;">Legal validation for electronic governance, cyber crimes and digital signatures.</p>
+        <div class="compliance-progress-bar"><div class="compliance-progress-fill" style="width:95%; background:linear-gradient(90deg,var(--accent-secondary),var(--accent-primary));"></div></div>
+      </div>
+
+      <!-- 8. CIS Controls -->
+      <div class="compliance-card reveal" style="animation-delay:0.35s;">
+        <div class="flex justify-between items-center mb-2">
+          <span style="font-family:var(--font-mono); font-size:0.75rem; font-weight:700; color:var(--accent-safe);">CIS CONTROLS</span>
+          <span style="font-size:0.72rem; color:var(--accent-safe); font-weight:600;">90%</span>
+        </div>
+        <h5 style="font-size:0.95rem; font-weight:700; margin-bottom:4px;">CIS Critical Security Controls</h5>
+        <p class="text-secondary" style="font-size:0.8rem; line-height:1.5;">Action-oriented cyber defense controls prioritized for modern infrastructure.</p>
+        <div class="compliance-progress-bar"><div class="compliance-progress-fill" style="width:90%; background:linear-gradient(90deg,var(--accent-safe),#00e5ff);"></div></div>
       </div>
     </div>
   </div>
@@ -1569,6 +1917,17 @@
       const content = item.querySelector('.faq-content');
       content.style.maxHeight = content.scrollHeight + 'px';
     }
+  }
+
+  // ── Diagnostics Tab Switching ──
+  function switchDiagnosticTab(tabName) {
+    document.querySelectorAll('.sidebar-tab').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.workspace-content-tab').forEach(tab => tab.classList.remove('active'));
+    
+    const activeBtn = document.querySelector(`.sidebar-tab[onclick*="${tabName}"]`);
+    const activeTab = document.getElementById(`tab-content-${tabName}`);
+    if (activeBtn) activeBtn.classList.add('active');
+    if (activeTab) activeTab.classList.add('active');
   }
 
   // ── Diagnostics Scan Simulation ──
