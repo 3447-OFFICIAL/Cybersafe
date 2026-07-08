@@ -389,14 +389,77 @@
     grid-template-columns: 1.25fr 0.75fr;
     gap: var(--space-6);
   }
+  .soc-section {
+    position: relative;
+    background: linear-gradient(180deg, rgba(10, 12, 20, 0.18), rgba(10, 12, 20, 0.32));
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    overflow: hidden;
+  }
+  .soc-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 0%, rgba(0, 210, 255, 0.06), transparent 28%),
+      radial-gradient(circle at 80% 10%, rgba(99, 102, 241, 0.05), transparent 30%);
+    pointer-events: none;
+  }
+  .soc-section > .container {
+    position: relative;
+    z-index: 1;
+  }
+  .soc-section-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-6);
+    align-items: end;
+    margin-bottom: var(--space-8);
+  }
+  .soc-section-copy {
+    max-width: 46rem;
+  }
+  .soc-section-kicker {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: var(--space-3);
+    background: rgba(239, 68, 68, 0.08);
+    color: var(--accent-risk);
+    border: 1px solid rgba(239, 68, 68, 0.15);
+  }
+  .soc-section-title {
+    font-size: clamp(2rem, 3.2vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.02;
+    margin-bottom: var(--space-3);
+  }
+  .soc-section-copy p {
+    max-width: 40rem;
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+  .soc-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--space-2);
+    align-self: end;
+  }
+  .soc-feed-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
   .soc-map-container {
-    background: rgba(10, 12, 20, 0.7);
-    border: 1px solid var(--border-subtle);
+    background: rgba(10, 12, 20, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: var(--radius-xl);
-    padding: var(--space-6);
+    padding: clamp(1.25rem, 2vw, 1.5rem);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.28);
   }
   .soc-map-header {
     display: flex;
@@ -410,13 +473,14 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: var(--space-4);
-    margin-top: var(--space-4);
-    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    margin-top: var(--space-5);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
     padding-top: var(--space-4);
   }
   .soc-stat-node {
     display: flex;
     flex-direction: column;
+    gap: var(--space-1);
   }
   .soc-stat-title {
     font-size: 0.62rem;
@@ -437,21 +501,22 @@
   .soc-stat-val.low { color: var(--accent-safe); }
 
   .attack-feed-panel {
-    background: rgba(10,12,20,0.7);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
+    background: rgba(10,12,20,0.76);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-xl);
     padding: var(--space-4);
     height: 100%;
     font-family: var(--font-mono);
     font-size: 0.68rem;
     overflow: hidden;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.24);
   }
 
   .threat-badge {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    padding: 2px 8px;
+    padding: 0.35rem 0.7rem;
     border-radius: var(--radius-full);
     font-size: 0.65rem;
     font-weight: 700;
@@ -463,20 +528,23 @@
   .threat-badge-low      { background: rgba(16,185,129,.1); color:#6ee7b7; border:1px solid rgba(16,185,129,.2); }
 
   .filter-tab {
-    padding: 5px 12px;
-    border-radius: var(--radius-full);
-    font-size: 0.75rem;
-    font-weight: 600;
+    min-height: 44px;
+    padding: 0.75rem 1rem;
+    border-radius: 999px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
     cursor: pointer;
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255,255,255,0.08);
     color: var(--text-muted);
-    transition: all 0.2s;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
   }
   .filter-tab.active, .filter-tab:hover {
     background: var(--accent-primary);
     color: var(--bg-void);
     border-color: var(--accent-primary);
+    transform: translateY(-1px);
   }
 
   /* pulse dots on map */
@@ -919,6 +987,13 @@
     .sidebar-menu { flex-direction: row; flex-wrap: wrap; }
     .sidebar-tab { width: calc(50% - 4px); }
     .compliance-grid { grid-template-columns: repeat(2, 1fr); }
+    .soc-section-header {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+    .soc-filter-bar {
+      justify-content: flex-start;
+    }
   }
   @media (max-width: 640px) {
     .hero-section {
@@ -965,6 +1040,16 @@
     .compliance-grid { grid-template-columns: 1fr; }
     .metrics-dashboard-grid { grid-template-columns: 1fr; }
     .soc-dashboard { grid-template-columns: 1fr; }
+    .soc-stats-bar {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .soc-section-title {
+      font-size: clamp(1.65rem, 8vw, 2.2rem);
+    }
+    .filter-tab {
+      flex: 1 1 calc(50% - var(--space-2));
+      justify-content: center;
+    }
   }
 </style>
 {% endblock %}
@@ -1109,16 +1194,16 @@
 </section>
 
 <!-- ═══════════ THREAT LANDSCAPE SOC SECTION ═══════════ -->
-<section class="py-20" style="position:relative; background: rgba(10, 12, 20, 0.2);">
-  <div style="position:absolute; width:350px; height:350px; border-radius:50%; background:radial-gradient(circle,rgba(239,68,68,0.03),transparent 70%); filter:blur(80px); top:10%; left:-5%; pointer-events:none; z-index:-1;"></div>
+<section class="py-20 soc-section">
+  <div style="position:absolute; width:350px; height:350px; border-radius:50%; background:radial-gradient(circle,rgba(239,68,68,0.03),transparent 70%); filter:blur(80px); top:10%; left:-5%; pointer-events:none; z-index:0;"></div>
   <div class="container">
-    <div class="flex justify-between items-end mb-8 flex-wrap gap-6">
-      <div class="reveal" style="flex:1; min-width:280px;">
-        <span class="badge badge-safe mb-3" style="background:rgba(239,68,68,0.08); color:var(--accent-risk); border:1px solid rgba(239,68,68,0.15);">LIVE SOC STREAM</span>
-        <h2 style="font-size:clamp(1.8rem,3vw,2.3rem); font-weight:700; margin-bottom:8px; letter-spacing:-0.02em;">Threat Intelligence Center</h2>
-        <p class="text-secondary" style="font-size:0.95rem;">Real-time indicators and intelligence feeds synced with CERT-In &amp; national databases.</p>
+    <div class="soc-section-header">
+      <div class="soc-section-copy reveal">
+        <span class="badge soc-section-kicker mb-3">LIVE SOC STREAM</span>
+        <h2 class="soc-section-title">Threat Intelligence Center</h2>
+        <p class="text-secondary">Real-time indicators and intelligence feeds synced with CERT-In &amp; national databases.</p>
       </div>
-      <div class="flex gap-2 flex-wrap reveal-right">
+      <div class="soc-filter-bar reveal-right">
         <button class="filter-tab active" onclick="filterBySeverity('all', this)">All Feeds</button>
         <button class="filter-tab" onclick="filterBySeverity('critical', this)">Critical</button>
         <button class="filter-tab" onclick="filterBySeverity('high', this)">High</button>
@@ -1179,15 +1264,15 @@
         <!-- Featured Threat Box -->
         {% with featured=trending_crimes.0 %}
         {% if featured %}
-        <div class="cyber-card reveal" data-severity="{{ featured.severity|lower }}" style="padding:16px; border-color:rgba(255,255,255,0.04);">
+        <div class="cyber-card reveal" data-severity="{{ featured.severity|lower }}" style="padding:var(--space-4); border-color:rgba(255,255,255,0.05); background:rgba(10, 12, 20, 0.78);">
           <div class="flex justify-between items-center mb-2">
             <span class="threat-badge threat-badge-{{ featured.severity|lower }}">
               {{ featured.severity|upper }}
             </span>
             <span class="conf-label" style="font-size:0.6rem; font-family:var(--font-mono);">99.4% CONF</span>
           </div>
-          <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:4px; color:var(--text-primary); line-height:1.3;">{{ featured.title }}</h4>
-          <p class="text-secondary" style="font-size:0.78rem; line-height:1.45; margin-bottom:8px;">{{ featured.description|truncatewords:15 }}</p>
+          <h4 style="font-size:0.98rem; font-weight:700; margin-bottom:6px; color:var(--text-primary); line-height:1.35;">{{ featured.title }}</h4>
+          <p class="text-secondary" style="font-size:0.84rem; line-height:1.55; margin-bottom:var(--space-3);">{{ featured.description|truncatewords:15 }}</p>
           <div class="flex justify-between items-center" style="font-family:var(--font-mono); font-size:0.6rem; color:var(--text-muted); border-top:1px solid rgba(255,255,255,0.03); padding-top:8px;">
             <span>Source: CERT-In</span>
             <a href="{% url 'crime_detail' featured.id %}" style="color:var(--accent-primary); font-weight:700;">INVESTIGATE &rarr;</a>
@@ -1199,7 +1284,7 @@
         <!-- Live Feed Log Console -->
         <div class="attack-feed-panel reveal">
           <div style="font-family:var(--font-mono); font-size:0.62rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px; display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.04); padding-bottom:4px;">
-            <span>⬡ Live Activity Stream</span>
+            <span>Live Activity Stream</span>
             <span style="color:var(--accent-safe);">STATUS: OK</span>
           </div>
           <div id="attack-feed-container">
